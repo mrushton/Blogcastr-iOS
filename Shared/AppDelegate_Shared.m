@@ -163,6 +163,33 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Session
+
+- (Session *)session {
+	NSFetchRequest *fetchRequest;
+	NSEntityDescription *entityDescription;
+	NSArray *array;
+	NSError *error;
+	Session *session;
+	
+	//MVR - get Session
+	fetchRequest = [[NSFetchRequest alloc] init];
+	entityDescription = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entityDescription];
+	array = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	//MVR - if array is nil there was an error
+	if (!array) {
+		NSLog(@"Error fetching Session: %@", [error localizedDescription]);
+		return nil;
+	}
+	if ([array count] > 0)
+		session = [array objectAtIndex:0];
+	else
+		session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+
+	return session;
+}
 
 @end
 

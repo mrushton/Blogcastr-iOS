@@ -1,0 +1,1234 @@
+TBlogcastr
+v7
+r0
+t321133294.389967
+cCheck dependencies
+cCpResource build/Debug-iphoneos/Blogcastr.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+cProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Info.plist Blogcastr-Info.plist
+cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib
+cCopyPNGFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png iPhone/logo@2x~iphone.png
+cCopyPNGFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo~iphone.png iPhone/logo~iphone.png
+cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib
+cProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
+cProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
+cDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr normal armv6
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr normal armv7
+cCreateUniversalBinary /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr normal "armv6 armv7"
+cGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr
+cProcessProductPackaging "/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision" /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision
+cTouch /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent
+cCodeSign /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk
+c000000004CC7DC9E0000000000000110
+t1288166558
+s272
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist
+c000000004CB3DFCF00000000000001A7
+t1286856655
+s423
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+c000000004CB3DFCF00000000000001E5
+t1286856655
+s485
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004CC10FA70000000000300DE0
+t1287720871
+s3149280
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h
+c000000004CC10F8D000000000000046B
+t1287720845
+s1131
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004CC10EF500000000003532B0
+t1287720693
+s3486384
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CC10F4700000000003E1F20
+t1287720775
+s4071200
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004CC10F1C0000000000001466
+t1287720732
+s5222
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004CC11AE60000000000000AA1
+t1287723750
+s2721
+
+N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004CC11B750000000000C769F0
+t1287723893
+s13068784
+
+N/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.h
+c000000004D6F117E0000000000000274
+t1299124606
+s628
+i<Foundation/Foundation.h>
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m
+c000000004D6DC4B60000000000000317
+t1299039414
+s791
+i"BlogcastrServer.h"
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch
+c000000004D62FDFE00000000000000BB
+t1298333182
+s187
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.h
+c000000004D6B10350000000000002DF9
+t1298862133
+s11769
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m
+c000000004D6B10350000000000004F33
+t1298862133
+s20275
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr/Session.h
+c000000004D7310EB00000000000001BC
+t1299386603
+s444
+i<CoreData/CoreData.h>
+
+N/Users/mrushton/Desktop/Blogcastr/Session.m
+c000000004D7310EB000000000000010E
+t1299386603
+s270
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr/SessionController.h
+c000000004D6C75E90000000000000AB3
+t1298953705
+s2739
+i<UIKit/UIKit.h>
+i"Session.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr/SessionController.m
+c000000004D6CF9A30000000000003301
+t1298987427
+s13057
+i"SessionController.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr/SettingsController.h
+c000000004D634D6D00000000000000EA
+t1298353517
+s234
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/SettingsController.m
+c000000004D73DF1900000000000019B1
+t1299439385
+s6577
+i"SettingsController.h"
+i"AppDelegate_Shared.h"
+
+N/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.h
+c000000004D73D14800000000000003E0
+t1299435848
+s992
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m
+c000000004D7310EB0000000000001AC4
+t1299386603
+s6852
+i"AppDelegate_Shared.h"
+
+N/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
+c000000004D7310EB0000000000000088
+t1299386603
+s136
+
+N/Users/mrushton/Desktop/Blogcastr/Shared/main.m
+c000000004D62FDFE0000000000000166
+t1298333182
+s358
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/SignInController.h
+c000000004D6F14720000000000000AAE
+t1299125362
+s2734
+i<UIKit/UIKit.h>
+i"Session.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr/SignInController.m
+c000000004D7273150000000000003629
+t1299346197
+s13865
+i"SignInController.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr/SignInView.h
+c000000004D62F53E00000000000002F3
+t1298330942
+s755
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/SignInView.m
+c000000004D62F53E00000000000002F0
+t1298330942
+s752
+i"SignInView.h"
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent
+t1298438658
+s424
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_Shared.o
+t1299437342
+s62760
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPad.o
+t1299437342
+s47060
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPhone.o
+t1299440492
+s60232
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr
+t1299440492
+s106484
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr.LinkFileList
+c000000004D73D7160000000000000665
+t1299437334
+s1637
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/BlogcastrServer.o
+t1299437343
+s13284
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/HomeController.o
+t1299437343
+s38036
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/MBProgressHUD.o
+t1298877621
+s109148
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/RootController_iPhone.o
+t1299440492
+s48808
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Session.o
+t1299437342
+s5536
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SessionController.o
+t1298987432
+s90756
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SettingsController.o
+t1299440492
+s43124
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInController.o
+t1299437343
+s91816
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInView.o
+t1298877620
+s42976
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/TabToolbarController.o
+t1299437343
+s49548
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/UserController.o
+t1299437343
+s40904
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/main.o
+t1298877619
+s6452
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_Shared.o
+t1299437346
+s62564
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPad.o
+t1299437346
+s47004
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPhone.o
+t1299440492
+s60072
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr
+t1299440493
+s101580
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr.LinkFileList
+c000000004D73D7160000000000000665
+t1299437334
+s1637
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/BlogcastrServer.o
+t1299437347
+s13228
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/HomeController.o
+t1299437347
+s38008
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/MBProgressHUD.o
+t1298877623
+s105096
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/RootController_iPhone.o
+t1299440493
+s48684
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Session.o
+t1299437346
+s5536
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SessionController.o
+t1298987432
+s89956
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SettingsController.o
+t1299440493
+s42980
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInController.o
+t1299437347
+s90804
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInView.o
+t1298877622
+s42852
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/TabToolbarController.o
+t1299437347
+s49304
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/UserController.o
+t1299437347
+s40844
+
+N/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/main.o
+t1298877621
+s6436
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+t1299440494
+s646
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app.dSYM
+t1299440493
+s102
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr
+t1299440493
+s226672
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd
+t1299437339
+s136
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/HomeController.nib
+t1299437338
+s1207
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Info.plist
+t1298438653
+s1103
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/MainWindow_iPad.nib
+t1298438654
+s982
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/MainWindow_iPhone.nib
+t1298438654
+s984
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/PkgInfo
+t1298438653
+s8
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/ResourceRules.plist
+t1298438653
+s485
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/RootController_iPhone.nib
+t1298438655
+s1475
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/SignInView_iPhone.nib
+t1298987431
+s1991
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/TabToolbar.nib
+t1298837883
+s1121
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision
+t1298438658
+s7361
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/live.png
+t1298952032
+s6142
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png
+t1298951651
+s53010
+
+N/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo~iphone.png
+t1298951651
+s23228
+
+N/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.h
+c000000004D62FDFE0000000000000102
+t1298333182
+s258
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m
+c000000004D62FDFE000000000000071F
+t1298333182
+s1823
+i"AppDelegate_iPad.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib
+c000000004D62FDFE000000000000389F
+t1298333182
+s14495
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.h
+c000000004D6933AB0000000000000196
+t1298740139
+s406
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+i"RootController_iPhone.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m
+c000000004D7314D30000000000001136
+t1299387603
+s4406
+i"AppDelegate_iPhone.h"
+i"SettingsController.h"
+i"HomeController.h"
+i"UserController.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.h
+c000000004D6966DC0000000000000102
+t1298753244
+s258
+i<UIKit/UIKit.h>
+i"TabToolbarController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m
+c000000004D6970EF000000000000059D
+t1298755823
+s1437
+i"HomeController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib
+c000000004D72AD7C00000000000054B0
+t1299361148
+s21680
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib
+c000000004D62FDFE0000000000003A8D
+t1298333182
+s14989
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.h
+c000000004D73E297000000000000027E
+t1299440279
+s638
+i<UIKit/UIKit.h>
+i"Session.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m
+c000000004D73E35B000000000000124D
+t1299440475
+s4685
+i"AppDelegate_Shared.h"
+i"RootController_iPhone.h"
+i"HomeController.h"
+i"SettingsController.h"
+i"Session.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.xib
+c000000004C9D66150000000000006700
+t1285383701
+s26368
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib
+c000000004D6C74D300000000000055C7
+t1298953427
+s21959
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib
+c000000004D6961740000000000005058
+t1298751860
+s20568
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.h
+c000000004D72D5680000000000000242
+t1299371368
+s578
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m
+c000000004D72EF410000000000000FA3
+t1299377985
+s4003
+i"TabToolbarController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.h
+c000000004D72C56500000000000000E1
+t1299367269
+s225
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m
+c000000004D72C5940000000000001274
+t1299367316
+s4724
+i"UserController.h"
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/live.png
+c000000004D6C6E5D0000000000001307
+t1298951773
+s4871
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/logo@2x~iphone.png
+c000000004D6C6851000000000000CA95
+t1298950225
+s51861
+
+N/Users/mrushton/Desktop/Blogcastr/iPhone/logo~iphone.png
+c000000004D6C68F4000000000000565D
+t1298950388
+s22109
+
+N/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision
+c000000004D22A6980000000000001CC1
+t1294116504
+s7361
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch.gch
+t1298877618
+s10446552
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dbapmdsefosqbabzkawqcmstuzij/Blogcastr_Prefix.pch.gch
+t1298438656
+s9983704
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evxnthcrsgdrqsdsvmwrdnemwndz/Blogcastr_Prefix.pch.gch
+t1298438656
+s10446552
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch.gch
+t1298877618
+s9983704
+
+NBlogcastr-Info.plist
+c000000004D62FDFE0000000000000569
+t1298333182
+s1385
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies321133292#321133292#0(0"0(0#1#0"8695601088#0"0#
+
+CCodeSign /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+s321133293.594893
+e321133294.389553
+r1
+xCodeSign
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+lSLF07#2@43"CodeSign build/Debug-iphoneos/Blogcastr.app321133293#321133294#0(0"0(0#0#68"/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app8701662080#641"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv _CODESIGN_ALLOCATE_ /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    /usr/bin/codesign -f -s "iPhone Developer: Matthew Rushton (WYSQM37L24)" --resource-rules=/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/ResourceRules.plist --entitlements /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130139.330189
+e321130142.535588
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_Shared.o
+x/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m321130139#321130142#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m8703000064#1752"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_Shared.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130138.452792
+e321130142.513424
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPad.o
+x/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m321130138#321130142#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m8703006400#1746"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPad.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321133292.368879
+e321133292.711854
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: At top level:
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321133292#321133292#0(766"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: At top level:/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@37"Unused variable 'blogcastsController'321133292#143#113#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#22#0#22#0#19"unused variable '*'0(23@13"At top level:321133292#256#77#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#0#0#0#0#0"0(22@136"Property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation321133292#333#213#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#124#0#124#0#0"0(22@143"Property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation321133292#546#220#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#124#0#124#0#0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m8685681664#1752"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/AppDelegate_iPhone.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130143.345154
+e321130143.521871
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/BlogcastrServer.o
+x/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found
+lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m321130143#321130143#0(371"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found3(22@52"Incomplete implementation of class 'BlogcastrServer'321130143#0#118#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#38"incomplete implementation of class '*'0(22@43"Method definition for '-getUser:' not found321130143#118#109#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(22@78"Method definition for '-getAuthenticationTokenForUsername:password:' not found321130143#227#144#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(0#0#51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m8702725216#1739"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/BlogcastrServer.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130143.081218
+e321130143.193785
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/HomeController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m321130143#321130143#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m8702191552#1744"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/HomeController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320570420.621320
+e320570421.302934
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/MBProgressHUD.o
+x/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@57"Compile /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m320570420#320570421#0(0"0(0#0#49"/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m8658208896#1735"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/MBProgressHUD.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321133292.370826
+e321133292.702135
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/RootController_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@72"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m321133292#321133292#0(0"0(0#0#64"/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m8683109248#1758"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/RootController_iPhone.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130142.535718
+e321130142.773104
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Session.o
+x/Users/mrushton/Desktop/Blogcastr/Session.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@51"Compile /Users/mrushton/Desktop/Blogcastr/Session.m321130142#321130142#0(0"0(0#0#43"/Users/mrushton/Desktop/Blogcastr/Session.m8682133536#1723"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Session.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Session.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SessionController.o /Users/mrushton/Desktop/Blogcastr/SessionController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320680231.604456
+e320680232.138409
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SessionController.o
+x/Users/mrushton/Desktop/Blogcastr/SessionController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@61"Compile /Users/mrushton/Desktop/Blogcastr/SessionController.m320680231#320680232#0(0"0(0#0#53"/Users/mrushton/Desktop/Blogcastr/SessionController.m8675178080#1743"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SessionController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SessionController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321133292.702279
+e321133292.853895
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SettingsController.o
+x/Users/mrushton/Desktop/Blogcastr/SettingsController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@62"Compile /Users/mrushton/Desktop/Blogcastr/SettingsController.m321133292#321133292#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/SettingsController.m8701564608#1745"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SettingsController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SettingsController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130143.193930
+e321130143.694344
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInController.o
+x/Users/mrushton/Desktop/Blogcastr/SignInController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@60"Compile /Users/mrushton/Desktop/Blogcastr/SignInController.m321130143#321130143#0(0"0(0#0#52"/Users/mrushton/Desktop/Blogcastr/SignInController.m8701154720#1741"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SignInController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInView.o /Users/mrushton/Desktop/Blogcastr/SignInView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320570419.874763
+e320570420.079700
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInView.o
+x/Users/mrushton/Desktop/Blogcastr/SignInView.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@54"Compile /Users/mrushton/Desktop/Blogcastr/SignInView.m320570419#320570420#0(0"0(0#0#46"/Users/mrushton/Desktop/Blogcastr/SignInView.m8676515328#1729"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SignInView.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/SignInView.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130143.031734
+e321130143.344903
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/TabToolbarController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@71"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m321130143#321130143#0(0"0(0#0#63"/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m8674288416#1756"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/TabToolbarController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s321130143.522022
+e321130143.676011
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/UserController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m321130143#321130143#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m8702979296#1744"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/UserController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320570419.048175
+e320570419.181414
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/main.o
+x/Users/mrushton/Desktop/Blogcastr/Shared/main.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@55"Compile /Users/mrushton/Desktop/Blogcastr/Shared/main.m320570419#320570419#0(0"0(0#0#47"/Users/mrushton/Desktop/Blogcastr/Shared/main.m8672162048#1724"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/main.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/main.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130146.231753
+e321130146.716495
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_Shared.o
+x/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m321130146#321130146#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m8700508096#1752"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_Shared.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130143.676491
+e321130146.685031
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPad.o
+x/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m321130143#321130146#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m8697793696#1746"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPad.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321133292.712937
+e321133292.992303
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: At top level:
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321133292#321133292#0(766"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: At top level:/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:124: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@37"Unused variable 'blogcastsController'321133292#143#113#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#22#0#22#0#19"unused variable '*'0(23@13"At top level:321133292#256#77#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#0#0#0#0#0"0(22@136"Property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation321133292#333#213#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#124#0#124#0#0"0(22@143"Property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation321133292#546#220#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321080403#124#0#124#0#0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m8701165376#1752"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/AppDelegate_iPhone.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130147.225621
+e321130147.382421
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/BlogcastrServer.o
+x/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found
+o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found
+lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m321130147#321130147#0(371"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found3(22@52"Incomplete implementation of class 'BlogcastrServer'321130147#0#118#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#38"incomplete implementation of class '*'0(22@43"Method definition for '-getUser:' not found321130147#118#109#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(22@78"Method definition for '-getAuthenticationTokenForUsername:password:' not found321130147#227#144#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(0#0#51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m8702235936#1739"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/BlogcastrServer.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130147.117621
+e321130147.225363
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/HomeController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m321130147#321130147#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m8677481472#1744"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/HomeController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320570422.419410
+e320570423.079314
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/MBProgressHUD.o
+x/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@57"Compile /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m320570422#320570423#0(0"0(0#0#49"/Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m8670991072#1735"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/MBProgressHUD.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321133292.992595
+e321133293.257624
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/RootController_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@72"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m321133292#321133293#0(0"0(0#0#64"/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m8700358176#1758"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/RootController_iPhone.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130146.716623
+e321130146.816182
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Session.o
+x/Users/mrushton/Desktop/Blogcastr/Session.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@51"Compile /Users/mrushton/Desktop/Blogcastr/Session.m321130146#321130146#0(0"0(0#0#43"/Users/mrushton/Desktop/Blogcastr/Session.m8702867968#1723"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Session.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Session.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SessionController.o /Users/mrushton/Desktop/Blogcastr/SessionController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320680232.136494
+e320680232.422317
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SessionController.o
+x/Users/mrushton/Desktop/Blogcastr/SessionController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@61"Compile /Users/mrushton/Desktop/Blogcastr/SessionController.m320680232#320680232#0(0"0(0#0#53"/Users/mrushton/Desktop/Blogcastr/SessionController.m8674720352#1743"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SessionController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SessionController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321133293.004616
+e321133293.227399
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SettingsController.o
+x/Users/mrushton/Desktop/Blogcastr/SettingsController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@62"Compile /Users/mrushton/Desktop/Blogcastr/SettingsController.m321133293#321133293#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/SettingsController.m8700199296#1745"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SettingsController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SettingsController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130147.210409
+e321130147.605070
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInController.o
+x/Users/mrushton/Desktop/Blogcastr/SignInController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@60"Compile /Users/mrushton/Desktop/Blogcastr/SignInController.m321130147#321130147#0(0"0(0#0#52"/Users/mrushton/Desktop/Blogcastr/SignInController.m8702547520#1741"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SignInController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInView.o /Users/mrushton/Desktop/Blogcastr/SignInView.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320570421.740014
+e320570422.043708
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInView.o
+x/Users/mrushton/Desktop/Blogcastr/SignInView.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@54"Compile /Users/mrushton/Desktop/Blogcastr/SignInView.m320570421#320570422#0(0"0(0#0#46"/Users/mrushton/Desktop/Blogcastr/SignInView.m8638852032#1729"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SignInView.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/SignInView.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130147.044533
+e321130147.210285
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/TabToolbarController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@71"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m321130147#321130147#0(0"0(0#0#63"/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m8701517632#1756"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/TabToolbarController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s321130147.382544
+e321130147.506027
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/UserController.o
+x/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m321130147#321130147#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m8700364384#1744"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/UserController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320570421.010508
+e320570421.171694
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/main.o
+x/Users/mrushton/Desktop/Blogcastr/Shared/main.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@55"Compile /Users/mrushton/Desktop/Blogcastr/Shared/main.m320570421#320570421#0(0"0(0#0#47"/Users/mrushton/Desktop/Blogcastr/Shared/main.m8663931808#1724"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/main.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/main.o0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib
+s320131453.415422
+e320131454.306184
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib
+lSLF07#2@35"CompileXIB iPad/MainWindow_iPad.xib320131453#320131454#0(0"0(0#0#58"/Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib8643899264#544"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/MainWindow_iPad.nib /Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib
+s321130134.186285
+e321130138.441149
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib
+lSLF07#2@36"CompileXIB iPhone/HomeController.xib321130134#321130138#0(0"0(0#0#59"/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib8674804800#544"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/HomeController.nib /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib
+s320131453.416547
+e320131454.274369
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib
+lSLF07#2@39"CompileXIB iPhone/MainWindow_iPhone.xib320131453#320131454#0(0"0(0#0#62"/Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib8643800416#550"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/MainWindow_iPhone.nib /Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.xib
+s320131454.306299
+e320131455.215342
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.xib
+lSLF07#2@43"CompileXIB iPhone/RootController_iPhone.xib320131454#320131455#0(0"0(0#0#66"/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.xib8643692416#558"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/RootController_iPhone.nib /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib
+s320680227.503857
+e320680231.235627
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib
+lSLF07#2@39"CompileXIB iPhone/SignInView_iPhone.xib320680227#320680231#0(0"0(0#0#62"/Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib8678138208#550"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/SignInView_iPhone.nib /Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib
+s320530682.529759
+e320530683.844218
+r1
+xCompileXIB
+x/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib
+lSLF07#2@32"CompileXIB iPhone/TabToolbar.xib320530682#320530684#0(0"0(0#0#55"/Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib8649886976#536"    cd /Users/mrushton/Desktop/Blogcastr    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/TabToolbar.nib /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib --sdk /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk0#
+
+CCopyPNGFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/live.png iPhone/live.png
+s320644831.938472
+e320644832.134582
+r1
+xCopyPNGFile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/live.png
+xiPhone/live.png
+lSLF07#2@71"CopyPNGFile build/Debug-iphoneos/Blogcastr.app/live.png iPhone/live.png320644831#320644832#0(0"0(0#0#49"/Users/mrushton/Desktop/Blogcastr/iPhone/live.png8670308832#550"    cd /Users/mrushton/Desktop/Blogcastr    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/mrushton/Desktop/Blogcastr/iPhone/live.png /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/live.png0#
+
+CCopyPNGFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png iPhone/logo@2x~iphone.png
+s320644450.109056
+e320644451.698986
+r1
+xCopyPNGFile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png
+xiPhone/logo@2x~iphone.png
+lSLF07#2@91"CopyPNGFile build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png iPhone/logo@2x~iphone.png320644450#320644451#0(0"0(0#0#59"/Users/mrushton/Desktop/Blogcastr/iPhone/logo@2x~iphone.png8671392384#570"    cd /Users/mrushton/Desktop/Blogcastr    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/mrushton/Desktop/Blogcastr/iPhone/logo@2x~iphone.png /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo@2x~iphone.png0#
+
+CCopyPNGFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo~iphone.png iPhone/logo~iphone.png
+s320644451.031325
+e320644451.341751
+r1
+xCopyPNGFile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo~iphone.png
+xiPhone/logo~iphone.png
+lSLF07#2@85"CopyPNGFile build/Debug-iphoneos/Blogcastr.app/logo~iphone.png iPhone/logo~iphone.png320644451#320644451#0(0"0(0#0#56"/Users/mrushton/Desktop/Blogcastr/iPhone/logo~iphone.png8653584480#564"    cd /Users/mrushton/Desktop/Blogcastr    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/mrushton/Desktop/Blogcastr/iPhone/logo~iphone.png /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/logo~iphone.png0#
+
+CCpResource build/Debug-iphoneos/Blogcastr.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+s320131453.400010
+e320131453.412684
+r1
+xCpResource
+xbuild/Debug-iphoneos/Blogcastr.app/ResourceRules.plist
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist
+lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist320131453#320131453#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist8646920768#486"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/ResourceRules.plist /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app0#
+
+CCreateUniversalBinary /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr normal "armv6 armv7"
+s321133293.371716
+e321133293.381316
+r1
+xCreateUniversalBinary
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr
+xnormal
+xarmv6 armv7
+lSLF07#2@87"CreateUniversalBinary build/Debug-iphoneos/Blogcastr.app/Blogcastr normal "armv6 armv7"321133293#321133293#0(0"0(0#0#45"/Users/mrushton/Desktop/Blogcastr/armv6 armv78702786656#514"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/lipo -create /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr -output /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr0#
+
+CDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
+s321130138.441830
+e321130139.330065
+r1
+xDataModelVersionCompile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd
+x/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
+o/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.settings: warning: Session.settings -- relationship does not have an inverse 
+o/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.user: warning: Session.user -- relationship does not have an inverse 
+lSLF07#2@103"DataModelVersionCompile build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd Shared/Blogcastr.xcdatamodeld321130138#321130139#0(336"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.settings: warning: Session.settings -- relationship does not have an inverse /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.user: warning: Session.user -- relationship does not have an inverse 2(22@58"Session.settings -- relationship does not have an inverse 321130139#18446744073709551615#0#0(6@85"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel321079403#0#0#0#0#0"0(22@54"Session.user -- relationship does not have an inverse 321130139#18446744073709551615#0#0(6@85"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel321079403#0#0#0#0#0"0(0#0#63"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld8699091552#341"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/momc /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr.momd0#
+
+CGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr
+s321133293.381432
+e321133293.586795
+r1
+xGenerateDSYMFile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app.dSYM
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr
+lSLF07#2@101"GenerateDSYMFile build/Debug-iphoneos/Blogcastr.app.dSYM build/Debug-iphoneos/Blogcastr.app/Blogcastr321133293#321133293#0(0"0(0#0#78"/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr8702555424#353"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Blogcastr -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app.dSYM0#
+
+CLd /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr normal armv6
+s321133292.854023
+e321133293.004467
+r1
+xLd
+x/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr
+xnormal
+xarmv6
+lSLF07#2@122"Link /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr321133292#321133293#0(0"0(0#0#0"8700742464#866"    cd /Users/mrushton/Desktop/Blogcastr    setenv IPHONEOS_DEPLOYMENT_TARGET 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -L/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -filelist /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr.LinkFileList -dead_strip -miphoneos-version-min=4.2 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv6/Blogcastr0#
+
+CLd /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr normal armv7
+s321133293.257762
+e321133293.371566
+r1
+xLd
+x/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr
+xnormal
+xarmv7
+lSLF07#2@122"Link /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr321133293#321133293#0(0"0(0#0#0"8671641440#866"    cd /Users/mrushton/Desktop/Blogcastr    setenv IPHONEOS_DEPLOYMENT_TARGET 4.2    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv7 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -L/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -filelist /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr.LinkFileList -dead_strip -miphoneos-version-min=4.2 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Objects-normal/armv7/Blogcastr0#
+
+CProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Info.plist Blogcastr-Info.plist
+s320131453.402020
+e320131453.415199
+r1
+xProcessInfoPlistFile
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Info.plist
+xBlogcastr-Info.plist
+lSLF07#2@28"Process Blogcastr-Info.plist320131453#320131453#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr-Info.plist8644459552#550"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility Blogcastr-Info.plist -genpkginfo /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/ResourceRules.plist -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/Info.plist0#
+
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320570415.282856
+e320570419.030358
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch320570415#320570419#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8670373952#1618"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-bjvjdfuolbqsyqdwrkfrdeadkfpo/Blogcastr_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dbapmdsefosqbabzkawqcmstuzij/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320131455.327304
+e320131456.472599
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dbapmdsefosqbabzkawqcmstuzij/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch320131455#320131456#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8637798592#1610"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dbapmdsefosqbabzkawqcmstuzij/Blogcastr_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evxnthcrsgdrqsdsvmwrdnemwndz/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv7 objective-c com.apple.compilers.gcc.4_2
+s320131455.328686
+e320131456.595115
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evxnthcrsgdrqsdsvmwrdnemwndz/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch320131455#320131456#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8643229024#1610"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv7 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv7 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evxnthcrsgdrqsdsvmwrdnemwndz/Blogcastr_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
+s320570415.281277
+e320570418.772298
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch320570415#320570418#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8664695328#1618"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=4.2 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources/armv6 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/DerivedSources -DDEVEL -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-gtnxjvvxaanspedhyhlfawrrwndk/Blogcastr_Prefix.pch.gch0#
+
+CProcessProductPackaging "/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision" /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision
+s320131458.283701
+e320131458.285387
+r1
+xProcessProductPackaging
+x/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision
+lSLF07#2@197"ProcessProductPackaging "/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision" build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision320131458#320131458#0(0"0(0#0#93"/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision8640678112#418"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/mrushton/Library/MobileDevice/Provisioning Profiles/664996AB-30B6-468C-A813-527CFF1800A1.mobileprovision" -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app/embedded.mobileprovision0#
+
+CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent
+s320131458.285581
+e320131458.313271
+r1
+xProcessProductPackaging
+x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist
+x/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent
+lSLF07#2@181"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent320131458#320131458#0(0"0(0#0#102"/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent8640068832#428"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.2.sdk/Entitlements.plist -entitlements -format xml -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphoneos/Blogcastr.build/Blogcastr.xcent0#
+
+CTouch /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+s321133293.587032
+e321133293.594663
+r1
+xTouch
+x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app
+lSLF07#2@74"Touch /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app321133293#321133293#0(0"0(0#0#0"8702670848#256"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/mrushton/Desktop/Blogcastr/build/Debug-iphoneos/Blogcastr.app0#
+

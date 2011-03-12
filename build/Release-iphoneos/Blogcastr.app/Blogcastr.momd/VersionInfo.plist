@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSManagedObjectModel_CurrentVersionName</key>
+	<string>Blogcastr</string>
+	<key>NSManagedObjectModel_VersionHashes</key>
+	<dict>
+		<key>Blogcastr</key>
+		<dict>
+			<key>Session</key>
+			<data>
+			O8IAb36YR+EikZQA0D/XuixlAQZ4I8zgbwspzFLfJAg=
+			</data>
+			<key>User</key>
+			<data>
+			+JnPu5UHQu77Tjjg3tqTxchyaqFMDyj8T3Hb2KFOs58=
+			</data>
+		</dict>
+	</dict>
+</dict>
+</plist>

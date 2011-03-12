@@ -1,0 +1,2 @@
+/Users/mrushton/Desktop/Blogcastr/SignInController.m:499: warning: property 'xmlParserRequestType' requires method '-xmlParserRequestType' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/mrushton/Desktop/Blogcastr/SignInController.m:499: warning: property 'xmlParserRequestType' requires the method 'setXmlParserRequestType:' to be defined - use @synthesize, @dynamic or provide a method implementation

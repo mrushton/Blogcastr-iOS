@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate_iPhone.h"
+#import "SettingsController.h"
+#import "HomeController.h"
+#import "UserController.h"
+#import "SignInController.h"
 
 @implementation AppDelegate_iPhone
 
@@ -15,9 +19,46 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
+	UIViewController *blogcastsController;
+	UserController *userController;
+	SettingsController *settingsController;
+	HomeController *homeController;
+	Session *session;
+
     // Override point for customization after application launch.
-    
+	//MVR - always add the root controller and present the session controller modally if not signed in
+	//MVR - create the home controller at the bottom of the navigation controller stack
+	session = self.session;
+	if (!session) {
+		NSLog(@"Unable to get session");
+		return NO;
+	}
+	homeController = [[HomeController alloc] init];
+	userController = [[UserController alloc] initWithStyle:UITableViewStylePlain];
+	userController.tabBarItem.title = @"Profile";
+	settingsController = [[SettingsController alloc] initWithStyle:UITableViewStyleGrouped];
+	settingsController.managedObjectContext = self.managedObjectContext;
+	settingsController.session = session;
+	homeController.viewControllers = [NSArray arrayWithObjects:userController, settingsController, nil];
+	rootController = [[RootController_iPhone alloc] initWithRootViewController:homeController]; 
+	rootController.managedObjectContext = self.managedObjectContext;
+	rootController.session = session;
+	[window addSubview:rootController.view];
+	if (!session.authenticationToken) {
+		SignInController *signInController;
+		
+		signInController = [[SignInController alloc] init];
+		signInController.managedObjectContext = self.managedObjectContext;
+		signInController.session = session;
+		signInController.delegate = rootController;
+		[rootController presentModalViewController:signInController animated:NO];
+		[signInController release];
+	}
+	else {
+		homeController.title = session.user.username;
+	}
+
+	[session release];
     [self.window makeKeyAndVisible];
     
     return YES;
