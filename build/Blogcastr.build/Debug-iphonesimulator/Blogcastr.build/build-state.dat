@@ -1,36 +1,36 @@
 TBlogcastr
 v7
 r0
-t321602541.894304
+t321641937.610645
 cCheck dependencies
-cProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Info.plist Blogcastr-Info.plist
-cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPad/MainWindow_iPad.xib
-cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/MainWindow_iPhone.xib
-cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/SignInView_iPhone.xib
-cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbar.xib
+cProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Info.plist Blogcastr-Info.plist
+cCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPad/MainWindow_iPad.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/MainWindow_iPhone.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/SignInView_iPhone.xib
+cCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbar.xib
 cCpResource build/Debug-iphonesimulator/Blogcastr.app/logo@2x~iphone.png iPhone/logo@2x~iphone.png
 cCpResource build/Debug-iphonesimulator/Blogcastr.app/logo~iphone.png iPhone/logo~iphone.png
-cCompileXIB /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.xib
-cProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-cDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o /Users/mrushton/Desktop/Blogcastr/Shared/User.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o /Users/mrushton/Desktop/Blogcastr/Shared/Settings.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cLd /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr normal i386
-cGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
-cTouch /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app
+cCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.xib
+cProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcastr.xcdatamodeld
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o /Users/mrushton/Desktop/Blogcastr-iOS/Session.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o /Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o /Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr normal i386
+cGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
+cTouch /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app
 
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk
 c000000004CC128950000000000000110
@@ -62,6 +62,11 @@ c000000004CC1225F0000000000001466
 t1287725663
 s5222
 
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004CC12431000000000015CDB0
+t1287726129
+s1428912
+
 N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
 c000000004CC1281F0000000000000AA1
 t1287727135
@@ -71,6 +76,371 @@ N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2
 c000000004CC12883000000000074D7B0
 t1287727235
 s7657392
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.h
+c000000004D7BA1AD0000000000000274
+t1299947949
+s628
+i<Foundation/Foundation.h>
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m
+c000000004D7BA1AD0000000000000317
+t1299947949
+s791
+i"BlogcastrServer.h"
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr_Prefix.pch
+c000000004D7BA1AD00000000000000BB
+t1299947949
+s187
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.h
+c000000004D7BA1AD0000000000002DF9
+t1299947949
+s11769
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m
+c000000004D7BA1AD0000000000004F33
+t1299947949
+s20275
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Session.h
+c000000004D7BA1AD000000000000019D
+t1299947949
+s413
+i<CoreData/CoreData.h>
+i"User.h"
+i"Settings.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Session.m
+c000000004D7BA1AD00000000000000FB
+t1299947949
+s251
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.h
+c000000004D7BA1AD0000000000000264
+t1299947949
+s612
+i<UIKit/UIKit.h>
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m
+c000000004D7BA1AD0000000000001DFB
+t1299947949
+s7675
+i"SettingsController.h"
+i"AppDelegate_Shared.h"
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.h
+c000000004D7BA1AD00000000000003E0
+t1299947949
+s992
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+i"Session.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m
+c000000004D7BA1AD0000000000001AC4
+t1299947949
+s6852
+i"AppDelegate_Shared.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcastr.xcdatamodeld
+c000000004D7BA1AD0000000000000088
+t1299947949
+s136
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.h
+c000000004D7BA1AD000000000000014A
+t1299947949
+s330
+i<CoreData/CoreData.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m
+c000000004D7BA1AD00000000000000EC
+t1299947949
+s236
+i"Settings.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.h
+c000000004D7BA1AD0000000000000260
+t1299947949
+s608
+i<CoreData/CoreData.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m
+c000000004D7BA1AD0000000000000140
+t1299947949
+s320
+i"User.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m
+c000000004D7BA1AD0000000000000166
+t1299947949
+s358
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/SignInController.h
+c000000004D7BA1AD0000000000000DF5
+t1299947949
+s3573
+i<UIKit/UIKit.h>
+i"Session.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m
+c000000004D7BA1AD0000000000003F8E
+t1299947949
+s16270
+i"SignInController.h"
+i"MBProgressHUD.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o
+t1299948958
+s63552
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o
+t1299948957
+s47328
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o
+t1299948958
+s61096
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Blogcastr.LinkFileList
+c000000004D7BA1B800000000000007E5
+t1299947960
+s2021
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o
+t1299948959
+s13344
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o
+t1299948958
+s38128
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o
+t1299948958
+s115112
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o
+t1299948958
+s49708
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o
+t1299948958
+s5284
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o
+t1299948959
+s5244
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o
+t1299948958
+s60256
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o
+t1299948958
+s112532
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o
+t1299948958
+s50532
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o
+t1299948959
+s5424
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o
+t1299948959
+s41028
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o
+t1299948957
+s6316
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app
+t1299948960
+s442
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app.dSYM
+t1299948960
+s102
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
+t1299948959
+s1828468
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd
+t1299947949
+s136
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/HomeController.nib
+t1299947949
+s1207
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Info.plist
+t1299947949
+s913
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/MainWindow_iPad.nib
+t1299947949
+s982
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/MainWindow_iPhone.nib
+t1299947949
+s984
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/PkgInfo
+t1299947949
+s8
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/SignInView_iPhone.nib
+t1299947949
+s1991
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/TabToolbar.nib
+t1299947949
+s1121
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/logo@2x~iphone.png
+t1299947949
+s51861
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/logo~iphone.png
+t1299947949
+s22109
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.h
+c000000004D7BA1AD0000000000000102
+t1299947949
+s258
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m
+c000000004D7BA1AD000000000000071F
+t1299947949
+s1823
+i"AppDelegate_iPad.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPad/MainWindow_iPad.xib
+c000000004D7BA1AD000000000000389F
+t1299947949
+s14495
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.h
+c000000004D7BA1AD0000000000000196
+t1299947949
+s406
+i<UIKit/UIKit.h>
+i"AppDelegate_Shared.h"
+i"RootController_iPhone.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m
+c000000004D7BA1AD0000000000001193
+t1299947949
+s4499
+i"AppDelegate_iPhone.h"
+i"SettingsController.h"
+i"HomeController.h"
+i"UserController.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.h
+c000000004D7BA1AD0000000000000102
+t1299947949
+s258
+i<UIKit/UIKit.h>
+i"TabToolbarController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m
+c000000004D7BA1AD000000000000059D
+t1299947949
+s1437
+i"HomeController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.xib
+c000000004D7BA1AD00000000000054B0
+t1299947949
+s21680
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/MainWindow_iPhone.xib
+c000000004D7BA1AD0000000000003A8D
+t1299947949
+s14989
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.h
+c000000004D7BA1AD000000000000027E
+t1299947949
+s638
+i<UIKit/UIKit.h>
+i"Session.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m
+c000000004D7BA1AD0000000000001252
+t1299947949
+s4690
+i"AppDelegate_Shared.h"
+i"RootController_iPhone.h"
+i"HomeController.h"
+i"SettingsController.h"
+i"Session.h"
+i"SignInController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/SignInView_iPhone.xib
+c000000004D7BA1AD00000000000055C7
+t1299947949
+s21959
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbar.xib
+c000000004D7BA1AD0000000000005058
+t1299947949
+s20568
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.h
+c000000004D7BA1AD0000000000000242
+t1299947949
+s578
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m
+c000000004D7BA1AD0000000000000FA3
+t1299947949
+s4003
+i"TabToolbarController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.h
+c000000004D7BA1AD00000000000000E1
+t1299947949
+s225
+i<UIKit/UIKit.h>
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m
+c000000004D7BA1AD0000000000001274
+t1299947949
+s4724
+i"UserController.h"
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/logo@2x~iphone.png
+c000000004D7BA1AD000000000000CA95
+t1299947949
+s51861
+
+N/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/logo~iphone.png
+c000000004D7BA1AD000000000000565D
+t1299947949
+s22109
 
 N/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.h
 c000000004D6F117E0000000000000274
@@ -570,8 +940,51 @@ c000000004D6C68F4000000000000565D
 t1298950388
 s22109
 
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20.a
+c000000004D7BA5120000000000001010
+t1299948818
+s4112
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Core.a
+c000000004D7BA4E70000000000041308
+t1299948775
+s267016
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Network.a
+c000000004D7BA4EF0000000000052BE8
+t1299948783
+s338920
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Style.a
+c000000004D7BA4FB0000000000127850
+t1299948795
+s1210448
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UI.a
+c000000004D7BA50E00000000005C9C48
+t1299948814
+s6069320
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UICommon.a
+c000000004D7BA4EC000000000004ACA0
+t1299948780
+s306336
+
+N/Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UINavigator.a
+c000000004D7BA4FF000000000008F578
+t1299948799
+s587128
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-cjjyvbfbnsmeuqcdsqmuemcvzixl/Blogcastr_Prefix.pch.gch
+t1299947962
+s15453392
+
 N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch.gch
 t1299344356
+s15453392
+
+N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch.gch
+t1299948957
 s15453392
 
 N/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-hkdqnaggkfyajgalddcnfvuherdn/Blogcastr_Prefix.pch.gch
@@ -579,13 +992,26 @@ t1298836291
 s15453392
 
 NBlogcastr-Info.plist
-c000000004D62FDFE0000000000000569
-t1298333182
+c000000004D7BA1AD0000000000000569
+t1299947949
 s1385
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies321602541#321602541#0(0"0(0#1#0"8709087616#0"0#
+lSLF07#2@18"Check dependencies321641937#321641937#0(0"0(0#1#0"8715896928#0"0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641757.744782
+e321641758.083057
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@73"Compile /Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m321641757#321641758#0(0"0(0#0#65"/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m8681924832#2022"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430621.541717
@@ -600,6 +1026,19 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m321430621#321430621#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m8688591456#1942"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/AppDelegate_Shared.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_Shared.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641757.647867
+e321641757.816261
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m321641757#321641757#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m8692164192#2016"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPad/AppDelegate_iPad.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430621.383382
 e321430621.742955
@@ -612,6 +1051,24 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m321430621#321430621#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m8701805280#1936"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPad/AppDelegate_iPad.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPad.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641757.816389
+e321641758.154936
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':
+o/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'
+o/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m: At top level:
+o/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@73"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m321641757#321641758#0(786"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m: At top level:/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@37"Unused variable 'blogcastsController'321641757#147#117#0(6@65"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m321640749#22#0#22#0#19"unused variable '*'0(23@13"At top level:321641757#264#81#0(6@65"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m321640749#0#0#0#0#0"0(22@136"Property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation321641757#345#217#0(6@65"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m321640749#126#0#126#0#0"0(22@143"Property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation321641757#562#224#0(6@65"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m321640749#126#0#126#0#0"0(0#0#65"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m8680471008#2022"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/AppDelegate_iPhone.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430933.931926
@@ -631,6 +1088,22 @@ o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:126: warning: pro
 o/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation
 lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321430933#321430934#0(766"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: In function '-[AppDelegate_iPhone application:didFinishLaunchingWithOptions:]':/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:22: warning: unused variable 'blogcastsController'/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m: At top level:/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m:126: warning: property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@37"Unused variable 'blogcastsController'321430934#143#113#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321430933#22#0#22#0#19"unused variable '*'0(23@13"At top level:321430934#256#77#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321430933#0#0#0#0#0"0(22@136"Property 'rootController' requires method '-rootController' to be defined - use @synthesize, @dynamic or provide a method implementation321430934#333#213#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321430933#126#0#126#0#0"0(22@143"Property 'rootController' requires the method 'setRootController:' to be defined - use @synthesize, @dynamic or provide a method implementation321430934#546#220#0(6@61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m321430933#126#0#126#0#0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m8707665664#1942"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/AppDelegate_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/AppDelegate_iPhone.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.869313
+e321641759.005670
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'
+o/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found
+o/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found
+lSLF07#2@63"Compile /Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m321641758#321641759#0(383"/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found3(22@52"Incomplete implementation of class 'BlogcastrServer'321641758#0#122#0(6@55"/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m321640749#51#0#51#0#38"incomplete implementation of class '*'0(22@43"Method definition for '-getUser:' not found321641758#122#113#0(6@55"/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m321640749#51#0#51#0#35"method definition for '*' not found0(22@78"Method definition for '-getAuthenticationTokenForUsername:password:' not found321641758#235#148#0(6@55"/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m321640749#51#0#51#0#35"method definition for '*' not found0(0#0#55"/Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m8642016672#2009"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/BlogcastrServer.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430622.217571
 e321430622.371392
@@ -647,6 +1120,19 @@ o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definit
 o/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found
 lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m321430622#321430622#0(371"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: incomplete implementation of class 'BlogcastrServer'/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getUser:' not found/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m:51: warning: method definition for '-getAuthenticationTokenForUsername:password:' not found3(22@52"Incomplete implementation of class 'BlogcastrServer'321430622#0#118#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#38"incomplete implementation of class '*'0(22@43"Method definition for '-getUser:' not found321430622#118#109#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(22@78"Method definition for '-getAuthenticationTokenForUsername:password:' not found321430622#227#144#0(6@51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m320732214#51#0#51#0#35"method definition for '*' not found0(0#0#51"/Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m8710393632#1929"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/BlogcastrServer.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/BlogcastrServer.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.430783
+e321641758.553664
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m321641758#321641758#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m8691352064#2014"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321064168.569816
 e321064168.735889
@@ -659,6 +1145,19 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m321064168#321064168#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m8700632192#1934"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/HomeController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/HomeController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.591683
+e321641758.970180
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@61"Compile /Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m321641758#321641758#0(0"0(0#0#53"/Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m8680454848#2005"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/MBProgressHUD.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/MBProgressHUD.o /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321037157.221214
@@ -676,6 +1175,19 @@ lSLF07#2@57"Compile /Users/mrushton/Desktop/Blogcastr/MBProgressHUD.m321037157#3
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Request.o /Users/mrushton/Desktop/Blogcastr/Request.m normal i386 objective-c com.apple.compilers.gcc.4_2
 r0
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.155073
+e321641758.430640
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@76"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m321641758#321641758#0(0"0(0#0#68"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m8680169312#2028"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430913.171136
 e321430913.426515
@@ -688,6 +1200,19 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@72"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m321430913#321430913#0(0"0(0#0#64"/Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m8684679232#1948"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/RootController_iPhone.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/RootController_iPhone.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o /Users/mrushton/Desktop/Blogcastr-iOS/Session.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.083226
+e321641758.207027
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/Session.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@55"Compile /Users/mrushton/Desktop/Blogcastr-iOS/Session.m321641758#321641758#0(0"0(0#0#47"/Users/mrushton/Desktop/Blogcastr-iOS/Session.m8628802336#1993"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/Session.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Session.o /Users/mrushton/Desktop/Blogcastr/Session.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321430621.804625
@@ -721,6 +1246,19 @@ r0
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings-F95A74B3469C9D57.o /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Settings.m normal i386 objective-c com.apple.compilers.gcc.4_2
 r0
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641759.096944
+e321641759.247446
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m321641759#321641759#0(0"0(0#0#55"/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m8609772672#2002"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Settings.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Settings.m normal i386 objective-c com.apple.compilers.gcc.4_2
 r0
 
@@ -737,6 +1275,19 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr/Shared/Settings.m321430622#321430622#0(0"0(0#0#51"/Users/mrushton/Desktop/Blogcastr/Shared/Settings.m8686676736#1922"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/Settings.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Settings.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o /Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.207159
+e321641758.397433
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@66"Compile /Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m321641758#321641758#0(0"0(0#0#58"/Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m8679775200#2015"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/SettingsController.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o /Users/mrushton/Desktop/Blogcastr/SettingsController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321602532.318527
 e321602532.760076
@@ -749,6 +1300,19 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@62"Compile /Users/mrushton/Desktop/Blogcastr/SettingsController.m321602532#321602532#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/SettingsController.m8709084448#1935"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SettingsController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SettingsController.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o /Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.553812
+e321641758.869174
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@64"Compile /Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m321641758#321641758#0(0"0(0#0#56"/Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m8681698560#2011"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/SignInController.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInController.o /Users/mrushton/Desktop/Blogcastr/SignInController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321431173.202068
@@ -775,6 +1339,19 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@54"Compile /Users/mrushton/Desktop/Blogcastr/SignInView.m320570587#320570587#0(0"0(0#0#46"/Users/mrushton/Desktop/Blogcastr/SignInView.m8676278112#1919"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/SignInView.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/SignInView.o0#
+
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.397558
+e321641758.591549
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@75"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m321641758#321641758#0(0"0(0#0#67"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m8715222688#2026"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbarController.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o0#
 
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/TabToolbarController.o /Users/mrushton/Desktop/Blogcastr/iPhone/TabToolbarController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321070785.842394
@@ -804,6 +1381,19 @@ o/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m:76: warning: prope
 o/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m:76: warning: property 'toolbar' requires the method 'setToolbar:' to be defined - use @synthesize, @dynamic or provide a method implementation
 lSLF07#2@68"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m320390285#320390285#0(401"/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m:76: warning: property 'toolbar' requires method '-toolbar' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m:76: warning: property 'toolbar' requires the method 'setToolbar:' to be defined - use @synthesize, @dynamic or provide a method implementation2(22@122"Property 'toolbar' requires method '-toolbar' to be defined - use @synthesize, @dynamic or provide a method implementation320390285#0#197#0(6@60"/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m320390225#76#0#76#0#0"0(22@129"Property 'toolbar' requires the method 'setToolbar:' to be defined - use @synthesize, @dynamic or provide a method implementation320390285#197#204#0(6@60"/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m320390225#76#0#76#0#0"0(0#0#60"/Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m8652716640#1932"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-hkdqnaggkfyajgalddcnfvuherdn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/ToolbarController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/ToolbarController.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641759.005800
+e321641759.226448
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m321641759#321641759#0(0"0(0#0#51"/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m8624981696#1994"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/User.m normal i386 objective-c com.apple.compilers.gcc.4_2
 r0
 
@@ -820,6 +1410,19 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@55"Compile /Users/mrushton/Desktop/Blogcastr/Shared/User.m321247325#321247325#0(0"0(0#0#47"/Users/mrushton/Desktop/Blogcastr/Shared/User.m8701332160#1914"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/User.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/User.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641758.970323
+e321641759.096570
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m321641758#321641759#0(0"0(0#0#61"/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m8629011680#2014"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/UserController.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321060116.930364
 e321060117.385945
@@ -833,6 +1436,19 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@65"Compile /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m321060116#321060117#0(0"0(0#0#57"/Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m8682665184#1934"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/iPhone/UserController.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/UserController.o0#
 
+CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o /Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641757.582113
+e321641757.744650
+r1
+xCompileC
+xbuild/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o
+x/Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m321641757#321641757#0(0"0(0#0#51"/Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m8700076224#1994"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr-iOS/Shared/main.m -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o0#
+
 CCompileC build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o /Users/mrushton/Desktop/Blogcastr/Shared/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
 s321037156.381162
 e321037156.513793
@@ -845,6 +1461,21 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@55"Compile /Users/mrushton/Desktop/Blogcastr/Shared/main.m321037156#321037156#0(0"0(0#0#47"/Users/mrushton/Desktop/Blogcastr/Shared/main.m8694780096#1914"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -include /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch -c /Users/mrushton/Desktop/Blogcastr/Shared/main.m -o /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPad/MainWindow_iPad.xib
+r0
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/HomeController.xib
+r0
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/MainWindow_iPhone.xib
+r0
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/SignInView_iPhone.xib
+r0
+
+CCompileXIB /Users/mrushton/Desktop/Blogcastr-iOS/iPhone/TabToolbar.xib
+r0
 
 CCompileXIB /Users/mrushton/Desktop/Blogcastr/SessionController.xib
 s320454260.724849
@@ -938,6 +1569,9 @@ xbuild/Debug-iphonesimulator/Blogcastr.app/logo~iphone.png
 xiPhone/logo~iphone.png
 lSLF07#2@27"Copy iPhone/logo~iphone.png321037152#321037152#0(0"0(0#0#56"/Users/mrushton/Desktop/Blogcastr/iPhone/logo~iphone.png8703022592#467"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/mrushton/Desktop/Blogcastr/iPhone/logo~iphone.png /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app0#
 
+CDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcastr.xcdatamodeld
+r0
+
 CDataModelVersionCompile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld
 s321430621.381599
 e321430621.541593
@@ -949,6 +1583,15 @@ o/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdat
 o/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.settings: warning: Session.settings -- relationship does not have an inverse 
 lSLF07#2@110"DataModelVersionCompile build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd Shared/Blogcastr.xcdatamodeld321430621#321430621#0(336"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.user: warning: Session.user -- relationship does not have an inverse /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel:Session.settings: warning: Session.settings -- relationship does not have an inverse 2(22@54"Session.user -- relationship does not have an inverse 321430621#18446744073709551615#0#0(6@85"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel321430621#0#0#0#0#0"0(22@58"Session.settings -- relationship does not have an inverse 321430621#18446744073709551615#0#0(6@85"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld/Blogcastr.xcdatamodel321430621#0#0#0#0#0"0(0#0#63"/Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld8703793664#384"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.6 /Users/mrushton/Desktop/Blogcastr/Shared/Blogcastr.xcdatamodeld /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr.momd0#
 
+CGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
+s321641759.652718
+e321641760.239167
+r1
+xGenerateDSYMFile
+x/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app.dSYM
+x/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
+lSLF07#2@115"GenerateDSYMFile build/Debug-iphonesimulator/Blogcastr.app.dSYM build/Debug-iphonesimulator/Blogcastr.app/Blogcastr321641759#321641760#0(0"0(0#0#89"/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr8683010848#386"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app.dSYM0#
+
 CGenerateDSYMFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app.dSYM /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
 s321602532.859529
 e321602532.927723
@@ -957,6 +1600,16 @@ xGenerateDSYMFile
 x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app.dSYM
 x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
 lSLF07#2@115"GenerateDSYMFile build/Debug-iphonesimulator/Blogcastr.app.dSYM build/Debug-iphonesimulator/Blogcastr.app/Blogcastr321602532#321602532#0(0"0(0#0#85"/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr8711083872#374"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app.dSYM0#
+
+CLd /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr normal i386
+s321641759.247568
+e321641759.652587
+r1
+xLd
+x/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr
+xnormal
+xi386
+lSLF07#2@94"Link /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr321641759#321641759#0(0"0(0#0#0"8699391392#1564"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -L/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -filelist /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Blogcastr.LinkFileList -mmacosx-version-min=10.6 -ObjC -Xlinker -objc_abi_version -Xlinker 2 /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UICommon.a /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20.a /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UINavigator.a /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Core.a /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20UI.a -framework QuartzCore /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Network.a /Users/mrushton/Desktop/three20/Build/Products/Debug-iphonesimulator/libThree20Style.a -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr0#
 
 CLd /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr normal i386
 s321602532.760193
@@ -968,6 +1621,9 @@ xnormal
 xi386
 lSLF07#2@90"Link /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr321602532#321602532#0(0"0(0#0#0"8679678656#905"    cd /Users/mrushton/Desktop/Blogcastr    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -L/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -filelist /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Objects-normal/i386/Blogcastr.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Blogcastr0#
 
+CProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app/Info.plist Blogcastr-Info.plist
+r0
+
 CProcessInfoPlistFile /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Info.plist Blogcastr-Info.plist
 s321037150.810557
 e321037150.919569
@@ -976,6 +1632,19 @@ xProcessInfoPlistFile
 x/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Info.plist
 xBlogcastr-Info.plist
 lSLF07#2@28"Process Blogcastr-Info.plist321037150#321037150#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr-Info.plist8702686976#470"    cd /Users/mrushton/Desktop/Blogcastr    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility Blogcastr-Info.plist -genpkginfo /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app/Info.plist0#
+
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-cjjyvbfbnsmeuqcdsqmuemcvzixl/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s321640761.001523
+e321640762.669811
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-cjjyvbfbnsmeuqcdsqmuemcvzixl/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch321640761#321640762#0(0"0(0#0#58"/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr_Prefix.pch8670105408#1842"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -c /Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-cjjyvbfbnsmeuqcdsqmuemcvzixl/Blogcastr_Prefix.pch.gch0#
 
 CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
 s321037153.004209
@@ -990,6 +1659,19 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@31"Precompile Blogcastr_Prefix.pch321037153#321037156#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8701354048#1802"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-dfkkrdqqjkvvtseneebdapvttmhn/Blogcastr_Prefix.pch.gch0#
 
+CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s321641755.543115
+e321641757.581860
+r1
+xProcessPCH
+x/var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch.gch
+xBlogcastr_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile Blogcastr_Prefix.pch321641755#321641757#0(0"0(0#0#58"/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr_Prefix.pch8632082048#1878"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/include -I../three20/Build/Products/three20 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr-iOS/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -DDEVEL -c /Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-evpahuzckckyujgvwuxrqfqbzqnd/Blogcastr_Prefix.pch.gch0#
+
 CProcessPCH /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-hkdqnaggkfyajgalddcnfvuherdn/Blogcastr_Prefix.pch.gch Blogcastr_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
 s320529089.347062
 e320529091.779028
@@ -1002,6 +1684,14 @@ xi386
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@31"Precompile Blogcastr_Prefix.pch320529089#320529091#0(0"0(0#0#54"/Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch8661328800#1794"    cd /Users/mrushton/Desktop/Blogcastr    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.2.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -D__IPHONE_OS_VERSION_MIN_REQUIRED=40200 -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-generated-files.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-own-target-headers.hmap -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-all-target-headers.hmap -iquote /Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/Blogcastr-project-headers.hmap -F/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator -I/Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/include -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources/i386 -I/Users/mrushton/Desktop/Blogcastr/build/Blogcastr.build/Debug-iphonesimulator/Blogcastr.build/DerivedSources -c /Users/mrushton/Desktop/Blogcastr/Blogcastr_Prefix.pch -o /var/folders/f8/f8BZ7BY4FeqU4UrwWt8hB++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/Blogcastr_Prefix-hkdqnaggkfyajgalddcnfvuherdn/Blogcastr_Prefix.pch.gch0#
+
+CTouch /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app
+s321641760.239553
+e321641760.245067
+r1
+xTouch
+x/Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app
+lSLF07#2@85"Touch /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app321641760#321641760#0(0"0(0#0#0"8679705664#278"    cd /Users/mrushton/Desktop/Blogcastr-iOS    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/mrushton/Desktop/Blogcastr-iOS/build/Debug-iphonesimulator/Blogcastr.app0#
 
 CTouch /Users/mrushton/Desktop/Blogcastr/build/Debug-iphonesimulator/Blogcastr.app
 s321602532.928481
