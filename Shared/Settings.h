@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSNumber * saveOriginalImages;
 @property (nonatomic, retain) NSNumber * vibrate;
 
+
 @end
 
 

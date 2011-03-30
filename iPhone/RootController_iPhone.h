@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Three20/Three20.h>
 #import "Session.h"
 #import "SignInController.h"
 
+
+#define TOOLBAR_HEIGHT 44.0
 
 @interface RootController_iPhone : UINavigationController <SignInControllerProtocol> {
 	NSManagedObjectContext *managedObjectContext;
@@ -20,7 +23,7 @@
 @property (nonatomic, retain) Session *session;
 
 - (void)signIn;
-- (IBAction)signOut;
+- (void)signOut;
 - (RootController_iPhone *)initWithRootViewController:(UIViewController *)viewController; 
 
 @end

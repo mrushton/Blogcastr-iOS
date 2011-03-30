@@ -171,9 +171,10 @@
 	NSEntityDescription *entityDescription;
 	NSArray *array;
 	NSError *error;
-	Session *session;
 	
 	//MVR - get Session
+	if (session_)
+		return session_;
 	fetchRequest = [[NSFetchRequest alloc] init];
 	entityDescription = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 	[fetchRequest setEntity:entityDescription];
@@ -184,11 +185,11 @@
 		return nil;
 	}
 	if ([array count] > 0)
-		session = [array objectAtIndex:0];
+		session_ = [array objectAtIndex:0];
 	else
-		session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+		session_ = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 
-	return session;
+	return session_;
 }
 
 @end

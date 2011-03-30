@@ -9,7 +9,7 @@
 #import "AppDelegate_Shared.h"
 #import "RootController_iPhone.h"
 #import "HomeController.h"
-//#import "NewBlogcastController_Shared.h"
+#import "UserController.h"
 #import "SettingsController.h"
 #import "Session.h"
 #import "SignInController.h"
@@ -19,9 +19,11 @@
 @synthesize managedObjectContext;
 @synthesize session;
 
-- (RootController_iPhone *)initWithRootViewController:(UIViewController *)viewController {
-	[super initWithRootViewController:viewController];
+- (RootController_iPhone *)init {
+	[super init];
 	self.navigationBar.tintColor = [UIColor colorWithRed:0.18 green:0.30 blue:0.38 alpha:1.0];
+	//MVR - sign out notification
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
 	
 	return self;
 }
@@ -75,72 +77,46 @@
 }
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
 - (void)signIn {
+	UIViewController *blogcastsController;
+	UserController *userController;
+	SettingsController *settingsController;
 	HomeController *homeController;
 
+	//MVR - create the Home Controller at the bottom of the navigation controller stack
+	homeController = [[HomeController alloc] init];
 	//MVR - set Home Controller title
-	homeController = [self.viewControllers objectAtIndex:0];
 	homeController.title = session.user.username;
-	/*if (blogcastsController.updatedAt) {
-		[blogcastsController.updatedAt release];
-		blogcastsController.updatedAt = nil;
-		[blogcastsController.dragRefreshView setUpdateDate:nil];
-	}*/
-//	[blogcastsController update];
-	//MVR - dismiss sign in controller
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)settings {
-	/*settingsController = [[SettingsController alloc] init];
-	settingsController.managedObjectContext = managedObjectContext;
+	userController = [[UserController alloc] initWithStyle:UITableViewStyleGrouped];
+	userController.managedObjectContext = self.managedObjectContext;
+	userController.session = session;
+	userController.user = session.user;
+	userController.tabBarItem.title = @"Profile";
+	settingsController = [[SettingsController alloc] initWithStyle:UITableViewStyleGrouped];
+	settingsController.tabBarItem.title = @"Settings";
+	settingsController.managedObjectContext = self.managedObjectContext;
 	settingsController.session = session;
-	settingsController.delegate = self;
-	[self presentModalViewController:sessionController animated:YES];
-	[sessionController release];*/
+	homeController.viewControllers = [NSArray arrayWithObjects:userController, settingsController, nil];
+	[userController release];
+	[settingsController release];
+	//MVR - set the navigation stack
+	self.viewControllers = [NSArray arrayWithObjects:homeController, nil];
+	[homeController release];
 }
 
 - (void)signOut {
-/*	BlogcastsController_Shared *blogcastsController;
-	SessionController *sessionController;
-	NSFetchRequest *fetchRequest;
-	NSEntityDescription *entityDescription;
-	NSArray *array;
-	NSError *error;
-
-	//MVR - clear Session object
-	session.username = nil;
-	session.password = nil;
-	session.authenticationToken = nil;
-	session.isAuthenticated = [NSNumber numberWithBool:NO];
-	//MVR - delete Blogcast objects
-	fetchRequest = [[NSFetchRequest alloc] init];
-	entityDescription = [NSEntityDescription entityForName:@"Blogcast" inManagedObjectContext:managedObjectContext];
-	[fetchRequest setEntity:entityDescription];
-	array = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	for (NSManagedObject *managedObject in array)
-        [managedObjectContext deleteObject:managedObject];
-	if (![managedObjectContext save:&error]) {
-	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		return;
-	}	
-	//[session release];
-	//session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:managedObjectContext];
-	//[session retain];
-	//MVR - update blogcasts controller
-	blogcastsController = [self.viewControllers objectAtIndex:0];
-	//MVR - session info
-	blogcastsController.session = session;
-	sessionController = [[SessionController alloc] init];
-	sessionController.managedObjectContext = managedObjectContext;
-	sessionController.session = session;
-	sessionController.delegate = self;
-	[self presentModalViewController:sessionController animated:YES];
-	[sessionController release];
- */
+	SignInController *signInController;
+	
+	signInController = [[SignInController alloc] init];
+	signInController.managedObjectContext = self.managedObjectContext;
+	signInController.session = session;
+	signInController.delegate = self;
+	[self presentModalViewController:signInController animated:YES];
+	[signInController release];
 }
 
 @end

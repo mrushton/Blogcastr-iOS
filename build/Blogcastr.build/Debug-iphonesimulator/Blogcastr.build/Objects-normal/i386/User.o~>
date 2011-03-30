@@ -1,0 +1,6 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:22: error: no declaration of property 'numBlogcasts' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:23: error: no declaration of property 'numSubscriptions' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:24: error: no declaration of property 'numSubscribers' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:25: error: no declaration of property 'numPosts' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:26: error: no declaration of property 'numComments' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/User.m:27: error: no declaration of property 'numLikes' found in the interface

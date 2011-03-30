@@ -6,11 +6,13 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <Three20/Three20.h>
 #import "AppDelegate_iPhone.h"
 #import "SettingsController.h"
 #import "HomeController.h"
 #import "UserController.h"
 #import "SignInController.h"
+#import "BlogcastrStyleSheet.h"
 
 @implementation AppDelegate_iPhone
 
@@ -19,28 +21,27 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-	UIViewController *blogcastsController;
-	UserController *userController;
-	SettingsController *settingsController;
-	HomeController *homeController;
+	BlogcastrStyleSheet *styleSheet;
+	TTNavigator *navigator;
 	Session *session;
 
     // Override point for customization after application launch.
-	//MVR - always add the root controller and present the session controller modally if not signed in
-	//MVR - create the home controller at the bottom of the navigation controller stack
+	
+	//MVR - set the global style sheet for Three20
+	styleSheet = [[BlogcastrStyleSheet alloc] init];
+	[TTStyleSheet setGlobalStyleSheet:styleSheet];
+	TT_RELEASE_SAFELY(styleSheet);
+	//MVR - set navigator to handle web urls for Three20
+	//navigator = [TTNavigator navigator];
+	//urlMap = navigator.URLMap;
+	//[urlMap from:@"*" toViewController:[TTWebController class]];
 	session = self.session;
 	if (!session) {
 		NSLog(@"Unable to get session");
 		return NO;
 	}
-	homeController = [[HomeController alloc] init];
-	userController = [[UserController alloc] initWithStyle:UITableViewStylePlain];
-	userController.tabBarItem.title = @"Profile";
-	settingsController = [[SettingsController alloc] initWithStyle:UITableViewStyleGrouped];
-	settingsController.managedObjectContext = self.managedObjectContext;
-	settingsController.session = session;
-	homeController.viewControllers = [NSArray arrayWithObjects:userController, settingsController, nil];
-	rootController = [[RootController_iPhone alloc] initWithRootViewController:homeController]; 
+	//MVR - always add the root controller and present the session controller modally if not signed in
+	rootController = [[RootController_iPhone alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;
 	rootController.session = session;
 	[window addSubview:rootController.view];
@@ -53,11 +54,9 @@
 		signInController.delegate = rootController;
 		[rootController presentModalViewController:signInController animated:NO];
 		[signInController release];
+	} else {
+		[rootController signIn];
 	}
-	else {
-		homeController.title = session.user.username;
-	}
-
 	[session release];
     [self.window makeKeyAndVisible];
     

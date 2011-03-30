@@ -1,0 +1,2 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m: In function '-[ImageViewerController loadView]':
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:39: warning: unused variable 'innerFrame'

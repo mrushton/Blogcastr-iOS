@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "Settings.h"
 
 
 @interface User :  NSManagedObject  
@@ -20,7 +21,14 @@
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSDate * updatedAt;
-@property (nonatomic, retain) NSString * avatarFileName;
+@property (nonatomic, retain) NSString * avatarUrl;
+@property (nonatomic, retain) NSNumber * numBlogcasts;
+@property (nonatomic, retain) NSNumber * numSubscriptions;
+@property (nonatomic, retain) NSNumber * numSubscribers;
+@property (nonatomic, retain) NSNumber * numPosts;
+@property (nonatomic, retain) NSNumber * numComments;
+@property (nonatomic, retain) NSNumber * numLikes;
+@property (nonatomic, retain) Settings * settings;
 
 @end
 

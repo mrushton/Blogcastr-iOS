@@ -6,6 +6,7 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <Three20/Three20.h>
 #import "SettingsController.h"
 #import "AppDelegate_Shared.h"
 #import "Session.h"
@@ -17,33 +18,44 @@
 @synthesize managedObjectContext;
 @synthesize session;
 @synthesize alertView;
+@synthesize tabToolbarController;
 
 #pragma mark -
 #pragma mark Initialization
 
+/*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization.
-		self.tabBarItem.title = @"Settings";
-		self.tableView.backgroundColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1.0];
     }
     return self;
 }
+*/
 
 
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
 - (void)viewDidLoad {
+	UIView *footerView;
+	TTButton *signOutButton;
+	
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-*/
+	self.tableView.backgroundColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1.0];
+	footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 85.0)];
+	self.tableView.tableFooterView = footerView;
+	[footerView release];
+	//MVR - set up sign out button
+	signOutButton = [TTButton buttonWithStyle:@"redTableFooterButton:" title:@"Sign Out"];
+	[signOutButton addTarget:self action:@selector(signOut:) forControlEvents:UIControlEventTouchUpInside]; 
+	signOutButton.frame = CGRectMake(9.0, 20.0, 302.0, 45.0);
+	[self.tableView.tableFooterView  addSubview:signOutButton];	
+ }
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,7 +111,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
-	
+	NSLog(@"MVR - getting table view cell");
 	//AS DESIGNED: only 3 cells no need to make them reusable
 	cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
 	if (indexPath.section == 0) {
@@ -109,16 +121,14 @@
 			cell.textLabel.text = @"Save original images";
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			theSwitch = [[UISwitch alloc] init];
-			[theSwitch setOn:[session.settings.saveOriginalImages boolValue] animated:NO];
+			[theSwitch setOn:[session.user.settings.saveOriginalImages boolValue] animated:NO];
 			[theSwitch addTarget:self action:@selector(saveOriginalImages:) forControlEvents:UIControlEventValueChanged];
 			cell.accessoryView = theSwitch;
-		}
-		else {
+		} else {
 			cell.textLabel.text = @"Change avatar";
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
-	}
-	else {
+	} else {
 		cell.textLabel.text = @"Version";
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"%d.%d", VERSION_MAJOR, VERSION_MINOR];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -226,6 +236,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"MVR - dealloc settings controlelr");
+
     [super dealloc];
 }
 
@@ -235,26 +247,43 @@
 - (void)saveOriginalImages:(UISwitch *)theSwitch {
 	NSError *error;
 
-	NSLog(@"MVR - saving settings %i",[session.settings.saveOriginalImages intValue]);
-	session.settings.saveOriginalImages = [NSNumber numberWithBool:theSwitch.on];
+	session.user.settings.saveOriginalImages = [NSNumber numberWithBool:theSwitch.on];
 	if (![managedObjectContext save:&error]) {
 		NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		[self errorAlert:@"Save error"];
+		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save your settings."];
 		return;
 	}
 }
 
 #pragma mark -
+#pragma mark Sign Out
+
+- (void)signOut:(id)object {
+	NSError *error;
+	
+	//MVR - clear Session object
+	session.authenticationToken = nil;
+	session.user = nil;
+	if (![managedObjectContext save:&error]) {
+	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
+		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't sign you out."];
+		return;
+	}
+	//MVR - post sign out notification since multiple controllers may be interested
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:self];
+}
+
+#pragma mark -
 #pragma mark Error handling
 
-- (void)errorAlert:(NSString *)error {
+- (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {
 	//MVR - display the alert view
 	if (!alertView) {
-		alertView = [[UIAlertView alloc] initWithTitle:error message:@"Oops! We couldn't save your settings." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+		alertView = [[UIAlertView alloc] initWithTitle:title message: message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 	}
 	else {
-		alertView.title = error;
-		alertView.message = @"Oops! We couldn't save your settings.";
+		alertView.title = title;
+		alertView.message = message;
 	}
 	[alertView show];
 }

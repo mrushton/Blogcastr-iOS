@@ -13,6 +13,5 @@
 
 @dynamic authenticationToken;
 @dynamic user;
-@dynamic settings;
 
 @end

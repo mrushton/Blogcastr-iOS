@@ -1,0 +1,8 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m: In function '-[ImageViewerController loadView]':
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:38: warning: unused variable 'innerFrame'
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m: In function '-[ImageViewerController showBars:animated:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:158: warning: 'ImageViewerController' may not respond to '-showBarsAnimationDidStop'
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:158: warning: (Messages without a matching method signature
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:158: warning: will be assumed to return 'id' and accept
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:158: warning: '...' as arguments.)
+/Users/mrushton/Desktop/Blogcastr-iOS/ImageViewerController.m:160: warning: 'ImageViewerController' may not respond to '-hideBarsAnimationDidStop'

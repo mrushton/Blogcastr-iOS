@@ -20,11 +20,17 @@
 @synthesize xmlParserAuthenticationToken;
 @synthesize xmlParserId;
 @synthesize xmlParserUsername;
-@synthesize xmlParserAvatarFileName;
+@synthesize xmlParserAvatarUrl;
 @synthesize xmlParserBio;
 @synthesize xmlParserFullName;
 @synthesize xmlParserLocation;
 @synthesize xmlParserWeb;
+@synthesize xmlParserNumBlogcasts;
+@synthesize xmlParserNumSubscriptions;
+@synthesize xmlParserNumSubscribers;
+@synthesize xmlParserNumPosts;
+@synthesize xmlParserNumComments;
+@synthesize xmlParserNumLikes;
 @synthesize delegate;
 @synthesize usernameTextField;
 @synthesize passwordTextField;
@@ -105,21 +111,19 @@
 	//AS DESIGNED: only 2 cells no need to make them reusable
 	cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	cell.textLabel.textColor = [UIColor colorWithRed:0.318 green:0.345 blue:0.439 alpha:1.0];
-	rect = CGRectMake(106.0, 11.0, 190.0, 30.0);
+	rect = CGRectMake(106.0, 0.0, 190.0, 43.0);
 	textField = [[UITextField alloc] initWithFrame:rect];
-	textField.textColor = [UIColor colorWithRed:0.31 green:0.31 blue:0.31 alpha:1.0];
+	textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+	textField.textColor = [UIColor colorWithRed:0.22 green:0.329 blue:0.529 alpha:1.0];
 	textField.autocorrectionType = UITextAutocorrectionTypeNo;
 	textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	//textField.font = [UIFont systemFontOfSize:17.0];
 	if (indexPath.row == 0) {
 		cell.textLabel.text = @"Username";
 		textField.keyboardType = UIKeyboardTypeEmailAddress;
 		textField.returnKeyType = UIReturnKeyNext;
 		[textField addTarget:self action:@selector(usernameEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
 		self.usernameTextField = textField;
-	}
-	else {
+	} else {
 		cell.textLabel.text = @"Password";
 		textField.secureTextEntry = YES;
 		textField.returnKeyType = UIReturnKeyGo;
@@ -131,6 +135,9 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	return @"Sign In";
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -200,17 +207,16 @@
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-	if (alertView)
-		self.alertView = nil;
-	if (progressHUD)
-		self.progressHUD = nil;
+	self.alertView = nil;
+	self.progressHUD = nil;
 }
 
 
 - (void)dealloc {
 	[managedObjectContext release];
 	[session release];
-
+	[alertView release];
+	[progressHUD release];
 	//MVR - free dictonary
 	if (urlConnectionDataMutableDictionaryRef_)
 		CFRelease(urlConnectionDataMutableDictionaryRef_);
@@ -347,10 +353,12 @@
 #pragma mark NSXMLParser delegate methods
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
+	NSFetchRequest *fetchRequest;
+	NSEntityDescription *entityDescription;
+	NSPredicate *predicate;
+	NSArray *array;
 	User *user;
-	Settings *settings;
 	NSNumberFormatter *numberFormatter;
-	NSNumber *number;
 	NSError *error;
 	
 	//MVR - save Session, User and Settings objects
@@ -360,7 +368,23 @@
 		return;
 	}
 	session.authenticationToken = xmlParserAuthenticationToken;
-	user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+	//MVR - find User or create one
+	fetchRequest = [[NSFetchRequest alloc] init];
+	entityDescription = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+	[fetchRequest setEntity:entityDescription];
+	predicate = [NSPredicate predicateWithFormat:@"id = %@", xmlParserId];
+	[fetchRequest setPredicate:predicate];
+	array = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	//MVR - if array is nil there was an error
+	if (!array) {
+		NSLog(@"Error fetching User: %@", [error localizedDescription]);
+		[self errorAlert:@"Fetch error"];
+		return;
+	}
+	if ([array count] > 0)
+		user = [array objectAtIndex:0];
+	else
+		user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
 	if (!xmlParserId) {
 		NSLog(@"Error parsing id");
 		[self errorAlert:@"Parse error"];
@@ -368,16 +392,14 @@
 	}
 	numberFormatter = [[NSNumberFormatter alloc] init];
 	[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-	number = [numberFormatter numberFromString:xmlParserId];
-	[numberFormatter release];
-	user.id = number;
+	user.id = [numberFormatter numberFromString:xmlParserId];
 	if (!xmlParserUsername) {
 		NSLog(@"Error parsing username");
 		[self errorAlert:@"Parse error"];
 		return;
 	}
 	user.username = xmlParserUsername;
-	user.avatarFileName = xmlParserAvatarFileName;
+	user.avatarUrl = xmlParserAvatarUrl;
 	user.bio = xmlParserBio;
 	if (!xmlParserFullName) {
 		NSLog(@"Error parsing full name");
@@ -387,9 +409,47 @@
 	user.fullName = xmlParserFullName;
 	user.location = xmlParserLocation;
 	user.web = xmlParserWeb;
+	if (!xmlParserNumBlogcasts) {
+		NSLog(@"Error parsing num blogcasts");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numBlogcasts = [numberFormatter numberFromString:xmlParserNumBlogcasts];
+	if (!xmlParserNumSubscriptions) {
+		NSLog(@"Error parsing num subscriptions");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numSubscriptions = [numberFormatter numberFromString:xmlParserNumSubscriptions];
+	if (!xmlParserNumSubscribers) {
+		NSLog(@"Error parsing num subscribers");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numSubscribers = [numberFormatter numberFromString:xmlParserNumSubscribers];
+	if (!xmlParserNumPosts) {
+		NSLog(@"Error parsing num posts");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numPosts = [numberFormatter numberFromString:xmlParserNumPosts];
+	if (!xmlParserNumComments) {
+		NSLog(@"Error parsing num comments");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numComments = [numberFormatter numberFromString:xmlParserNumComments];
+	if (!xmlParserNumLikes) {
+		NSLog(@"Error parsing num likes");
+		[self errorAlert:@"Parse error"];
+		return;
+	}
+	user.numLikes = [numberFormatter numberFromString:xmlParserNumLikes];
+	[numberFormatter release];
+	//MVR - create Settings if it does not exist
+	if (!user.settings)
+		user.settings = [NSEntityDescription insertNewObjectForEntityForName:@"Settings" inManagedObjectContext:managedObjectContext];
 	session.user = user;
-	settings = [NSEntityDescription insertNewObjectForEntityForName:@"Settings" inManagedObjectContext:managedObjectContext];
-	session.settings = settings;
 	if (![managedObjectContext save:&error]) {
 		NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
 		[self errorAlert:@"Save error"];
@@ -400,19 +460,28 @@
 	self.xmlParserAuthenticationToken = nil;
 	self.xmlParserId = nil;
 	self.xmlParserUsername = nil;
-	self.xmlParserAvatarFileName = nil;
+	self.xmlParserAvatarUrl = nil;
 	self.xmlParserBio = nil;
 	self.xmlParserFullName = nil;
 	self.xmlParserLocation = nil;
 	self.xmlParserWeb = nil;
+	self.xmlParserNumBlogcasts = nil;
+	self.xmlParserNumSubscriptions = nil;
+	self.xmlParserNumSubscribers = nil;
+	self.xmlParserNumPosts = nil;
+	self.xmlParserNumComments = nil;
+	self.xmlParserNumLikes = nil;
 	//MVR - sign in to the root view controller
 	//AS DESIGNED: use delegate to avoid compiler warning
 	[delegate signIn];
+	//MVR - this message gets forwarded to the parent 
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	xmlParserInBlogcastrUser = NO;
 	xmlParserInSetting = NO;
+	xmlParserInStats = NO;
 }
 
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
@@ -421,6 +490,9 @@
 	}
 	else if (xmlParserInBlogcastrUser && [elementName isEqual:@"setting"]) {
 		xmlParserInSetting = YES;		 
+	}
+	else if (xmlParserInBlogcastrUser && [elementName isEqual:@"stats"]) {
+		xmlParserInStats = YES;		 
 	}
 	//AS DESIGNED: no need to use a stack to save state this works
 	self.xmlParserMutableString = nil;
@@ -431,8 +503,8 @@
 		if (xmlParserInSetting) {
 			if ([elementName isEqual:@"setting"])
 				xmlParserInSetting = NO;
-			else if ([elementName isEqual:@"avatar-file-name"])
-				self.xmlParserAvatarFileName = xmlParserMutableString;
+			else if ([elementName isEqual:@"avatar-url"])
+				self.xmlParserAvatarUrl = xmlParserMutableString;
 			else if ([elementName isEqual:@"bio"])
 				self.xmlParserBio = xmlParserMutableString;
 			else if ([elementName isEqual:@"full-name"])
@@ -441,14 +513,29 @@
 				self.xmlParserLocation = xmlParserMutableString;
 			else if ([elementName isEqual:@"web"])
 				self.xmlParserWeb = xmlParserMutableString;
-		}
-		else {
+		} else if (xmlParserInStats) {
+			if ([elementName isEqual:@"stats"])
+				xmlParserInStats = NO;
+			else if ([elementName isEqual:@"blogcasts"])
+				self.xmlParserNumBlogcasts = xmlParserMutableString;
+			else if ([elementName isEqual:@"subscriptions"])
+				self.xmlParserNumSubscriptions = xmlParserMutableString;
+			else if ([elementName isEqual:@"subscribers"])
+				self.xmlParserNumSubscribers = xmlParserMutableString;
+			else if ([elementName isEqual:@"posts"])
+				self.xmlParserNumPosts = xmlParserMutableString;
+			else if ([elementName isEqual:@"comments"])
+				self.xmlParserNumComments = xmlParserMutableString;
+			else if ([elementName isEqual:@"likes"])
+				self.xmlParserNumLikes = xmlParserMutableString;
+		} else {
 			if ([elementName isEqual:@"blogcastr-user"])
 				xmlParserInBlogcastrUser = NO;
 			else if ([elementName isEqual:@"authentication-token"])
 				self.xmlParserAuthenticationToken = xmlParserMutableString;
-			else if ([elementName isEqual:@"id"])
-				self.xmlParserId = xmlParserMutableString;
+			else if ([elementName isEqual:@"id"]) {
+				NSLog(@"MVR - id %@", xmlParserMutableString);
+				self.xmlParserId = xmlParserMutableString;}
 			else if ([elementName isEqual:@"username"])
 				self.xmlParserUsername = xmlParserMutableString;
 		}

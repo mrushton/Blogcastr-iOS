@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-
+#define TAB_TOOLBAR_HEIGHT 49.0
 #define TAB_TOOLBAR_VIEW_TAG 7
+
+@class TabToolbarController;
+
+@protocol TabToolbarControllerProtocol
+
+- (void)setTabToolbarController:(TabToolbarController *)tabToolbarController;
+
+@end
 
 @interface TabToolbarController : UIViewController <UITabBarDelegate> {
 	NSArray *viewControllers;

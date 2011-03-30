@@ -7,6 +7,7 @@
 //
 
 #import "TabToolbarController.h"
+#import "RootController_iPhone.h"
 
 
 @implementation TabToolbarController
@@ -27,23 +28,26 @@
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+	CGRect applicationFrame;
 	UIView *view;
 	CGRect frame;
 	NSMutableArray *items;
 	UIViewController *firstViewController;
 	
-	view = [[UIView alloc] init];
+	applicationFrame = [UIScreen mainScreen].applicationFrame;
+	view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT)];
 	//MVR - set up the tab view
 	if ([viewControllers count] > 0) {
 		firstViewController = [viewControllers objectAtIndex:0];
+		firstViewController.view.frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
 		[view addSubview:firstViewController.view];
-	}
-	else {
+	} else {
 		firstViewController = nil;
 	}
 	//MVR - set up the tab bar
-	frame = CGRectMake(0.0, 367.0, 320.0, 49.0);
+	frame = CGRectMake(0.0, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT, applicationFrame.size.width, TAB_TOOLBAR_HEIGHT);
 	tabBar = [[UITabBar alloc] initWithFrame:frame];
+	tabBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
 	tabBar.delegate = self;
 	items = [NSMutableArray arrayWithCapacity:5];
 	for (int i = 0; i < [viewControllers count]; i++)
@@ -54,7 +58,6 @@
 		tabBar.selectedItem = firstViewController.tabBarItem;	
 	[view addSubview:tabBar];
 	self.view = view;
-	//NSLog(@"TableViewFrame before set:%@",NSStringFromCGRect(firstViewController.view.frame));
 }
 
 /*
@@ -63,6 +66,30 @@
     [super viewDidLoad];
 }
 */
+
+- (void)viewWillAppear:(BOOL)animated {
+	UIViewController *viewController;
+	
+	[super viewWillAppear:animated];
+	viewController = [viewControllers objectAtIndex:selectedIndex];
+	if (!viewController) {
+		NSLog(@"Error finding tab view controller");
+		return;
+	}
+	[viewController viewWillAppear:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	UIViewController *viewController;
+
+	[super viewWillAppear:animated];
+	viewController = [viewControllers objectAtIndex:selectedIndex];
+	if (!viewController) {
+		NSLog(@"Error finding tab view controller");
+		return;
+	}
+	[viewController viewDidAppear:YES];
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -83,12 +110,14 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+	self.tabBar = nil;
 }
 
 
 - (void)dealloc {
+	[viewControllers release];
+	[tabBar release];
     [super dealloc];
-	self.tabBar = nil;
 }
 
 - (NSArray *)viewControllers {
@@ -96,20 +125,16 @@
 }
 
 - (void)setViewControllers:(NSArray *)theViewControllers {
-	CGRect frame;
-
 	//AS DESIGNED: this does nothing to the tab bar
-	NSLog(@"MVR - setting view controllers");
 	[viewControllers release];
 	viewControllers = [theViewControllers copy];
 	//MVR - set up the tab bar views
-	frame = CGRectMake(0.0, 0.0, 320.0, 367.0);
 	for (int i = 0; i < [viewControllers count]; i++) {
-		UIViewController *viewController;
+		UIViewController<TabToolbarControllerProtocol> *viewController;
 
 		viewController = [viewControllers objectAtIndex:0];
-		viewController.view.frame = frame;
-		viewController.view.autoresizingMask = UIViewAutoresizingNone;
+		[viewController setTabToolbarController:self];
+		viewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 		viewController.view.tag = TAB_TOOLBAR_VIEW_TAG;
 	}
 }
@@ -121,6 +146,7 @@
 	NSUInteger index;
 	UIViewController *viewController;
 	UIView *currentView;
+	CGRect applicationFrame;
 	CGRect frame;
 
 	//MVR - remove current view
@@ -133,8 +159,10 @@
 		NSLog(@"Error finding tab view controller");
 		return;
 	}
-	//MVR - need to set frame here as well not exactly sure why?
-	frame = CGRectMake(0.0, 0.0, 320.0, 367.0);
+	//MVR - set frame
+	applicationFrame = [UIScreen mainScreen].applicationFrame;
+	frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
+;
 	viewController.view.frame = frame;
 	[self.view addSubview:viewController.view];
 }	

@@ -26,6 +26,8 @@
 		320CC833B8AF0ACFD35E6225 /* libThree20Style.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320CC833B8AF0ACFD35E6224 /* libThree20Style.a */; };
 		320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320D7DCCE32703ACAB9A45E4 /* libThree20.a */; };
 		320F2C48872C2E2C4DF86205 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F2C48872C2E2C4DF86204 /* libThree20UI.a */; };
+		CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA58CB67133E78FA00BBC5D9 /* Three20.bundle */; };
+		CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */; };
 		CA59BBFF131339F600416E4D /* SignInView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */; };
 		CA59BC0513133A0D00416E4D /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BC0113133A0D00416E4D /* Session.m */; };
 		CA59BCB6131381E900416E4D /* RootController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCB4131381E900416E4D /* RootController_iPhone.m */; };
@@ -35,13 +37,12 @@
 		CA59BE5D13199D7A00416E4D /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BE5B13199D7A00416E4D /* HomeController.m */; };
 		CA59BE991319BA2E00416E4D /* SignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BE971319BA2E00416E4D /* SignInController.m */; };
 		CA59C09F131B54FC00416E4D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C09E131B54FC00416E4D /* MBProgressHUD.m */; };
-		CA59C186131CA01100416E4D /* logo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59C185131CA01100416E4D /* logo@2x~iphone.png */; };
-		CA59C18A131CA0B300416E4D /* logo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59C189131CA0B300416E4D /* logo~iphone.png */; };
-		CA59C1ED131DDEFA00416E4D /* BlogcastrServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C1EC131DDEFA00416E4D /* BlogcastrServer.m */; };
-		CA59C3001322E2C500416E4D /* HomeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA59C2FF1322E2C500416E4D /* HomeController.xib */; };
 		CA59C38E1322FCE500416E4D /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C38D1322FCE500416E4D /* UserController.m */; };
 		CA59C57A1325D6AA00416E4D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C5791325D6AA00416E4D /* User.m */; };
 		CA59C57F1325D7ED00416E4D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C57E1325D7ED00416E4D /* Settings.m */; };
+		CA59C918132C5D3900416E4D /* BlogcastrStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */; };
+		CA59CBA5132DE31C00416E4D /* logo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59CBA4132DE31C00416E4D /* logo~iphone.png */; };
+		CA59CBA7132DE32700416E4D /* logo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59CBA6132DE32700416E4D /* logo@2x~iphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +221,9 @@
 		320F2C48872C2E2C4DF86200 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = ../three20/src/Three20UI/Three20UI.xcodeproj; sourceTree = SOURCE_ROOT; };
 		32CA4F630368D1EE00C91783 /* Blogcastr_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blogcastr_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Blogcastr-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Blogcastr-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		CA58CB67133E78FA00BBC5D9 /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
+		CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
+		CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
 		CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInView_iPhone.xib; sourceTree = "<group>"; };
 		CA59BC0013133A0D00416E4D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		CA59BC0113133A0D00416E4D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
@@ -236,18 +240,17 @@
 		CA59BE971319BA2E00416E4D /* SignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInController.m; sourceTree = "<group>"; };
 		CA59C09D131B54F300416E4D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		CA59C09E131B54FC00416E4D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		CA59C185131CA01100416E4D /* logo@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x~iphone.png"; sourceTree = "<group>"; };
-		CA59C189131CA0B300416E4D /* logo~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo~iphone.png"; sourceTree = "<group>"; };
-		CA59C1EB131DDEFA00416E4D /* BlogcastrServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogcastrServer.h; sourceTree = "<group>"; };
-		CA59C1EC131DDEFA00416E4D /* BlogcastrServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogcastrServer.m; sourceTree = "<group>"; };
-		CA59C2FF1322E2C500416E4D /* HomeController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeController.xib; sourceTree = "<group>"; };
-		CA59C38C1322FCE500416E4D /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
-		CA59C38D1322FCE500416E4D /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		CA59C38C1322FCE500416E4D /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserController.h; path = iPhone/UserController.h; sourceTree = "<group>"; };
+		CA59C38D1322FCE500416E4D /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserController.m; path = iPhone/UserController.m; sourceTree = "<group>"; };
 		CA59C51E132453CD00416E4D /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		CA59C5781325D6AA00416E4D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Shared/User.h; sourceTree = "<group>"; };
 		CA59C5791325D6AA00416E4D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Shared/User.m; sourceTree = "<group>"; };
 		CA59C57D1325D7ED00416E4D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Shared/Settings.h; sourceTree = "<group>"; };
 		CA59C57E1325D7ED00416E4D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Shared/Settings.m; sourceTree = "<group>"; };
+		CA59C916132C5D3900416E4D /* BlogcastrStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogcastrStyleSheet.h; sourceTree = "<group>"; };
+		CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogcastrStyleSheet.m; sourceTree = "<group>"; };
+		CA59CBA4132DE31C00416E4D /* logo~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo~iphone.png"; sourceTree = "<group>"; };
+		CA59CBA6132DE32700416E4D /* logo@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x~iphone.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,9 +291,8 @@
 				2860E388111B897F00E27156 /* AppDelegate_iPhone.m */,
 				CA59BE5A13199D7A00416E4D /* HomeController.h */,
 				CA59BE5B13199D7A00416E4D /* HomeController.m */,
-				CA59C2FF1322E2C500416E4D /* HomeController.xib */,
-				CA59C185131CA01100416E4D /* logo@2x~iphone.png */,
-				CA59C189131CA0B300416E4D /* logo~iphone.png */,
+				CA59CBA4132DE31C00416E4D /* logo~iphone.png */,
+				CA59CBA6132DE32700416E4D /* logo@2x~iphone.png */,
 				2860E389111B897F00E27156 /* MainWindow_iPhone.xib */,
 				CA59BCB3131381E900416E4D /* RootController_iPhone.h */,
 				CA59BCB4131381E900416E4D /* RootController_iPhone.m */,
@@ -298,8 +300,6 @@
 				CA59BDBC1318D68100416E4D /* TabToolbarController.h */,
 				CA59BDBD1318D68100416E4D /* TabToolbarController.m */,
 				CA59BE1413198E1F00416E4D /* TabToolbar.xib */,
-				CA59C38C1322FCE500416E4D /* UserController.h */,
-				CA59C38D1322FCE500416E4D /* UserController.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -310,8 +310,10 @@
 				2819307C112F81BE00ECF9B4 /* Blogcastr.xcdatamodeld */,
 				28EEC0491118E28000187D67 /* AppDelegate_Shared.h */,
 				28EEC04A1118E28000187D67 /* AppDelegate_Shared.m */,
-				CA59C1EB131DDEFA00416E4D /* BlogcastrServer.h */,
-				CA59C1EC131DDEFA00416E4D /* BlogcastrServer.m */,
+				CA59C916132C5D3900416E4D /* BlogcastrStyleSheet.h */,
+				CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */,
+				CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */,
+				CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */,
 				CA59C09D131B54F300416E4D /* MBProgressHUD.h */,
 				CA59C09E131B54FC00416E4D /* MBProgressHUD.m */,
 				CA59C51E132453CD00416E4D /* Request.h */,
@@ -323,8 +325,11 @@
 				CA59BE971319BA2E00416E4D /* SignInController.m */,
 				CA59BCBA131384ED00416E4D /* SettingsController.h */,
 				CA59BCBB131384ED00416E4D /* SettingsController.m */,
+				CA58CB67133E78FA00BBC5D9 /* Three20.bundle */,
 				CA59C5781325D6AA00416E4D /* User.h */,
 				CA59C5791325D6AA00416E4D /* User.m */,
+				CA59C38C1322FCE500416E4D /* UserController.h */,
+				CA59C38D1322FCE500416E4D /* UserController.m */,
 				8D1107310486CEB800E47090 /* Blogcastr-Info.plist */,
 			);
 			name = Shared;
@@ -635,9 +640,9 @@
 				2860E38B111B897F00E27156 /* MainWindow_iPhone.xib in Resources */,
 				CA59BBFF131339F600416E4D /* SignInView_iPhone.xib in Resources */,
 				CA59BE1513198E1F00416E4D /* TabToolbar.xib in Resources */,
-				CA59C186131CA01100416E4D /* logo@2x~iphone.png in Resources */,
-				CA59C18A131CA0B300416E4D /* logo~iphone.png in Resources */,
-				CA59C3001322E2C500416E4D /* HomeController.xib in Resources */,
+				CA59CBA5132DE31C00416E4D /* logo~iphone.png in Resources */,
+				CA59CBA7132DE32700416E4D /* logo@2x~iphone.png in Resources */,
+				CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,10 +665,11 @@
 				CA59BE5D13199D7A00416E4D /* HomeController.m in Sources */,
 				CA59BE991319BA2E00416E4D /* SignInController.m in Sources */,
 				CA59C09F131B54FC00416E4D /* MBProgressHUD.m in Sources */,
-				CA59C1ED131DDEFA00416E4D /* BlogcastrServer.m in Sources */,
 				CA59C38E1322FCE500416E4D /* UserController.m in Sources */,
 				CA59C57A1325D6AA00416E4D /* User.m in Sources */,
 				CA59C57F1325D7ED00416E4D /* Settings.m in Sources */,
+				CA59C918132C5D3900416E4D /* BlogcastrStyleSheet.m in Sources */,
+				CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

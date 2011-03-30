@@ -18,6 +18,13 @@
 @dynamic username;
 @dynamic fullName;
 @dynamic updatedAt;
-@dynamic avatarFileName;
+@dynamic avatarUrl;
+@dynamic numBlogcasts;
+@dynamic numSubscriptions;
+@dynamic numSubscribers;
+@dynamic numPosts;
+@dynamic numComments;
+@dynamic numLikes;
+@dynamic settings;
 
 @end

@@ -407,6 +407,7 @@
 	
 	// If the grace time is set postpone the HUD display
 	if (self.graceTime > 0.0) {
+		NSLog(@"MVR - fgrace timer");
 		self.graceTimer = [NSTimer scheduledTimerWithTimeInterval:self.graceTime 
 														   target:self 
 														 selector:@selector(handleGraceTimer:) 
@@ -415,6 +416,7 @@
 	} 
 	// ... otherwise show the HUD imediately 
 	else {
+		NSLog(@"MVR - show immediate");
 		[self setNeedsDisplay];
 		[self showUsingAnimation:useAnimation];
 	}
@@ -486,7 +488,7 @@
 
 - (void)done {
     isFinished = YES;
-	
+
     // If delegate was set make the callback
     self.alpha = 0.0;
     
@@ -495,8 +497,9 @@
 			[delegate performSelector:@selector(hudWasHidden:) withObject:self];
 		}
     }
-	
+
 	if (removeFromSuperViewOnHide) {
+
 		[self removeFromSuperview];
 	}
 }
@@ -518,12 +521,14 @@
 - (void)showUsingAnimation:(BOOL)animated {
     self.alpha = 0.0;
     if (animated && animationType == MBProgressHUDAnimationZoom) {
+
         self.transform = CGAffineTransformConcat(rotationTransform, CGAffineTransformMakeScale(1.5, 1.5));
     }
     
 	self.showStarted = [NSDate date];
     // Fade in
     if (animated) {
+
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.30];
         self.alpha = 1.0;
@@ -533,6 +538,7 @@
         [UIView commitAnimations];
     }
     else {
+
         self.alpha = 1.0;
     }
 }
@@ -551,6 +557,7 @@
         }
         self.alpha = 0.02;
         [UIView commitAnimations];
+
     }
     else {
         self.alpha = 0.0;
@@ -594,7 +601,9 @@
 		[self setTransformForCurrentOrientation:YES];
 	}
 	// Stay in sync with the parent view (make sure we cover it fully)
-	self.frame = self.superview.bounds;
+	//MVR - view may have been removed from superview
+	if (self.superview)
+		self.frame = self.superview.bounds;
 	[self setNeedsDisplay];
 }
 
