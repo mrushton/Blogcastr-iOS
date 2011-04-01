@@ -6,6 +6,7 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <Three20/Three20.h>
 #import "TabToolbarController.h"
 #import "RootController_iPhone.h"
 
@@ -35,17 +36,17 @@
 	UIViewController *firstViewController;
 	
 	applicationFrame = [UIScreen mainScreen].applicationFrame;
-	view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT)];
+	view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT)];
 	//MVR - set up the tab view
 	if ([viewControllers count] > 0) {
 		firstViewController = [viewControllers objectAtIndex:0];
-		firstViewController.view.frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
+		firstViewController.view.frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
 		[view addSubview:firstViewController.view];
 	} else {
 		firstViewController = nil;
 	}
 	//MVR - set up the tab bar
-	frame = CGRectMake(0.0, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT, applicationFrame.size.width, TAB_TOOLBAR_HEIGHT);
+	frame = CGRectMake(0.0, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT, applicationFrame.size.width, TAB_TOOLBAR_HEIGHT);
 	tabBar = [[UITabBar alloc] initWithFrame:frame];
 	tabBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
 	tabBar.delegate = self;
@@ -161,7 +162,7 @@
 	}
 	//MVR - set frame
 	applicationFrame = [UIScreen mainScreen].applicationFrame;
-	frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
+	frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
 ;
 	viewController.view.frame = frame;
 	[self.view addSubview:viewController.view];

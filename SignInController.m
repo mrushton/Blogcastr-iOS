@@ -540,7 +540,6 @@
 				self.xmlParserUsername = xmlParserMutableString;
 		}
 	}
-	NSLog(@"retain before inside %d",[xmlParserMutableString retainCount]);
 	self.xmlParserMutableString = nil;
 }
 

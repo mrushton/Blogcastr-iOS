@@ -111,7 +111,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
-	NSLog(@"MVR - getting table view cell");
+
 	//AS DESIGNED: only 3 cells no need to make them reusable
 	cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
 	if (indexPath.section == 0) {
@@ -236,8 +236,6 @@
 
 
 - (void)dealloc {
-	NSLog(@"MVR - dealloc settings controlelr");
-
     [super dealloc];
 }
 
@@ -280,8 +278,7 @@
 	//MVR - display the alert view
 	if (!alertView) {
 		alertView = [[UIAlertView alloc] initWithTitle:title message: message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-	}
-	else {
+	} else {
 		alertView.title = title;
 		alertView.message = message;
 	}

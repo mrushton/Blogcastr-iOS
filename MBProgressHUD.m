@@ -407,7 +407,6 @@
 	
 	// If the grace time is set postpone the HUD display
 	if (self.graceTime > 0.0) {
-		NSLog(@"MVR - fgrace timer");
 		self.graceTimer = [NSTimer scheduledTimerWithTimeInterval:self.graceTime 
 														   target:self 
 														 selector:@selector(handleGraceTimer:) 
@@ -416,7 +415,6 @@
 	} 
 	// ... otherwise show the HUD imediately 
 	else {
-		NSLog(@"MVR - show immediate");
 		[self setNeedsDisplay];
 		[self showUsingAnimation:useAnimation];
 	}

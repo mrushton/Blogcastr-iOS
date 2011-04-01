@@ -12,8 +12,6 @@
 #import "SignInController.h"
 
 
-#define TOOLBAR_HEIGHT 44.0
-
 @interface RootController_iPhone : UINavigationController <SignInControllerProtocol> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;

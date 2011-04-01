@@ -380,13 +380,9 @@
 #pragma mark Avatar
 
 - (void)pressAvatar:(id)object {
-	TTImageView *imageView;
 	ImageViewerController *imageViewerController;
 	
-	imageView = [[TTImageView alloc] init];
-	[imageView setUrlPath:[self avatarUrlForSize:@"original"]];
-	imageViewerController = [[ImageViewerController alloc] initWithImageView:imageView];
-	[imageView release];
+	imageViewerController = [[ImageViewerController alloc] initWithImageUrl:[self avatarUrlForSize:@"original"]];
 	[self.tabToolbarController.navigationController pushViewController:imageViewerController animated:YES];
 }
 

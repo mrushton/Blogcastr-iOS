@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -276,7 +274,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>41</integer>
+									<integer>27</integer>
 									<integer>19</integer>
 									<integer>0</integer>
 								</array>
@@ -301,7 +299,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>385 209 1207 845 0 0 1920 1178 </string>
+						<string>607 169 1207 845 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -312,12 +310,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>User.m</string>
+								<string>ImageViewerController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +325,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>User.m</string>
+										<string>ImageViewerController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CA054F8D1343030100307B90</string>
+										<string>CA05511B1345AABE00307B90</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -344,38 +344,38 @@
 											<string>CA59CA6A132D524800416E4D</string>
 											<string>CA59CAC2132D823A00416E4D</string>
 											<string>CA59CADA132D9F0D00416E4D</string>
-											<string>CA59CADE132D9F0D00416E4D</string>
 											<string>CAD970B8132F350800996CC1</string>
-											<string>CAD970EA132F3EAD00996CC1</string>
 											<string>CAD97155133097CD00996CC1</string>
 											<string>CAD97156133097CD00996CC1</string>
-											<string>CAD97157133097CD00996CC1</string>
-											<string>CAD97161133097CD00996CC1</string>
 											<string>CAD971891331E1CB00996CC1</string>
 											<string>CA58C9B2133AE73900BBC5D9</string>
 											<string>CA58C9BD133AF79900BBC5D9</string>
-											<string>CA58CABA133C65C300BBC5D9</string>
-											<string>CA58CAD1133E50E200BBC5D9</string>
 											<string>CA58CB12133E6D1100BBC5D9</string>
-											<string>CA58CB39133E70F600BBC5D9</string>
-											<string>CA58CC17134183E400BBC5D9</string>
-											<string>CA58CC641341B98B00BBC5D9</string>
-											<string>CA58CCE51342563500BBC5D9</string>
 											<string>CA58CCE61342563500BBC5D9</string>
-											<string>CA58CCE91342563500BBC5D9</string>
-											<string>CA58CCEA1342563500BBC5D9</string>
 											<string>CA58CD14134278B900BBC5D9</string>
 											<string>CA58CD15134278B900BBC5D9</string>
 											<string>CA58CDAD1342A59C00BBC5D9</string>
-											<string>CA58CDAE1342A59C00BBC5D9</string>
-											<string>CA58CDB61342A73600BBC5D9</string>
-											<string>CA58CDED1342B74700BBC5D9</string>
-											<string>CA054F7A1343000E00307B90</string>
-											<string>CA054F7B1343000E00307B90</string>
-											<string>CA054F891343030100307B90</string>
-											<string>CA054F8A1343030100307B90</string>
-											<string>CA054F8B1343030100307B90</string>
-											<string>CA054F8C1343030100307B90</string>
+											<string>CA054F9213440A5200307B90</string>
+											<string>CA054FC31344260500307B90</string>
+											<string>CA054FC51344260500307B90</string>
+											<string>CA054FC61344260500307B90</string>
+											<string>CA05502C13444A5000307B90</string>
+											<string>CA05503013444A5000307B90</string>
+											<string>CA05503113444A5000307B90</string>
+											<string>CA05503B13444A8300307B90</string>
+											<string>CA05503F13444AA300307B90</string>
+											<string>CA0550A713456BA500307B90</string>
+											<string>CA0550B513456E4500307B90</string>
+											<string>CA0550B613456E4500307B90</string>
+											<string>CA0550EA13459C5C00307B90</string>
+											<string>CA0550EB13459C5C00307B90</string>
+											<string>CA0550F51345A3DC00307B90</string>
+											<string>CA0550F71345A3DC00307B90</string>
+											<string>CA0551041345A70B00307B90</string>
+											<string>CA0551051345A70B00307B90</string>
+											<string>CA0551151345AA3300307B90</string>
+											<string>CA0551161345AA3300307B90</string>
+											<string>CA0551171345AA3300307B90</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -389,7 +389,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {955, 564}}</string>
 								<key>RubberWindowFrame</key>
-								<string>385 209 1207 845 0 0 1920 1178 </string>
+								<string>607 169 1207 845 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -409,7 +409,7 @@
 								<key>Frame</key>
 								<string>{{0, 569}, {955, 235}}</string>
 								<key>RubberWindowFrame</key>
-								<string>385 209 1207 845 0 0 1920 1178 </string>
+								<string>607 169 1207 845 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -581,7 +581,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>385 209 1207 845 0 0 1920 1178 </string>
+	<string>607 169 1207 845 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
