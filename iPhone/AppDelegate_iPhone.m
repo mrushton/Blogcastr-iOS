@@ -31,6 +31,8 @@
 	styleSheet = [[BlogcastrStyleSheet alloc] init];
 	[TTStyleSheet setGlobalStyleSheet:styleSheet];
 	TT_RELEASE_SAFELY(styleSheet);
+	//MVR - no limit on Three20 download sizes
+	[[TTURLRequestQueue mainQueue] setMaxContentLength:0];
 	//MVR - set navigator to handle web urls for Three20
 	//navigator = [TTNavigator navigator];
 	//urlMap = navigator.URLMap;
