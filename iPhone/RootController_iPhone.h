@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import <Three20/Three20.h>
 #import "Session.h"
 #import "SignInController.h"

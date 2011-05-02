@@ -9,9 +9,15 @@
 //#import <Foundation/Foundation.h>
 #import <Three20/Three20.h>
 
+#define BLOGCASTRSTYLESHEET ((BlogcastrStyleSheet *)[TTStyleSheet globalStyleSheet])
+#define BLOGCASTRSTYLEVAR(_VARNAME) [BLOGCASTRSTYLESHEET _VARNAME]
 
 @interface BlogcastrStyleSheet : TTDefaultStyleSheet {
 
 }
+
+- (UIColor *)tableViewSeperatorColor;
+- (UIColor *)lightBackgroundColor;
+- (UIColor *)blueTextColor;
 
 @end

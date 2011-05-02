@@ -7,26 +7,35 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Session.h"
+#import <CoreData/CoreData.h>
 #import "TabToolbarController.h"
+#import "Session.h"
+#import "MBProgressHUD.h"
 
 
-@interface SettingsController : UITableViewController {
+@interface SettingsController : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+	TabToolbarController *tabToolbarController;
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
+	UIActionSheet *_avatarActionSheet;
+	UIActionSheet *_signOutActionSheet;
+	MBProgressHUD *_windowProgressHud;
 	UIAlertView *alertView;
-	TabToolbarController *tabToolbarController;
 }
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) Session *session;
-@property (nonatomic, retain) UIAlertView *alertView;
 //AS DESIGNED: keep a weak reference to avoid retian cycles
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;
-
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) Session *session;
+@property (nonatomic, readonly) UIActionSheet *avatarActionSheet;
+@property (nonatomic, readonly) UIActionSheet *signOutActionSheet;
+@property (nonatomic, readonly) MBProgressHUD *windowProgressHud;
+@property (nonatomic, retain) UIAlertView *alertView;
 
 - (void)saveOriginalImages:(UISwitch *)theSwitch;
 - (void)signOut:(id)object;
+- (BOOL)save;
+- (void)showWindowProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

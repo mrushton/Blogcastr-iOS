@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "TabToolbarController.h"
+#import "Session.h"
 
 
 @interface HomeController : TabToolbarController {
-
+	NSManagedObjectContext *managedObjectContext;
+	Session *session;
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) Session *session;
 
 @end

@@ -7,9 +7,29 @@
 //
 
 #import "HomeController.h"
+#import "BlogcastrStyleSheet.h"
+#import "NewBlogcastController.h"
 
 
 @implementation HomeController
+
+@synthesize managedObjectContext;
+@synthesize session;
+
+- (id)init {
+	self = [super init];
+	if (self) {
+		UIBarButtonItem *newBlogcastButton;
+		
+		//MVR - add bar button item
+		newBlogcastButton = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleBordered target:self action:@selector(newBlogcast)];
+		newBlogcastButton.title = @"New";
+		self.navigationItem.rightBarButtonItem = newBlogcastButton;		
+		[newBlogcastButton release];
+	}
+	
+	return self;
+}
 
 /*
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -55,5 +75,20 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Actions
+
+- (void)newBlogcast {
+	UINavigationController *theNavigationController;
+	NewBlogcastController *newBlogcastController;
+	
+	newBlogcastController = [[NewBlogcastController alloc] initWithStyle:UITableViewStyleGrouped];
+	newBlogcastController.managedObjectContext = managedObjectContext;
+	newBlogcastController.session = session;
+	theNavigationController = [[UINavigationController alloc] initWithRootViewController:newBlogcastController];
+	[newBlogcastController release];
+	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+	[self presentModalViewController:theNavigationController animated:YES];
+}
 
 @end

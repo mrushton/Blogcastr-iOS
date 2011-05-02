@@ -9,6 +9,7 @@
 #import "AppDelegate_Shared.h"
 #import "RootController_iPhone.h"
 #import "HomeController.h"
+#import "BlogcastsController.h"
 #import "UserController.h"
 #import "SettingsController.h"
 #import "Session.h"
@@ -82,15 +83,22 @@
 }
 
 - (void)signIn {
-	UIViewController *blogcastsController;
+	BlogcastsController *blogcastsController;
 	UserController *userController;
 	SettingsController *settingsController;
 	HomeController *homeController;
 
 	//MVR - create the Home Controller at the bottom of the navigation controller stack
 	homeController = [[HomeController alloc] init];
+	homeController.session = session;
 	//MVR - set Home Controller title
 	homeController.title = session.user.username;
+	//MVR - now create each tab
+	blogcastsController = [[BlogcastsController alloc] initWithStyle:UITableViewStylePlain];
+	blogcastsController.managedObjectContext = self.managedObjectContext;
+	blogcastsController.session = session;
+	blogcastsController.user = session.user;
+	blogcastsController.tabBarItem.title = @"Blogcasts";
 	userController = [[UserController alloc] initWithStyle:UITableViewStyleGrouped];
 	userController.managedObjectContext = self.managedObjectContext;
 	userController.session = session;
@@ -100,7 +108,7 @@
 	settingsController.tabBarItem.title = @"Settings";
 	settingsController.managedObjectContext = self.managedObjectContext;
 	settingsController.session = session;
-	homeController.viewControllers = [NSArray arrayWithObjects:userController, settingsController, nil];
+	homeController.viewControllers = [NSArray arrayWithObjects:blogcastsController, userController, settingsController, nil];
 	[userController release];
 	[settingsController release];
 	//MVR - set the navigation stack

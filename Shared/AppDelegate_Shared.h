@@ -21,7 +21,7 @@
     NSManagedObjectContext *managedObjectContext_;
     NSManagedObjectModel *managedObjectModel_;
     NSPersistentStoreCoordinator *persistentStoreCoordinator_;
-	Session *session_;
+	Session *_session;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

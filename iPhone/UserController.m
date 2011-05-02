@@ -253,6 +253,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSLog(@"MVR - DID DESELECT %d %d",indexPath.row,indexPath.section);
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -382,6 +383,7 @@
 - (void)pressAvatar:(id)object {
 	ImageViewerController *imageViewerController;
 	
+	NSLog(@"MVR - pushing VIEW controller 0x%x",self.tabToolbarController.navigationController);
 	imageViewerController = [[ImageViewerController alloc] initWithImageUrl:[self avatarUrlForSize:@"original"]];
 	[self.tabToolbarController.navigationController pushViewController:imageViewerController animated:YES];
 }

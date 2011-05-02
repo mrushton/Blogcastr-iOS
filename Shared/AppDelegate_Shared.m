@@ -158,7 +158,7 @@
     [managedObjectContext_ release];
     [managedObjectModel_ release];
     [persistentStoreCoordinator_ release];
-    
+    [_session release];
     [window release];
     [super dealloc];
 }
@@ -173,8 +173,8 @@
 	NSError *error;
 	
 	//MVR - get Session
-	if (session_)
-		return session_;
+	if (_session)
+		return _session;
 	fetchRequest = [[NSFetchRequest alloc] init];
 	entityDescription = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 	[fetchRequest setEntity:entityDescription];
@@ -185,11 +185,11 @@
 		return nil;
 	}
 	if ([array count] > 0)
-		session_ = [array objectAtIndex:0];
+		_session = [array objectAtIndex:0];
 	else
-		session_ = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
+		_session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 
-	return session_;
+	return _session;
 }
 
 @end

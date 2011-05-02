@@ -10,15 +10,20 @@
 #import "SettingsController.h"
 #import "AppDelegate_Shared.h"
 #import "Session.h"
+#import "ASIFormDataRequest.h"
+#import "SettingsParser.h"
 
 
 @implementation SettingsController
 
 
+@synthesize tabToolbarController;
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize avatarActionSheet;
+@synthesize signOutActionSheet;
+@synthesize windowProgressHud;
 @synthesize alertView;
-@synthesize tabToolbarController;
 
 #pragma mark -
 #pragma mark Initialization
@@ -46,12 +51,13 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.tableView.backgroundColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1.0];
+	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 85.0)];
 	self.tableView.tableFooterView = footerView;
 	[footerView release];
 	//MVR - set up sign out button
 	signOutButton = [TTButton buttonWithStyle:@"redTableFooterButton:" title:@"Sign Out"];
+///	[signOutButton setImage:@"bundle://logo.png" forState:UIControlStateNormal];
 	[signOutButton addTarget:self action:@selector(signOut:) forControlEvents:UIControlEventTouchUpInside]; 
 	signOutButton.frame = CGRectMake(9.0, 20.0, 302.0, 45.0);
 	[self.tableView.tableFooterView  addSubview:signOutButton];	
@@ -205,17 +211,91 @@
 }
 */
 
-
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	if (indexPath.section == 0 && indexPath.row == 1) {
-			
+	if (indexPath.section == 0 && indexPath.row == 1)
+		[self.avatarActionSheet showInView:tabToolbarController.view];
+}
+
+#pragma mark -
+#pragma mark Action sheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (actionSheet == self.avatarActionSheet && (buttonIndex == 0 || buttonIndex == 1)) {
+		UIImagePickerController *imagePickerController;
+		
+		imagePickerController = [[UIImagePickerController alloc] init];
+		imagePickerController.delegate = self;
+		if (buttonIndex == 0)
+			imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+		else if (buttonIndex == 1)
+			imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+		[tabToolbarController presentModalViewController:imagePickerController animated:YES];
+		[imagePickerController release];
+	} else if (actionSheet == self.signOutActionSheet && buttonIndex == 0) {
+		NSError *error;
+		
+		//MVR - clear Session object
+		session.authenticationToken = nil;
+		session.user = nil;
+		if (![self save]) {
+			NSLog(@"Error saving session");
+			[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't sign you out."];
+			return;
+		}
+		//MVR - post sign out notification since multiple controllers may be interested
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:self];
 	}
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	NSLog(@"MVR _ DISMIISSS ACTION SHEET");
+	if (actionSheet == self.avatarActionSheet && buttonIndex == 2)
+		[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
+}
+
+#pragma mark -
+#pragma mark Image picker delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
+	ASIFormDataRequest *request;
+	NSData *data;
+	
+	//MVR - display HUD
+	[self showWindowProgressHudWithLabelText:@"Uploading avatar..." animated:YES animationType:MBProgressHUDAnimationZoom];
+	request = [ASIFormDataRequest requestWithURL:[self settingsUrl]];
+	[request addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	data = UIImageJPEGRepresentation(image, 0.5);
+	[request addData:data withFileName:@"avatar.jpg" andContentType:@"image/jpeg" forKey:@"setting[avatar]"];
+	//MVR - settings update is a PUT request
+	[request setRequestMethod:@"PUT"];
+	[request setDelegate:self];
+	//MVR - update progress view indirectly
+	[request setUploadProgressDelegate:self];
+	[request setDidFinishSelector:@selector(uploadAvatarFinished:)];
+	[request setDidFailSelector:@selector(uploadAvatarFailed:)];
+	[request startAsynchronous];
+	[tabToolbarController dismissModalViewControllerAnimated:YES];
+}
+
+- (void)setProgress:(float)progress {
+	self.windowProgressHud.progress = progress;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	[tabToolbarController dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)theProgressHUD {
+	//MVR - remove HUD from screen when the HUD was hidden
+	[self.windowProgressHud removeFromSuperview];
+}
 
 #pragma mark -
 #pragma mark Memory management
@@ -227,16 +307,36 @@
     // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-	if (alertView)
-		self.alertView = nil;
+- (void)dealloc {
+	[_avatarActionSheet release];
+	[_signOutActionSheet release];
+	[_windowProgressHud release];
+    [super dealloc];
 }
 
+- (UIActionSheet *)avatarActionSheet {
+	if (!_avatarActionSheet)
+		_avatarActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
 
-- (void)dealloc {
-    [super dealloc];
+	return _avatarActionSheet;
+}
+
+- (UIActionSheet *)signOutActionSheet {
+	if (!_signOutActionSheet)
+		_signOutActionSheet = [[UIActionSheet alloc] initWithTitle:@"Are you sure you want to sign out?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Yes" otherButtonTitles:nil];
+	
+	return _signOutActionSheet;
+}
+
+- (MBProgressHUD *)windowProgressHud {
+	if (!_windowProgressHud) {
+		_windowProgressHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
+		_windowProgressHud.delegate = self;
+		//MVR - show progress view
+		_windowProgressHud.mode = MBProgressHUDModeDeterminate;
+	}
+	
+	return _windowProgressHud;
 }
 
 #pragma mark -
@@ -257,22 +357,105 @@
 #pragma mark Sign Out
 
 - (void)signOut:(id)object {
-	NSError *error;
-	
-	//MVR - clear Session object
-	session.authenticationToken = nil;
-	session.user = nil;
-	if (![managedObjectContext save:&error]) {
-	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't sign you out."];
-		return;
-	}
-	//MVR - post sign out notification since multiple controllers may be interested
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"signOut" object:self];
+	[self.signOutActionSheet showInView:tabToolbarController.view];
 }
 
 #pragma mark -
-#pragma mark Error handling
+#pragma mark Network callbacks
+
+- (void)uploadAvatarFinished:(ASIHTTPRequest *)request {
+	int statusCode;
+	SettingsParser *parser;
+	
+	//MVR - hide the progress HUD
+	[self.windowProgressHud hide:YES];
+	statusCode = [request responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error uploading avatar: received status code %i", statusCode);
+		[self errorAlertWithTitle:@"Upload failed" message:@"Oops! We couldn't change your avatar."];
+		return;
+	}
+	//MVR - parse response
+	parser = [[SettingsParser alloc] initWithData:[request responseData]];
+	parser.user = session.user;
+	if (![parser parse]) {
+		NSLog(@"Error parsing settings response");
+		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't change your avatar."];
+		[parser release];
+		return;
+	}
+	if (![self save]) {
+		NSLog(@"Error saving settings");
+		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't change your avatar."];
+		return;
+	}
+	[parser release];
+	//MVR - send settings updated notification
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"updatedSettings" object:self];
+}
+
+- (void)uploadAvatarFailed:(ASIHTTPRequest *)request {
+	NSError *error;
+	
+	//MVR - hide the progress HUD
+	[self.windowProgressHud hide:YES];
+	error = [request error];
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error uploading avatar: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't change your avatar."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error uploading avatar: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't change your avatar."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Upload avatar request cancelled");
+			break;
+		default:
+			NSLog(@"Error uploading avatar");
+			break;
+	}	
+}
+
+#pragma mark -
+#pragma mark Core Data
+
+- (BOOL)save {
+	NSError *error;
+	
+    if (![managedObjectContext save:&error]) {
+	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
+		return FALSE;
+	}
+	
+	return TRUE;
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (NSURL *)settingsUrl {
+	NSString *string;
+	NSURL *url;
+	
+#ifdef DEVEL
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/settings.xml"];
+#else //DEVEL
+	string = [NSString stringWithFormat:@"http://blogcastr.com/settings.xml"];
+#endif //DEVEL
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
+
+- (void)showWindowProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType {
+	self.windowProgressHud.labelText = labelText;
+	if (animated)
+		self.windowProgressHud.animationType = animationType;
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self.windowProgressHud];
+	[self.windowProgressHud show:animated];
+}
 
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {
 	//MVR - display the alert view

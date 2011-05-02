@@ -147,10 +147,7 @@
 		UIBarItem *spaceItem;
 
 		_toolbar = [[UIToolbar alloc] init];
-		_toolbar.tintColor = TTSTYLEVAR(toolbarTintColor);
-		_toolbar.barStyle = UIBarStyleBlack;
-		_toolbar.translucent = YES;
-		_toolbar.tintColor = nil;
+		_toolbar.barStyle = UIBarStyleBlackTranslucent;
 		_toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
 		spaceItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
 		_toolbar.items = [NSArray arrayWithObjects: spaceItem, self.actionButtonItem, nil];
@@ -180,7 +177,7 @@
 - (UIActionSheet *)actionSheet {
 	if (!_actionSheet)
 		_actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Save Image", nil];
-	
+		
 	return _actionSheet;
 }
 
@@ -282,6 +279,7 @@
 
 - (void)imageView:(TTImageView *)imageView didFailLoadWithError:(NSError *)error {
 	NSLog(@"Error loading image view: %@", [error localizedDescription]);
+	[self errorAlertWithTitle:@"Load Error" message:(NSString *)@"Oops! We couldn't load the image."];
 	[self.activityIndicatorView stopAnimating];
 }
 
@@ -354,7 +352,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex == 0) {
 		//MVR - show progress HUD
-		[self showProgressHudWithLabelText:@"Saving" animationType:MBProgressHUDAnimationZoom];
+		[self showProgressHudWithLabelText:@"Saving..." animationType:MBProgressHUDAnimationZoom];
 		UIImageWriteToSavedPhotosAlbum(imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	}
 }

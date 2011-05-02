@@ -1,0 +1,124 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m: In function '-[AppDelegate_Shared dealloc]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:161: error: '_session' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:161: error: (Each undeclared identifier is reported only once
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:161: error: for each function it appears in.)
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m: In function '-[AppDelegate_Shared session]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:176: error: '_session' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:193: warning: control reaches end of non-void function
+{standard input}:581:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_19" minus "L00000000007$pb"
+{standard input}:581:symbol: "L_OBJC_SELECTOR_REFERENCES_19" can't be undefined in a subtraction expression
+{standard input}:573:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_18" minus "L00000000007$pb"
+{standard input}:573:symbol: "L_OBJC_SELECTOR_REFERENCES_18" can't be undefined in a subtraction expression
+{standard input}:567:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_17" minus "L00000000007$pb"
+{standard input}:567:symbol: "L_OBJC_SELECTOR_REFERENCES_17" can't be undefined in a subtraction expression
+{standard input}:564:non-relocatable subtraction expression, "L_OBJC_CLASSLIST_REFERENCES_$_4" minus "L00000000007$pb"
+{standard input}:564:symbol: "L_OBJC_CLASSLIST_REFERENCES_$_4" can't be undefined in a subtraction expression
+{standard input}:532:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:532:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:516:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_3" minus "L00000000006$pb"
+{standard input}:516:symbol: "L_OBJC_SELECTOR_REFERENCES_3" can't be undefined in a subtraction expression
+{standard input}:499:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_16" minus "L00000000006$pb"
+{standard input}:499:symbol: "L_OBJC_SELECTOR_REFERENCES_16" can't be undefined in a subtraction expression
+{standard input}:496:non-relocatable subtraction expression, "L_NSSQLiteStoreType$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:496:symbol: "L_NSSQLiteStoreType$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:490:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:490:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:481:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_15" minus "L00000000006$pb"
+{standard input}:481:symbol: "L_OBJC_SELECTOR_REFERENCES_15" can't be undefined in a subtraction expression
+{standard input}:475:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_14" minus "L00000000006$pb"
+{standard input}:475:symbol: "L_OBJC_SELECTOR_REFERENCES_14" can't be undefined in a subtraction expression
+{standard input}:468:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000006$pb"
+{standard input}:468:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:465:non-relocatable subtraction expression, "L_OBJC_CLASSLIST_REFERENCES_$_3" minus "L00000000006$pb"
+{standard input}:465:symbol: "L_OBJC_CLASSLIST_REFERENCES_$_3" can't be undefined in a subtraction expression
+{standard input}:460:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:460:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:449:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_13" minus "L00000000006$pb"
+{standard input}:449:symbol: "L_OBJC_SELECTOR_REFERENCES_13" can't be undefined in a subtraction expression
+{standard input}:442:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_12" minus "L00000000006$pb"
+{standard input}:442:symbol: "L_OBJC_SELECTOR_REFERENCES_12" can't be undefined in a subtraction expression
+{standard input}:432:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:432:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:423:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" minus "L00000000006$pb"
+{standard input}:423:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:376:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" minus "L00000000005$pb"
+{standard input}:376:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:366:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_11" minus "L00000000005$pb"
+{standard input}:366:symbol: "L_OBJC_SELECTOR_REFERENCES_11" can't be undefined in a subtraction expression
+{standard input}:360:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000005$pb"
+{standard input}:360:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:357:non-relocatable subtraction expression, "L_OBJC_CLASSLIST_REFERENCES_$_2" minus "L00000000005$pb"
+{standard input}:357:symbol: "L_OBJC_CLASSLIST_REFERENCES_$_2" can't be undefined in a subtraction expression
+{standard input}:352:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" minus "L00000000005$pb"
+{standard input}:352:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:342:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_10" minus "L00000000005$pb"
+{standard input}:342:symbol: "L_OBJC_SELECTOR_REFERENCES_10" can't be undefined in a subtraction expression
+{standard input}:334:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_9" minus "L00000000005$pb"
+{standard input}:334:symbol: "L_OBJC_SELECTOR_REFERENCES_9" can't be undefined in a subtraction expression
+{standard input}:331:non-relocatable subtraction expression, "L_OBJC_CLASSLIST_REFERENCES_$_1" minus "L00000000005$pb"
+{standard input}:331:symbol: "L_OBJC_CLASSLIST_REFERENCES_$_1" can't be undefined in a subtraction expression
+{standard input}:322:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" minus "L00000000005$pb"
+{standard input}:322:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:313:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" minus "L00000000005$pb"
+{standard input}:313:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:258:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" minus "L00000000004$pb"
+{standard input}:258:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:248:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_8" minus "L00000000004$pb"
+{standard input}:248:symbol: "L_OBJC_SELECTOR_REFERENCES_8" can't be undefined in a subtraction expression
+{standard input}:242:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" minus "L00000000004$pb"
+{standard input}:242:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:234:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_7" minus "L00000000004$pb"
+{standard input}:234:symbol: "L_OBJC_SELECTOR_REFERENCES_7" can't be undefined in a subtraction expression
+{standard input}:228:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000004$pb"
+{standard input}:228:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:225:non-relocatable subtraction expression, "L_OBJC_CLASSLIST_REFERENCES_$_0" minus "L00000000004$pb"
+{standard input}:225:symbol: "L_OBJC_CLASSLIST_REFERENCES_$_0" can't be undefined in a subtraction expression
+{standard input}:220:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" minus "L00000000004$pb"
+{standard input}:220:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:209:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000004$pb"
+{standard input}:209:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:199:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" minus "L00000000004$pb"
+{standard input}:199:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:190:non-relocatable subtraction expression, "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" minus "L00000000004$pb"
+{standard input}:190:symbol: "L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:151:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_3" minus "L00000000003$pb"
+{standard input}:151:symbol: "L_OBJC_SELECTOR_REFERENCES_3" can't be undefined in a subtraction expression
+{standard input}:139:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_2" minus "L00000000003$pb"
+{standard input}:139:symbol: "L_OBJC_SELECTOR_REFERENCES_2" can't be undefined in a subtraction expression
+{standard input}:131:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_1" minus "L00000000003$pb"
+{standard input}:131:symbol: "L_OBJC_SELECTOR_REFERENCES_1" can't be undefined in a subtraction expression
+{standard input}:120:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:120:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:79:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_0" minus "L00000000002$pb"
+{standard input}:79:symbol: "L_OBJC_SELECTOR_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:51:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_0" minus "L00000000001$pb"
+{standard input}:51:symbol: "L_OBJC_SELECTOR_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_0
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_4
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_1
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_2
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_3
+{standard input}:unknown:Undefined local symbol L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectContext_$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_5
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_0
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_6
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_7
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_8
+{standard input}:unknown:Undefined local symbol L_OBJC_IVAR_$_AppDelegate_Shared.managedObjectModel_$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_1
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_9
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_10
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_2
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_11
+{standard input}:unknown:Undefined local symbol L_OBJC_IVAR_$_AppDelegate_Shared.persistentStoreCoordinator_$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_12
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_13
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_3
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_14
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_15
+{standard input}:unknown:Undefined local symbol L_NSSQLiteStoreType$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_16
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASSLIST_REFERENCES_$_4
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_17
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_18
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_19

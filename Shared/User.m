@@ -25,6 +25,8 @@
 @dynamic numPosts;
 @dynamic numComments;
 @dynamic numLikes;
+@dynamic blogcastsUpdatedAt;
+@dynamic blogcastsAtEnd;
 @dynamic settings;
 
 @end

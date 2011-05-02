@@ -28,6 +28,8 @@
 @property (nonatomic, retain) NSNumber * numPosts;
 @property (nonatomic, retain) NSNumber * numComments;
 @property (nonatomic, retain) NSNumber * numLikes;
+@property (nonatomic, retain) NSDate * blogcastsUpdatedAt;
+@property (nonatomic, retain) NSNumber * blogcastsAtEnd;
 @property (nonatomic, retain) Settings * settings;
 
 @end

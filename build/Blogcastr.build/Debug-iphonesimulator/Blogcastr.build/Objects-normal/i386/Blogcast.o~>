@@ -1,0 +1,3 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:19: error: no declaration of property 'theDescription' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:23: warning: property 'description' requires method '-description' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:23: warning: property 'description' requires the method 'setDescription:' to be defined - use @synthesize, @dynamic or provide a method implementation

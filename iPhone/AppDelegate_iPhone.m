@@ -12,7 +12,9 @@
 #import "HomeController.h"
 #import "UserController.h"
 #import "SignInController.h"
+#import "RequestServer.h"
 #import "BlogcastrStyleSheet.h"
+#import "ASIHTTPRequest.h"
 
 @implementation AppDelegate_iPhone
 
@@ -20,46 +22,41 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	BlogcastrStyleSheet *styleSheet;
-	TTNavigator *navigator;
-	Session *session;
 
     // Override point for customization after application launch.
-	
+
 	//MVR - set the global style sheet for Three20
 	styleSheet = [[BlogcastrStyleSheet alloc] init];
 	[TTStyleSheet setGlobalStyleSheet:styleSheet];
 	TT_RELEASE_SAFELY(styleSheet);
 	//MVR - no limit on Three20 download sizes
 	[[TTURLRequestQueue mainQueue] setMaxContentLength:0];
+	//MVR - increase default timeout for ASIHTTPRequest
+	[ASIHTTPRequest setDefaultTimeOutSeconds:60.0];
 	//MVR - set navigator to handle web urls for Three20
 	//navigator = [TTNavigator navigator];
 	//urlMap = navigator.URLMap;
 	//[urlMap from:@"*" toViewController:[TTWebController class]];
-	session = self.session;
-	if (!session) {
-		NSLog(@"Unable to get session");
-		return NO;
-	}
+
 	//MVR - always add the root controller and present the session controller modally if not signed in
 	rootController = [[RootController_iPhone alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;
-	rootController.session = session;
+	rootController.session = self.session;
 	[window addSubview:rootController.view];
-	if (!session.authenticationToken) {
+	if (!self.session.authenticationToken) {
 		SignInController *signInController;
 		
 		signInController = [[SignInController alloc] init];
 		signInController.managedObjectContext = self.managedObjectContext;
-		signInController.session = session;
+		signInController.session = self.session;
 		signInController.delegate = rootController;
 		[rootController presentModalViewController:signInController animated:NO];
 		[signInController release];
 	} else {
 		[rootController signIn];
 	}
-	[session release];
     [self.window makeKeyAndVisible];
     
     return YES;

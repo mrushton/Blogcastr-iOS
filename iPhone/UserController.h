@@ -10,6 +10,7 @@
 #import <Three20/Three20.h>
 #import "TabToolbarController.h"
 #import "Session.h"
+#import "User.h"
 
 
 @interface UserController : UITableViewController <TabToolbarControllerProtocol> {
