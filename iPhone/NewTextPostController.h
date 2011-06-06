@@ -11,14 +11,18 @@
 #import "Session.h"
 #import "Blogcast.h"
 #import "MBProgressHUD.h"
+#import "ASIHTTPRequest.h"
 
-@interface NewTextPostController : UITableViewController {
+@interface NewTextPostController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	Blogcast *blogcast;
 	UITextView *textView;
 	MBProgressHUD *_progressHud;
+	UIActionSheet *_actionSheet;
+	UIActionSheet *_requestActionSheet;
 	UIAlertView *_alertView;
+	ASIHTTPRequest *request;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -26,7 +30,10 @@
 @property (nonatomic, retain) Blogcast *blogcast;
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, readonly) MBProgressHUD *progressHud;
+@property (nonatomic, readonly) UIActionSheet *actionSheet;
+@property (nonatomic, readonly) UIActionSheet *requestActionSheet;
 @property (nonatomic, readonly) UIAlertView *alertView;
+@property (nonatomic, retain) ASIHTTPRequest *request;
 
 - (NSURL *)newTextPostUrl;
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;

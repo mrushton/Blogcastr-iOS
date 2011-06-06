@@ -13,6 +13,7 @@
 #import "Session.h"
 #import "User.h"
 #import "MBProgressHUD.h"
+#import "XMPPStream.h"
 
 @interface BlogcastsController : UITableViewController <TabToolbarControllerProtocol, NSFetchedResultsControllerDelegate> {
 	TabToolbarController *tabToolbarController;
@@ -20,6 +21,7 @@
 	NSFetchedResultsController *_fetchedResultsController;
 	Session *session;
 	User *user;
+	XMPPStream *xmppStream;
 	TTTableHeaderDragRefreshView *dragRefreshView;
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
 	//MVR - for the drag refresh view
@@ -36,6 +38,7 @@
 @property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) User *user;
+@property (nonatomic, retain) XMPPStream *xmppStream;
 //AS DESIGNED: keep a weak reference to avoid retian cycles
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;
 @property (nonatomic, retain) TTTableHeaderDragRefreshView *dragRefreshView;

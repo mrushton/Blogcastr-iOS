@@ -367,6 +367,8 @@
 		[self errorAlert:@"Parse error"];
 		return;
 	}
+	//MVR - we need to save the password for xmpp
+	session.password = password;
 	session.authenticationToken = xmlParserAuthenticationToken;
 	//MVR - find User or create one
 	fetchRequest = [[NSFetchRequest alloc] init];
@@ -393,6 +395,7 @@
 	numberFormatter = [[NSNumberFormatter alloc] init];
 	[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	user.id = [numberFormatter numberFromString:xmlParserId];
+	user.type = @"BlogcastrUser";
 	if (!xmlParserUsername) {
 		NSLog(@"Error parsing username");
 		[self errorAlert:@"Parse error"];

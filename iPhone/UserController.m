@@ -379,14 +379,12 @@
 
 #pragma mark -
 #pragma mark Avatar
-
 - (void)pressAvatar:(id)object {
 	ImageViewerController *imageViewerController;
 	
-	NSLog(@"MVR - pushing VIEW controller 0x%x",self.tabToolbarController.navigationController);
 	imageViewerController = [[ImageViewerController alloc] initWithImageUrl:[self avatarUrlForSize:@"original"]];
 	[self.tabToolbarController.navigationController pushViewController:imageViewerController animated:YES];
 }
-
+	
 @end
 

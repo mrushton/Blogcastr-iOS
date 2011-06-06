@@ -12,6 +12,7 @@
 @implementation Session 
 
 @dynamic authenticationToken;
+@dynamic password;
 @dynamic user;
 
 @end

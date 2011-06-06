@@ -75,7 +75,7 @@
 		NSLog(@"Error finding tab view controller");
 		return;
 	}
-	[viewController viewWillAppear:YES];
+	[viewController viewWillAppear:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,7 +87,7 @@
 		NSLog(@"Error finding tab view controller");
 		return;
 	}
-	[viewController viewDidAppear:YES];
+	[viewController viewDidAppear:NO];
 }
 
 /*
@@ -165,6 +165,7 @@
 	frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
 	viewController.view.frame = frame;
 	[self.view addSubview:viewController.view];
+	[viewController viewWillAppear:NO];
 }	
 	
 @end

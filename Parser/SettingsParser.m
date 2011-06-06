@@ -20,6 +20,9 @@
 @synthesize web;
 @synthesize avatarUrl;
 
+#pragma mark -
+#pragma mark Class methods
+
 - (SettingsParser *)initWithData:(NSData *)theData {
 	self.data = theData;
 	

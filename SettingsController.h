@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface SettingsController : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate> {
+@interface SettingsController : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate> {
 	TabToolbarController *tabToolbarController;
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;

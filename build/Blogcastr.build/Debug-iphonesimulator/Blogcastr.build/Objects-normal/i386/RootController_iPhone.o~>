@@ -1,5 +1,2 @@
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m: In function '-[RootController_iPhone signIn]':
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m:85: warning: unused variable 'blogcastsController'
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m: At top level:
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m:122: warning: incomplete implementation of class 'RootController_iPhone'
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m:122: warning: method definition for '-initWithRootViewController:' not found
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m:132: warning: incomplete implementation of class 'RootController_iPhone'
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/RootController_iPhone.m:132: warning: method definition for '-initWithRootViewController:' not found

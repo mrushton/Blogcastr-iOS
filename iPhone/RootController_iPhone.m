@@ -90,14 +90,16 @@
 
 	//MVR - create the Home Controller at the bottom of the navigation controller stack
 	homeController = [[HomeController alloc] init];
-	homeController.session = session;
-	//MVR - set Home Controller title
 	homeController.title = session.user.username;
+	homeController.session = session;
+	//MVR - connect to XMPP server
+	[homeController connect];
 	//MVR - now create each tab
 	blogcastsController = [[BlogcastsController alloc] initWithStyle:UITableViewStylePlain];
 	blogcastsController.managedObjectContext = self.managedObjectContext;
 	blogcastsController.session = session;
 	blogcastsController.user = session.user;
+	blogcastsController.xmppStream = homeController.xmppStream;
 	blogcastsController.tabBarItem.title = @"Blogcasts";
 	userController = [[UserController alloc] initWithStyle:UITableViewStyleGrouped];
 	userController.managedObjectContext = self.managedObjectContext;

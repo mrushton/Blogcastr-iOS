@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSString * theDescription;
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) User * user;
+@property (nonatomic, retain) NSNumber * postsAtEnd;
+@property (nonatomic, retain) NSNumber * commentsAtEnd;
 
 @end
 

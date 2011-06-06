@@ -1,0 +1,3 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/PostStreamCell.m:17: error: no declaration of property 'maxId' found in the interface
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/PostStreamCell.m:21: warning: property 'minId' requires method '-minId' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/PostStreamCell.m:21: warning: property 'minId' requires the method 'setMinId:' to be defined - use @synthesize, @dynamic or provide a method implementation

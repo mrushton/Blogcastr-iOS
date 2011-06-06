@@ -14,6 +14,8 @@
 @synthesize managedObjectContext;
 @synthesize session;
 @synthesize blogcast;
+@synthesize xmppStream;
+@synthesize xmppRoom;
 
 - (id)init {
 	self = [super init];
@@ -77,7 +79,24 @@
 
 
 - (void)dealloc {
+	[managedObjectContext release];
+	[session release];
+	[blogcast release];
+	//MVR - leave room when it gets dealloced
+	[xmppRoom release];
+	[xmppStream release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark XMPPRoom delegate
+
+- (void)xmppRoom:(XMPPRoom *)room didEnter:(BOOL)enter {
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"joinedRoom" object:self];
+}
+
+- (void)xmppRoom:(XMPPRoom *)room didLeave:(BOOL)leave {
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"leftRoom" object:self];
 }
 
 #pragma mark -
@@ -95,6 +114,14 @@
 	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
 	[self presentModalViewController:theNavigationController animated:YES];
 */
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (BOOL)connect {
+	[xmppRoom createOrJoinRoom];
+	return YES;
 }
 
 

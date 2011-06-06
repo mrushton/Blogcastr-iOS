@@ -15,6 +15,7 @@
 #import "RequestServer.h"
 #import "BlogcastrStyleSheet.h"
 #import "ASIHTTPRequest.h"
+#import "NSDate+Timestamp.h"
 
 @implementation AppDelegate_iPhone
 

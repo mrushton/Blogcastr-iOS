@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, retain) NSString * authenticationToken;
+@property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) User * user;
 
 

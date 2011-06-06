@@ -11,16 +11,25 @@
 #import "TabToolbarController.h"
 #import "Session.h"
 #import "Blogcast.h"
+#import "XMPPStream.h"
+#import "XMPPRoom.h"
 
 
 @interface DashboardController : TabToolbarController {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	Blogcast *blogcast;
+	XMPPStream *xmppStream;
+	XMPPRoom *xmppRoom;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) Blogcast *blogcast;
+@property (nonatomic, retain) XMPPStream *xmppStream;
+@property (nonatomic, retain) XMPPRoom *xmppRoom;
+
+- (BOOL)connect;
+- (void)disconnect;
 
 @end

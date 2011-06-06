@@ -10,6 +10,7 @@
 #import "BlogcastsController.h"
 #import "DashboardController.h"
 #import "PostsController.h"
+#import "CommentsController.h"
 #import "BlogcastrTableViewCell.h"
 #import "BlogcastsParser.h"
 #import "Blogcast.h"
@@ -18,6 +19,7 @@
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
 #import "NSDate+Timestamp.h"
+#import "XMPPRoom.h"
 
 @implementation BlogcastsController
 
@@ -25,12 +27,12 @@
 @synthesize managedObjectContext;
 @synthesize session;
 @synthesize user;
+@synthesize xmppStream;
 @synthesize dragRefreshView;
 @synthesize infiniteScrollView;
 
 //MVR - the number of pixels the table needs to be pulled down by in order to initiate the refresh
 static const CGFloat kRefreshDeltaY = -65.0f;
-//MVR - the height of the infinte scroll view
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const NSInteger kBlogcastsRequestCount = 20;
 
@@ -38,17 +40,16 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-	NSError *error;
 	UIView *footerBorderView;
-	
-    [super viewDidLoad];
+	NSError *error;
 
+    [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	self.tableView.separatorColor = BLOGCASTRSTYLEVAR(tableViewSeperatorColor);
 	dragRefreshView = [[TTTableHeaderDragRefreshView alloc] initWithFrame:CGRectMake(0, -self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
-	dragRefreshView.backgroundColor = TTSTYLEVAR(tableRefreshHeaderBackgroundColor);
+	//dragRefreshView.backgroundColor = TTSTYLEVAR(tableRefreshHeaderBackgroundColor);
 	[dragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
     [self.tableView addSubview:dragRefreshView];
 	//MVR - set footer view to infinite scroll view
@@ -58,7 +59,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	if (![user.blogcastsAtEnd boolValue])
 		[infiniteScrollView setLoading:YES];
 	footerBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, infiniteScrollView.bounds.size.width, 1.0)];
-	footerBorderView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	footerBorderView.backgroundColor = BLOGCASTRSTYLEVAR(lightBackgroundColor);
 	[infiniteScrollView addSubview:footerBorderView];
 	[footerBorderView release];
@@ -68,12 +68,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	//MVR - timer updates table view every 10 seconds
 	timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(reloadTableView) userInfo:nil repeats:YES];	
 	//MVR - now fetch blogcasts
-	if (![self.fetchedResultsController performFetch:&error]) {
+	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
-	}
 	//TODO: viewDIdUnload
-	NSLog(@"MVR - min ID 123 -- %d",[self.minId intValue]);
-	NSLog(@"MVR - max ID 123 -- %d",[self.maxId intValue]);
 }
 
 
@@ -213,6 +210,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	NSURL *url;
 	ASIHTTPRequest *request;
 	
+	isUpdatingFooter = YES;
 	url = [self blogcastsUrlWithMaxId:[self.minId intValue] - 1 count:kBlogcastsRequestCount];	
 	request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
@@ -499,6 +497,10 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	Blogcast *blogcast;
 	DashboardController *dashboardController;
 	PostsController *postsController;
+	CommentsController *commentsController;
+	XMPPRoom *xmppRoom;
+	NSString *roomName;
+	NSString *nickname;
 
     // Navigation logic may go here. Create and push another view controller.
     /*
@@ -514,15 +516,44 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	dashboardController.session = session;
 	dashboardController.blogcast = blogcast;
 	dashboardController.title = blogcast.title;
+	//MVR - set up MUC room
+#ifdef DEVEL
+	roomName = [NSString stringWithFormat:@"blogcast.%d@conference.sandbox.blogcastr.com", [blogcast.id intValue]];
+#else //DEVEL
+	roomName = [NSString stringWithFormat:@"blogcast.%d@conference.blogcastr.com", [blogcast.id intValue]];
+#endif //DEVEL
+	nickname = [NSString stringWithFormat:@"%@", xmppStream.myJID.resource]; 
+	xmppRoom = [[XMPPRoom alloc] initWithStream:xmppStream roomName:roomName nickName:nickname];
+	xmppRoom.delegate = dashboardController;
+	dashboardController.xmppRoom = xmppRoom;
+	[xmppRoom release];
 	//MVR - create each tab
 	postsController = [[PostsController alloc] init];
 	postsController.managedObjectContext = self.managedObjectContext;
 	postsController.session = session;
 	postsController.blogcast = blogcast;
+	postsController.xmppStream = xmppStream;
+	[xmppStream addDelegate:postsController];
+	//MVR - XMPP notifications
+	[[NSNotificationCenter defaultCenter] addObserver:postsController selector:@selector(joinedRoom) name:@"joinedRoom" object:dashboardController];
+	[[NSNotificationCenter defaultCenter] addObserver:postsController selector:@selector(leftRoom) name:@"leftRoom" object:dashboardController];
 	postsController.tabBarItem.title = @"Posts";
-	dashboardController.viewControllers = [NSArray arrayWithObjects:postsController, nil];
+	commentsController = [[CommentsController alloc] initWithStyle:UITableViewStylePlain];
+	commentsController.managedObjectContext = self.managedObjectContext;
+	commentsController.session = session;
+	commentsController.blogcast = blogcast;
+	commentsController.xmppStream = xmppStream;
+	[xmppStream addDelegate:commentsController];
+	commentsController.tabBarItem.title = @"Comments";
+	//MVR - XMPP notifications
+	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(joinedRoom) name:@"joinedRoom" object:dashboardController];
+	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(leftRoom) name:@"leftRoom" object:dashboardController];
+	dashboardController.viewControllers = [NSArray arrayWithObjects:postsController, commentsController, nil];
 	[postsController release];
-	[self.tabToolbarController.navigationController pushViewController:dashboardController animated:YES];
+	[commentsController release];
+	[tabToolbarController.navigationController pushViewController:dashboardController animated:YES];
+	//MVR - connect to MUC room
+	[dashboardController connect];
 	[dashboardController release];
 }
 
@@ -545,7 +576,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	}
 	//MVR - footer logic
 	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![user.blogcastsAtEnd boolValue] && !isUpdatingFooter && self.minId > 0) {
-		isUpdatingFooter = YES;
 		[self updateBlogcastsFooter];
 	}
 }	
@@ -687,8 +717,20 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	[_fetchedResultsController release];
 	[session release];
 	[user release];
+	[xmppStream release];
+	[_maxId release];
+	[_minId release];
 	[_alertView release];
 	[super dealloc];
+}
+
+- (UIAlertView *)alertView {
+	if (!_alertView) {
+		_alertView = [[UIAlertView alloc] init];
+		[_alertView addButtonWithTitle:@"Ok"];
+	}
+	
+	return _alertView;
 }
 
 #pragma mark -
@@ -734,7 +776,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 }
 
 #pragma mark -
-#pragma mark Blogcast Stream
+#pragma mark Blogcast stream
 
 - (NSNumber *)maxId {
 	NSFetchRequest *request;
@@ -807,7 +849,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	entity = [NSEntityDescription entityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 	[request setEntity:entity];
 	//MVR - set predicate
-	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", user.id];
+	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", [user.id intValue]];
 	[request setPredicate:predicate];		
 	//MVR - specify that the request should return dictionaries	
 	[request setResultType:NSDictionaryResultType];	
@@ -905,18 +947,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		NSLog(@"Error replacing size in avatar url: %@", avatarUrl);
 		return avatarUrl;
 	}
-}
-
-#pragma mark -
-#pragma mark Error handling
-
-- (UIAlertView *)alertView {
-	if (!_alertView) {
-		_alertView = [[UIAlertView alloc] init];
-		[_alertView addButtonWithTitle:@"Ok"];
-	}
-	
-	return _alertView;
 }
 
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {

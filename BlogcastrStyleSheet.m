@@ -39,11 +39,10 @@
 
 - (UIColor *)blueTextColor {
 	return [UIColor colorWithRed:0.22 green:0.329 blue:0.529 alpha:1.0];
+}
 
-//	return [TTTextStyle styleWithColor:[UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0] next:nil];
-
-
-//	return [TTTextStyle styleWithColor:[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0] next:nil];
+- (UIColor *)blueGrayTextColor {
+	return [UIColor colorWithRed:0.245 green:0.301 blue:0.370 alpha:1.0];
 }
 
 - (TTStyle *)topBar {
@@ -59,22 +58,6 @@
 	return [TTLinearGradientFillStyle styleWithColor1:gradientColor1 color2:gradientColor2 next:
            [TTInsetStyle styleWithInset:UIEdgeInsetsMake(0.0, -1.0, 0.0, -1.0) next:
            [TTFourBorderStyle styleWithTop:[UIColor whiteColor] right:nil bottom:bottomBorderColor left:nil width:1.0 next:nil]]];
-}
-
-- (TTStyle*)timestampInWords {
-    return [TTShapeStyle styleWithShape:[TTRoundedRectangleShape shapeWithRadius:2.5] next:
-	 [TTInsetStyle styleWithInset:UIEdgeInsetsMake(0, -3, -1, -3) next:
-	  [TTSolidFillStyle styleWithColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.0] next:
-
-	  [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5] blur:1.0 offset:CGSizeMake(0.0, 1.0) next:
-		[TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.976 green:0.976 blue:0.976 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:
-		 [TTTextStyle styleWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0] color:[UIColor colorWithRed:0.4 green:0.4 blue:0.45 alpha:1.0] next:nil]]]]]];
-
-	
-	return [TTTextStyle styleWithFont:[UIFont italicSystemFontOfSize:10.0] color:[UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0] next:nil];
-
-	
-	return [TTTextStyle styleWithColor:[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0] next:nil];
 }
 
 - (TTStyle *)roundedAvatar:(UIControlState)state {
@@ -263,6 +246,22 @@
            [TTShadowStyle styleWithColor:[UIColor colorWithRed:0.718 green:0.718 blue:0.718 alpha:1.0] blur:2.0 offset:CGSizeMake(0.0, 2.0) next:
            [TTLinearGradientFillStyle styleWithColor1:gradientColor1 color2:gradientColor2 next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.976 green:0.976 blue:0.976 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:nil]]]];
+}
+
+- (TTStyle*)timestampInWords {
+    return [TTShapeStyle styleWithShape:[TTRoundedRectangleShape shapeWithRadius:2.5] next:
+			[TTInsetStyle styleWithInset:UIEdgeInsetsMake(0, -3, -1, -3) next:
+			 [TTSolidFillStyle styleWithColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.0] next:
+			  
+			  [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5] blur:1.0 offset:CGSizeMake(0.0, 1.0) next:
+			   [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.976 green:0.976 blue:0.976 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:
+				[TTTextStyle styleWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0] color:[self blueGrayTextColor] next:nil]]]]]];
+	
+	
+	return [TTTextStyle styleWithFont:[UIFont italicSystemFontOfSize:10.0] color:[UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0] next:nil];
+	
+	
+	return [TTTextStyle styleWithColor:[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0] next:nil];
 }
 
 @end

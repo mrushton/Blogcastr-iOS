@@ -19,5 +19,6 @@
 - (UIColor *)tableViewSeperatorColor;
 - (UIColor *)lightBackgroundColor;
 - (UIColor *)blueTextColor;
+- (UIColor *)blueGrayTextColor;
 
 @end

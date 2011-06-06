@@ -19,5 +19,7 @@
 @dynamic theDescription;
 @dynamic createdAt;
 @dynamic user;
+@dynamic postsAtEnd;
+@dynamic commentsAtEnd;
 
 @end

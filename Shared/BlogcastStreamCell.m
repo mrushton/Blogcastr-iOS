@@ -13,7 +13,7 @@
 @implementation BlogcastStreamCell 
 
 @dynamic id;
-@dynamic minId;
+@dynamic maxId;
 @dynamic blogcast;
 @dynamic user;
 

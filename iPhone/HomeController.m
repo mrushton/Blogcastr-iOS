@@ -9,23 +9,42 @@
 #import "HomeController.h"
 #import "BlogcastrStyleSheet.h"
 #import "NewBlogcastController.h"
+#import "XMPPStream.h"
+#import "XMPPReconnect.h"
+#import "XMPPJID.h"
 
 
 @implementation HomeController
 
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize xmppStream;
+@synthesize xmppReconnect;
 
 - (id)init {
 	self = [super init];
 	if (self) {
 		UIBarButtonItem *newBlogcastButton;
+		XMPPStream *theXmppStream;
+		XMPPReconnect *theXmppReconnect;
 		
 		//MVR - add bar button item
 		newBlogcastButton = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleBordered target:self action:@selector(newBlogcast)];
 		newBlogcastButton.title = @"New";
 		self.navigationItem.rightBarButtonItem = newBlogcastButton;		
 		[newBlogcastButton release];
+		theXmppStream = [[XMPPStream alloc] init];
+		[theXmppStream addDelegate:self];
+		self.xmppStream = theXmppStream;
+		[theXmppStream release];
+		theXmppReconnect = [[XMPPReconnect alloc] initWithStream:xmppStream];
+		self.xmppReconnect = theXmppReconnect;
+		[theXmppReconnect release];
+		didAuthenticate = NO;
+		wasToldToDisconnect = NO;
+		didErrorAlert = NO;
+		//MVR - sign out notification
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
 	}
 	
 	return self;
@@ -72,7 +91,66 @@
 
 
 - (void)dealloc {
+	[xmppStream release];
+	[XMPPReconnect release];
     [super dealloc];
+}
+
+- (UIAlertView *)alertView {
+	if (!_alertView) {
+		_alertView = [[UIAlertView alloc] init];
+		[_alertView addButtonWithTitle:@"Ok"];
+	}
+	
+	return _alertView;
+}
+
+#pragma mark -
+#pragma mark XMPPStream delegate
+
+- (void)xmppStreamDidConnect:(XMPPStream *)sender {
+	NSError *error = nil;
+	
+	wasToldToDisconnect = NO;
+	didErrorAlert = NO;
+	if (![xmppStream authenticateWithPassword:session.password error:&error])
+		NSLog(@"Error trying to authenticate with XMPP server: %@", error);
+}
+
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+	didAuthenticate = YES;
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+	NSLog(@"Error authentication failed with XMPP server");
+	//TODO: the password may have changed so log out 
+}
+
+- (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error {
+	if ([error isKindOfClass:[NSError class]]) {
+		NSLog(@"Received TCP error: %@",[error localizedDescription]);
+		if (!didErrorAlert) {
+			[self errorAlertWithTitle:@"Connection error" message:@"Oops! We received a connection error."];
+			didErrorAlert = YES;
+		}
+	} else if ([error isKindOfClass:[NSXMLElement class]]) {
+		NSLog(@"Received XMPP error");
+		if (!didErrorAlert) {
+			[self errorAlertWithTitle:@"Server error" message:@"Oops! We received an error from the server."];
+			didErrorAlert = YES;
+		}
+	}
+}
+
+- (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender {
+	//MVR - happens after signing out
+	wasToldToDisconnect = YES;
+}
+
+- (void)xmppStreamDidDisconnect:(XMPPStream *)sender {
+	//MVR - do manual start if we haven't connected yet
+	if (didAuthenticate == NO && wasToldToDisconnect == NO)
+		[xmppReconnect manualStart];
 }
 
 #pragma mark -
@@ -89,6 +167,43 @@
 	[newBlogcastController release];
 	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
 	[self presentModalViewController:theNavigationController animated:YES];
+}
+
+- (void)signOut {
+	[self disconnect];
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (BOOL)connect {
+	NSError *error = nil;
+
+#ifdef DEVEL
+	xmppStream.myJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@sandbox.blogcastr.com/dashboard", session.user.username]];
+	xmppStream.hostName = @"sandbox.blogcastr.com";
+#else
+	xmppStream.myJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@blogcastr.com/dashboard", session.user.username]];
+	xmppStream.hostName = @"ejabberd.blogcastr.com";
+#endif
+	if (![xmppStream connect:&error]) {
+		NSLog(@"Error connecting to XMPP server: %@", error);
+		return FALSE;
+	}
+	
+	return TRUE;
+}
+
+- (void)disconnect {
+	[xmppStream disconnect];
+	[xmppReconnect stop];
+}
+
+- (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {
+	//MVR - update and display the alert view
+	self.alertView.title = title;
+	self.alertView.message = message;
+	[self.alertView show];
 }
 
 @end

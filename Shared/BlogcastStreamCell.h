@@ -16,7 +16,7 @@
 }
 
 @property (nonatomic, retain) NSNumber * id;
-@property (nonatomic, retain) NSNumber * minId;
+@property (nonatomic, retain) NSNumber * maxId;
 @property (nonatomic, retain) Blogcast * blogcast;
 @property (nonatomic, retain) User * user;
 

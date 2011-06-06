@@ -10,14 +10,29 @@
 #import <CoreData/CoreData.h>
 #import "TabToolbarController.h"
 #import "Session.h"
+#import "XMPPStream.h"
+#import "XMPPReconnect.h"
 
 
 @interface HomeController : TabToolbarController {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
+	XMPPStream *xmppStream;
+	XMPPReconnect *xmppReconnect;
+	BOOL didAuthenticate;
+	BOOL wasToldToDisconnect;
+	BOOL didErrorAlert;
+	UIAlertView *_alertView;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) XMPPStream *xmppStream;
+@property (nonatomic, retain) XMPPReconnect *xmppReconnect;
+@property (nonatomic, retain) UIAlertView *alertView;
+
+- (BOOL)connect;
+- (void)disconnect;
+- (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

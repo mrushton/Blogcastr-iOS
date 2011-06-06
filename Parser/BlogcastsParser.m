@@ -23,6 +23,9 @@
 @synthesize blogcastUpdatedAt;
 @synthesize blogcasts;
 
+#pragma mark -
+#pragma mark Methods
+
 - (BlogcastsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext {
 	self.data = theData;
 	self.managedObjectContext = theManagedObjectContext;
@@ -43,6 +46,21 @@
 		[parser release];
 		return FALSE;	
 	}
+}
+
+#pragma mark -
+#pragma mark Memory management
+
+- (void)dealloc {
+	[data release];
+	[managedObjectContext release];
+    [mutableString release];
+	[blogcastId release];
+	[blogcastTitle release];
+	[blogcastDescription release];
+	[blogcastStartingAt release];
+	[blogcastUpdatedAt release];
+	[blogcasts release];
 }
 
 #pragma mark -

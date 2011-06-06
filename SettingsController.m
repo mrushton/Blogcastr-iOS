@@ -57,7 +57,6 @@
 	[footerView release];
 	//MVR - set up sign out button
 	signOutButton = [TTButton buttonWithStyle:@"redTableFooterButton:" title:@"Sign Out"];
-///	[signOutButton setImage:@"bundle://logo.png" forState:UIControlStateNormal];
 	[signOutButton addTarget:self action:@selector(signOut:) forControlEvents:UIControlEventTouchUpInside]; 
 	signOutButton.frame = CGRectMake(9.0, 20.0, 302.0, 45.0);
 	[self.tableView.tableFooterView  addSubview:signOutButton];	
@@ -224,7 +223,7 @@
 #pragma mark Action sheet delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (actionSheet == self.avatarActionSheet && (buttonIndex == 0 || buttonIndex == 1)) {
+	if (actionSheet == _avatarActionSheet && (buttonIndex == 0 || buttonIndex == 1)) {
 		UIImagePickerController *imagePickerController;
 		
 		imagePickerController = [[UIImagePickerController alloc] init];
@@ -235,7 +234,7 @@
 			imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 		[tabToolbarController presentModalViewController:imagePickerController animated:YES];
 		[imagePickerController release];
-	} else if (actionSheet == self.signOutActionSheet && buttonIndex == 0) {
+	} else if (actionSheet == _signOutActionSheet && buttonIndex == 0) {
 		NSError *error;
 		
 		//MVR - clear Session object
@@ -252,7 +251,6 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	NSLog(@"MVR _ DISMIISSS ACTION SHEET");
 	if (actionSheet == self.avatarActionSheet && buttonIndex == 2)
 		[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
 }
@@ -279,10 +277,6 @@
 	[request setDidFailSelector:@selector(uploadAvatarFailed:)];
 	[request startAsynchronous];
 	[tabToolbarController dismissModalViewControllerAnimated:YES];
-}
-
-- (void)setProgress:(float)progress {
-	self.windowProgressHud.progress = progress;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -416,6 +410,10 @@
 			NSLog(@"Error uploading avatar");
 			break;
 	}	
+}
+
+- (void)setProgress:(float)progress {
+	self.windowProgressHud.progress = progress;
 }
 
 #pragma mark -

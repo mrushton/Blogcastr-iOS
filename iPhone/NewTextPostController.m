@@ -9,6 +9,7 @@
 #import <Three20/Three20.h>
 #import "NewTextPostController.h"
 #import "ASIFormDataRequest.h"
+#import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
 
 
@@ -20,7 +21,10 @@
 @synthesize blogcast;
 @synthesize textView;
 @synthesize progressHud;
+@synthesize actionSheet;
+@synthesize requestActionSheet;
 @synthesize alertView;
+@synthesize request;
 
 #pragma mark -
 #pragma mark Initialization
@@ -58,7 +62,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
-	theTextView = [[UITextView alloc] initWithFrame:CGRectMake(2.0, 4.0, 296.0, 92.0)];
+	theTextView = [[UITextView alloc] initWithFrame:CGRectMake(2.0, 4.0, 296.0, 112.0)];
 	//MVR - slight hack with insets to make the top align a little nicer
 	theTextView.contentInset = UIEdgeInsetsMake(-4.0, 0.0, 0.0, 0.0);
 	theTextView.backgroundColor = [UIColor clearColor];	
@@ -113,7 +117,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0)
-		return 100.0;
+		return 120.0;
 	
 	return 0;
 }
@@ -212,13 +216,11 @@
 	self.textView = nil;
 }
 
-- (UIAlertView *)alertView {
-	if (!_alertView) {
-		_alertView = [[UIAlertView alloc] init];
-		[_alertView addButtonWithTitle:@"Ok"];
-	}
-	
-	return _alertView;
+- (void)dealloc {
+	[_progressHud release];
+	[_actionSheet release];
+	[_alertView release];
+    [super dealloc];
 }
 
 - (MBProgressHUD *)progressHud {
@@ -231,30 +233,121 @@
 	return _progressHud;
 }
 
-- (void)dealloc {
-    [super dealloc];
+- (UIActionSheet *)actionSheet {
+	if (!_actionSheet)
+		_actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles: nil];
+	
+	return _actionSheet;
+}
+
+- (UIActionSheet *)requestActionSheet {
+	if (!_requestActionSheet)
+		_requestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles:@"Cancel Upload", nil];
+	
+	return _requestActionSheet;
+}
+
+- (UIAlertView *)alertView {
+	if (!_alertView) {
+		_alertView = [[UIAlertView alloc] init];
+		[_alertView addButtonWithTitle:@"Ok"];
+	}
+	
+	return _alertView;
 }
 
 #pragma mark -
 #pragma mark ASIHTTPRequest delegate
 
-- (void)newTextPostFinished:(ASIHTTPRequest *)request {
-	NSLog(@"MVR - new blogcast finished");
-}
-
-
-- (void)newTextPostFailed:(ASIHTTPRequest *)request {
-	NSLog(@"MVR - new blogcast failed");
+- (void)newTextPostFinished:(ASIHTTPRequest *)theRequest {
+	int statusCode;
 	
+	self.request = nil;
+	//MVR - we need to dismiss the action sheet here for some reason
+	if (self.requestActionSheet.visible)
+		[self.requestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	statusCode = [theRequest responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error new text post received status code %i", statusCode);
+		//MVR - enable post button
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		[self errorAlertWithTitle:@"Post failed" message:@"Oops! We couldn't make the text post."];
+		return;
+	}
+	[self dismissModalViewControllerAnimated:YES];
 }
+
+- (void)newTextPostFailed:(ASIHTTPRequest *)theRequest {
+	NSError *error;
+
+	self.request = nil;
+	error = [theRequest error];
+	//MVR - we need to dismiss the action sheet here for some reason
+	if (self.requestActionSheet.visible)
+		[self.requestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	//MVR - enable post button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error posting text: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't make the text post."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error posting text: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't make the text post."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Text post request cancelled");
+			break;
+		default:
+			NSLog(@"Error posting text");
+			break;
+	}	
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate delegate
+
+- (void)hudWasHidden:(MBProgressHUD *)theProgressHUD {
+	//MVR - remove HUD from screen when the HUD was hidden
+	[theProgressHUD removeFromSuperview];
+}
+
+#pragma mark -
+#pragma mark Action sheet delegate
+
+- (void)actionSheet:(UIActionSheet *)theActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (theActionSheet == _requestActionSheet) {
+		if (buttonIndex == 0) {
+			if (request)
+				[request cancel];
+			[self dismissModalViewControllerAnimated:YES];
+		} else if (buttonIndex == 1) {
+			if (request)
+				[request cancel];
+		}
+	} else if (theActionSheet == _actionSheet) {
+		if (buttonIndex == 0)
+			[self dismissModalViewControllerAnimated:YES];
+	}
+}
+
+/*
+ - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+ if (actionSheet == self.avatarActionSheet && buttonIndex == 2)
+ [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
+ }
+ */
 
 #pragma mark -
 #pragma mark Actions
 
 - (void)post {
-	NSString *string;
-	NSURL *url;
-	ASIFormDataRequest *request;
+	ASIFormDataRequest *theRequest;
 	
 	//MVR - check for errors
 	if (!textView.text || [textView.text compare:@""] == NSOrderedSame) {
@@ -263,20 +356,30 @@
 	}
 	//MVR - dismiss keyboard
 	[textView resignFirstResponder];
+	//MVR - disable post button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 	[self showProgressHudWithLabelText:@"Posting text..." animated:YES animationType:MBProgressHUDAnimationZoom];
-	request = [ASIFormDataRequest requestWithURL:[self newTextPostUrl]];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(newTextPostFinished:)];
-	[request setDidFailSelector:@selector(newTextPostFailed:)];
-	[request addPostValue:session.authenticationToken forKey:@"authentication_token"];
-	[request addPostValue:textView.text forKey:@"text_post[text]"];
-	[request addPostValue:@"iPhone" forKey:@"text_post[from]"];
-	[request startAsynchronous];
+	theRequest = [ASIFormDataRequest requestWithURL:[self newTextPostUrl]];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(newTextPostFinished:)];
+	[theRequest setDidFailSelector:@selector(newTextPostFailed:)];
+	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:textView.text forKey:@"text_post[text]"];
+	[theRequest addPostValue:@"iPhone" forKey:@"text_post[from]"];
+	[theRequest startAsynchronous];
+	self.request = theRequest;
 }
 
 - (void)cancel {
-	//TODO: need to cancel request as well
-	[self dismissModalViewControllerAnimated:YES];
+	//MVR - if empty just dismiss the controller
+	if (!textView.text || [textView.text compare:@""] == NSOrderedSame) {
+		[self dismissModalViewControllerAnimated:YES];
+		return;
+	}
+	if (request)
+		[self.requestActionSheet showInView:self.navigationController.view];
+	else
+		[self.actionSheet showInView:self.navigationController.view];
 }
 
 #pragma mark -
