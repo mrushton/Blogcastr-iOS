@@ -70,8 +70,9 @@
 - (BOOL)save;
 - (NSString *)imagePostUrlForPost:(Post *)post size:(NSString *)size;
 - (BOOL)isStreamCellRequested:(PostStreamCell *)streamCell;
-- (BOOL)addMessage:(XMPPMessage *)message;
 - (Post *)parseMessage:(XMPPMessage *)message;
+- (BOOL)addMessage:(XMPPMessage *)message;
+- (void)updateBadge:(NSInteger)numAdded;
 - (TTStyledTextLabel *)timestampLabel;
 - (void)timerExpired:(Timer *)timer;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;

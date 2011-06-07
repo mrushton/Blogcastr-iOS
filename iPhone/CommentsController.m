@@ -88,6 +88,7 @@ static const NSInteger kCommentsRequestCount = 20;
 
 - (void)viewWillAppear:(BOOL)animated {
 	isTableViewRendered = YES;
+	self.tabBarItem.badgeValue = nil;
     [super viewWillAppear:animated];
 }
 
@@ -121,8 +122,6 @@ static const NSInteger kCommentsRequestCount = 20;
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CommentStreamCell *streamCell;
 	Comment *comment;
-
-	//NSLog(@"MVR - HEIGHT DID LOAD %d",[self.tableView numberOfRowsInSection:0]);
 
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	comment = streamCell.comment;
@@ -172,7 +171,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	UILabel *textView;
 	CGSize timestampLabelSize;
 	CGSize textSize;
-    
+
 	// Configure the cell...
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	comment = streamCell.comment;
@@ -387,7 +386,8 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
 	float systemVersion;
-	
+
+	NSLog(@"MVR - BEGIN UPDATES");
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	//AS DESIGNED: second work around for not being able to insert rows before the table view has been rendered
@@ -492,13 +492,14 @@ static const NSInteger kCommentsRequestCount = 20;
 		return;
 	//MVR - if we aren't in sync queue up the message to be parsed after we are
 	if (isSynced) {
-		if (![self addMessage:message]) {
+		if ([self addMessage:message]) {
+			if (![self save]) {
+				NSLog(@"Error saving comment");
+				[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comment."];
+			}
+			[self updateBadge:1];
+		} else {
 			NSLog(@"Could not add comment to stream");
-			return;
-		}
-		if (![self save]) {
-			NSLog(@"Error saving comment");
-			[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comment."];
 		}
 	} else {
 		//MVR - add the message after we sync up
@@ -574,10 +575,10 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - if the array hasn't been allocated yet there is no need to allocate and check it
 	if (_commentMessages) {
 		for (XMPPMessage *message in self.commentMessages) {
-			if (![self addMessage:message]) {
+			if ([self addMessage:message])
+				numAdded++;
+			else
 				NSLog(@"Could not add comment to stream");
-				return;
-			}
 		}
 		[self.commentMessages removeAllObjects];
 	}
@@ -586,6 +587,8 @@ static const NSInteger kCommentsRequestCount = 20;
 		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comments."];
 	}
 	isSynced = YES;
+	//MVR - update the badge value
+	[self updateBadge:numAdded];
 }
 
 - (void)updateCommentsFailed:(ASIHTTPRequest *)request {
@@ -1105,9 +1108,24 @@ static const NSInteger kCommentsRequestCount = 20;
 		streamCell.comment = comment;
 		streamCell.blogcast = blogcast;
 		self.maxId = comment.id;
+		return YES;
 	}
 	
-	return YES;
+	return NO;
+}
+
+- (void)updateBadge:(NSInteger)numAdded {
+	//MVR - update the badge value
+	if (numAdded > 0 && self.view.window == nil) {
+		if (self.tabBarItem.badgeValue) {
+			NSInteger badgeValue;
+			
+			badgeValue = [self.tabBarItem.badgeValue integerValue];
+			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", badgeValue + numAdded];
+		} else {
+			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", numAdded];
+		}
+	}
 }
 
 - (TTStyledTextLabel *)timestampLabel {

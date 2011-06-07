@@ -1,0 +1,7 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m: In function '-[PostsController xmppStream:didReceiveMessage:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m:652: warning: 'PostsController' may not respond to '-updateBadge:'
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m:652: warning: (Messages without a matching method signature
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m:652: warning: will be assumed to return 'id' and accept
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m:652: warning: '...' as arguments.)
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m: In function '-[PostsController updatePostsFinished:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostsController.m:743: warning: 'PostsController' may not respond to '-updateBadge:'

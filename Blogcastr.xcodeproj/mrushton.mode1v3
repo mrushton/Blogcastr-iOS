@@ -279,7 +279,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2}, {230, 984}}</string>
+							<string>{{0, 81}, {230, 984}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -298,7 +298,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>466 122 1327 1043 0 0 1920 1178 </string>
+						<string>466 114 1327 1043 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -309,8 +309,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -328,7 +326,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CA53FFA0139C95D400EC2003</string>
+										<string>CA53FFCD139DE62100EC2003</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -517,12 +515,12 @@
 											<string>CA99C715139BE67F00DCE077</string>
 											<string>CA99C789139C192400DCE077</string>
 											<string>CA99C7EF139C635E00DCE077</string>
-											<string>CA99C7FB139C66C400DCE077</string>
 											<string>CA53FF7C139C909500EC2003</string>
-											<string>CA53FF7D139C909500EC2003</string>
-											<string>CA53FF7E139C909500EC2003</string>
-											<string>CA53FF95139C92A400EC2003</string>
-											<string>CA53FF96139C92A400EC2003</string>
+											<string>CA53FFB3139DBFC100EC2003</string>
+											<string>CA53FFC9139DE62100EC2003</string>
+											<string>CA53FFCA139DE62100EC2003</string>
+											<string>CA53FFCB139DE62100EC2003</string>
+											<string>CA53FFCC139DE62100EC2003</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -536,7 +534,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1075, 715}}</string>
 								<key>RubberWindowFrame</key>
-								<string>466 122 1327 1043 0 0 1920 1178 </string>
+								<string>466 114 1327 1043 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -544,6 +542,8 @@
 							<string>715pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -556,7 +556,7 @@
 								<key>Frame</key>
 								<string>{{0, 720}, {1075, 282}}</string>
 								<key>RubberWindowFrame</key>
-								<string>466 122 1327 1043 0 0 1920 1178 </string>
+								<string>466 114 1327 1043 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -728,7 +728,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>466 122 1327 1043 0 0 1920 1178 </string>
+	<string>466 114 1327 1043 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

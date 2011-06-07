@@ -644,13 +644,14 @@ static const NSInteger kPostsRequestCount = 20;
 		return;
 	//MVR - if we aren't in sync queue up the message to be parsed after we are
 	if (isSynced) {
-		if (![self addMessage:message]) {
+		if ([self addMessage:message]) {
+			if (![self save]) {
+				NSLog(@"Error saving comment");
+				[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comment."];
+			}
+			[self updateBadge:1];
+		} else {
 			NSLog(@"Could not add post to stream");
-			return;
-		}
-		if (![self save]) {
-			NSLog(@"Error saving post");
-			[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the post."];
 		}
 	} else {
 		//MVR - add the message after we sync up
@@ -726,10 +727,10 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - if the array hasn't been allocated yet there is no need to allocate and check it
 	if (_postMessages) {
 		for (XMPPMessage *message in self.postMessages) {
-			if (![self addMessage:message]) {
+			if ([self addMessage:message])
+				numAdded++;
+			else
 				NSLog(@"Could not add post to stream");
-				return;
-			}
 		}
 		[self.postMessages removeAllObjects];
 	}
@@ -738,6 +739,8 @@ static const NSInteger kPostsRequestCount = 20;
 		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the posts."];
 	}
 	isSynced = YES;
+	//MVR - update the badge value
+	[self updateBadge:numAdded];
 }
 
 - (void)updatePostsFailed:(ASIHTTPRequest *)request {
@@ -1420,6 +1423,20 @@ static const NSInteger kPostsRequestCount = 20;
 	}
 
 	return YES;
+}
+
+- (void)updateBadge:(NSInteger)numAdded {
+	//MVR - update the badge value
+	if (numAdded > 0 && self.view.window == nil) {
+		if (self.tabBarItem.badgeValue) {
+			NSInteger badgeValue;
+			
+			badgeValue = [self.tabBarItem.badgeValue integerValue];
+			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", badgeValue + numAdded];
+		} else {
+			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", numAdded];
+		}
+	}
 }
 
 - (TTStyledTextLabel *)timestampLabel {

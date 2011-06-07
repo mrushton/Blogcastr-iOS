@@ -563,7 +563,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	NSIndexPath *indexPath;
-	
+
 	//MVR - deselect highlighted table cells
 	indexPath = [self.tableView indexPathForSelectedRow];
 	if (indexPath)
@@ -575,9 +575,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 			[dragRefreshView setStatus:TTTableHeaderDragRefreshReleaseToReload];
 	}
 	//MVR - footer logic
-	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![user.blogcastsAtEnd boolValue] && !isUpdatingFooter && self.minId > 0) {
+	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![user.blogcastsAtEnd boolValue] && !isUpdatingFooter && self.minId > 0)
 		[self updateBlogcastsFooter];
-	}
 }	
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {

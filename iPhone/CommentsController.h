@@ -67,8 +67,9 @@
 - (NSURL *)commentsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count;
 - (BOOL)save;
 - (BOOL)isStreamCellRequested:(CommentStreamCell *)streamCell;
-- (BOOL)addMessage:(XMPPMessage *)message;
 - (Comment *)parseMessage:(XMPPMessage *)message;
+- (BOOL)addMessage:(XMPPMessage *)message;
+- (void)updateBadge:(NSInteger)numAdded;
 - (TTStyledTextLabel *)timestampLabel;
 - (void)timerExpired:(Timer *)timer;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
