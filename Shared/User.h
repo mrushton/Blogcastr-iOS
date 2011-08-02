@@ -2,13 +2,14 @@
 //  User.h
 //  Blogcastr
 //
-//  Created by Matthew Rushton on 5/15/11.
+//  Created by Matthew Rushton on 7/11/11.
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
 @class Blogcast;
+@class Comment;
 @class Post;
 @class Settings;
 
@@ -40,7 +41,9 @@
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSSet* blogcasts;
+@property (nonatomic, retain) NSSet* subscriptions;
 @property (nonatomic, retain) Settings * settings;
+@property (nonatomic, retain) NSSet* subscribers;
 @property (nonatomic, retain) NSSet* posts;
 @property (nonatomic, retain) NSSet* comments;
 
@@ -53,13 +56,23 @@
 - (void)addBlogcasts:(NSSet *)value;
 - (void)removeBlogcasts:(NSSet *)value;
 
+- (void)addSubscriptionsObject:(NSManagedObject *)value;
+- (void)removeSubscriptionsObject:(NSManagedObject *)value;
+- (void)addSubscriptions:(NSSet *)value;
+- (void)removeSubscriptions:(NSSet *)value;
+
+- (void)addSubscribersObject:(NSManagedObject *)value;
+- (void)removeSubscribersObject:(NSManagedObject *)value;
+- (void)addSubscribers:(NSSet *)value;
+- (void)removeSubscribers:(NSSet *)value;
+
 - (void)addPostsObject:(Post *)value;
 - (void)removePostsObject:(Post *)value;
 - (void)addPosts:(NSSet *)value;
 - (void)removePosts:(NSSet *)value;
 
-- (void)addCommentsObject:(NSManagedObject *)value;
-- (void)removeCommentsObject:(NSManagedObject *)value;
+- (void)addCommentsObject:(Comment *)value;
+- (void)removeCommentsObject:(Comment *)value;
 - (void)addComments:(NSSet *)value;
 - (void)removeComments:(NSSet *)value;
 

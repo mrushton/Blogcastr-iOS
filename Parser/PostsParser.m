@@ -16,6 +16,7 @@
 
 @synthesize data;
 @synthesize managedObjectContext;
+@synthesize blogcast;
 @synthesize mutableString;
 @synthesize postId;
 @synthesize postType;
@@ -39,13 +40,6 @@
 #pragma mark -
 #pragma mark Methods
 
-- (PostsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext {
-	self.data = theData;
-	self.managedObjectContext = theManagedObjectContext;
-	
-	return self;
-}
-
 - (BOOL)parse {
 	NSXMLParser *parser;
 	
@@ -67,6 +61,7 @@
 - (void)dealloc {
 	[data release];
 	[managedObjectContext release];
+	[blogcast release];
     [mutableString release];
 	[postId release];
 	[postType release];
@@ -154,6 +149,7 @@
 		[request release];
 		post.id = postId;
 		self.postId = nil;
+		post.blogcast = blogcast;
 		post.type = postType;
 		self.postType = nil;
 		//MVR - find post user if they exist
@@ -169,6 +165,7 @@
 			user = [array objectAtIndex:0];
 		else
 			user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request release];
 		user.id = postUserId;
 		self.postUserId = nil;
 		user.username = postUserUsername;
@@ -193,7 +190,7 @@
 			self.postImageHeight = nil;
 		} else if ([post.type isEqual:@"CommentPost"]) {
 			Comment *comment;
-			
+
 			//MVR - find comment if it exists
 			request = [[NSFetchRequest alloc] init];
 			entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:managedObjectContext];
@@ -210,6 +207,7 @@
 			[request release];
 			comment.id = commentId;
 			self.commentId = nil;
+			comment.blogcast = blogcast;
 			//AS DESIGNED: use the post equivalent variable
 			comment.text = postText;
 			self.postText = nil;
@@ -222,10 +220,12 @@
 			//MVR - execute the fetch
 			array = [managedObjectContext executeFetchRequest:request error:&error];
 			//MVR - create user if they don't exist
-			if ([array count] > 0)
-				user = [array objectAtIndex:0];
-			else
-				user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+			if ([array count] > 0) {
+				user = [array objectAtIndex:0];}
+		else{
+				user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];}
+			NSLog(@"MVR - comment user 0x%x",user);
+			[request release];
 			user.id = commentUserId;
 			self.commentUserId = nil;
 			user.type = commentUserType;
@@ -310,17 +310,13 @@
 		self.postImageHeight = [formatter numberFromString:mutableString];
 		[formatter release];
 	} else if ([elementName isEqual:@"created-at"]) {
-		NSString *string;
 		NSDate *date;
-		
-		//MVR - convert date string
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [mutableString substringToIndex:10], [mutableString substringWithRange:NSMakeRange(11, 8)], [mutableString substringWithRange:NSMakeRange(19, 3)], [mutableString substringWithRange:NSMakeRange(23, 2)]];
-		date = [[NSDate alloc] initWithString:string];
+
+		date = [self parseTimestamp:mutableString];
 		if (inComment)
 			self.commentCreatedAt = date;
 		else
 			self.postCreatedAt = date;
-		[date release];
 	} else if ([elementName isEqual:@"user"]) {
 		inUser = FALSE;
 	} else if ([elementName isEqual:@"comment"]) {
@@ -343,6 +339,23 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Error parsing posts: %@", [parseError localizedDescription]);
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (NSDate *)parseTimestamp: (NSString *)timestamp {
+	NSString *string;
+	NSDate *date;
+	
+	//MVR - parse timestamp based on whether it is in UTC format or not
+	if ([timestamp length] == 20)
+		string = [NSString stringWithFormat:@"%@ %@ +0000", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)]];
+	else
+		string = [NSString stringWithFormat:@"%@ %@ %@%@", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)], [timestamp substringWithRange:NSMakeRange(19, 3)], [timestamp substringWithRange:NSMakeRange(23, 2)]];
+	date = [[[NSDate alloc] initWithString:string] autorelease];
+	
+	return date;
 }
 
 @end

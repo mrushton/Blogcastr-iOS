@@ -11,23 +11,50 @@
 #import "TabToolbarController.h"
 #import "Session.h"
 #import "User.h"
+#import "Subscription.h"
+#import "ASIHTTPRequest.h"
+#import "MBProgressHUD.h"
 
 
-@interface UserController : UITableViewController <TabToolbarControllerProtocol> {
+@interface UserController : UITableViewController <TabToolbarControllerProtocol, MBProgressHUDDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	User *user;
+	Subscription *subscription;
 	TabToolbarController *tabToolbarController;
+	UIBarButtonItem *_subscribeButton;
+	UIBarButtonItem *_unsubscribeButton;
+	ASIHTTPRequest *request;
+	BOOL isLoading;
+	BOOL isUpdating;
+	MBProgressHUD *_viewProgressHud;
+	MBProgressHUD *_windowProgressHud;
+	UIAlertView *_alertView;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) User *user;
+@property (nonatomic, retain) Subscription *subscription;
 //AS DESIGNED: keep a weak reference to avoid retian cycles
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;
+@property (nonatomic, readonly) UIBarButtonItem *subscribeButton;
+@property (nonatomic, readonly) UIBarButtonItem *unsubscribeButton;
+@property (nonatomic, retain) ASIHTTPRequest *request;
+@property (nonatomic, readonly) MBProgressHUD *viewProgressHud;
+@property (nonatomic, readonly) MBProgressHUD *windowProgressHud;
+@property (nonatomic, readonly) UIAlertView *alertView;
 
+- (BOOL)save;
+- (void)updateUser;
 - (NSString *)avatarUrlForSize:(NSString *)size;
 - (TTView *)statViewFor:(NSString *)name value:(NSNumber *)value;
 - (UIView *)footerView;
+- (NSURL *)userUrl;
+- (NSURL *)subscribeUrl;
+- (NSURL *)unsubscribeUrl;
+- (void)showViewProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
+- (void)showWindowProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
+- (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

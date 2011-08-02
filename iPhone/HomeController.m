@@ -42,7 +42,6 @@
 		[theXmppReconnect release];
 		didAuthenticate = NO;
 		wasToldToDisconnect = NO;
-		didErrorAlert = NO;
 		//MVR - sign out notification
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(signOut) name:@"signOut" object:nil];
 	}
@@ -92,7 +91,7 @@
 
 - (void)dealloc {
 	[xmppStream release];
-	[XMPPReconnect release];
+	[xmppReconnect release];
     [super dealloc];
 }
 
@@ -112,12 +111,13 @@
 	NSError *error = nil;
 	
 	wasToldToDisconnect = NO;
-	didErrorAlert = NO;
 	if (![xmppStream authenticateWithPassword:session.password error:&error])
 		NSLog(@"Error trying to authenticate with XMPP server: %@", error);
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+	NSLog(@"MVR - DID AUTH HOME");
+
 	didAuthenticate = YES;
 }
 
@@ -129,16 +129,9 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error {
 	if ([error isKindOfClass:[NSError class]]) {
 		NSLog(@"Received TCP error: %@",[error localizedDescription]);
-		if (!didErrorAlert) {
-			[self errorAlertWithTitle:@"Connection error" message:@"Oops! We received a connection error."];
-			didErrorAlert = YES;
-		}
 	} else if ([error isKindOfClass:[NSXMLElement class]]) {
 		NSLog(@"Received XMPP error");
-		if (!didErrorAlert) {
-			[self errorAlertWithTitle:@"Server error" message:@"Oops! We received an error from the server."];
-			didErrorAlert = YES;
-		}
+		[self errorAlertWithTitle:@"Server error" message:@"Oops! We received an error from the server."];
 	}
 }
 

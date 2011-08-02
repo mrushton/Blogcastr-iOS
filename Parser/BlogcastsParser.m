@@ -17,9 +17,19 @@
 @synthesize managedObjectContext;
 @synthesize mutableString;
 @synthesize blogcastId;
-@synthesize blogcastTitle;
-@synthesize blogcastDescription;
-@synthesize blogcastStartingAt;
+@synthesize title;
+@synthesize theDescription;
+@synthesize user;
+@synthesize userId;
+@synthesize userUsername;
+@synthesize userAvatarUrl;
+@synthesize tags;
+@synthesize numCurrentViewers;
+@synthesize numPosts;
+@synthesize numComments;
+@synthesize numLikes;
+@synthesize numViews;
+@synthesize startingAt;
 @synthesize blogcastUpdatedAt;
 @synthesize blogcasts;
 
@@ -56,11 +66,22 @@
 	[managedObjectContext release];
     [mutableString release];
 	[blogcastId release];
-	[blogcastTitle release];
-	[blogcastDescription release];
-	[blogcastStartingAt release];
+	[title release];
+	[theDescription release];
+	[user release];
+	[userId release];
+	[userUsername release];
+	[userAvatarUrl release];
+	[tags release];
+	[numCurrentViewers release];
+	[numPosts release];
+	[numComments release];
+	[numLikes release];
+	[numViews release];
+	[startingAt release];
 	[blogcastUpdatedAt release];
 	[blogcasts release];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -72,36 +93,52 @@
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	self.mutableString = nil;
 	self.blogcastId = nil;
-	self.blogcastTitle = nil;
-	self.blogcastDescription = nil;
-	self.blogcastStartingAt = nil;
+	self.title = nil;
+	self.theDescription = nil;
+	self.user = nil;
+	self.userId = nil;
+	self.userUsername = nil;
+	self.userAvatarUrl = nil;
+	self.tags = nil;
+	self.numCurrentViewers = nil;
+	self.numPosts = nil;
+	self.numComments = nil;
+	self.numLikes = nil;
+	self.numViews = nil;
+	self.startingAt = nil;
 	self.blogcastUpdatedAt = nil;
-	inTag = FALSE;
+	inUser = NO;
+	inTags = NO;
+	inStats = NO;
 	self.blogcasts = [NSMutableArray array];
 }
 
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
-	if ([elementName isEqual:@"tag"]) {
-		inTag = TRUE;
-	}
+	if ([elementName isEqual:@"user"])
+		inUser = YES;
+	else if ([elementName isEqual:@"tags"])
+		inTags = YES;
+	else if ([elementName isEqual:@"stats"])
+		inStats = YES;
 	//MVR - need to reset string here to handle white space
     self.mutableString = nil;
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+	NSFetchRequest *request;
+	NSEntityDescription *entity;
+	NSPredicate *predicate;
+	NSArray *array;
+	NSError *error;
+	
 	if ([elementName isEqual:@"blogcast"]) {
-		NSFetchRequest *request;
-		NSEntityDescription *entity;
-		NSPredicate *predicate;
-		NSArray *array;
 		Blogcast *blogcast;
-		NSError *error;
 		
 		//MVR - find blogcast if it exists
 		request = [[NSFetchRequest alloc] init];
 		entity = [NSEntityDescription entityForName:@"Blogcast" inManagedObjectContext:managedObjectContext];
 		[request setEntity:entity];	
-		predicate = [NSPredicate predicateWithFormat:@"id = %d", blogcastId];
+		predicate = [NSPredicate predicateWithFormat:@"id = %d", [blogcastId integerValue]];
 		[request setPredicate:predicate];
 		//MVR - execute the fetch
 		array = [managedObjectContext executeFetchRequest:request error:&error];
@@ -113,50 +150,102 @@
 		[request release];
 		blogcast.id = blogcastId;
 		self.blogcastId = nil;
-		blogcast.title = blogcastTitle;
-		self.blogcastTitle = nil;
-		blogcast.theDescription = blogcastDescription;
-		self.blogcastDescription = nil;
-		blogcast.startingAt = blogcastStartingAt;
-		self.blogcastStartingAt = nil;
+		blogcast.title = title;
+		self.title = nil;
+		blogcast.theDescription = theDescription;
+		self.theDescription = nil;
+		blogcast.user = user;
+		self.user = nil;
+		blogcast.tags = tags;
+		self.tags = nil;
+		blogcast.numCurrentViewers = numCurrentViewers;
+		self.numCurrentViewers = nil;
+		blogcast.numPosts = numPosts;
+		self.numPosts = nil;
+		blogcast.numComments = numComments;
+		self.numComments = nil;
+		blogcast.numLikes = numLikes;
+		self.numLikes = nil;
+		blogcast.numViews = numViews;
+		self.numViews = nil;
+		blogcast.startingAt = startingAt;
+		self.startingAt = nil;
 		blogcast.updatedAt = blogcastUpdatedAt;
 		self.blogcastUpdatedAt = nil;
-		//MVR - save in case we need to delete them on error
+		//MVR - save for further processing
 		[blogcasts addObject:blogcast];
 	} else if ([elementName isEqual:@"id"]) {
-		if (inTag) {
-		} else {
-			NSNumberFormatter *formatter;
-			
-			formatter = [[NSNumberFormatter alloc] init];
-			self.blogcastId = [formatter numberFromString:mutableString];
-			[formatter release];
-		}
+		if (inUser)
+			self.userId = [NSNumber numberWithInteger:[mutableString integerValue]];
+		else
+			self.blogcastId = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"title"]){
-		self.blogcastTitle = mutableString;
+		self.title = mutableString;
 	} else if ([elementName isEqual:@"description"]) {
-		self.blogcastDescription = mutableString;
-	} else if ([elementName isEqual:@"starting-at"]) {
-		NSString *string;
-		NSDate *date;
+		self.theDescription = mutableString;
+	} else if ([elementName isEqual:@"user"]) {
+		User *theUser;
 		
-		//MVR - convert date string
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [mutableString substringToIndex:10], [mutableString substringWithRange:NSMakeRange(11, 8)], [mutableString substringWithRange:NSMakeRange(19, 3)], [mutableString substringWithRange:NSMakeRange(23, 2)]];
-		date = [[NSDate alloc] initWithString:string];
-		self.blogcastStartingAt = date;
-		[date release];
-	} else if ([elementName isEqual:@"updated-at"]) {
-		NSString *string;
-		NSDate *date;
-		
-		//MVR - convert date string
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [mutableString substringToIndex:10], [mutableString substringWithRange:NSMakeRange(11, 8)], [mutableString substringWithRange:NSMakeRange(19, 3)], [mutableString substringWithRange:NSMakeRange(23, 2)]];
-		date = [[NSDate alloc] initWithString:string];
-		self.blogcastUpdatedAt = date;
-		[date release];
+		//MVR - find blogcast if it exists
+		request = [[NSFetchRequest alloc] init];
+		entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request setEntity:entity];	
+		predicate = [NSPredicate predicateWithFormat:@"id = %d", [userId intValue]];
+		[request setPredicate:predicate];
+		//MVR - execute the fetch
+		array = [managedObjectContext executeFetchRequest:request error:&error];
+		//MVR - create blogcast if it doesn't exist
+		if ([array count] > 0)
+			theUser = [array objectAtIndex:0];
+		else
+			theUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request release];
+		theUser.id = userId;
+		self.userId = nil;
+		theUser.type = @"BlogcastrUser";
+		theUser.username = userUsername;
+		self.userUsername = nil;
+		theUser.avatarUrl = userAvatarUrl;
+		self.userAvatarUrl = nil;
+		self.user = theUser;
+		inUser = NO;
+	} else if ([elementName isEqual:@"username"]) {
+		if (inUser)
+			self.userUsername = mutableString;	
+	} else if ([elementName isEqual:@"avatar-url"]) {
+		if (inUser)
+			self.userAvatarUrl = mutableString;		
+	} else if ([elementName isEqual:@"tags"]) {
+		inTags = NO;
 	} else if ([elementName isEqual:@"tag"]) {
-		inTag = FALSE;
-	}
+		if (inTags) {
+			if (tags)
+				self.tags = [tags stringByAppendingFormat:@", %@", mutableString];
+			else
+				self.tags = mutableString;
+		}
+	} else if ([elementName isEqual:@"stats"]) {
+		inStats = NO;
+	} else if ([elementName isEqual:@"current-viewers"]) {
+		if (inStats)
+			self.numCurrentViewers = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"posts"]) {
+		if (inStats)
+			self.numPosts = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"comments"]) {
+		if (inStats)
+			self.numComments = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"likes"]) {
+		if (inStats)
+			self.numLikes = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"views"]) {
+		if (inStats)
+			self.numViews = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"starting-at"]) {
+		self.startingAt = [self parseTimestamp:mutableString];
+	} else if ([elementName isEqual:@"updated-at"]) {
+		self.blogcastUpdatedAt = [self parseTimestamp:mutableString];
+	} 
 	//MVR - release string here to handle potential memory leak
     self.mutableString = nil;
 }
@@ -174,6 +263,23 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Error parsing blogcasts: %@", [parseError localizedDescription]);
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (NSDate *)parseTimestamp: (NSString *)timestamp {
+	NSString *string;
+	NSDate *date;
+	
+	//MVR - parse timestamp based on whether it is in UTC format or not
+	if ([timestamp length] == 20)
+		string = [NSString stringWithFormat:@"%@ %@ +0000", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)]];
+	else
+		string = [NSString stringWithFormat:@"%@ %@ %@%@", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)], [timestamp substringWithRange:NSMakeRange(19, 3)], [timestamp substringWithRange:NSMakeRange(23, 2)]];
+	date = [[[NSDate alloc] initWithString:string] autorelease];
+
+	return date;
 }
 
 @end

@@ -2,13 +2,14 @@
 //  User.m
 //  Blogcastr
 //
-//  Created by Matthew Rushton on 5/15/11.
+//  Created by Matthew Rushton on 7/11/11.
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
 #import "User.h"
 
 #import "Blogcast.h"
+#import "Comment.h"
 #import "Post.h"
 #import "Settings.h"
 
@@ -38,7 +39,9 @@
 @dynamic fullName;
 @dynamic username;
 @dynamic blogcasts;
+@dynamic subscriptions;
 @dynamic settings;
+@dynamic subscribers;
 @dynamic posts;
 @dynamic comments;
 

@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Blogcast.h"
 
 
 @interface CommentsParser : NSObject <NSXMLParserDelegate> {
 	NSData *data;
 	NSManagedObjectContext *managedObjectContext;
+	Blogcast *blogcast;
 	//MVR - xml parser
     NSMutableString *mutableString;
 	NSNumber *commentId;
@@ -29,6 +31,7 @@
 
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) Blogcast *blogcast;
 @property (nonatomic, retain) NSString *mutableString;
 @property (nonatomic, retain) NSNumber *commentId;
 @property (nonatomic, retain) NSString *commentText;
@@ -40,7 +43,7 @@
 @property (nonatomic, retain) NSDate *commentCreatedAt;
 @property (nonatomic, retain) NSMutableArray *comments;
 
-- (CommentsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext;
 - (BOOL)parse;
+- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

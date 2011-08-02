@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "User.h"
 
 
 @interface BlogcastsParser : NSObject <NSXMLParserDelegate> {
@@ -16,11 +17,23 @@
 	//MVR - xml parser
     NSMutableString *mutableString;
 	NSNumber *blogcastId;
-	NSString *blogcastTitle;
-	NSString *blogcastDescription;
-	NSDate *blogcastStartingAt;
+	NSString *title;
+	NSString *theDescription;
+	User *user;
+	NSNumber *userId;
+	NSString *userUsername;
+	NSString *userAvatarUrl;
+	NSString *tags;
+	NSNumber *numCurrentViewers;
+	NSNumber *numPosts;
+	NSNumber *numComments;
+	NSNumber *numLikes;
+	NSNumber *numViews;
+	NSDate *startingAt;
 	NSDate *blogcastUpdatedAt;
-	BOOL inTag;
+	BOOL inUser;
+	BOOL inTags;
+	BOOL inStats;
 	NSMutableArray *blogcasts;
 }
 
@@ -28,13 +41,24 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSString *mutableString;
 @property (nonatomic, retain) NSNumber *blogcastId;
-@property (nonatomic, retain) NSString *blogcastTitle;
-@property (nonatomic, retain) NSString *blogcastDescription;
-@property (nonatomic, retain) NSDate *blogcastStartingAt;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *theDescription;
+@property (nonatomic, retain) User *user;
+@property (nonatomic, retain) NSNumber *userId;
+@property (nonatomic, retain) NSString *userUsername;
+@property (nonatomic, retain) NSString *userAvatarUrl;
+@property (nonatomic, retain) NSString *tags;
+@property (nonatomic, retain) NSNumber *numCurrentViewers;
+@property (nonatomic, retain) NSNumber *numPosts;
+@property (nonatomic, retain) NSNumber *numComments;
+@property (nonatomic, retain) NSNumber *numLikes;
+@property (nonatomic, retain) NSNumber *numViews;
+@property (nonatomic, retain) NSDate *startingAt;
 @property (nonatomic, retain) NSDate *blogcastUpdatedAt;
 @property (nonatomic, retain) NSMutableArray *blogcasts;
 
 - (BlogcastsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext;
 - (BOOL)parse;
+- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

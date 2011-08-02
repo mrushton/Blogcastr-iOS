@@ -8,6 +8,7 @@
 
 #import <Three20/Three20.h>
 #import "CommentsController.h"
+#import "CommentController.h"
 #import "NewTextPostController.h"
 #import "NewImagePostController.h"
 #import "BlogcastrTableViewCell.h"
@@ -84,11 +85,13 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - now fetch blogcasts
 	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
+	//AS DESIGNED: we know the comment view will not be visible when loaded so set the badge value here
+	[self setBadgeVal:[blogcast.commentsBadgeVal integerValue]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	isTableViewRendered = YES;
-	self.tabBarItem.badgeValue = nil;
+	[self setBadgeVal:0];
     [super viewWillAppear:animated];
 }
 
@@ -189,6 +192,7 @@ static const NSInteger kCommentsRequestCount = 20;
 				activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
 				[activityIndicatorView startAnimating];
 				[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
+				[activityIndicatorView release];
 			}
 		}
 	} else {
@@ -213,6 +217,7 @@ static const NSInteger kCommentsRequestCount = 20;
 			textView.numberOfLines = 0;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
+			[textView release];
 		} else {
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
@@ -285,14 +290,19 @@ static const NSInteger kCommentsRequestCount = 20;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-    */
+	CommentStreamCell *streamCell;
+	Comment *comment;
+	CommentController *commentController;
+	
+	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	comment = streamCell.comment;
+	commentController = [[CommentController alloc] initWithNibName:nil bundle:nil];
+	commentController.managedObjectContext = managedObjectContext;
+	commentController.session = session;
+	commentController.comment = comment;
+	commentController.title = @"Comment";
+	[tabToolbarController.navigationController pushViewController:commentController animated:YES];
+	[commentController release];
 }
 
 
@@ -493,11 +503,10 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - if we aren't in sync queue up the message to be parsed after we are
 	if (isSynced) {
 		if ([self addMessage:message]) {
-			if (![self save]) {
+			if (![self save])
 				NSLog(@"Error saving comment");
-				[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comment."];
-			}
-			[self updateBadge:1];
+			if (self.view.window == nil)
+				[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + 1];
 		} else {
 			NSLog(@"Could not add comment to stream");
 		}
@@ -523,7 +532,10 @@ static const NSInteger kCommentsRequestCount = 20;
 		return;
 	}
 	//MVR - parse xml
-	parser = [[CommentsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[CommentsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update comments response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the comments."];
@@ -582,13 +594,13 @@ static const NSInteger kCommentsRequestCount = 20;
 		}
 		[self.commentMessages removeAllObjects];
 	}
-	if (![self save]) {
+	[parser release];
+	if (![self save])
 		NSLog(@"Error saving comments");
-		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comments."];
-	}
 	isSynced = YES;
 	//MVR - update the badge value
-	[self updateBadge:numAdded];
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updateCommentsFailed:(ASIHTTPRequest *)request {
@@ -613,7 +625,10 @@ static const NSInteger kCommentsRequestCount = 20;
 		return;
 	}
 	//MVR - parse response
-	parser = [[CommentsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[CommentsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer comments response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your comments."];
@@ -641,8 +656,12 @@ static const NSInteger kCommentsRequestCount = 20;
 		//MVR - delete the scroll cell
 		[self.managedObjectContext deleteObject:streamCell];
 	}
-	[self save];
 	[parser release];
+	if (![self save])
+		NSLog(@"Error saving comments");
+	//MVR - update the badge value
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updateCommentsStreamCellFailed:(ASIHTTPRequest *)request {
@@ -664,7 +683,10 @@ static const NSInteger kCommentsRequestCount = 20;
 		return;
 	}
 	//MVR - parse response
-	parser = [[CommentsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[CommentsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer comments response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your comments."];
@@ -693,8 +715,12 @@ static const NSInteger kCommentsRequestCount = 20;
 		comment = [parser.comments objectAtIndex:kCommentsRequestCount - 1];
 		self.minId = comment.id;
 	}
-	[self save];
 	[parser release];
+	if (![self save])
+		NSLog(@"Error saving comments");
+	//MVR - update the badge value
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
@@ -1043,6 +1069,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	[request setPredicate:predicate];
 	//MVR - execute the fetch
 	array = [managedObjectContext executeFetchRequest:request error:&error];
+	[request release];
 	//MVR - create the comment if it doesn't exist
 	if ([array count] > 0) {
 		comment = [array objectAtIndex:0];
@@ -1053,6 +1080,7 @@ static const NSInteger kCommentsRequestCount = 20;
 		//MVR - parsing done create the post
 		comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 		comment.id = [NSNumber numberWithInteger:[commentId integerValue]];
+		comment.blogcast = blogcast;
 		//MVR - convert date string
 		string = [NSString stringWithFormat:@"%@ %@ %@%@", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)], [commentCreatedAt substringWithRange:NSMakeRange(19, 3)], [commentCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 		date = [[NSDate alloc] initWithString:string];
@@ -1067,6 +1095,7 @@ static const NSInteger kCommentsRequestCount = 20;
 		[request setPredicate:predicate];
 		//MVR - execute the fetch
 		array = [managedObjectContext executeFetchRequest:request error:&error];
+		[request release];
 		//MVR - create user if they don't exist
 		if ([array count] > 0) {
 			user = [array objectAtIndex:0];
@@ -1114,27 +1143,24 @@ static const NSInteger kCommentsRequestCount = 20;
 	return NO;
 }
 
-- (void)updateBadge:(NSInteger)numAdded {
-	//MVR - update the badge value
-	if (numAdded > 0 && self.view.window == nil) {
-		if (self.tabBarItem.badgeValue) {
-			NSInteger badgeValue;
-			
-			badgeValue = [self.tabBarItem.badgeValue integerValue];
-			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", badgeValue + numAdded];
-		} else {
-			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", numAdded];
-		}
-	}
+- (void)setBadgeVal:(NSInteger)val {
+	//MVR - update and save the badge value
+	blogcast.commentsBadgeVal = [NSNumber numberWithInteger:val];
+	if (![self save])
+		NSLog(@"Error saving comments badge value");
+	if (val)
+		self.tabBarItem.badgeValue = [blogcast.commentsBadgeVal stringValue];
+	else
+		self.tabBarItem.badgeValue = nil;
 }
 
 - (TTStyledTextLabel *)timestampLabel {
 	TTStyledTextLabel *timestampLabel;
-	
-	timestampLabel = [[TTStyledTextLabel alloc] init];
+
+	timestampLabel = [[[TTStyledTextLabel alloc] init] autorelease];
 	timestampLabel.contentInset = UIEdgeInsetsMake(0.0, 3.0, 0.0, 0.0);
 	timestampLabel.textAlignment = UITextAlignmentRight;
-	timestampLabel.font = [UIFont systemFontOfSize:10.0];
+	timestampLabel.font = [UIFont systemFontOfSize:9.0];
 	timestampLabel.tag = TIMESTAMP_LABEL_TAG;
 	
 	return timestampLabel;

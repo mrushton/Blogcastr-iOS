@@ -12,9 +12,10 @@
 #import "Blogcast.h"
 #import "TextViewWithPlaceholder.h"
 #import "MBProgressHUD.h"
+#import "ASIHTTPRequest.h"
 
 
-@interface NewBlogcastController : UITableViewController {
+@interface NewBlogcastController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	UITextField *titleTextField;
@@ -22,7 +23,10 @@
 	TextViewWithPlaceholder *descriptionTextView;
 	TextViewWithPlaceholder *tagsTextView;
 	MBProgressHUD *_progressHud;
+	UIActionSheet *_cancelActionSheet;
+	UIActionSheet *_cancelRequestActionSheet;
 	UIAlertView *_alertView;
+	ASIHTTPRequest *request;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -32,7 +36,10 @@
 @property (nonatomic, retain) TextViewWithPlaceholder *descriptionTextView;
 @property (nonatomic, retain) TextViewWithPlaceholder *tagsTextView;
 @property (nonatomic, readonly) MBProgressHUD *progressHud;
+@property (nonatomic, readonly) UIActionSheet *cancelActionSheet;
+@property (nonatomic, readonly) UIActionSheet *cancelRequestActionSheet;
 @property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, retain) ASIHTTPRequest *request;
 
 - (NSURL *)newBlogcastUrl;
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;

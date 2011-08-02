@@ -21,7 +21,6 @@
 	XMPPReconnect *xmppReconnect;
 	BOOL didAuthenticate;
 	BOOL wasToldToDisconnect;
-	BOOL didErrorAlert;
 	UIAlertView *_alertView;
 }
 
@@ -29,7 +28,7 @@
 @property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) XMPPStream *xmppStream;
 @property (nonatomic, retain) XMPPReconnect *xmppReconnect;
-@property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, retain, readonly) UIAlertView *alertView;
 
 - (BOOL)connect;
 - (void)disconnect;

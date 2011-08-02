@@ -1,0 +1,6 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m: In function '-[AppDelegate_Shared dealloc]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:162: error: '_operationQueue' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:162: error: (Each undeclared identifier is reported only once
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:162: error: for each function it appears in.)
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m: In function '-[AppDelegate_Shared operationQueue]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Shared/AppDelegate_Shared.m:195: error: '_operationQueue' undeclared (first use in this function)

@@ -163,9 +163,6 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Session
-
 - (Session *)session {
 	NSFetchRequest *fetchRequest;
 	NSEntityDescription *entityDescription;
@@ -179,6 +176,7 @@
 	entityDescription = [NSEntityDescription entityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 	[fetchRequest setEntity:entityDescription];
 	array = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	[fetchRequest release];
 	//MVR - if array is nil there was an error
 	if (!array) {
 		NSLog(@"Error fetching Session: %@", [error localizedDescription]);

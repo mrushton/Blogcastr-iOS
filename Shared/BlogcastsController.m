@@ -11,6 +11,7 @@
 #import "DashboardController.h"
 #import "PostsController.h"
 #import "CommentsController.h"
+#import "InfoController.h"
 #import "BlogcastrTableViewCell.h"
 #import "BlogcastsParser.h"
 #import "Blogcast.h"
@@ -35,6 +36,16 @@
 static const CGFloat kRefreshDeltaY = -65.0f;
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const NSInteger kBlogcastsRequestCount = 20;
+
+- (id)initWithStyle:(UITableViewStyle)style {
+	self = [super initWithStyle:style];
+	if (self) {
+		//MVR - created blogcast notification
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createdBlogcast) name:@"createdBlogcast" object:nil];
+	}
+	
+	return self;
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -78,7 +89,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	
     [super viewWillAppear:animated];
 	//MVR - update blogcasts if it's the first time or been longer than a day
-	if (!user.blogcastsUpdatedAt || [user.blogcastsUpdatedAt timeIntervalSinceNow] < -86400.0) {
+	if ((!user.blogcastsUpdatedAt || [user.blogcastsUpdatedAt timeIntervalSinceNow] < -86400.0) && isUpdating == NO) {
 		isUpdating = YES;
 		[self updateBlogcasts];
 /*		[dragRefreshView setStatus:TTTableHeaderDragRefreshLoading];
@@ -87,23 +98,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		self.tableView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
 		[UIView commitAnimations];*/
 	}
-}
-
-- (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count {
-	NSString *string;
-	NSURL *url;
-	
-#ifdef DEVEL
-	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-#else //DEVEL
-	string = [[NSString stringWithFormat:@"http://blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-#endif //DEVEL
-	//MVR - add a max id if set
-	if (maxId)
-		string = [string stringByAppendingString:[[NSString stringWithFormat:@"&max_id=%d", maxId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	url = [NSURL URLWithString:string];
-	
-	return url;
 }
 
 - (void)updateBlogcasts {
@@ -122,8 +116,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	int statusCode;
 	NSInteger numAdded = 0;
 	BlogcastsParser *parser;
-	Blogcast *blogcast;
-	
+
+	isUpdating = NO;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update blogcasts received status code %i", statusCode);
@@ -139,10 +133,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		return;
 	}
 	//MVR - add blogcasts above max id
-	for (int i = 0; i < parser.blogcasts.count; i++) {
-		Blogcast *blogcast;
-		
-		blogcast = [parser.blogcasts objectAtIndex:i];
+	for (Blogcast *blogcast in parser.blogcasts) {
 		if ([blogcast.id intValue] > [self.maxId intValue]) {
 			BlogcastStreamCell *streamCell;
 			
@@ -159,11 +150,15 @@ static const NSInteger kBlogcastsRequestCount = 20;
 			user.blogcastsAtEnd = [NSNumber numberWithBool:YES];
 			[infiniteScrollView setLoading:NO];
 		} else {
+			Blogcast *blogcast;
+
 			//MVR - update min id if there may be more to load
 			blogcast = [parser.blogcasts objectAtIndex:numAdded - 1];
 			self.minId = blogcast.id;
 		}
 	} else if (numAdded == kBlogcastsRequestCount) {
+		Blogcast *blogcast;
+
 		blogcast = [parser.blogcasts objectAtIndex:kBlogcastsRequestCount - 1];
 		//MVR - add one to make sure there is actually a gap
 		if (blogcast.id > self.maxId + 1) {
@@ -174,12 +169,13 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	}
 	//MVR - update max id
 	if (numAdded > 0) {
+		Blogcast *blogcast;
+
 		blogcast = [parser.blogcasts objectAtIndex:0];
 		self.maxId = blogcast.id;
 	}
 	user.blogcastsUpdatedAt = [NSDate date];
 	[dragRefreshView setUpdateDate:user.blogcastsUpdatedAt];
-	isUpdating = NO;
 	if (isRefreshing) {
 		[dragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
 		[UIView beginAnimations:nil context:NULL];
@@ -223,7 +219,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	int statusCode;
 	NSInteger numAdded = 0;
 	BlogcastsParser *parser;
-	Blogcast *blogcast;
 	
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
@@ -240,11 +235,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		return;
 	}
 	//MVR - add blogcasts above max id
-	for (int i = 0; i < parser.blogcasts.count; i++) {
-		Blogcast *blogcast;
-		
-		blogcast = [parser.blogcasts objectAtIndex:i];
-		if ([blogcast.id intValue] < [self.minId intValue]) {
+	for (Blogcast *blogcast in parser.blogcasts) {
+		if ([blogcast.id integerValue] < [self.minId integerValue]) {
 			BlogcastStreamCell *streamCell;
 			
 			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
@@ -498,6 +490,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	DashboardController *dashboardController;
 	PostsController *postsController;
 	CommentsController *commentsController;
+	InfoController *infoController;
 	XMPPRoom *xmppRoom;
 	NSString *roomName;
 	NSString *nickname;
@@ -515,6 +508,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	dashboardController = [[DashboardController alloc] init];
 	dashboardController.session = session;
 	dashboardController.blogcast = blogcast;
+	dashboardController.xmppStream = xmppStream;
+	[xmppStream addDelegate:dashboardController];
 	dashboardController.title = blogcast.title;
 	//MVR - set up MUC room
 #ifdef DEVEL
@@ -522,7 +517,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #else //DEVEL
 	roomName = [NSString stringWithFormat:@"blogcast.%d@conference.blogcastr.com", [blogcast.id intValue]];
 #endif //DEVEL
-	nickname = [NSString stringWithFormat:@"%@", xmppStream.myJID.resource]; 
+	//MVR - add a timestamp to the nickname to make it unique and work around reconnect issues
+	nickname = [NSString stringWithFormat:@"%@-%lf", xmppStream.myJID.resource, [[NSDate date] timeIntervalSince1970]];
 	xmppRoom = [[XMPPRoom alloc] initWithStream:xmppStream roomName:roomName nickName:nickname];
 	xmppRoom.delegate = dashboardController;
 	dashboardController.xmppRoom = xmppRoom;
@@ -548,9 +544,15 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	//MVR - XMPP notifications
 	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(joinedRoom) name:@"joinedRoom" object:dashboardController];
 	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(leftRoom) name:@"leftRoom" object:dashboardController];
-	dashboardController.viewControllers = [NSArray arrayWithObjects:postsController, commentsController, nil];
+	infoController = [[InfoController alloc] initWithStyle:UITableViewStyleGrouped];
+	infoController.managedObjectContext = self.managedObjectContext;
+	infoController.session = session;
+	infoController.blogcast = blogcast;
+	infoController.tabBarItem.title = @"Info";
+	dashboardController.viewControllers = [NSArray arrayWithObjects:postsController, commentsController, infoController, nil];
 	[postsController release];
 	[commentsController release];
+	[infoController release];
 	[tabToolbarController.navigationController pushViewController:dashboardController animated:YES];
 	//MVR - connect to MUC room
 	[dashboardController connect];
@@ -720,6 +722,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	[_maxId release];
 	[_minId release];
 	[_alertView release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
 
@@ -928,7 +931,37 @@ static const NSInteger kBlogcastsRequestCount = 20;
 }
 
 #pragma mark -
+#pragma mark Actions
+
+- (void)createdBlogcast {
+	NSLog(@"MVR - created BLOGCAST");
+	if (isUpdating == NO) {
+		NSLog(@"MVR - created BLOGCAST fa real");
+
+		isUpdating = YES;
+		[self updateBlogcasts];
+	}
+}
+
+#pragma mark -
 #pragma mark Helpers
+
+- (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count {
+	NSString *string;
+	NSURL *url;
+	
+#ifdef DEVEL
+	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#else //DEVEL
+	string = [[NSString stringWithFormat:@"http://blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#endif //DEVEL
+	//MVR - add a max id if set
+	if (maxId)
+		string = [string stringByAppendingString:[[NSString stringWithFormat:@"&max_id=%d", maxId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
 
 - (NSString *)avatarUrlForSize:(NSString *)size {
 	NSString *avatarUrl;
@@ -939,7 +972,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #else //DEVEL
 	avatarUrl = [[user.avatarUrl copy] autorelease];
 #endif //DEVEL
-	range = [avatarUrl rangeOfString:@"small"];
+	range = [avatarUrl rangeOfString:@"original"];
 	if (range.location != NSNotFound) {
 		return [avatarUrl stringByReplacingCharactersInRange:range withString:size];
 	} else {

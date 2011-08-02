@@ -30,6 +30,5 @@
 @property (nonatomic, retain) XMPPRoom *xmppRoom;
 
 - (BOOL)connect;
-- (void)disconnect;
 
 @end

@@ -10,6 +10,7 @@
 #import "PostsController.h"
 #import "NewTextPostController.h"
 #import "NewImagePostController.h"
+#import "PostController.h"
 #import "BlogcastrTableViewCell.h"
 #import "BlogcastrStyleSheet.h"
 #import "PostsParser.h"
@@ -126,6 +127,12 @@ static const NSInteger kPostsRequestCount = 20;
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[self setBadgeVal:0];
+	[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:animated];
+	[super viewWillAppear:animated];
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -161,6 +168,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[blogcast release];
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
+	[tableView release];
 	if (postsRequest)
 		[postsRequest setDelegate:nil];
 	[_postMessages release];
@@ -336,6 +344,7 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.numberOfLines = 0;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
+			[textView release];
 		} else {
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
@@ -357,12 +366,14 @@ static const NSInteger kPostsRequestCount = 20;
 		TTImageView *imageView;
 		CGFloat imageWidth;
 		CGFloat imageHeight;
-		
+		NSString *imagePostUrl;
+
 		cell = (BlogcastrTableViewCell *)[theTableView dequeueReusableCellWithIdentifier:@"ImagePost"];
 		//MVR - if cell doesn't exist create it
-		if (!cell) {	
+		if (!cell) {
 			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ImagePost"] autorelease];
 			imageView = [[TTImageView alloc] init];
+			imageView.backgroundColor = [UIColor clearColor];
 			imageView.tag = IMAGE_VIEW_TAG;
 			[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
 			[imageView release];
@@ -383,6 +394,7 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.numberOfLines = 0;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
+			[textView release];
 		} else {
 			imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
@@ -390,7 +402,11 @@ static const NSInteger kPostsRequestCount = 20;
 			textView = (UILabel *)[cell viewWithTag:TEXT_VIEW_TAG];
 		}
 		//MVR - image view
-		imageView.urlPath = [self imagePostUrlForPost:post size:@"default"];
+		imagePostUrl = [self imagePostUrlForPost:post size:@"default"];
+		//MVR - unset the image unless it's the same
+		if (![imageView.urlPath isEqualToString:imagePostUrl])
+			[imageView unsetImage];
+		imageView.urlPath = imagePostUrl;
 		if ([post.imageWidth intValue] > [post.imageHeight intValue]) {
 			if ([post.imageWidth intValue] > 80.0) {
 				imageWidth = 80.0;
@@ -448,6 +464,7 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.numberOfLines = 0;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
+			[textView release];
 		} else {
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
@@ -518,6 +535,24 @@ static const NSInteger kPostsRequestCount = 20;
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	PostStreamCell *streamCell;
+	Post *post;
+	PostController *postController;
+	
+	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	post = streamCell.post;
+	postController = [[PostController alloc] initWithNibName:nil bundle:nil];
+	postController.managedObjectContext = managedObjectContext;
+	postController.session = session;
+	postController.post = post;
+	if ([post.type isEqual:@"TextPost"])
+		postController.title = @"Text Post";
+	else if ([post.type isEqual:@"ImagePost"])
+		postController.title = @"Image Post";
+	else if ([post.type isEqual:@"CommentPost"])
+		postController.title = @"Comment Post";
+	[tabToolbarController.navigationController pushViewController:postController animated:YES];
+	[postController release];
 }
 
 #pragma mark -
@@ -645,11 +680,10 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - if we aren't in sync queue up the message to be parsed after we are
 	if (isSynced) {
 		if ([self addMessage:message]) {
-			if (![self save]) {
+			if (![self save])
 				NSLog(@"Error saving comment");
-				[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the comment."];
-			}
-			[self updateBadge:1];
+			if (self.view.window == nil)
+				[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + 1];
 		} else {
 			NSLog(@"Could not add post to stream");
 		}
@@ -675,7 +709,10 @@ static const NSInteger kPostsRequestCount = 20;
 		return;
 	}
 	//MVR - parse xml
-	parser = [[PostsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[PostsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update posts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the posts."];
@@ -723,6 +760,7 @@ static const NSInteger kPostsRequestCount = 20;
 		post = [parser.posts objectAtIndex:0];
 		self.maxId = post.id;
 	}
+	[parser release];
 	self.postsRequest = nil;
 	//MVR - if the array hasn't been allocated yet there is no need to allocate and check it
 	if (_postMessages) {
@@ -734,13 +772,12 @@ static const NSInteger kPostsRequestCount = 20;
 		}
 		[self.postMessages removeAllObjects];
 	}
-	if (![self save]) {
+	if (![self save])
 		NSLog(@"Error saving posts");
-		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save the posts."];
-	}
 	isSynced = YES;
 	//MVR - update the badge value
-	[self updateBadge:numAdded];
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updatePostsFailed:(ASIHTTPRequest *)request {
@@ -765,7 +802,10 @@ static const NSInteger kPostsRequestCount = 20;
 		return;
 	}
 	//MVR - parse response
-	parser = [[PostsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[PostsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer posts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your posts."];
@@ -793,8 +833,12 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - delete the scroll cell
 		[self.managedObjectContext deleteObject:streamCell];
 	}
-	[self save];
 	[parser release];
+	if (![self save])
+		NSLog(@"Error saving posts");
+	//MVR - update the badge value
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updatePostsStreamCellFailed:(ASIHTTPRequest *)request {
@@ -816,7 +860,10 @@ static const NSInteger kPostsRequestCount = 20;
 		return;
 	}
 	//MVR - parse response
-	parser = [[PostsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[PostsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer posts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your posts."];
@@ -845,8 +892,12 @@ static const NSInteger kPostsRequestCount = 20;
 		post = [parser.posts objectAtIndex:kPostsRequestCount - 1];
 		self.minId = post.id;
 	}
-	[self save];
 	[parser release];
+	if (![self save])
+		NSLog(@"Error saving posts");
+	//MVR - update the badge value
+	if (self.view.window == nil)
+		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
@@ -1034,6 +1085,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[newTextPostController release];
 	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
 	[self.tabToolbarController presentModalViewController:theNavigationController animated:YES];
+	[theNavigationController release];
 }
 
 - (void)newImagePost:(id)object {
@@ -1048,6 +1100,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[newImagePostController release];
 	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
 	[self.tabToolbarController presentModalViewController:theNavigationController animated:YES];
+	[theNavigationController release];
 }
 
 - (void)timerExpired:(Timer *)timer {
@@ -1314,6 +1367,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[request setPredicate:predicate];
 	//MVR - execute the fetch
 	array = [managedObjectContext executeFetchRequest:request error:&error];
+	[request release];
 	//MVR - create post user if they don't exist
 	if ([array count] > 0) {
 		postUser = [array objectAtIndex:0];
@@ -1328,6 +1382,7 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - parsing done create the post
 	post = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:managedObjectContext];
 	post.id = [NSNumber numberWithInteger:[postId integerValue]];
+	post.blogcast = blogcast;
 	post.type = postType;
 	//MVR - convert date string
 	string = [NSString stringWithFormat:@"%@ %@ %@%@", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)], [postCreatedAt substringWithRange:NSMakeRange(19, 3)], [postCreatedAt substringWithRange:NSMakeRange(23, 2)]];
@@ -1355,6 +1410,7 @@ static const NSInteger kPostsRequestCount = 20;
 		[request setPredicate:predicate];
 		//MVR - execute the fetch
 		array = [managedObjectContext executeFetchRequest:request error:&error];
+		[request release];
 		//MVR - create user if they don't exist
 		if ([array count] > 0) {
 			commentUser = [array objectAtIndex:0];
@@ -1372,7 +1428,6 @@ static const NSInteger kPostsRequestCount = 20;
 			}
 			commentUser.avatarUrl = commentUserAvatarUrl;
 		}
-		[request release];
 		//MVR - find comment if it exists
 		request = [[NSFetchRequest alloc] init];
 		entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:managedObjectContext];
@@ -1381,12 +1436,14 @@ static const NSInteger kPostsRequestCount = 20;
 		[request setPredicate:predicate];
 		//MVR - execute the fetch
 		array = [managedObjectContext executeFetchRequest:request error:&error];
+		[request release];
 		//MVR - create comment if it doesn't exist
 		if ([array count] > 0) {
 			comment = [array objectAtIndex:0];
 		} else {
 			comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 			comment.id = [NSNumber numberWithInteger:[commentId integerValue]];
+			comment.blogcast = blogcast;
 			//AS DESIGNED: use the post equivalent variable
 			comment.text = postText;
 			comment.user = commentUser;
@@ -1395,7 +1452,6 @@ static const NSInteger kPostsRequestCount = 20;
 			comment.createdAt = date;
 			[date release];
 		}
-		[request release];
 		post.comment = comment;
 	}
 
@@ -1425,27 +1481,24 @@ static const NSInteger kPostsRequestCount = 20;
 	return YES;
 }
 
-- (void)updateBadge:(NSInteger)numAdded {
-	//MVR - update the badge value
-	if (numAdded > 0 && self.view.window == nil) {
-		if (self.tabBarItem.badgeValue) {
-			NSInteger badgeValue;
-			
-			badgeValue = [self.tabBarItem.badgeValue integerValue];
-			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", badgeValue + numAdded];
-		} else {
-			self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", numAdded];
-		}
-	}
+- (void)setBadgeVal:(NSInteger)val {
+	//MVR - update and save the badge value
+	blogcast.postsBadgeVal = [NSNumber numberWithInteger:val];
+	if (![self save])
+		NSLog(@"Error saving posts badge value");
+	if (val)
+		self.tabBarItem.badgeValue = [blogcast.postsBadgeVal stringValue];
+	else
+		self.tabBarItem.badgeValue = nil;
 }
 
 - (TTStyledTextLabel *)timestampLabel {
 	TTStyledTextLabel *timestampLabel;
 	
-	timestampLabel = [[TTStyledTextLabel alloc] init];
+	timestampLabel = [[[TTStyledTextLabel alloc] init] autorelease];
 	timestampLabel.contentInset = UIEdgeInsetsMake(0.0, 3.0, 0.0, 0.0);
 	timestampLabel.textAlignment = UITextAlignmentRight;
-	timestampLabel.font = [UIFont systemFontOfSize:10.0];
+	timestampLabel.font = [UIFont systemFontOfSize:9.0];
 	timestampLabel.tag = TIMESTAMP_LABEL_TAG;
 	
 	return timestampLabel;

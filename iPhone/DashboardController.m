@@ -6,7 +6,9 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <Three20/Three20.h>
 #import "DashboardController.h"
+#import "EditBlogcastController.h"
 
 
 @implementation DashboardController
@@ -82,10 +84,19 @@
 	[managedObjectContext release];
 	[session release];
 	[blogcast release];
-	//MVR - leave room when it gets dealloced
-	[xmppRoom release];
+	[xmppStream removeDelegate:self];
 	[xmppStream release];
+	//MVR - leaves room when it gets dealloced
+	[xmppRoom release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark XMPPStream delegate
+
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+	//MVR - reconnect every time we authenticate
+	[self connect];
 }
 
 #pragma mark -
@@ -103,17 +114,17 @@
 #pragma mark Actions
 
 - (void)editBlogcast {
-/*	UINavigationController *theNavigationController;
-	NewBlogcastController *newBlogcastController;
+	UINavigationController *theNavigationController;
+	EditBlogcastController *editBlogcastController;
 	
-	newBlogcastController = [[NewBlogcastController alloc] initWithStyle:UITableViewStyleGrouped];
-	newBlogcastController.managedObjectContext = managedObjectContext;
-	newBlogcastController.session = session;
-	theNavigationController = [[UINavigationController alloc] initWithRootViewController:newBlogcastController];
-	[newBlogcastController release];
+	editBlogcastController = [[EditBlogcastController alloc] initWithStyle:UITableViewStyleGrouped];
+	editBlogcastController.managedObjectContext = managedObjectContext;
+	editBlogcastController.session = session;
+	editBlogcastController.blogcast = blogcast;
+	theNavigationController = [[UINavigationController alloc] initWithRootViewController:editBlogcastController];
+	[editBlogcastController release];
 	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
 	[self presentModalViewController:theNavigationController animated:YES];
-*/
 }
 
 #pragma mark -
@@ -121,6 +132,7 @@
 
 - (BOOL)connect {
 	[xmppRoom createOrJoinRoom];
+
 	return YES;
 }
 

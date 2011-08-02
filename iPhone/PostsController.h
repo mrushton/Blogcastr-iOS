@@ -59,9 +59,9 @@
 @property (nonatomic, retain) ASIHTTPRequest *postsRequest;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
-@property (nonatomic, readonly) UIAlertView *alertView;
 @property (nonatomic, retain) Timer *fastTimer;
 @property (nonatomic, retain) Timer *slowTimer;
+@property (nonatomic, readonly) UIAlertView *alertView;
 
 - (void)updatePosts;
 - (void)updatePostsStreamCell:(PostStreamCell *)streamCell;
@@ -72,7 +72,7 @@
 - (BOOL)isStreamCellRequested:(PostStreamCell *)streamCell;
 - (Post *)parseMessage:(XMPPMessage *)message;
 - (BOOL)addMessage:(XMPPMessage *)message;
-- (void)updateBadge:(NSInteger)numAdded;
+- (void)setBadgeVal:(NSInteger)val;
 - (TTStyledTextLabel *)timestampLabel;
 - (void)timerExpired:(Timer *)timer;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;

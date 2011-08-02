@@ -16,6 +16,7 @@
 
 @synthesize data;
 @synthesize managedObjectContext;
+@synthesize blogcast;
 @synthesize mutableString;
 @synthesize commentId;
 @synthesize commentText;
@@ -29,13 +30,6 @@
 
 #pragma mark -
 #pragma mark Methods
-
-- (CommentsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext {
-	self.data = theData;
-	self.managedObjectContext = theManagedObjectContext;
-	
-	return self;
-}
 
 - (BOOL)parse {
 	NSXMLParser *parser;
@@ -58,6 +52,7 @@
 - (void)dealloc {
 	[data release];
 	[managedObjectContext release];
+	[blogcast release];
     [mutableString release];
 	[commentId release];
 	[commentText release];
@@ -70,6 +65,7 @@
 	[comments release];
 	[super dealloc];
 }
+
 #pragma mark -
 #pragma mark NSXMLParserDelegate methods
 
@@ -86,13 +82,13 @@
 	self.userUrl = nil;
 	self.userAvatarUrl = nil;
 	self.commentCreatedAt = nil;
-	inUser = FALSE;
+	inUser = NO;
 	self.comments = [NSMutableArray array];
 }
 
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
 	if ([elementName isEqual:@"user"])
-		inUser = TRUE;
+		inUser = YES;
 	//MVR - need to reset string here to handle white space
     self.mutableString = nil;
 }
@@ -122,6 +118,7 @@
 		} else {
 			comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 			comment.id = commentId;
+			comment.blogcast = blogcast;
 			comment.text = commentText;
 			comment.createdAt = commentCreatedAt;			
 			//MVR - find comment user if they exist
@@ -177,16 +174,9 @@
 	} else if ([elementName isEqual:@"text"]) {
 		self.commentText = mutableString;
 	} else if ([elementName isEqual:@"created-at"]) {
-		NSString *string;
-		NSDate *date;
-		
-		//MVR - convert date string
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [mutableString substringToIndex:10], [mutableString substringWithRange:NSMakeRange(11, 8)], [mutableString substringWithRange:NSMakeRange(19, 3)], [mutableString substringWithRange:NSMakeRange(23, 2)]];
-		date = [[NSDate alloc] initWithString:string];
-		self.commentCreatedAt = date;
-		[date release];
+		self.commentCreatedAt = [self parseTimestamp:mutableString];
 	} else if ([elementName isEqual:@"user"]) {
-		inUser = FALSE;
+		inUser = NO;
 	}
 	//MVR - release string here to handle potential memory leak
     self.mutableString = nil;
@@ -205,6 +195,23 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Error parsing comments: %@", [parseError localizedDescription]);
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (NSDate *)parseTimestamp: (NSString *)timestamp {
+	NSString *string;
+	NSDate *date;
+	
+	//MVR - parse timestamp based on whether it is in UTC format or not
+	if ([timestamp length] == 20)
+		string = [NSString stringWithFormat:@"%@ %@ +0000", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)]];
+	else
+		string = [NSString stringWithFormat:@"%@ %@ %@%@", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)], [timestamp substringWithRange:NSMakeRange(19, 3)], [timestamp substringWithRange:NSMakeRange(23, 2)]];
+	date = [[[NSDate alloc] initWithString:string] autorelease];
+	
+	return date;
 }
 
 @end

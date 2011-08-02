@@ -7,9 +7,22 @@
 //
 
 #import "ImageViewerController.h"
+#import "ResizeImageOperation.h"
+#import "AppDelegate_Shared.h"
 
 
 @implementation ImageViewerController
+
+@synthesize imageUrl;
+@synthesize image;
+@synthesize imageView;
+@synthesize activityIndicatorView;
+@synthesize toolbar;
+@synthesize actionButtonItem;
+@synthesize request;
+
+//MVR - the operation queue is static for memory management purposes
+static NSOperationQueue *sharedOperationQueue;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -22,34 +35,61 @@
     return self;
 }
 
-- (id)initWithImageUrl:(NSString *)imageUrl {
-	imageView = [[TTImageView alloc] init];
-	imageView.delegate = self;
-	imageView.autoresizesToImage = YES;
-	[imageView setUrlPath:imageUrl];
-	[self initWithNibName:nil bundle:nil];
-	
-	return self;
-}
-
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	CGRect screenFrame;
+	UIView *theView;
+	UIImageView *theImageView;
+	TTScrollView *scrollView;
+	UIActivityIndicatorView *theActivityIndicatorView;
+	UIToolbar *theToolbar;
+	UIBarItem *spaceItem;
+	UIBarButtonItem *theActionButtonItem;
+	TTURLImageResponse *imageResponse;
 
 	screenFrame = [UIScreen mainScreen].bounds;
-	self.view = [[[UIView alloc] initWithFrame:screenFrame] autorelease];
+	theView = [[UIView alloc] initWithFrame:screenFrame];
+	self.view = theView;
+	[theView release];
+	theImageView = [[UIImageView alloc] init];
+	self.imageView = theImageView;
+	[theImageView release];
 	scrollView = [[TTScrollView alloc] initWithFrame:screenFrame];
 	scrollView.delegate = self;
 	scrollView.dataSource = self;
-	scrollView.rotateEnabled = NO;
 	scrollView.backgroundColor = [UIColor blackColor];
 	scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:scrollView];
+	[scrollView release];
 	//MVR - place activity indicator view in the center of the screen
-	self.activityIndicatorView.center = CGPointMake(screenFrame.size.width / 2.0, screenFrame.size.height / 2.0);
-	[self.view addSubview:self.activityIndicatorView];	
-	self.toolbar.frame = CGRectMake(0, screenFrame.size.height - TT_TOOLBAR_HEIGHT, screenFrame.size.width, TT_TOOLBAR_HEIGHT);
-	[self.view addSubview:self.toolbar];
+	theActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	theActivityIndicatorView.hidesWhenStopped = YES;
+	theActivityIndicatorView.center = CGPointMake(screenFrame.size.width / 2.0, screenFrame.size.height / 2.0);
+	theActivityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
+	[theActivityIndicatorView startAnimating];
+	[self.view addSubview:theActivityIndicatorView];
+	self.activityIndicatorView = theActivityIndicatorView;
+	[theActivityIndicatorView release];
+	theToolbar = [[UIToolbar alloc] init];
+	theToolbar.barStyle = UIBarStyleBlackTranslucent;
+	theToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
+	spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+	theActionButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(pressAction:)];
+	theActionButtonItem.enabled = NO;
+	theToolbar.items = [NSArray arrayWithObjects: spaceItem, theActionButtonItem, nil];
+	[spaceItem release];
+	self.actionButtonItem = theActionButtonItem;
+	[theActionButtonItem release];
+	theToolbar.frame = CGRectMake(0, screenFrame.size.height - TT_TOOLBAR_HEIGHT, screenFrame.size.width, TT_TOOLBAR_HEIGHT);
+	[self.view addSubview:theToolbar];
+	self.toolbar = theToolbar;
+	[theToolbar release];
+	//MVR - load the image
+	self.request = [TTURLRequest requestWithURL:imageUrl delegate:self];
+	imageResponse = [[TTURLImageResponse alloc] init];
+	request.response = imageResponse;
+	[imageResponse release];
+	[request send];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +104,12 @@
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	[self updateToolbarWithOrientation:self.interfaceOrientation];
 }
+
+/*
+- (void)viewDidAppear:(BOOL)animated {
+
+}
+*/
 
 - (void)viewWillDisappear:(BOOL)animated {
 	UINavigationBar *navigationBar;
@@ -80,10 +126,10 @@
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
+
 }
 */
-
+ 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations.
@@ -113,66 +159,32 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+	self.imageView = nil;
+	self.activityIndicatorView = nil;
+	self.toolbar = nil;
+	self.actionButtonItem = nil;
 }
 
 
 - (void)dealloc {
-    [super dealloc];
-	[scrollView release];
+	[image release];
+	[activityIndicatorView release];
+	[toolbar release];
+	[actionButtonItem release];
 	[imageView release];
-	[_toolbar release];
-	[_actionButtonItem release];
-	[_activityIndicatorView release];
 	[_actionSheet release];
 	[_progressHUD release];
+	[request cancel];
+	[request release];
+	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark Activity Indicator View
-
-- (UIActivityIndicatorView *)activityIndicatorView {
-	if (!_activityIndicatorView) {
-		_activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-		_activityIndicatorView.hidesWhenStopped = YES;
-	}
-
-	return _activityIndicatorView;
++ (NSOperationQueue *)sharedOperationQueue {
+	if (!sharedOperationQueue)
+		sharedOperationQueue = [[NSOperationQueue alloc] init];
+	
+	return sharedOperationQueue;
 }
-
-#pragma mark -
-#pragma mark Toolbar
-
-- (UIToolbar *)toolbar {
-	if (!_toolbar) {
-		UIBarItem *spaceItem;
-
-		_toolbar = [[UIToolbar alloc] init];
-		_toolbar.barStyle = UIBarStyleBlackTranslucent;
-		_toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
-		spaceItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
-		_toolbar.items = [NSArray arrayWithObjects: spaceItem, self.actionButtonItem, nil];
-	}
-
-	return _toolbar;
-}
-
-#pragma mark -
-#pragma mark Action Button Item
-
-- (UIBarButtonItem *)actionButtonItem {
-	if (!_actionButtonItem) {
-		_actionButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(pressAction:)];
-		if (imageView.image)
-			_actionButtonItem.enabled = YES;
-		else
-			_actionButtonItem.enabled = NO;
-	}
-
-	return _actionButtonItem;
-}
-
-#pragma mark -
-#pragma mark Action Sheet
 
 - (UIActionSheet *)actionSheet {
 	if (!_actionSheet)
@@ -180,9 +192,6 @@
 		
 	return _actionSheet;
 }
-
-#pragma mark -
-#pragma mark Alert View
 
 - (UIAlertView *)alertView {
 	if (!_alertView) {
@@ -193,21 +202,11 @@
 	return _alertView;
 }
 
-#pragma mark -
-#pragma mark Progress HUD
-
 - (MBProgressHUD *)progressHUD {
 	if (!_progressHUD)
 		_progressHUD = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
 	
 	return _progressHUD;
-}
-
-- (void)showProgressHudWithLabelText:(NSString *)labelText animationType:(MBProgressHUDAnimation)animationType{
-	self.progressHUD.labelText = labelText;
-	self.progressHUD.animationType = animationType;
-	[[[UIApplication sharedApplication] keyWindow] addSubview:self.progressHUD];
-	[self.progressHUD show:YES];
 }
 
 #pragma mark -
@@ -265,20 +264,28 @@
 }
 
 #pragma mark -
-#pragma mark TTImageViewDelegate
+#pragma mark TTURLRequestDelegate
 
-- (void)imageViewDidStartLoad:(TTImageView *)imageView {
-	[self.activityIndicatorView startAnimating];
-	self.actionButtonItem.enabled = NO;
+- (void)requestDidStartLoad:(TTURLRequest *)theRequest {
 }
 
-- (void)imageView:(TTImageView *)imageView didLoadImage:(UIImage *)image {
-	[self.activityIndicatorView stopAnimating];
-	self.actionButtonItem.enabled = YES;
+- (void)requestDidFinishLoad:(TTURLRequest *)theRequest {
+	ResizeImageOperation *resizeImageOperation;
+	TTURLImageResponse *response;
+	
+	resizeImageOperation = [[ResizeImageOperation alloc] init];
+	response = theRequest.response;
+	resizeImageOperation.image = response.image;
+	//MVR - keep the original image for saving
+	self.image = response.image;
+	resizeImageOperation.imageViewerController = self;
+	[[ImageViewerController sharedOperationQueue] addOperation:resizeImageOperation];
+	[resizeImageOperation release];
 }
 
-- (void)imageView:(TTImageView *)imageView didFailLoadWithError:(NSError *)error {
-	NSLog(@"Error loading image view: %@", [error localizedDescription]);
+- (void)request:(TTURLRequest *)theRequest didFailLoadWithError:(NSError *)error {
+	NSLog(@"Error loading image %@", [error localizedDescription]);
+	self.request = nil;
 	[self errorAlertWithTitle:@"Load Error" message:(NSString *)@"Oops! We couldn't load the image."];
 	[self.activityIndicatorView stopAnimating];
 }
@@ -323,27 +330,19 @@
 #pragma mark -
 #pragma mark TTScrollViewDataSource
 
-- (NSInteger)numberOfPagesInScrollView:(TTScrollView*)scrollView {
+- (NSInteger)numberOfPagesInScrollView:(TTScrollView* )scrollView {
 	return 1;
 }
 
-- (UIView *)scrollView:(TTScrollView*)scrollView pageAtIndex:(NSInteger)pageIndex {
-	return imageView;
+- (UIView *)scrollView:(TTScrollView *)scrollView pageAtIndex:(NSInteger)pageIndex {
+	return self.imageView;
 }
 
 - (CGSize)scrollView:(TTScrollView *)scrollView sizeOfPageAtIndex:(NSInteger)pageIndex {
-	if (imageView.image)
-		return imageView.image.size;
+	if (self.imageView.image)
+		return self.imageView.image.size;
 	else
 		return CGSizeZero;
-}
-
-#pragma mark -
-#pragma mark Action
-
-- (void)pressAction:(id)object {
-	//MVR - dislpay action sheet
-	[self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
 }
 
 #pragma mark -
@@ -352,8 +351,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (buttonIndex == 0) {
 		//MVR - show progress HUD
-		[self showProgressHudWithLabelText:@"Saving..." animationType:MBProgressHUDAnimationZoom];
-		UIImageWriteToSavedPhotosAlbum(imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+		[self showProgressHudWithLabelText:@"Saving image..." animationType:MBProgressHUDAnimationZoom];
+		UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	}
 }
 
@@ -375,7 +374,29 @@
 }
 
 #pragma mark -
-#pragma mark Error handling
+#pragma mark Actions
+
+- (void)pressAction:(id)object {
+	//MVR - dislpay action sheet
+	[self.actionSheet showFromBarButtonItem:self.actionButtonItem animated:YES];
+}
+
+- (void)resizedImage:(UIImage *)theImage {
+	self.imageView.image = theImage;
+	[self.imageView sizeToFit];
+	[activityIndicatorView stopAnimating];
+	actionButtonItem.enabled = YES;
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)showProgressHudWithLabelText:(NSString *)labelText animationType:(MBProgressHUDAnimation)animationType{
+	self.progressHUD.labelText = labelText;
+	self.progressHUD.animationType = animationType;
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self.progressHUD];
+	[self.progressHUD show:YES];
+}
 
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {
 	//MVR - display the alert view

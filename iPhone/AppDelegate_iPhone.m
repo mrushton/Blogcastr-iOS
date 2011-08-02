@@ -36,11 +36,6 @@
 	[[TTURLRequestQueue mainQueue] setMaxContentLength:0];
 	//MVR - increase default timeout for ASIHTTPRequest
 	[ASIHTTPRequest setDefaultTimeOutSeconds:60.0];
-	//MVR - set navigator to handle web urls for Three20
-	//navigator = [TTNavigator navigator];
-	//urlMap = navigator.URLMap;
-	//[urlMap from:@"*" toViewController:[TTWebController class]];
-
 	//MVR - always add the root controller and present the session controller modally if not signed in
 	rootController = [[RootController_iPhone alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;

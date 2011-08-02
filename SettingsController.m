@@ -57,7 +57,7 @@
 	[footerView release];
 	//MVR - set up sign out button
 	signOutButton = [TTButton buttonWithStyle:@"redTableFooterButton:" title:@"Sign Out"];
-	[signOutButton addTarget:self action:@selector(signOut:) forControlEvents:UIControlEventTouchUpInside]; 
+	[signOutButton addTarget:self action:@selector(signOut) forControlEvents:UIControlEventTouchUpInside]; 
 	signOutButton.frame = CGRectMake(9.0, 20.0, 302.0, 45.0);
 	[self.tableView.tableFooterView  addSubview:signOutButton];	
  }
@@ -242,7 +242,6 @@
 		session.user = nil;
 		if (![self save]) {
 			NSLog(@"Error saving session");
-			[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't sign you out."];
 			return;
 		}
 		//MVR - post sign out notification since multiple controllers may be interested
@@ -340,17 +339,14 @@
 	NSError *error;
 
 	session.user.settings.saveOriginalImages = [NSNumber numberWithBool:theSwitch.on];
-	if (![managedObjectContext save:&error]) {
+	if (![managedObjectContext save:&error])
 		NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't save your settings."];
-		return;
-	}
 }
 
 #pragma mark -
 #pragma mark Sign Out
 
-- (void)signOut:(id)object {
+- (void)signOut {
 	[self.signOutActionSheet showInView:tabToolbarController.view];
 }
 
@@ -380,7 +376,6 @@
 	}
 	if (![self save]) {
 		NSLog(@"Error saving settings");
-		[self errorAlertWithTitle:@"Save error" message:@"Oops! We couldn't change your avatar."];
 		return;
 	}
 	[parser release];

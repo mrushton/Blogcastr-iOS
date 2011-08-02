@@ -45,7 +45,7 @@
 @property (nonatomic, retain) TTTableFooterInfiniteScrollView *infiniteScrollView;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
-@property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, readonly) UIAlertView *alertView;
 
 - (NSURLConnection *)getUrl:(NSString *)url;
 - (void)updateBlogcasts;
@@ -54,6 +54,7 @@
 - (void)showProgressHudWithLabelText:(NSString *)labelText animationType:(MBProgressHUDAnimation)animationType;
 - (void)reloadTableView;
 - (BOOL)save;
+- (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count;
 - (NSString *)avatarUrlForSize:(NSString *)size;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 

@@ -12,6 +12,7 @@
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
+#import "UIImage+Resize.h"
 
 @implementation NewImagePostController
 
@@ -240,10 +241,10 @@
 - (void)dealloc {
 	[image release];
 	[thumbnailImage release];
-	[_progressHud release];
 	[_imageActionSheet release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
+	[_progressHud release];
 	[_alertView release];
     [super dealloc];
 }
@@ -308,6 +309,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)theImage editingInfo:(NSDictionary *)editingInfo {
 	UIImage *theThumbnailImage;
 
+	//MVR - save the image to the photo library if it's from the camera and the setting is enabled
+	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && [session.user.settings.saveOriginalImages boolValue])
+		UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(savedImage:withError:contextInfo:), nil);
 	self.image = theImage;
 	//MVR - thumbnail based on screen resolution
 	if ([[UIScreen mainScreen] scale] > 1.0)
@@ -442,6 +446,8 @@
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 	[self showProgressHudWithLabelText:@"Posting image..." animated:YES animationType:MBProgressHUDAnimationZoom];
 	theRequest = [ASIFormDataRequest requestWithURL:[self newImagePostUrl]];
+	//MVR - post request should never timeout
+	theRequest.timeOutSeconds = 0;
 	[theRequest setDelegate:self];
 	[theRequest setUploadProgressDelegate:self];
 	[theRequest setDidFinishSelector:@selector(newImagePostFinished:)];
@@ -458,7 +464,7 @@
 
 - (void)cancel {
 	//MVR - if empty just dismiss the controller
-	if (!image && (!textView.text || [textView.text compare:@""] == NSOrderedSame)) {
+	if (!image && (!textView.text || [textView.text isEqualToString:@""])) {
 		[self dismissModalViewControllerAnimated:YES];
 		return;
 	}
@@ -471,6 +477,13 @@
 #pragma mark -
 #pragma mark Helpers
 
+- (void)savedImage:(UIImage *)image withError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error) {
+		NSLog(@"Error saving image to photo album: %@", [error localizedDescription]);
+		[self errorAlertWithTitle:@"Save failed" message:@"Oops! Failed saving image to photo album."];
+	}
+}
+
 - (NSURL *)newImagePostUrl {
 	NSString *string;
 	NSURL *url;
@@ -478,7 +491,7 @@
 #ifdef DEVEL
 	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/blogcasts/%d/image_posts.xml", [blogcast.id intValue]];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http:/blogcastr.com/blogcasts/%d/image_posts.xml", [blogcast.id intValue]];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/blogcasts/%d/image_posts.xml", [blogcast.id intValue]];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	

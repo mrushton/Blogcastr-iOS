@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Blogcast.h"
 
 
 @interface PostsParser : NSObject <NSXMLParserDelegate> {
 	NSData *data;
 	NSManagedObjectContext *managedObjectContext;
+	Blogcast *blogcast;
 	//MVR - xml parser
     NSMutableString *mutableString;
 	NSNumber *postId;
@@ -38,6 +40,7 @@
 
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) Blogcast *blogcast;
 @property (nonatomic, retain) NSString *mutableString;
 @property (nonatomic, retain) NSNumber *postId;
 @property (nonatomic, retain) NSString *postType;
@@ -60,5 +63,6 @@
 
 - (PostsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext;
 - (BOOL)parse;
+- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

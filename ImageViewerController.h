@@ -11,25 +11,31 @@
 #import "MBProgressHUD.h"
 
 
-@interface ImageViewerController : UIViewController <TTImageViewDelegate, TTScrollViewDataSource, TTScrollViewDelegate, UIActionSheetDelegate, MBProgressHUDDelegate> {
-	TTScrollView *scrollView;
-	TTImageView *imageView;
-	UIToolbar *_toolbar;
-	UIBarButtonItem *_actionButtonItem;
-	UIActivityIndicatorView *_activityIndicatorView;
+@interface ImageViewerController : UIViewController <TTURLRequestDelegate, TTScrollViewDataSource, TTScrollViewDelegate, UIActionSheetDelegate, MBProgressHUDDelegate> {
+	NSString *imageUrl;
+	UIImage *image;
+	UIImageView *imageView;
+	UIToolbar *toolbar;
+	UIBarButtonItem *actionButtonItem;
+	UIActivityIndicatorView *activityIndicatorView;
 	UIActionSheet *_actionSheet;
 	MBProgressHUD *_progressHUD;
 	UIAlertView *_alertView;
+	TTURLRequest *request;
 }
 
-@property (nonatomic, retain, readonly) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, retain, readonly) UIToolbar *toolbar;
-@property (nonatomic, retain, readonly) UIBarButtonItem *actionButtonItem;
+@property (nonatomic, retain) NSString *imageUrl;
+@property (nonatomic, retain) UIImage *image;
+@property (nonatomic, retain) UIImageView *imageView;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, retain) UIToolbar *toolbar;
+@property (nonatomic, retain) UIBarButtonItem *actionButtonItem;
 @property (nonatomic, retain, readonly) UIActionSheet *actionSheet;
 @property (nonatomic, retain, readonly) MBProgressHUD *progressHUD;
 @property (nonatomic, retain, readonly) UIAlertView *alertView;
+@property (nonatomic, retain) TTURLRequest *request;
 
-- (id)initWithImageUrl:(NSString *)imageUrl;
++ (NSOperationQueue *)sharedOperationQueue;
 - (BOOL)isShowingBars;
 - (void)showBars:(BOOL)show animated:(BOOL)animated;
 - (void)showBarsAnimationDidStop;

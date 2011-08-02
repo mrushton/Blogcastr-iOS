@@ -30,18 +30,18 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	CGRect applicationFrame;
-	UIView *view;
+	UIView *theView;
 	CGRect frame;
 	NSMutableArray *items;
 	UIViewController *viewController;
 
 	applicationFrame = [UIScreen mainScreen].applicationFrame;
-	view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT)];
+	theView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT)];
 	//MVR - set up the tab view
 	viewController = [viewControllers objectAtIndex:selectedIndex];
 	if (viewController) {
 		viewController.view.frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
-		[view addSubview:viewController.view];
+		[theView addSubview:viewController.view];
 	}
 	//MVR - set up the tab bar
 	frame = CGRectMake(0.0, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT, applicationFrame.size.width, TAB_TOOLBAR_HEIGHT);
@@ -55,8 +55,9 @@
 	//TODO: saving state of tab bar
 	if (viewController)
 		tabBar.selectedItem = viewController.tabBarItem;	
-	[view addSubview:tabBar];
-	self.view = view;
+	[theView addSubview:tabBar];
+	self.view = theView;
+	[theView release];
 }
 
 /*
@@ -75,7 +76,7 @@
 		NSLog(@"Error finding tab view controller");
 		return;
 	}
-	[viewController viewWillAppear:NO];
+	[viewController viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,7 +88,7 @@
 		NSLog(@"Error finding tab view controller");
 		return;
 	}
-	[viewController viewDidAppear:NO];
+	[viewController viewDidAppear:animated];
 }
 
 /*
@@ -127,6 +128,7 @@
 	//AS DESIGNED: this does nothing to the tab bar
 	[viewControllers release];
 	viewControllers = [theViewControllers copy];
+	NSLog(@"MVR - setting view controllers %d", [viewControllers count]);
 	//MVR - set up the tab bar views
 	for (int i = 0; i < [viewControllers count]; i++) {
 		UIViewController<TabToolbarControllerProtocol> *viewController;

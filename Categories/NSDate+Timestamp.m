@@ -51,9 +51,9 @@
 		days = timeInterval / (24 * 60 * 60);
 		if (days > 0) {
 			if (days == 1)
-				return @"1 day from now";
+				return @"in 1 day";
 			else
-				return [NSString stringWithFormat:@"%d days from now", days];
+				return [NSString stringWithFormat:@"in %d days", days];
 		}
 		else {
 			NSInteger hours;
@@ -61,18 +61,18 @@
 			hours = timeInterval / (60 * 60);
 			if (hours > 0) {
 				if (hours == 1)
-					return @"1 hour from now";
+					return @"in 1 hour";
 				else
-					return [NSString stringWithFormat:@"%d hours from now", hours];
+					return [NSString stringWithFormat:@"in %d hours", hours];
 			} else {
 				NSInteger minutes;
 				
 				minutes = timeInterval / 60;
 				if (minutes > 0) {
 					if (minutes == 1)
-						return @"1 minute from now";
+						return @"in 1 minute";
 					else
-						return [NSString stringWithFormat:@"%d minutes from now", minutes];
+						return [NSString stringWithFormat:@"in %d minutes", minutes];
 				} else {
 					//MVR - at this point we know timeInterval is greater than 0 and less than 60
 					return @"just now";

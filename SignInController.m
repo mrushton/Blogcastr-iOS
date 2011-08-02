@@ -455,7 +455,6 @@
 	session.user = user;
 	if (![managedObjectContext save:&error]) {
 		NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		[self errorAlert:@"Save error"];
 		return;
 	}
 	//MVR - free xml parser strings

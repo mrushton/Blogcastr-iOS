@@ -21,8 +21,8 @@
 @synthesize blogcast;
 @synthesize textView;
 @synthesize progressHud;
-@synthesize actionSheet;
-@synthesize requestActionSheet;
+@synthesize cancelActionSheet;
+@synthesize cancelRequestActionSheet;
 @synthesize alertView;
 @synthesize request;
 
@@ -218,9 +218,24 @@
 
 - (void)dealloc {
 	[_progressHud release];
-	[_actionSheet release];
+	[_cancelActionSheet release];
+	[_cancelRequestActionSheet release];
 	[_alertView release];
     [super dealloc];
+}
+
+- (UIActionSheet *)cancelActionSheet {
+	if (!_cancelActionSheet)
+		_cancelActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles: nil];
+	
+	return _cancelActionSheet;
+}
+
+- (UIActionSheet *)cancelRequestActionSheet {
+	if (!_cancelRequestActionSheet)
+		_cancelRequestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles:@"Cancel Upload", nil];
+	
+	return _cancelRequestActionSheet;
 }
 
 - (MBProgressHUD *)progressHud {
@@ -231,20 +246,6 @@
 	}
 	
 	return _progressHud;
-}
-
-- (UIActionSheet *)actionSheet {
-	if (!_actionSheet)
-		_actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles: nil];
-	
-	return _actionSheet;
-}
-
-- (UIActionSheet *)requestActionSheet {
-	if (!_requestActionSheet)
-		_requestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles:@"Cancel Upload", nil];
-	
-	return _requestActionSheet;
 }
 
 - (UIAlertView *)alertView {
@@ -264,8 +265,8 @@
 	
 	self.request = nil;
 	//MVR - we need to dismiss the action sheet here for some reason
-	if (self.requestActionSheet.visible)
-		[self.requestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	if (self.cancelRequestActionSheet.visible)
+		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	statusCode = [theRequest responseStatusCode];
@@ -285,8 +286,8 @@
 	self.request = nil;
 	error = [theRequest error];
 	//MVR - we need to dismiss the action sheet here for some reason
-	if (self.requestActionSheet.visible)
-		[self.requestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	if (self.cancelRequestActionSheet.visible)
+		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	//MVR - enable post button
@@ -321,7 +322,7 @@
 #pragma mark Action sheet delegate
 
 - (void)actionSheet:(UIActionSheet *)theActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (theActionSheet == _requestActionSheet) {
+	if (theActionSheet == _cancelRequestActionSheet) {
 		if (buttonIndex == 0) {
 			if (request)
 				[request cancel];
@@ -330,7 +331,7 @@
 			if (request)
 				[request cancel];
 		}
-	} else if (theActionSheet == _actionSheet) {
+	} else if (theActionSheet == _cancelActionSheet) {
 		if (buttonIndex == 0)
 			[self dismissModalViewControllerAnimated:YES];
 	}
@@ -360,6 +361,8 @@
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 	[self showProgressHudWithLabelText:@"Posting text..." animated:YES animationType:MBProgressHUDAnimationZoom];
 	theRequest = [ASIFormDataRequest requestWithURL:[self newTextPostUrl]];
+	//MVR - post request should never timeout
+	theRequest.timeOutSeconds = 0;
 	[theRequest setDelegate:self];
 	[theRequest setDidFinishSelector:@selector(newTextPostFinished:)];
 	[theRequest setDidFailSelector:@selector(newTextPostFailed:)];
@@ -372,14 +375,14 @@
 
 - (void)cancel {
 	//MVR - if empty just dismiss the controller
-	if (!textView.text || [textView.text compare:@""] == NSOrderedSame) {
+	if (!textView.text || [textView.text isEqualToString:@""]) {
 		[self dismissModalViewControllerAnimated:YES];
 		return;
 	}
 	if (request)
-		[self.requestActionSheet showInView:self.navigationController.view];
+		[self.cancelRequestActionSheet showInView:self.navigationController.view];
 	else
-		[self.actionSheet showInView:self.navigationController.view];
+		[self.cancelActionSheet showInView:self.navigationController.view];
 }
 
 #pragma mark -
@@ -392,7 +395,7 @@
 #ifdef DEVEL
 	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/blogcasts/%d/text_posts.xml", [blogcast.id intValue]];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http:/blogcastr.com/blogcasts/%d/text_posts.xml", [blogcast.id intValue]];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/blogcasts/%d/text_posts.xml", [blogcast.id intValue]];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	

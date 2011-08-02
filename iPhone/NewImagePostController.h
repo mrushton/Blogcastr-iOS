@@ -14,7 +14,7 @@
 #import "MBProgressHUD.h"
 #import "ASIHTTPRequest.h"
 
-@interface NewImagePostController : UITableViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate> {
+@interface NewImagePostController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate, UIActionSheetDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	Blogcast *blogcast;
@@ -42,6 +42,7 @@
 @property (nonatomic, readonly) UIAlertView *alertView;
 @property (nonatomic, retain) ASIHTTPRequest *request;
 
+- (void)savedImage:(UIImage *)image withError:(NSError *)error contextInfo:(void *)contextInfo;
 - (NSURL *)newImagePostUrl;
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;

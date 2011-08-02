@@ -1,0 +1,102 @@
+In file included from /Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:9:
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.h:9:24: error: Cocoa/Cocoa.h: No such file or directory
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:17: error: expected ')' before 'BlogcastsParser'
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:17: error: expected ')' before 'NSManagedObjectContext'
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser initWithData:managedObjectContext:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:18: error: request for member 'data' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:19: error: request for member 'managedObjectContext' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser parse]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:28: error: 'data' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:28: error: (Each undeclared identifier is reported only once
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:28: error: for each function it appears in.)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:29: warning: class 'BlogcastParser' does not implement the 'NSXMLParserDelegate' protocol
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser parserDidStartDocument:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:46: error: request for member 'mutableString' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:47: error: request for member 'blogcastId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:48: error: request for member 'title' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:49: error: request for member 'theDescription' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:50: error: request for member 'user' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:51: error: request for member 'userId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:52: error: request for member 'userUsername' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:53: error: request for member 'userAvatarUrl' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:54: error: request for member 'tags' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:55: error: request for member 'numCurrentViewers' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:56: error: request for member 'numPosts' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:57: error: request for member 'numComments' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:58: error: request for member 'numLikes' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:59: error: request for member 'numViews' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:60: error: request for member 'startingAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:61: error: request for member 'blogcastUpdatedAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:62: error: 'inUser' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:63: error: 'inTags' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:64: error: 'inStats' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser parser:didStartElement:namespaceURI:qualifiedName:attributes:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:69: error: 'inUser' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:71: error: 'inTags' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:73: error: 'inStats' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:75: error: request for member 'mutableString' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser parser:didEndElement:namespaceURI:qualifiedName:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:79: error: 'NSFetchRequest' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:79: error: 'request' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:80: error: 'NSEntityDescription' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:80: error: 'entity' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:86: error: 'Blogcast' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:86: error: 'blogcast' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:90: error: 'managedObjectContext' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:92: error: 'blogcastId' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:103: error: request for member 'blogcastId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:104: error: 'title' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:105: error: request for member 'title' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:106: error: 'theDescription' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:107: error: request for member 'theDescription' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:108: error: 'user' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:109: error: request for member 'user' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:110: error: 'tags' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:111: error: request for member 'tags' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:112: error: 'numCurrentViewers' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:113: error: request for member 'numCurrentViewers' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:114: error: 'numPosts' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:115: error: request for member 'numPosts' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:116: error: 'numComments' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:117: error: request for member 'numComments' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:118: error: 'numLikes' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:119: error: request for member 'numLikes' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:120: error: 'numViews' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:121: error: request for member 'numViews' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:122: error: 'startingAt' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:123: error: request for member 'startingAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:124: error: 'blogcastUpdatedAt' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:125: error: request for member 'blogcastUpdatedAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:127: error: 'blogcasts' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:129: error: 'inUser' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:130: error: request for member 'userId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:130: error: 'mutableString' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:132: error: request for member 'blogcastId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:134: error: request for member 'title' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:136: error: request for member 'theDescription' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:138: error: 'User' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:138: error: 'theUser' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:144: error: 'userId' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:155: error: request for member 'userId' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:157: error: 'userUsername' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:158: error: request for member 'userUsername' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:159: error: 'userAvatarUrl' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:160: error: request for member 'userAvatarUrl' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:161: error: request for member 'user' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:165: error: request for member 'userUsername' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:168: error: request for member 'userAvatarUrl' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:170: error: 'inTags' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:174: error: request for member 'tags' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:176: error: request for member 'tags' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:179: error: 'inStats' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:182: error: request for member 'numCurrentViewers' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:185: error: request for member 'numPosts' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:188: error: request for member 'numComments' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:191: error: request for member 'numLikes' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:194: error: request for member 'numViews' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:202: error: request for member 'startingAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:211: error: request for member 'blogcastUpdatedAt' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:215: error: request for member 'mutableString' in something not a structure or union
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m: In function '-[BlogcastParser parser:foundCharacters:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:219: error: 'mutableString' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Parser/BlogcastParser.m:223: error: request for member 'mutableString' in something not a structure or union

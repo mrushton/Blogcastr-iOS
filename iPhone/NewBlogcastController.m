@@ -23,7 +23,10 @@
 @synthesize descriptionTextView;
 @synthesize tagsTextView;
 @synthesize progressHud;
+@synthesize cancelActionSheet;
+@synthesize cancelRequestActionSheet;
 @synthesize alertView;
+@synthesize request;
 
 #pragma mark -
 #pragma mark Initialization
@@ -289,6 +292,20 @@
 	return _alertView;
 }
 
+- (UIActionSheet *)cancelActionSheet {
+	if (!_cancelActionSheet)
+		_cancelActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear New Blogcast" otherButtonTitles: nil];
+	
+	return _cancelActionSheet;
+}
+
+- (UIActionSheet *)cancelRequestActionSheet {
+	if (!_cancelRequestActionSheet)
+		_cancelRequestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear New Blogcast" otherButtonTitles:@"Cancel Upload", nil];
+	
+	return _cancelRequestActionSheet;
+}
+
 - (MBProgressHUD *)progressHud {
 	if (!_progressHud) {
 		//MVR - use superview to handle a display bug
@@ -301,9 +318,17 @@
 
 
 - (void)dealloc {
+	[managedObjectContext release];
+	[session release];
+	[startingAt release];
 	[_progressHud release];
+	[_cancelActionSheet release];
+	[_cancelRequestActionSheet release];
 	[_alertView release];
-    [super dealloc];
+	if (request)
+		[request setDelegate:nil];
+	[request release];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -326,27 +351,96 @@
 }
 
 #pragma mark -
+#pragma mark ASIHTTPRequest delegate
+
+- (void)createBlogcastFinished:(ASIHTTPRequest *)theRequest {
+	int statusCode;
+	
+	self.request = nil;
+	//MVR - we need to dismiss the action sheet here for some reason
+	if (self.cancelRequestActionSheet.visible)
+		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	statusCode = [theRequest responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error create blogcast received status code %i", statusCode);
+		//MVR - enable create button
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		[self errorAlertWithTitle:@"Create failed" message:@"Oops! We couldn't create the blogcast."];
+		return;
+	}
+	//AS DESIGNED: a delegate could have been used but this makes things easier since it's not the parent controller that needs to know 
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"createdBlogcast" object:self];
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)createBlogcastFailed:(ASIHTTPRequest *)theRequest {
+	NSError *error;
+	
+	self.request = nil;
+	error = [theRequest error];
+	//MVR - we need to dismiss the action sheet here for some reason
+	if (self.cancelRequestActionSheet.visible)
+		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	//MVR - enable create button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error creating blogcast: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't create the blogcast."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error creating blogcast: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't create the blogcast."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Create blogcast request cancelled");
+			break;
+		default:
+			NSLog(@"Error creating blogcast");
+			break;
+	}	
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate delegate
+
+- (void)hudWasHidden:(MBProgressHUD *)theProgressHUD {
+	//MVR - remove HUD from screen when the HUD was hidden
+	[theProgressHUD removeFromSuperview];
+}
+
+#pragma mark -
+#pragma mark Action sheet delegate
+
+- (void)actionSheet:(UIActionSheet *)theActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (theActionSheet == _cancelActionSheet) {
+		if (buttonIndex == 0)
+			[self dismissModalViewControllerAnimated:YES];
+	} else if (theActionSheet == _cancelRequestActionSheet) {
+		if (buttonIndex == 0) {
+			if (request)
+				[request cancel];
+			[self dismissModalViewControllerAnimated:YES];
+		} else if (buttonIndex == 1) {
+			if (request)
+				[request cancel];
+		}
+	}
+}
+
+#pragma mark -
 #pragma mark Actions
 
-
-- (void)newBlogcastFinished:(ASIHTTPRequest *)request {
-	NSLog(@"MVR - new blogcast finished");
-}
-
-
-- (void)newBlogcastFailed:(ASIHTTPRequest *)request {
-	NSLog(@"MVR - new blogcast failed");
-
-}
-
 - (void)create {
-	NSString *string;
-	NSURL *url;
-	ASIFormDataRequest *request;
+	ASIFormDataRequest *theRequest;
 
 	//MVR - check for errors
-	if (!titleTextField.text || [titleTextField.text compare:@""] == NSOrderedSame) {
-		[self errorAlertWithTitle:@"Empty title" message:@"Oops! You need to enter a title."];
+	if (!titleTextField.text || [titleTextField.text isEqualToString:@""]) {
+		[self errorAlertWithTitle:@"Empty field" message:@"Oops! You need to enter a title."];
 		return;
 	}
 	//MVR - dismiss keyboard
@@ -357,43 +451,51 @@
 	else if (tagsTextView.isFirstResponder)
 		[tagsTextView resignFirstResponder];
 	[self showProgressHudWithLabelText:@"Creating blogcast..." animated:YES animationType:MBProgressHUDAnimationZoom];
-	request = [ASIFormDataRequest requestWithURL:[self newBlogcastUrl]];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(newBlogcastFinished:)];
-	[request setDidFailSelector:@selector(newBlogcastFailed:)];
-	[request addPostValue:session.authenticationToken forKey:@"authentication_token"];
-	[request addPostValue:titleTextField.text forKey:@"blogcast[title]"];
+	theRequest = [ASIFormDataRequest requestWithURL:[self newBlogcastUrl]];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(createBlogcastFinished:)];
+	[theRequest setDidFailSelector:@selector(createBlogcastFailed:)];
+	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:titleTextField.text forKey:@"blogcast[title]"];
 	if (startingAt) {
 		NSDateFormatter *dateFormatter;
 		
 		dateFormatter = [[NSDateFormatter alloc] init];
 		//MVR - year
 		[dateFormatter setDateFormat:@"y"];
-		[request addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(1i)]"];
+		[theRequest addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(1i)]"];
 		//MVR - month
 		[dateFormatter setDateFormat:@"M"];
-		[request addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(2i)]"];
+		[theRequest addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(2i)]"];
 		//MVR - day
 		[dateFormatter setDateFormat:@"d"];
-		[request addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(3i)]"];
-		//MVR - hour (1-24)
-		[dateFormatter setDateFormat:@"k"];
-		[request addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(4i)]"];
+		[theRequest addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(3i)]"];
+		//MVR - hour (0-23)
+		[dateFormatter setDateFormat:@"H"];
+		[theRequest addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(4i)]"];
 		//MVR - minute
 		[dateFormatter setDateFormat:@"m"];
-		[request addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(5i)]"];
+		[theRequest addPostValue:[dateFormatter stringFromDate:startingAt] forKey:@"blogcast[starting_at(5i)]"];
 		[dateFormatter release];
 	}
-	if (descriptionTextView.text && [descriptionTextView.text compare:@""] != NSOrderedSame)
-		[request addPostValue:descriptionTextView.text forKey:@"blogcast[description]"];
-	if (tagsTextView.text && [tagsTextView.text compare:@""] != NSOrderedSame)
-		[request addPostValue:tagsTextView.text forKey:@"tags"];
-	[request startAsynchronous];
+	if (descriptionTextView.text && ![descriptionTextView.text isEqualToString:@""])
+		[theRequest addPostValue:descriptionTextView.text forKey:@"blogcast[description]"];
+	if (tagsTextView.text && ![tagsTextView.text isEqualToString:@""])
+		[theRequest addPostValue:tagsTextView.text forKey:@"tags"];
+	self.request = theRequest;
+	[theRequest startAsynchronous];
 }
 
 - (void)cancel {
-	//TODO: need to cancel request as well
-	[self dismissModalViewControllerAnimated:YES];
+	//MVR - if empty just dismiss the controller
+	if ((!titleTextField.text || [titleTextField.text isEqualToString:@""]) && !startingAt && (!descriptionTextView.text || [descriptionTextView.text isEqualToString:@""]) && (!tagsTextView.text || [tagsTextView.text isEqualToString:@""])) {
+		[self dismissModalViewControllerAnimated:YES];
+		return;
+	}
+	if (request)
+		[self.cancelRequestActionSheet showInView:self.navigationController.view];
+	else
+		[self.cancelActionSheet showInView:self.navigationController.view];
 }
 
 - (void)titleEntered:(id)object {
@@ -410,9 +512,9 @@
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/blogcasts.xml"];
+	string = @"http://sandbox.blogcastr.com/blogcasts.xml";
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http://blogcastr.com/blogcasts.xml"];
+	string = @"http://blogcastr.com/blogcasts.xml";
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	

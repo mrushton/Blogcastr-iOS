@@ -69,7 +69,7 @@
 - (BOOL)isStreamCellRequested:(CommentStreamCell *)streamCell;
 - (Comment *)parseMessage:(XMPPMessage *)message;
 - (BOOL)addMessage:(XMPPMessage *)message;
-- (void)updateBadge:(NSInteger)numAdded;
+- (void)setBadgeVal:(NSInteger)val;
 - (TTStyledTextLabel *)timestampLabel;
 - (void)timerExpired:(Timer *)timer;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;

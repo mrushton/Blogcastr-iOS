@@ -19,8 +19,8 @@
 	Blogcast *blogcast;
 	UITextView *textView;
 	MBProgressHUD *_progressHud;
-	UIActionSheet *_actionSheet;
-	UIActionSheet *_requestActionSheet;
+	UIActionSheet *_cancelActionSheet;
+	UIActionSheet *_cancelRequestActionSheet;
 	UIAlertView *_alertView;
 	ASIHTTPRequest *request;
 }
@@ -30,8 +30,8 @@
 @property (nonatomic, retain) Blogcast *blogcast;
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, readonly) MBProgressHUD *progressHud;
-@property (nonatomic, readonly) UIActionSheet *actionSheet;
-@property (nonatomic, readonly) UIActionSheet *requestActionSheet;
+@property (nonatomic, readonly) UIActionSheet *cancelActionSheet;
+@property (nonatomic, readonly) UIActionSheet *cancelRequestActionSheet;
 @property (nonatomic, readonly) UIAlertView *alertView;
 @property (nonatomic, retain) ASIHTTPRequest *request;
 

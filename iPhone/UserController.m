@@ -9,6 +9,8 @@
 #import <Three20/Three20.h>
 #import "UserController.h"
 #import "ImageViewerController.h"
+#import "ASIFormDataRequest.h"
+#import "UserParser.h"
 
 
 @implementation UserController
@@ -17,7 +19,9 @@
 @synthesize managedObjectContext;
 @synthesize session;
 @synthesize user;
+@synthesize subscription;
 @synthesize tabToolbarController;
+@synthesize request;
 
 #pragma mark -
 #pragma mark Initialization
@@ -41,15 +45,28 @@
     [super viewDidLoad];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.tableView.backgroundColor = [UIColor colorWithRed:0.914 green:0.914 blue:0.914 alpha:1.0];
+	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	self.tableView.tableFooterView = [self footerView];
 }
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	//MVR - if never updated load info
+	if (!user.updatedAt && !isLoading) {
+		isLoading = YES;
+		isUpdating = YES;
+		//MVR - show progress HUD for loading
+		[self showViewProgressHudWithLabelText:@"Loading..." animated:YES animationType:MBProgressHUDAnimationZoom];
+		//MVR - disable subscribe button as well
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+		[self updateUser];
+	} else if ([user.updatedAt timeIntervalSinceNow] < -86400.0 && !isUpdating) {
+		//MVR - update user info if it's been longer than a day
+		isUpdating = YES;
+		[self updateUser];
+	}
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
 	 [super viewDidAppear:animated];
@@ -110,8 +127,8 @@
 	} else if (indexPath.section == 1) {
 		CGSize size;
 		
-		size = [user.bio sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(282.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		return size.height + 19.0;
+		size = [user.bio sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(284.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		return size.height + 17.0;
 	}
 
 	return 0;
@@ -139,19 +156,19 @@
 			else
 				[avatarButton setImage:[self avatarUrlForSize:@"large"] forState:UIControlStateNormal];
 			[cell addSubview:avatarButton];
-			rect = CGRectMake(95.0, 14.0, 207.0, 20.0);
+			rect = CGRectMake(95.0, 14.0, 207.0, 22.0);
 			label = [[UILabel alloc] initWithFrame:rect];
 			label.text = user.fullName;
 			label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
-			label.font = [UIFont boldSystemFontOfSize:20.0];
+			label.font = [UIFont boldSystemFontOfSize:18.0];
 			[cell addSubview:label];
 			[label release];
 			if (user.location) {
-				rect = CGRectMake(95.0, 37.0, 207.0, 18.0);
+				rect = CGRectMake(95.0, 38.0, 207.0, 18.0);
 				label = [[UILabel alloc] initWithFrame:rect];
 				label.text = user.location;
-				label.textColor = [UIColor colorWithRed:0.31 green:0.31 blue:0.31 alpha:1.0];
-				label.font = [UIFont fontWithName:@"Georgia-Italic" size:15.0];
+				label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
+				label.font = [UIFont boldSystemFontOfSize:14.0];
 				[cell addSubview:label];
 				[label release];
 			}
@@ -162,20 +179,19 @@
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
 	} else if (indexPath.section == 1) {
-		CGSize size;
 		CGRect rect;
 		UILabel *label;
 		
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		//MVR - determine the height of the bio
-		size = [user.bio sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(282.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		rect = CGRectMake(19.0, 10.0, 282.0, size.height);
+		rect = CGRectMake(18.0, 9.0, 284.0, 100.0);
 		label = [[UILabel alloc] initWithFrame:rect];
 		label.text = user.bio;
-		label.font = [UIFont systemFontOfSize:14.0];
+		label.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+		label.font = [UIFont systemFontOfSize:13.0];
 		label.lineBreakMode = UILineBreakModeWordWrap;
 		label.numberOfLines = 0;
+		[label sizeToFit];
 		[cell addSubview:label];
 	}
 
@@ -247,13 +263,16 @@
 
 			webController = [[TTWebController alloc] init];
 			[webController openURL:[NSURL URLWithString:user.web]];
-			[self.tabToolbarController.navigationController pushViewController:webController animated:YES];
+			//MVR - controller can be part of tab toolbar controller
+			if (tabToolbarController)
+				[self.tabToolbarController.navigationController pushViewController:webController animated:YES];
+			else
+				[self.navigationController pushViewController:webController animated:YES];
 		}
 	}
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"MVR - DID DESELECT %d %d",indexPath.row,indexPath.section);
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -274,25 +293,282 @@
 
 
 - (void)dealloc {
+	[_subscribeButton release];
+	[_unsubscribeButton release];
+	[_viewProgressHud release];
+	[_windowProgressHud release];
+	[_alertView release];
     [super dealloc];
 }
 
-- (NSString *)avatarUrlForSize:(NSString *)size {
-	NSString *avatarUrl;
-	NSRange range;
-	
-#ifdef DEVEL
-	avatarUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com%@", user.avatarUrl];
-#else //DEVEL
-	avatarUrl = [[user.avatarUrl copy] autorelease];
-#endif //DEVEL
-	range = [avatarUrl rangeOfString:@"small"];
-	if (range.location != NSNotFound) {
-		return [avatarUrl stringByReplacingCharactersInRange:range withString:size];
-	} else {
-		NSLog(@"Error replacing size in avatar url: %@", avatarUrl);
-		return avatarUrl;
+- (UIBarButtonItem *)subscribeButton {
+	if (!_subscribeButton) {
+		_subscribeButton = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleBordered target:self action:@selector(subscribe)];
+		_subscribeButton.title = @"Subscribe";
 	}
+	
+	return _subscribeButton;
+}
+
+- (UIBarButtonItem *)unsubscribeButton {
+	if (!_unsubscribeButton) {
+		_unsubscribeButton = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleBordered target:self action:@selector(unsubscribe)];
+		_unsubscribeButton.title = @"Unsubscribe";
+	}
+	
+	return _unsubscribeButton;
+}
+
+- (MBProgressHUD *)viewProgressHud {
+	if (!_viewProgressHud) {
+		//MVR - use window to allow no navigation back
+		_viewProgressHud = [[MBProgressHUD alloc] initWithView:self.view];
+		_viewProgressHud.delegate = self;
+	}
+	
+	return _viewProgressHud;
+}
+
+- (MBProgressHUD *)windowProgressHud {
+	if (!_windowProgressHud) {
+		//MVR - use view to allow navigation back
+		_windowProgressHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
+		_windowProgressHud.delegate = self;
+	}
+	
+	return _windowProgressHud;
+}
+
+- (UIAlertView *)alertView {
+	if (!_alertView) {
+		_alertView = [[UIAlertView alloc] init];
+		[_alertView addButtonWithTitle:@"Ok"];
+	}
+	
+	return _alertView;
+}
+
+#pragma mark -
+#pragma mark ASIHTTPRequest delegate
+
+- (void)updateUserFinished:(ASIHTTPRequest *)theRequest {
+	int statusCode;
+	UserParser *parser;
+	
+	isUpdating = NO;
+	if (isLoading) {
+		isLoading = NO;
+		//MVR - hide the loading progress HUD
+		[self.viewProgressHud hide:YES];
+	}
+	statusCode = [theRequest responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error update user received status code %i", statusCode);
+		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the user."];
+		return;
+	}
+	//MVR - parse xml
+	parser = [[UserParser alloc] init];
+	parser.managedObjectContext = managedObjectContext;
+	parser.data = [theRequest responseData];
+	parser.subscription = subscription;
+	if (![parser parse]) {
+		NSLog(@"Error parsing update user response");
+		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the user."];
+		[parser release];
+		return;
+	}
+	user.updatedAt = [NSDate date];
+	if (![self save])
+		NSLog(@"Save error updating user");
+	//MVR - reload everything after the update
+	[self.tableView reloadData];
+	self.tableView.tableFooterView = [self footerView];
+	//MVR - update the navigation button
+	if (subscription) {
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+		if ([subscription.isSubscribed boolValue])
+			self.navigationItem.rightBarButtonItem = [self unsubscribeButton];
+		else
+			self.navigationItem.rightBarButtonItem = [self subscribeButton];
+	}
+}
+
+- (void)subscribeFinished:(ASIHTTPRequest *)theRequest {
+	int statusCode;
+	
+	//MVR - hide the subscription progress HUD
+	[self.windowProgressHud hide:YES];
+	statusCode = [theRequest responseStatusCode];
+	//MVR - enable subscribe button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	if (statusCode != 200) {
+		NSLog(@"Error subscribe received status code %i", statusCode);
+		[self errorAlertWithTitle:@"Subscribe failed" message:@"Oops! We couldn't subscribe you."];
+		return;
+	}
+	//MVR - set subscribed and updatedAt to now
+	subscription.isSubscribed = [NSNumber numberWithBool:YES];
+	subscription.updatedAt = [NSDate date];
+	if (![self save])
+		NSLog(@"Save error subscribing");
+	//MVR - set the button to unsubscribe
+	self.navigationItem.rightBarButtonItem = [self unsubscribeButton];
+}
+
+- (void)subscribeFailed:(ASIHTTPRequest *)theRequest {
+	NSError *error;
+	
+	error = [theRequest error];
+	//MVR - hide the subscription progress HUD
+	[self.windowProgressHud hide:YES];
+	//MVR - enable subscribe button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error subscribing: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't subscribe you."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error subscribing: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't subscribe you."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Subscibe request cancelled");
+			break;
+		default:
+			NSLog(@"Error subscribing");
+			break;
+	}	
+}
+
+- (void)unsubscribeFinished:(ASIHTTPRequest *)theRequest {
+	int statusCode;
+	
+	//MVR - hide the subscription progress HUD
+	[self.windowProgressHud hide:YES];
+	//MVR - enable unsubscribe button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	statusCode = [theRequest responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error subscribe received status code %i", statusCode);
+		[self errorAlertWithTitle:@"Unsubscribe failed" message:@"Oops! We couldn't unsubscribe you."];
+		return;
+	}
+	//MVR - set subscribed and updatedAt to now
+	subscription.isSubscribed = [NSNumber numberWithBool:NO];
+	subscription.updatedAt = [NSDate date];
+	if (![self save])
+		NSLog(@"Save error unsubscribing");
+	//MVR - set the button to subscribe
+	self.navigationItem.rightBarButtonItem = [self subscribeButton];
+}
+
+- (void)unsubscribeFailed:(ASIHTTPRequest *)theRequest {
+	NSError *error;
+	
+	error = [theRequest error];
+	//MVR - hide the subscription progress HUD
+	[self.windowProgressHud hide:YES];
+	//MVR - enable unsubscribe button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error unsubscribing: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't unsubscribe you."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error unsubscribing: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't unsubscribe you."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Unsubscibe request cancelled");
+			break;
+		default:
+			NSLog(@"Error unsubscribing");
+			break;
+	}
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)theProgressHUD {
+	//MVR - remove HUD from screen when the HUD was hidden
+	[theProgressHUD removeFromSuperview];
+}
+
+#pragma mark -
+#pragma mark Core Data
+
+- (BOOL)save {
+	NSError *error;
+	
+    if (![managedObjectContext save:&error]) {
+	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
+		return FALSE;
+	}
+	
+	return TRUE;
+}
+
+#pragma mark -
+#pragma mark Actions
+
+- (void)subscribe {
+	ASIFormDataRequest *theRequest;
+	
+	//MVR - disable subscribe button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
+	[self showWindowProgressHudWithLabelText:@"Subscribing..." animated:YES animationType:MBProgressHUDAnimationZoom];
+	theRequest = [ASIFormDataRequest requestWithURL:[self subscribeUrl]];
+	[theRequest setRequestMethod:@"POST"];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(subscribeFinished:)];
+	[theRequest setDidFailSelector:@selector(subscribeFailed:)];
+	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest startAsynchronous];
+}
+
+- (void)unsubscribe {
+	ASIFormDataRequest *theRequest;
+	
+	//MVR - disable subscribe button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
+	[self showWindowProgressHudWithLabelText:@"Unsubscribing..." animated:YES animationType:MBProgressHUDAnimationZoom];
+	theRequest = [ASIFormDataRequest requestWithURL:[self unsubscribeUrl]];
+	[theRequest setRequestMethod:@"DELETE"];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(unsubscribeFinished:)];
+	[theRequest setDidFailSelector:@selector(unsubscribeFailed:)];
+	[theRequest startAsynchronous];
+}
+
+- (void)pressAvatar:(id)object {
+	ImageViewerController *imageViewerController;
+	
+	imageViewerController = [[ImageViewerController alloc] initWithNibName:nil bundle:nil];
+	imageViewerController.imageUrl = [self avatarUrlForSize:@"original"];
+	//MVR - controller can be part of tab toolbar controller
+	if (tabToolbarController)
+		[self.tabToolbarController.navigationController pushViewController:imageViewerController animated:YES];
+	else
+		[self.navigationController pushViewController:imageViewerController animated:YES];
+	[imageViewerController release];
+}
+
+#pragma mark -
+#pragma mark Helpers
+
+- (void)updateUser {
+	ASIFormDataRequest *theRequest;
+	
+	theRequest = [ASIFormDataRequest requestWithURL:[self userUrl]];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(updateUserFinished:)];
+	[theRequest setDidFailSelector:@selector(updateUserFailed:)];
+	[theRequest startAsynchronous];
+	self.request = theRequest;
 }
 
 - (TTView *)statViewFor:(NSString *)name value:(NSNumber *)value {
@@ -304,7 +580,7 @@
 	styleSheet = [TTStyleSheet globalStyleSheet];
 	statView = [[[TTView alloc] initWithFrame:CGRectMake(0.0, 0.0, 146.0, 36.0)] autorelease];
 	statView.backgroundColor = [UIColor clearColor];
-	statView.style = [styleSheet styleWithSelector:(NSString *)@"statView:"];
+	statView.style = [styleSheet styleWithSelector:@"stat"];
 	statValueLabel = [[UILabel alloc] init];
 	statValueLabel.text = [NSString stringWithFormat:@"%d", [value intValue]];
 	statValueLabel.font = [UIFont boldSystemFontOfSize:15.0];
@@ -377,14 +653,89 @@
 	return footerView;
 }
 
-#pragma mark -
-#pragma mark Avatar
-- (void)pressAvatar:(id)object {
-	ImageViewerController *imageViewerController;
+- (NSString *)avatarUrlForSize:(NSString *)size {
+	NSString *avatarUrl;
+	NSRange range;
 	
-	imageViewerController = [[ImageViewerController alloc] initWithImageUrl:[self avatarUrlForSize:@"original"]];
-	[self.tabToolbarController.navigationController pushViewController:imageViewerController animated:YES];
+#ifdef DEVEL
+	avatarUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com%@", user.avatarUrl];
+#else //DEVEL
+	avatarUrl = [[user.avatarUrl copy] autorelease];
+#endif //DEVEL
+	range = [avatarUrl rangeOfString:@"original"];
+	if (range.location != NSNotFound) {
+		return [avatarUrl stringByReplacingCharactersInRange:range withString:size];
+	} else {
+		NSLog(@"Error replacing size in avatar url: %@", avatarUrl);
+		return avatarUrl;
+	}
 }
+
+- (NSURL *)userUrl {
+	NSString *string;
+	NSURL *url;
 	
+#ifdef DEVEL
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+#else //DEVEL
+	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+#endif //DEVEL
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
+
+- (NSURL *)subscribeUrl {
+	NSString *string;
+	NSURL *url;
+	
+#ifdef DEVEL
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/subscriptions.xml", [user.id intValue]];
+#else //DEVEL
+	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d/subscriptions.xml", [user.id intValue]];
+#endif //DEVEL
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
+
+- (NSURL *)unsubscribeUrl {
+	NSString *string;
+	NSURL *url;
+	
+#ifdef DEVEL
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+#else //DEVEL
+	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+#endif //DEVEL
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
+
+- (void)showViewProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType {
+	self.viewProgressHud.labelText = labelText;
+	if (animated)
+		self.viewProgressHud.animationType = animationType;
+	//MVR - use superview to handle a display bug
+	[self.view.superview addSubview:self.viewProgressHud];
+	[self.viewProgressHud show:animated];
+}
+
+- (void)showWindowProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType {
+	self.windowProgressHud.labelText = labelText;
+	if (animated)
+		self.windowProgressHud.animationType = animationType;
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self.windowProgressHud];
+	[self.windowProgressHud show:animated];
+}
+
+- (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {
+	//MVR - update and display the alert view
+	self.alertView.title = title;
+	self.alertView.message = message;
+	[self.alertView show];
+}
+
 @end
 
