@@ -397,13 +397,11 @@ static const NSInteger kCommentsRequestCount = 20;
 {
 	float systemVersion;
 
-	NSLog(@"MVR - BEGIN UPDATES");
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	//AS DESIGNED: second work around for not being able to insert rows before the table view has been rendered
-	if (systemVersion >= 4.0 && isTableViewRendered) {
+	if (systemVersion >= 4.0 && isTableViewRendered)
 		[[self tableView] beginUpdates];
-	}
 }
 
 - (void)controller:(NSFetchedResultsController*)controller
@@ -524,7 +522,8 @@ static const NSInteger kCommentsRequestCount = 20;
 	NSInteger numAdded = 0;
 	CommentsParser *parser;
 	Comment *comment;
-	
+
+	self.commentsRequest = nil;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update comments received status code %i", statusCode);
@@ -583,7 +582,7 @@ static const NSInteger kCommentsRequestCount = 20;
 		comment = [parser.comments objectAtIndex:0];
 		self.maxId = comment.id;
 	}
-	self.commentsRequest = nil;
+	[parser release];
 	//MVR - if the array hasn't been allocated yet there is no need to allocate and check it
 	if (_commentMessages) {
 		for (XMPPMessage *message in self.commentMessages) {
@@ -594,7 +593,6 @@ static const NSInteger kCommentsRequestCount = 20;
 		}
 		[self.commentMessages removeAllObjects];
 	}
-	[parser release];
 	if (![self save])
 		NSLog(@"Error saving comments");
 	isSynced = YES;
@@ -604,9 +602,26 @@ static const NSInteger kCommentsRequestCount = 20;
 }
 
 - (void)updateCommentsFailed:(ASIHTTPRequest *)request {
-	NSLog(@"Update comments failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the comments."];
+	NSError *error;
+
 	self.commentsRequest = nil;
+	error = [request error];
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error updating comments: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the comments."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error updating comments: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the comments."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Update comments request cancelled");
+			break;
+		default:
+			NSLog(@"Error updating comments");
+			break;
+	}
 }
 
 - (void)updateCommentsStreamCellFinished:(ASIHTTPRequest *)request {
@@ -734,8 +749,12 @@ static const NSInteger kCommentsRequestCount = 20;
 
 - (void)joinedRoom {
 	isSynced = NO;
-	if (!commentsRequest)
-		[self updateComments];
+	//MVR - if another request has been made cancel it
+	if (commentsRequest) {
+		[commentsRequest cancel];
+		self.commentsRequest = nil;
+	}
+	[self updateComments];
 }
 
 - (void)leftRoom {

@@ -275,13 +275,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>16</integer>
+									<integer>12</integer>
 									<integer>6</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 62}, {230, 740}}</string>
+							<string>{{0, 0}, {230, 740}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -300,7 +300,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>519 304 1243 799 0 0 1920 1178 </string>
+						<string>625 258 1243 799 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>EditBlogcastController.m</string>
+								<string>CommentsController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>EditBlogcastController.m</string>
+										<string>CommentsController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CA40D47713E6D7BD00D3D8F2</string>
+										<string>CA40D4A213E8D45600D3D8F2</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -486,7 +486,6 @@
 											<string>CAB8079313DC9C6B005BF40D</string>
 											<string>CAB807B913DCA47D005BF40D</string>
 											<string>CAB807BB13DCA47D005BF40D</string>
-											<string>CAB807D713DCAC87005BF40D</string>
 											<string>CAB807D813DCAC87005BF40D</string>
 											<string>CAB807EC13DCD80C005BF40D</string>
 											<string>CA3BADB413DFAB68004F1A39</string>
@@ -518,7 +517,6 @@
 											<string>CA8A9D6213E465C000CB96A8</string>
 											<string>CA40D41813E65B8900D3D8F2</string>
 											<string>CA40D41913E65B8900D3D8F2</string>
-											<string>CA40D41A13E65B8900D3D8F2</string>
 											<string>CA40D41B13E65B8900D3D8F2</string>
 											<string>CA40D41D13E65B8900D3D8F2</string>
 											<string>CA40D41E13E65B8900D3D8F2</string>
@@ -531,20 +529,22 @@
 											<string>CA40D42513E65B8900D3D8F2</string>
 											<string>CA40D42613E65B8900D3D8F2</string>
 											<string>CA40D42713E65B8900D3D8F2</string>
-											<string>CA40D42813E65B8900D3D8F2</string>
 											<string>CA40D42913E65B8900D3D8F2</string>
 											<string>CA40D42A13E65B8900D3D8F2</string>
 											<string>CA40D42B13E65B8900D3D8F2</string>
 											<string>CA40D42C13E65B8900D3D8F2</string>
-											<string>CA40D42D13E65B8900D3D8F2</string>
 											<string>CA40D42E13E65B8900D3D8F2</string>
-											<string>CA40D42F13E65B8900D3D8F2</string>
-											<string>CA40D43013E65B8900D3D8F2</string>
 											<string>CA40D43113E65B8900D3D8F2</string>
 											<string>CA40D43213E65B8900D3D8F2</string>
 											<string>CA40D44813E65DB200D3D8F2</string>
 											<string>CA40D47513E6D7BD00D3D8F2</string>
-											<string>CA40D47613E6D7BD00D3D8F2</string>
+											<string>CA40D47E13E7A83300D3D8F2</string>
+											<string>CA40D47F13E7A83300D3D8F2</string>
+											<string>CA40D48013E7A83300D3D8F2</string>
+											<string>CA40D49913E8D43600D3D8F2</string>
+											<string>CA40D49A13E8D43600D3D8F2</string>
+											<string>CA40D4A013E8D45600D3D8F2</string>
+											<string>CA40D4A113E8D45600D3D8F2</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -558,7 +558,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {991, 457}}</string>
 								<key>RubberWindowFrame</key>
-								<string>519 304 1243 799 0 0 1920 1178 </string>
+								<string>625 258 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -578,7 +578,7 @@
 								<key>Frame</key>
 								<string>{{0, 462}, {991, 296}}</string>
 								<key>RubberWindowFrame</key>
-								<string>519 304 1243 799 0 0 1920 1178 </string>
+								<string>625 258 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -750,7 +750,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>519 304 1243 799 0 0 1920 1178 </string>
+	<string>625 258 1243 799 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

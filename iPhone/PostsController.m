@@ -662,7 +662,8 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
 	NSXMLElement *bodyElement;
 	NSString *type;
-	
+
+	[self errorAlertWithTitle:@"Got message" message:@"Oops! We couldn't update the posts."];
 	//MVR - filter for posts to this blogcast
 	if (![message isGroupChatMessageWithBody]) {
 		NSLog(@"Received a non-group chat XMPP message");
@@ -681,7 +682,7 @@ static const NSInteger kPostsRequestCount = 20;
 	if (isSynced) {
 		if ([self addMessage:message]) {
 			if (![self save])
-				NSLog(@"Error saving comment");
+				NSLog(@"Error saving post");
 			if (self.view.window == nil)
 				[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + 1];
 		} else {
@@ -701,7 +702,8 @@ static const NSInteger kPostsRequestCount = 20;
 	NSInteger numAdded = 0;
 	PostsParser *parser;
 	Post *post;
-	
+
+	self.postsRequest = nil;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update posts received status code %i", statusCode);
@@ -761,7 +763,6 @@ static const NSInteger kPostsRequestCount = 20;
 		self.maxId = post.id;
 	}
 	[parser release];
-	self.postsRequest = nil;
 	//MVR - if the array hasn't been allocated yet there is no need to allocate and check it
 	if (_postMessages) {
 		for (XMPPMessage *message in self.postMessages) {
@@ -781,9 +782,26 @@ static const NSInteger kPostsRequestCount = 20;
 }
 
 - (void)updatePostsFailed:(ASIHTTPRequest *)request {
-	NSLog(@"Update posts failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the posts."];
+	NSError *error;
+	
 	self.postsRequest = nil;
+	error = [request error];
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error updating posts: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the posts."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error updating posts: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the posts."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Update posts request cancelled");
+			break;
+		default:
+			NSLog(@"Error updating posts");
+			break;
+	}	
 }
 
 - (void)updatePostsStreamCellFinished:(ASIHTTPRequest *)request {
@@ -910,9 +928,12 @@ static const NSInteger kPostsRequestCount = 20;
 #pragma mark Dashboard notifications
 
 - (void)joinedRoom {
+	NSLog(@"MVR - JOINED ROOM!!!");
 	isSynced = NO;
-	if (!postsRequest)
-		[self updatePosts];
+	//MVR - if another request has been made cancel it
+	if (postsRequest)
+		[postsRequest cancel];
+	[self updatePosts];
 }
 
 - (void)leftRoom {
