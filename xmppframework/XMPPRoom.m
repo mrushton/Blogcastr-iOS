@@ -339,12 +339,14 @@ static NSString *const XMPPMUCOwnerNamespaceName = @"http://jabber.org/protocol/
 			// if the user is there. no need to notify. let's check that.
 			XMPPRoomOccupant *aoccupant = nil;
 			aoccupant = (XMPPRoomOccupant *)[occupants objectForKey:anick];
-			if (aoccupant) return;
-			aoccupant = [[XMPPRoomOccupant alloc] init];
-			[aoccupant setNick:anick];
-			[aoccupant setRole:role];
-			if (jid) [aoccupant setJid:[XMPPJID jidWithString:jid]];
-			[occupants setObject:aoccupant forKey:anick]; [aoccupant release];
+			//MVR - this needed to modified to handle the reconnect logic
+			if (!aoccupant) {
+				aoccupant = [[XMPPRoomOccupant alloc] init];
+				[aoccupant setNick:anick];
+				[aoccupant setRole:role];
+				if (jid) [aoccupant setJid:[XMPPJID jidWithString:jid]];
+				[occupants setObject:aoccupant forKey:anick]; [aoccupant release];
+			}
 			// let's notify delegate now..
 			//MVR - added delegate notification for joining room
 			if ([delegate respondsToSelector:@selector(xmppRoom:didEnter:)])

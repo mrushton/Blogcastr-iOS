@@ -518,13 +518,13 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	roomName = [NSString stringWithFormat:@"blogcast.%d@conference.blogcastr.com", [blogcast.id intValue]];
 #endif //DEVEL
 	//MVR - add a timestamp to the nickname to make it unique and work around reconnect issues
-	nickname = [NSString stringWithFormat:@"%@-%lf", xmppStream.myJID.resource, [[NSDate date] timeIntervalSince1970]];
+	nickname = xmppStream.myJID.resource;
 	xmppRoom = [[XMPPRoom alloc] initWithStream:xmppStream roomName:roomName nickName:nickname];
 	xmppRoom.delegate = dashboardController;
 	dashboardController.xmppRoom = xmppRoom;
 	[xmppRoom release];
 	//MVR - create each tab
-	postsController = [[PostsController alloc] init];
+	postsController = [[PostsController alloc] initWithNibName:nil bundle:nil];
 	postsController.managedObjectContext = self.managedObjectContext;
 	postsController.session = session;
 	postsController.blogcast = blogcast;
@@ -533,7 +533,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	//MVR - XMPP notifications
 	[[NSNotificationCenter defaultCenter] addObserver:postsController selector:@selector(joinedRoom) name:@"joinedRoom" object:dashboardController];
 	[[NSNotificationCenter defaultCenter] addObserver:postsController selector:@selector(leftRoom) name:@"leftRoom" object:dashboardController];
-	postsController.tabBarItem.title = @"Posts";
+	//postsController.tabBarItem.title = @"Posts";
 	commentsController = [[CommentsController alloc] initWithStyle:UITableViewStylePlain];
 	commentsController.managedObjectContext = self.managedObjectContext;
 	commentsController.session = session;

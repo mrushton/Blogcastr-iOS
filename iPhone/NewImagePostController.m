@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
 #import "UIImage+Resize.h"
+#import "UINavigationBar+ButtonColor.h"
 
 @implementation NewImagePostController
 
@@ -75,6 +76,7 @@
 	theTextView.placeholder = @"(optional)";
 	self.textView = theTextView;
 	[theTextView release];
+	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(blueButtonColor) withName:@"Post"];
 }
 
 /*

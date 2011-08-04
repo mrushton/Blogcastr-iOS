@@ -116,8 +116,6 @@
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-	NSLog(@"MVR - DID AUTH HOME");
-
 	didAuthenticate = YES;
 }
 
@@ -175,10 +173,10 @@
 #ifdef DEVEL
 	xmppStream.myJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@sandbox.blogcastr.com/dashboard", session.user.username]];
 	xmppStream.hostName = @"sandbox.blogcastr.com";
-#else
+#else //DEVEL
 	xmppStream.myJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@blogcastr.com/dashboard", session.user.username]];
 	xmppStream.hostName = @"ejabberd.blogcastr.com";
-#endif
+#endif //DEVEL
 	if (![xmppStream connect:&error]) {
 		NSLog(@"Error connecting to XMPP server: %@", error);
 		return FALSE;

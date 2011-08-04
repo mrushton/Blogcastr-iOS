@@ -156,9 +156,25 @@
 		<data>
 		p/4ki5Tya1XXuMQsq7kTTKju6qA=
 		</data>
+		<key>comments.png</key>
+		<data>
+		gyb599f/DOUnGwF2ZoMymAQwVpg=
+		</data>
+		<key>comments@2x.png</key>
+		<data>
+		qLSlXrObRvG+ezDSsBqnR6zSQaw=
+		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		g4A3MpKB+n2+3P1wNtOPKDDqTj8=
+		</data>
+		<key>info.png</key>
+		<data>
+		plTd5F+2K3uA9ybCKE8Qr1RTGhE=
+		</data>
+		<key>info@2x.png</key>
+		<data>
+		kh4n0LfK0nHrHkwbY9ysr6izo/U=
 		</data>
 		<key>logo@2x~iphone.png</key>
 		<data>
@@ -167,6 +183,14 @@
 		<key>logo~iphone.png</key>
 		<data>
 		Nv9WBwCgV8CSo93F4jxO+7iacLg=
+		</data>
+		<key>posts.png</key>
+		<data>
+		/LrUpt78QXzRXdX63mJPpUgzsEc=
+		</data>
+		<key>posts@2x.png</key>
+		<data>
+		zU/4E63U6CiHhY8pHBct+xS5zqQ=
 		</data>
 	</dict>
 	<key>rules</key>

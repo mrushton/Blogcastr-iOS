@@ -11,6 +11,7 @@
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
+#import "UINavigationBar+ButtonColor.h"
 
 
 @implementation NewTextPostController
@@ -70,6 +71,7 @@
 	theTextView.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	self.textView = theTextView;
 	[theTextView release];
+	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(blueButtonColor) withName:@"Post"];
 }
 
 /*

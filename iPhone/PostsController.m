@@ -46,15 +46,20 @@ static const CGFloat kCommentIconWidth = 16;
 static const NSInteger kPostsRequestCount = 20;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-/*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+		UIImage *image;
+		UITabBarItem *theTabBarItem;
+
         // Custom initialization.
+		image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"posts" ofType:@"png"]];
+		theTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Posts" image:image tag:0];
+		self.tabBarItem = theTabBarItem;
+		[theTabBarItem release];
     }
     return self;
 }
-*/
 
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
@@ -663,7 +668,6 @@ static const NSInteger kPostsRequestCount = 20;
 	NSXMLElement *bodyElement;
 	NSString *type;
 
-	[self errorAlertWithTitle:@"Got message" message:@"Oops! We couldn't update the posts."];
 	//MVR - filter for posts to this blogcast
 	if (![message isGroupChatMessageWithBody]) {
 		NSLog(@"Received a non-group chat XMPP message");
@@ -928,7 +932,7 @@ static const NSInteger kPostsRequestCount = 20;
 #pragma mark Dashboard notifications
 
 - (void)joinedRoom {
-	NSLog(@"MVR - JOINED ROOM!!!");
+	NSLog(@"MVR - JOINED ROOM");
 	isSynced = NO;
 	//MVR - if another request has been made cancel it
 	if (postsRequest)

@@ -35,10 +35,17 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     self = [super initWithStyle:style];
     if (self) {
+		UIImage *image;
+		UITabBarItem *theTabBarItem;
+
         // Custom initialization.
-		//MVR - created blogcast notification
+		image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"png"]];
+		theTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:image tag:0];
+		self.tabBarItem = theTabBarItem;
+		[theTabBarItem release];
+		//MVR - updated blogcast notification
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedBlogcast) name:@"updatedBlogcast" object:nil];
-    }
+	}
     return self;
 }
 

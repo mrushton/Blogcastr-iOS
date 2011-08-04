@@ -1,0 +1,6 @@
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m: In function '-[UIViewController(Helpers) changeNavigationButtonColor:withName:]':
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m:16: error: 'UINavigationButton' undeclared (first use in this function)
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m:16: error: (Each undeclared identifier is reported only once
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m:16: error: for each function it appears in.)
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m:16: error: expected expression before ')' token
+/Users/mrushton/Desktop/Blogcastr-iOS/Categories/UIViewController+Helpers.m:17: error: expected expression before ')' token

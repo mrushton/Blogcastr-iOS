@@ -32,6 +32,13 @@
 		CA0D841113CBE36400FC1330 /* Subscription.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0D841013CBE36400FC1330 /* Subscription.m */; };
 		CA0D84F513D3CFDF00FC1330 /* UserParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0D84F413D3CFDF00FC1330 /* UserParser.m */; };
 		CA3BADE113DFC4C7004F1A39 /* ResizeImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3BADE013DFC4C7004F1A39 /* ResizeImageOperation.m */; };
+		CA40D4D913E8F85C00D3D8F2 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D313E8F85C00D3D8F2 /* comments.png */; };
+		CA40D4DA13E8F85C00D3D8F2 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D413E8F85C00D3D8F2 /* comments@2x.png */; };
+		CA40D4DB13E8F85C00D3D8F2 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D513E8F85C00D3D8F2 /* info.png */; };
+		CA40D4DC13E8F85C00D3D8F2 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D613E8F85C00D3D8F2 /* info@2x.png */; };
+		CA40D4DD13E8F85C00D3D8F2 /* posts.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D713E8F85C00D3D8F2 /* posts.png */; };
+		CA40D4DE13E8F85C00D3D8F2 /* posts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D813E8F85C00D3D8F2 /* posts@2x.png */; };
+		CA40D50F13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA40D50E13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m */; };
 		CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA58CB67133E78FA00BBC5D9 /* Three20.bundle */; };
 		CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */; };
 		CA59BBFF131339F600416E4D /* SignInView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */; };
@@ -305,6 +312,14 @@
 		CA0D84F413D3CFDF00FC1330 /* UserParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserParser.m; sourceTree = "<group>"; };
 		CA3BADDF13DFC4C7004F1A39 /* ResizeImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeImageOperation.h; sourceTree = "<group>"; };
 		CA3BADE013DFC4C7004F1A39 /* ResizeImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeImageOperation.m; sourceTree = "<group>"; };
+		CA40D4D313E8F85C00D3D8F2 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comments.png; path = ../comments.png; sourceTree = "<group>"; };
+		CA40D4D413E8F85C00D3D8F2 /* comments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comments@2x.png"; path = "../comments@2x.png"; sourceTree = "<group>"; };
+		CA40D4D513E8F85C00D3D8F2 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = info.png; path = ../info.png; sourceTree = "<group>"; };
+		CA40D4D613E8F85C00D3D8F2 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "info@2x.png"; path = "../info@2x.png"; sourceTree = "<group>"; };
+		CA40D4D713E8F85C00D3D8F2 /* posts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = posts.png; path = ../posts.png; sourceTree = "<group>"; };
+		CA40D4D813E8F85C00D3D8F2 /* posts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "posts@2x.png"; path = "../posts@2x.png"; sourceTree = "<group>"; };
+		CA40D50D13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ButtonColor.h"; sourceTree = "<group>"; };
+		CA40D50E13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ButtonColor.m"; sourceTree = "<group>"; };
 		CA58CB67133E78FA00BBC5D9 /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
 		CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
 		CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
@@ -517,6 +532,8 @@
 				2860E388111B897F00E27156 /* AppDelegate_iPhone.m */,
 				CA660C0813C0F74D00EEC2F3 /* CommentController.h */,
 				CA660C0913C0F74D00EEC2F3 /* CommentController.m */,
+				CA40D4D313E8F85C00D3D8F2 /* comments.png */,
+				CA40D4D413E8F85C00D3D8F2 /* comments@2x.png */,
 				CA99C66D139A981000DCE077 /* CommentsController.h */,
 				CA99C66E139A981000DCE077 /* CommentsController.m */,
 				CA9A49AA136C87F400E10E51 /* DashboardController.h */,
@@ -525,6 +542,8 @@
 				CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */,
 				CA59BE5A13199D7A00416E4D /* HomeController.h */,
 				CA59BE5B13199D7A00416E4D /* HomeController.m */,
+				CA40D4D513E8F85C00D3D8F2 /* info.png */,
+				CA40D4D613E8F85C00D3D8F2 /* info@2x.png */,
 				CA0024CD13A3C43300A4B36F /* InfoController.h */,
 				CA0024CE13A3C43300A4B36F /* InfoController.m */,
 				CA59CBA4132DE31C00416E4D /* logo~iphone.png */,
@@ -538,6 +557,8 @@
 				CA9A4B47136E225A00E10E51 /* NewTextPostController.m */,
 				CA6609A613AD420400EEC2F3 /* PostController.h */,
 				CA6609A713AD420400EEC2F3 /* PostController.m */,
+				CA40D4D713E8F85C00D3D8F2 /* posts.png */,
+				CA40D4D813E8F85C00D3D8F2 /* posts@2x.png */,
 				CA9A49D3136C958C00E10E51 /* PostsController.h */,
 				CA9A49D4136C958C00E10E51 /* PostsController.m */,
 				CA59BCB3131381E900416E4D /* RootController_iPhone.h */,
@@ -811,6 +832,8 @@
 				CA9A4D1D1373898700E10E51 /* UIImage+Resize.m */,
 				CA9A4D1E1373898700E10E51 /* UIImage+RoundedCorner.h */,
 				CA9A4D1F1373898700E10E51 /* UIImage+RoundedCorner.m */,
+				CA40D50D13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.h */,
+				CA40D50E13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1098,6 +1121,12 @@
 				CA59CBA5132DE31C00416E4D /* logo~iphone.png in Resources */,
 				CA59CBA7132DE32700416E4D /* logo@2x~iphone.png in Resources */,
 				CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */,
+				CA40D4D913E8F85C00D3D8F2 /* comments.png in Resources */,
+				CA40D4DA13E8F85C00D3D8F2 /* comments@2x.png in Resources */,
+				CA40D4DB13E8F85C00D3D8F2 /* info.png in Resources */,
+				CA40D4DC13E8F85C00D3D8F2 /* info@2x.png in Resources */,
+				CA40D4DD13E8F85C00D3D8F2 /* posts.png in Resources */,
+				CA40D4DE13E8F85C00D3D8F2 /* posts@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,6 +1220,7 @@
 				CA0D841113CBE36400FC1330 /* Subscription.m in Sources */,
 				CA0D84F513D3CFDF00FC1330 /* UserParser.m in Sources */,
 				CA3BADE113DFC4C7004F1A39 /* ResizeImageOperation.m in Sources */,
+				CA40D50F13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

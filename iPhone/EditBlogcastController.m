@@ -11,12 +11,11 @@
 #import "DatePickerController.h"
 #import "TextViewWithPlaceholder.h"
 #import "ASIFormDataRequest.h"
+#import "UINavigationBar+ButtonColor.h"
 
 
 @implementation EditBlogcastController
 
-
-@class UINavigationButton;
 
 @synthesize managedObjectContext;
 @synthesize session;
@@ -97,7 +96,7 @@
 	theTagsTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.tagsTextView = theTagsTextView;
 	[theTagsTextView release];	
-	[self changeNavigationButtonColorWithName:@"Update"];
+	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(blueButtonColor) withName:@"Update"];
 }
 
 /*
@@ -509,13 +508,6 @@
 
 #pragma mark -
 #pragma mark Helpers
-
-- (void)changeNavigationButtonColorWithName:(NSString *)name {
-	for (UIView *view in self.navigationController.navigationBar.subviews) {
-		if ([[[view class] description] isEqualToString:@"UINavigationButton"] && [[(UINavigationButton *)view currentTitle] isEqualToString:name])
-			[(UINavigationButton *)view setTintColor:[UIColor colorWithRed:0.294 green:0.522 blue:0.753 alpha:1.0]];
-	}       
-}
 
 - (NSURL *)updateBlogcastUrl {
 	NSString *string;

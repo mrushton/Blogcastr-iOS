@@ -37,6 +37,14 @@
 	return [UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1.0];
 }
 
+- (UIColor *)blueButtonColor {
+	return [UIColor colorWithRed:0.294 green:0.522 blue:0.753 alpha:1.0];
+}
+
+- (UIColor *)redButtonColor {
+	return [UIColor colorWithRed:0.557 green:0.229 blue:0.127 alpha:1.0];
+}
+
 - (UIColor *)blueTextColor {
 	return [UIColor colorWithRed:0.22 green:0.329 blue:0.529 alpha:1.0];
 }

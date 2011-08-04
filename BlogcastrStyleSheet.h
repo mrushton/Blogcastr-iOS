@@ -18,6 +18,8 @@
 
 - (UIColor *)tableViewSeperatorColor;
 - (UIColor *)lightBackgroundColor;
+- (UIColor *)blueButtonColor;
+- (UIColor *)redButtonColor;
 - (UIColor *)blueTextColor;
 - (UIColor *)blueGrayTextColor;
 

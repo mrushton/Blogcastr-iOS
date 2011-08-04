@@ -15,6 +15,7 @@
 #import "BlogcastrStyleSheet.h"
 #import "ASIFormDataRequest.h"
 #import "NSDate+Timestamp.h"
+#import "UINavigationBar+ButtonColor.h"
 
 
 @implementation PostController
@@ -64,7 +65,11 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	theTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:theTableView];
 	self.tableView = theTableView;
-	[theTableView release];	
+	[theTableView release];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(redButtonColor) withName:@"Delete"];
 }
 
 /*
