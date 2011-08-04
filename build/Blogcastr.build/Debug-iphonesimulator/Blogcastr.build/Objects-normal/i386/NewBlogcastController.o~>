@@ -1,9 +1,0 @@
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m: In function '-[NewBlogcastController progressHud]':
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:296: warning: class 'NewBlogcastController' does not implement the 'MBProgressHUDDelegate' protocol
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m: In function '-[NewBlogcastController create]':
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:360: warning: 'NewBlogcastController' may not respond to '-newBlogcastUrl'
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:360: warning: (Messages without a matching method signature
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:360: warning: will be assumed to return 'id' and accept
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:360: warning: '...' as arguments.)
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:344: warning: unused variable 'url'
-/Users/mrushton/Desktop/Blogcastr-iOS/NewBlogcastController.m:343: warning: unused variable 'string'

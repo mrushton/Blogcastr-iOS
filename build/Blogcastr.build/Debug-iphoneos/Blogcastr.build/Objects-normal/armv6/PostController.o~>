@@ -1,5 +1,0 @@
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostController.m: In function '-[PostController tableView:cellForRowAtIndexPath:]':
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostController.m:214: warning: 'NSDate' may not respond to '-stringInWords'
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostController.m:214: warning: (Messages without a matching method signature
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostController.m:214: warning: will be assumed to return 'id' and accept
-/Users/mrushton/Desktop/Blogcastr-iOS/iPhone/PostController.m:214: warning: '...' as arguments.)

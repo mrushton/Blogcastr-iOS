@@ -1,4 +1,0 @@
-/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:25: warning: property 'postsUpdatedAt' requires method '-postsUpdatedAt' to be defined - use @synthesize, @dynamic or provide a method implementation
-/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:25: warning: property 'postsUpdatedAt' requires the method 'setPostsUpdatedAt:' to be defined - use @synthesize, @dynamic or provide a method implementation
-/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:25: warning: property 'commentsUpdatedAt' requires method '-commentsUpdatedAt' to be defined - use @synthesize, @dynamic or provide a method implementation
-/Users/mrushton/Desktop/Blogcastr-iOS/Shared/Blogcast.m:25: warning: property 'commentsUpdatedAt' requires the method 'setCommentsUpdatedAt:' to be defined - use @synthesize, @dynamic or provide a method implementation
