@@ -68,9 +68,10 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	[theTableView release];
 }
 
+/*
 - (void)viewDidAppear:(BOOL)animated {
-	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(redButtonColor) withName:@"Delete"];
 }
+*/
 
 /*
 // Override to allow orientations other than the default portrait orientation.

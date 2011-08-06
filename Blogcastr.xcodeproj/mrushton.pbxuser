@@ -209,9 +209,9 @@
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = Release;
 		activeExecutable = CA59BBE91313357E00416E4D /* Blogcastr */;
-		activeSDKPreference = iphonesimulator4.2;
+		activeSDKPreference = iphoneos4.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Blogcastr */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Blogcastr */,
@@ -569,6 +569,7 @@
 			CA87E16213ED1F8C00F2C432 /* PBXTextBookmark */ = CA87E16213ED1F8C00F2C432 /* PBXTextBookmark */;
 			CA87E16313ED1F8C00F2C432 /* PBXTextBookmark */ = CA87E16313ED1F8C00F2C432 /* PBXTextBookmark */;
 			CA87E16413ED1F8C00F2C432 /* PBXTextBookmark */ = CA87E16413ED1F8C00F2C432 /* PBXTextBookmark */;
+			CA87E16713EDA27800F2C432 /* PBXTextBookmark */ = CA87E16713EDA27800F2C432 /* PBXTextBookmark */;
 			CA99C1BF1388D78000DCE077 = CA99C1BF1388D78000DCE077 /* PBXTextBookmark */;
 			CA99C2081388E6D000DCE077 = CA99C2081388E6D000DCE077 /* PBXTextBookmark */;
 			CA99C303138994BC00DCE077 = CA99C303138994BC00DCE077 /* PBXTextBookmark */;
@@ -688,10 +689,10 @@
 	};
 	CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */ = {
 		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{8392, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{8443, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{8493, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 18601}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1069, 7124}}";
-			sepNavSelRange = "{3900, 116}";
-			sepNavVisRange = "{1715, 2118}";
+			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{8276, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{8327, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{8377, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 18485}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1069, 7137}}";
+			sepNavSelRange = "{3900, 0}";
+			sepNavVisRange = "{1894, 2094}";
 		};
 	};
 	CA0D829313C58E2500FC1330 /* PBXTextBookmark */ = {
@@ -1731,7 +1732,7 @@
 		isa = PBXTextBookmark;
 		fRef = CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */;
 		name = "EditBlogcastController.m: 99";
-		rLen = 116;
+		rLen = 0;
 		rLoc = 3900;
 		rType = 0;
 		vrLen = 1196;
@@ -1802,7 +1803,7 @@
 		fRef = CA6609A713AD420400EEC2F3 /* PostController.m */;
 		name = "PostController.m: 71";
 		rLen = 0;
-		rLoc = 2201;
+		rLoc = 2204;
 		rType = 0;
 		vrLen = 884;
 		vrLoc = 3395;
@@ -1959,9 +1960,9 @@
 	CA59BE971319BA2E00416E4D /* SignInController.m */ = {
 		uiCtxt = {
 			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{5936, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{5987, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{6037, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 12218}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {930, 4862}}";
-			sepNavSelRange = "{3489, 0}";
-			sepNavVisRange = "{2800, 1031}";
+			sepNavIntBoundsRect = "{{0, 0}, {930, 4836}}";
+			sepNavSelRange = "{3451, 0}";
+			sepNavVisRange = "{2887, 1140}";
 		};
 	};
 	CA59C38C1322FCE500416E4D /* UserController.h */ = {
@@ -2667,9 +2668,9 @@
 	};
 	CA74E2911353F8F000788D04 /* MBProgressHUD.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1328, 8671}}";
+			sepNavIntBoundsRect = "{{0, 0}, {930, 8697}}";
 			sepNavSelRange = "{3215, 11}";
-			sepNavVisRange = "{18301, 1651}";
+			sepNavVisRange = "{1441, 1211}";
 			sepNavWindowFrame = "{{15, 371}, {1252, 802}}";
 		};
 	};
@@ -3086,7 +3087,7 @@
 		fRef = CA6609A713AD420400EEC2F3 /* PostController.m */;
 		name = "PostController.m: 189";
 		rLen = 0;
-		rLoc = 5743;
+		rLoc = 5634;
 		rType = 0;
 		vrLen = 1366;
 		vrLoc = 5248;
@@ -3450,7 +3451,7 @@
 		fRef = CA6609A713AD420400EEC2F3 /* PostController.m */;
 		name = "PostController.m: 353";
 		rLen = 53;
-		rLoc = 11667;
+		rLoc = 11558;
 		rType = 0;
 		vrLen = 1494;
 		vrLoc = 11218;
@@ -3640,7 +3641,7 @@
 		fRef = CA6609A713AD420400EEC2F3 /* PostController.m */;
 		name = "PostController.m: 511";
 		rLen = 0;
-		rLoc = 16846;
+		rLoc = 16737;
 		rType = 0;
 		vrLen = 853;
 		vrLoc = 16266;
@@ -3650,7 +3651,7 @@
 		fRef = CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */;
 		name = "EditBlogcastController.m: 465";
 		rLen = 0;
-		rLoc = 15273;
+		rLoc = 15157;
 		rType = 0;
 		vrLen = 1516;
 		vrLoc = 14753;
@@ -4184,7 +4185,7 @@
 		isa = PBXTextBookmark;
 		fRef = CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */;
 		name = "EditBlogcastController.m: 99";
-		rLen = 116;
+		rLen = 0;
 		rLoc = 3900;
 		rType = 0;
 		vrLen = 2118;
@@ -4361,6 +4362,16 @@
 		rType = 0;
 		vrLen = 1031;
 		vrLoc = 2800;
+	};
+	CA87E16713EDA27800F2C432 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA59BE971319BA2E00416E4D /* SignInController.m */;
+		name = "SignInController.m: 99";
+		rLen = 0;
+		rLoc = 3451;
+		rType = 0;
+		vrLen = 1140;
+		vrLoc = 2887;
 	};
 	CA99C1BF1388D78000DCE077 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

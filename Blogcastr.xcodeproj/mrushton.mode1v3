@@ -301,7 +301,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>400 225 1243 799 0 0 1920 1178 </string>
+						<string>184 237 1243 799 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -331,7 +331,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CA87E16413ED1F8C00F2C432</string>
+										<string>CA87E16713EDA27800F2C432</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -567,7 +567,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {991, 568}}</string>
 								<key>RubberWindowFrame</key>
-								<string>400 225 1243 799 0 0 1920 1178 </string>
+								<string>184 237 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -587,7 +587,7 @@
 								<key>Frame</key>
 								<string>{{0, 573}, {991, 185}}</string>
 								<key>RubberWindowFrame</key>
-								<string>400 225 1243 799 0 0 1920 1178 </string>
+								<string>184 237 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -759,7 +759,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>400 225 1243 799 0 0 1920 1178 </string>
+	<string>184 237 1243 799 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

@@ -96,7 +96,6 @@
 	theTagsTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.tagsTextView = theTagsTextView;
 	[theTagsTextView release];	
-	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(blueButtonColor) withName:@"Update"];
 }
 
 /*
