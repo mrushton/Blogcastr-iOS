@@ -25,6 +25,8 @@
 @property (nonatomic, retain) NSDate * blogcastsUpdatedAt;
 @property (nonatomic, retain) NSNumber * numSubscriptions;
 @property (nonatomic, retain) NSString * avatarUrl;
+@property (nonatomic, retain) NSString * authenticationToken;
+@property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * bio;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSDate * updatedAt;

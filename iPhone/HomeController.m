@@ -111,7 +111,7 @@
 	NSError *error = nil;
 	
 	wasToldToDisconnect = NO;
-	if (![xmppStream authenticateWithPassword:session.password error:&error])
+	if (![xmppStream authenticateWithPassword:session.user.password error:&error])
 		NSLog(@"Error trying to authenticate with XMPP server: %@", error);
 }
 

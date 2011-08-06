@@ -23,6 +23,8 @@
 @dynamic blogcastsUpdatedAt;
 @dynamic numSubscriptions;
 @dynamic avatarUrl;
+@dynamic authenticationToken;
+@dynamic password;
 @dynamic bio;
 @dynamic type;
 @dynamic updatedAt;

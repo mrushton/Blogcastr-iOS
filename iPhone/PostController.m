@@ -506,9 +506,9 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/posts/%d.xml?authentication_token=%@", [post.id integerValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/posts/%d.xml?authentication_token=%@", [post.id integerValue], session.user.authenticationToken];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http://blogcastr.com/posts/%d.xml?authentication_token=%@", [post.id integerValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/posts/%d.xml?authentication_token=%@", [post.id integerValue], session.user.authenticationToken];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	

@@ -368,7 +368,7 @@
 	[theRequest setDelegate:self];
 	[theRequest setDidFinishSelector:@selector(newTextPostFinished:)];
 	[theRequest setDidFailSelector:@selector(newTextPostFailed:)];
-	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest addPostValue:textView.text forKey:@"text_post[text]"];
 	[theRequest addPostValue:@"iPhone" forKey:@"text_post[from]"];
 	[theRequest startAsynchronous];

@@ -932,7 +932,6 @@ static const NSInteger kPostsRequestCount = 20;
 #pragma mark Dashboard notifications
 
 - (void)joinedRoom {
-	NSLog(@"MVR - JOINED ROOM");
 	isSynced = NO;
 	//MVR - if another request has been made cancel it
 	if (postsRequest)

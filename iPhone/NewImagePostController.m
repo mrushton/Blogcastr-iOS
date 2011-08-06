@@ -454,7 +454,7 @@
 	[theRequest setUploadProgressDelegate:self];
 	[theRequest setDidFinishSelector:@selector(newImagePostFinished:)];
 	[theRequest setDidFailSelector:@selector(newImagePostFailed:)];
-	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest addPostValue:textView.text forKey:@"image_post[text]"];
 	[theRequest addPostValue:@"iPhone" forKey:@"image_post[from]"];
 	//MVR - data is autoreleased

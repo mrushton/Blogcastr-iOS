@@ -235,10 +235,9 @@
 		[tabToolbarController presentModalViewController:imagePickerController animated:YES];
 		[imagePickerController release];
 	} else if (actionSheet == _signOutActionSheet && buttonIndex == 0) {
-		NSError *error;
-		
-		//MVR - clear Session object
-		session.authenticationToken = nil;
+		//MVR - clear user session
+		session.user.authenticationToken = nil;
+		session.user.password = nil;
 		session.user = nil;
 		if (![self save]) {
 			NSLog(@"Error saving session");
@@ -264,7 +263,7 @@
 	//MVR - display HUD
 	[self showWindowProgressHudWithLabelText:@"Uploading avatar..." animated:YES animationType:MBProgressHUDAnimationZoom];
 	request = [ASIFormDataRequest requestWithURL:[self settingsUrl]];
-	[request addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[request addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	data = UIImageJPEGRepresentation(image, 0.5);
 	[request addData:data withFileName:@"avatar.jpg" andContentType:@"image/jpeg" forKey:@"setting[avatar]"];
 	//MVR - settings update is a PUT request

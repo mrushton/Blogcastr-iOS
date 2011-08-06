@@ -321,6 +321,7 @@
 	[managedObjectContext release];
 	[session release];
 	[startingAt release];
+	[titleTextField release];
 	[_progressHud release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
@@ -455,7 +456,7 @@
 	[theRequest setDelegate:self];
 	[theRequest setDidFinishSelector:@selector(createBlogcastFinished:)];
 	[theRequest setDidFailSelector:@selector(createBlogcastFailed:)];
-	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest addPostValue:titleTextField.text forKey:@"blogcast[title]"];
 	if (startingAt) {
 		NSDateFormatter *dateFormatter;

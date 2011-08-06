@@ -151,6 +151,8 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 		avatarUrl = [self avatarUrlForUser:comment.user size:@"super"];
 	else
 		avatarUrl = [self avatarUrlForUser:comment.user size:@"small"];
+	NSLog(@"MVR - avatar URL %@",avatarUrl);
+
 	if ([comment.user.type isEqual:@"BlogcastrUser"])
 		username = comment.user.username;
 	else if ([comment.user.type isEqual:@"FacebookUser"])
@@ -306,7 +308,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(postCommentFinished:)];
 	[request setDidFailSelector:@selector(postCommentFailed:)];
-	[request addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[request addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	//TODO: currently param format isn't standard
 	[request addPostValue:comment.id forKey:@"comment_id"];
 	[request addPostValue:@"iPhone" forKey:@"from"];

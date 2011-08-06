@@ -113,7 +113,7 @@ static NSOperationQueue *sharedOperationQueue;
 
 - (void)viewWillDisappear:(BOOL)animated {
 	UINavigationBar *navigationBar;
-	
+
 	//MVR - navigation bar
 	navigationBar = self.navigationController.navigationBar;
     navigationBar.barStyle = UIBarStyleDefault;
@@ -272,7 +272,8 @@ static NSOperationQueue *sharedOperationQueue;
 - (void)requestDidFinishLoad:(TTURLRequest *)theRequest {
 	ResizeImageOperation *resizeImageOperation;
 	TTURLImageResponse *response;
-	
+
+	NSLog(@"MVR - request FINISHED WELL");
 	resizeImageOperation = [[ResizeImageOperation alloc] init];
 	response = theRequest.response;
 	resizeImageOperation.image = response.image;

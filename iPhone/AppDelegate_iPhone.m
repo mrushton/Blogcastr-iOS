@@ -36,12 +36,12 @@
 	[[TTURLRequestQueue mainQueue] setMaxContentLength:0];
 	//MVR - increase default timeout for ASIHTTPRequest
 	[ASIHTTPRequest setDefaultTimeOutSeconds:60.0];
-	//MVR - always add the root controller and present the session controller modally if not signed in
+	//MVR - always add the root controller and present the sign in controller modally if not signed in
 	rootController = [[RootController_iPhone alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;
 	rootController.session = self.session;
 	[window addSubview:rootController.view];
-	if (!self.session.authenticationToken) {
+	if (!self.session.user || !self.session.user.authenticationToken) {
 		SignInController *signInController;
 		
 		signInController = [[SignInController alloc] init];

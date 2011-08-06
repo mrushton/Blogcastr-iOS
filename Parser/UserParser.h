@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Subscription.h"
+#import "User.h"
 
 @interface UserParser : NSObject <NSXMLParserDelegate> {
 	NSManagedObjectContext *managedObjectContext;
@@ -23,6 +24,7 @@
 	NSString *fullName;
 	NSString *web;
 	NSString *avatarUrl;
+	NSString *authenticationToken;
 	NSNumber *numBlogcasts;
 	NSNumber *numSubscriptions;
 	NSNumber *numSubscribers;
@@ -31,6 +33,7 @@
 	NSNumber *numLikes;
 	BOOL isSubscribed;
 	BOOL inStats;
+	User *user;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -44,12 +47,14 @@
 @property (nonatomic, copy) NSString *fullName;
 @property (nonatomic, copy) NSString *web;
 @property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSString *authenticationToken;
 @property (nonatomic, copy) NSNumber *numBlogcasts;
 @property (nonatomic, copy) NSNumber *numSubscriptions;
 @property (nonatomic, copy) NSNumber *numSubscribers;
 @property (nonatomic, copy) NSNumber *numPosts;
 @property (nonatomic, copy) NSNumber *numComments;
 @property (nonatomic, copy) NSNumber *numLikes;
+@property (nonatomic, retain) User *user;
 
 - (BOOL)parse;
 

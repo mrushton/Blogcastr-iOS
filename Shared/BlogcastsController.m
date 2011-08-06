@@ -934,10 +934,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #pragma mark Actions
 
 - (void)createdBlogcast {
-	NSLog(@"MVR - created BLOGCAST");
 	if (isUpdating == NO) {
-		NSLog(@"MVR - created BLOGCAST fa real");
-
 		isUpdating = YES;
 		[self updateBlogcasts];
 	}
@@ -955,9 +952,14 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #else //DEVEL
 	string = [[NSString stringWithFormat:@"http://blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 #endif //DEVEL
+	
+	
+	
 	//MVR - add a max id if set
 	if (maxId)
 		string = [string stringByAppendingString:[[NSString stringWithFormat:@"&max_id=%d", maxId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	NSLog(@"MVR - BLOGCASTS URL %@",string);
+
 	url = [NSURL URLWithString:string];
 	
 	return url;

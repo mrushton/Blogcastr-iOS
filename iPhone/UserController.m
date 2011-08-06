@@ -526,7 +526,7 @@
 	[theRequest setDelegate:self];
 	[theRequest setDidFinishSelector:@selector(subscribeFinished:)];
 	[theRequest setDidFailSelector:@selector(subscribeFailed:)];
-	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest startAsynchronous];
 }
 
@@ -676,9 +676,9 @@
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.user.authenticationToken];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d.xml?authentication_token=%@", [user.id intValue], session.user.authenticationToken];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	
@@ -704,9 +704,9 @@
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.user.authenticationToken];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/users/%d/subscriptions.xml?authentication_token=%@", [user.id intValue], session.user.authenticationToken];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	

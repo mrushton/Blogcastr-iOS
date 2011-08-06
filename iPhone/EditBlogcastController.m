@@ -462,7 +462,7 @@
 	[theRequest setDelegate:self];
 	[theRequest setDidFinishSelector:@selector(updateBlogcastFinished:)];
 	[theRequest setDidFailSelector:@selector(updateBlogcastFailed:)];
-	[theRequest addPostValue:session.authenticationToken forKey:@"authentication_token"];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest addPostValue:titleTextField.text forKey:@"blogcast[title]"];
 	dateFormatter = [[NSDateFormatter alloc] init];
 	//MVR - year

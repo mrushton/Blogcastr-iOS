@@ -23,12 +23,14 @@
 @synthesize fullName;
 @synthesize web;
 @synthesize avatarUrl;
+@synthesize authenticationToken;
 @synthesize numBlogcasts;
 @synthesize numSubscriptions;
 @synthesize numSubscribers;
 @synthesize numPosts;
 @synthesize numComments;
 @synthesize numLikes;
+@synthesize user;
 
 #pragma mark -
 #pragma mark Methods
@@ -61,12 +63,14 @@
 	[bio release];
 	[web release];
 	[avatarUrl release];
+	[authenticationToken release];
 	[numBlogcasts release];
 	[numSubscriptions release];
 	[numSubscribers release];
 	[numPosts release];
 	[numComments release];
 	[numLikes release];
+	[user release];
 	[super dealloc];
 }
 
@@ -84,12 +88,14 @@
 	self.bio = nil;
 	self.web = nil;
 	self.avatarUrl = nil;
+	self.authenticationToken = nil;
 	self.numBlogcasts = nil;
 	self.numSubscriptions = nil;
 	self.numSubscribers = nil;
 	self.numPosts = nil;
 	self.numComments = nil;
 	self.numLikes = nil;
+	self.user = nil;
 	inStats = NO;
 }
 
@@ -106,7 +112,7 @@
 		NSEntityDescription *entity;
 		NSPredicate *predicate;
 		NSArray *array;
-		User *user;
+		User *theUser;
 		NSError *error;
 		
 		//MVR - find user if they exists
@@ -120,35 +126,40 @@
 		[request release];
 		//MVR - create post if it doesn't exist
 		if ([array count] > 0)
-			user = [array objectAtIndex:0];
+			theUser = [array objectAtIndex:0];
 		else
-			user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
-		user.id = userId;
+			theUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+		theUser.id = userId;
 		self.userId = nil;
-		user.username = username;
+		//MVR - parser only handles Blogcastr users
+		theUser.type = @"BlogcastrUser";
+		theUser.username = username;
 		self.username = nil;
-		user.fullName = fullName;
+		theUser.fullName = fullName;
 		self.fullName = nil;
-		user.location = location;
+		theUser.location = location;
 		self.location = nil;
-		user.bio = bio;
+		theUser.bio = bio;
 		self.bio = nil;
-		user.web = web;
+		theUser.web = web;
 		self.web = nil;
-		user.avatarUrl = avatarUrl;
+		theUser.avatarUrl = avatarUrl;
 		self.avatarUrl = nil;
-		user.numBlogcasts = numBlogcasts;
+		theUser.authenticationToken = authenticationToken;
+		self.authenticationToken = nil;
+		theUser.numBlogcasts = numBlogcasts;
 		self.numBlogcasts = nil;
-		user.numSubscriptions = numSubscriptions;
+		theUser.numSubscriptions = numSubscriptions;
 		self.numSubscriptions = nil;
-		user.numSubscribers = numSubscribers;
+		theUser.numSubscribers = numSubscribers;
 		self.numSubscribers = nil;
-		user.numPosts = numPosts;
+		theUser.numPosts = numPosts;
 		self.numPosts = nil;
-		user.numComments = numComments;
+		theUser.numComments = numComments;
 		self.numComments = nil;
-		user.numLikes = numLikes;
+		theUser.numLikes = numLikes;
 		self.numLikes = nil;
+		self.user = theUser;
 	} else if ([elementName isEqual:@"id"]) {
 		self.userId = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"username"]) {
@@ -163,6 +174,8 @@
 		self.web = mutableString;
 	} else if ([elementName isEqual:@"bio"]) {
 		self.bio = mutableString;
+	} else if ([elementName isEqual:@"authentication-token"]) {
+		self.authenticationToken = mutableString;
 	} else if ([elementName isEqual:@"blogcasts"]) {
 		if (inStats)
 			self.numBlogcasts = [NSNumber numberWithInteger:[mutableString integerValue]];

@@ -641,9 +641,9 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/blogcasts/%d.xml?authentication_token=%@", [blogcast.id integerValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/blogcasts/%d.xml?authentication_token=%@", [blogcast.id integerValue], session.user.authenticationToken];
 #else //DEVEL
-	string = [NSString stringWithFormat:@"http://blogcastr.com/blogcasts/%d.xml?authentication_token=%@", [blogcast.id integerValue], session.authenticationToken];
+	string = [NSString stringWithFormat:@"http://blogcastr.com/blogcasts/%d.xml?authentication_token=%@", [blogcast.id integerValue], session.user.authenticationToken];
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	
