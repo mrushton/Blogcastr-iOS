@@ -33,6 +33,7 @@
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
 	NSMutableArray *_commentMessages;
 	ASIHTTPRequest *commentsRequest;
+	ASIHTTPRequest *commentsFooterRequest;
 	NSMutableArray *_streamCellRequests;
 	BOOL isSynced;
 	BOOL isUpdatingFooter;
@@ -55,6 +56,7 @@
 @property (nonatomic, readonly) NSMutableArray *commentMessages;
 @property (nonatomic, readonly) NSMutableArray *streamCellRequests;
 @property (nonatomic, retain) ASIHTTPRequest *commentsRequest;
+@property (nonatomic, retain) ASIHTTPRequest *commentsFooterRequest;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
 @property (nonatomic, readonly) UIAlertView *alertView;

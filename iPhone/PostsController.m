@@ -35,6 +35,7 @@
 @synthesize infiniteScrollView;
 @synthesize postMessages;
 @synthesize postsRequest;
+@synthesize postsFooterRequest;
 @synthesize streamCellRequests;
 @synthesize fastTimer;
 @synthesize slowTimer;
@@ -42,7 +43,8 @@
 static const CGFloat kPostBarViewHeight = 40.0;
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const CGFloat kScrollCellHeight = 40.0;
-static const CGFloat kCommentIconWidth = 16;
+static const CGFloat kCommentIconWidth = 15.0;
+static const CGFloat kCommentIconHeight = 14.0;
 static const NSInteger kPostsRequestCount = 20;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -87,16 +89,14 @@ static const NSInteger kPostsRequestCount = 20;
 	topBar.style = style;
 	//MVR - set up the post buttons
 	newTextPostButton = [TTButton buttonWithStyle:@"blueButtonWithImage:" title:@"New Text Post"];
-	//MVR - image url based on screen resolution
-	//if ([[UIScreen mainScreen] scale] > 1.0)
-	//[textPostButton setImage:@"bundle://logo~iphone.png" forState:UIControlStateNormal];
+	[newTextPostButton setImage:@"bundle://new-text-post.png" forState:UIControlStateNormal];
 	[newTextPostButton addTarget:self action:@selector(newTextPost:) forControlEvents:UIControlEventTouchUpInside]; 
 	newTextPostButton.frame = CGRectMake(5.0, 6.0, 150.0, 28.0);
 	[topBar addSubview:newTextPostButton];
 	newImagePostButton = [TTButton buttonWithStyle:@"orangeButtonWithImage:" title:@"New Image Post"];
 	//MVR - image url based on screen resolution
 	//if ([[UIScreen mainScreen] scale] > 1.0)
-	//[textPostButton setImage:@"bundle://logo~iphone.png" forState:UIControlStateNormal];
+	[newImagePostButton setImage:@"bundle://new-image-post.png" forState:UIControlStateNormal];
 	[newImagePostButton addTarget:self action:@selector(newImagePost:) forControlEvents:UIControlEventTouchUpInside]; 
 	newImagePostButton.frame = CGRectMake(165.0, 6.0, 150.0, 28.0);
 	[topBar addSubview:newImagePostButton];
@@ -174,16 +174,20 @@ static const NSInteger kPostsRequestCount = 20;
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
 	[tableView release];
-	if (postsRequest)
-		[postsRequest setDelegate:nil];
-	[_postMessages release];
+	[postsRequest clearDelegatesAndCancel];
 	[postsRequest release];
+	[postsFooterRequest clearDelegatesAndCancel];
+	[postsFooterRequest release];
+	[_postMessages release];
 	[_maxId release];
 	[_minId release];
 	[fastTimer invalidate];
 	[fastTimer release];
 	[slowTimer invalidate];
 	[slowTimer release];
+	//AS DESIGNED: if not allocated that is ok
+	for (ASIHTTPRequest *request in _streamCellRequests)
+		[request clearDelegatesAndCancel];
 	[_streamCellRequests release];
 	[_alertView release];
     [super dealloc];
@@ -450,8 +454,16 @@ static const NSInteger kPostsRequestCount = 20;
 	} else if ([post.type isEqual:@"CommentPost"]) {
 		cell = (BlogcastrTableViewCell *)[theTableView dequeueReusableCellWithIdentifier:@"CommentPost"];
 		//MVR - if cell doesn't exist create it
-		if (!cell) {	
+		if (!cell) {
+			UIImage *image;
+			UIImageView *imageView;
+			
 			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentPost"] autorelease];
+			image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"comment" ofType:@"png"]]; 
+			imageView = [[UIImageView alloc] initWithImage:image];
+			imageView.frame = CGRectMake(5.0, 5.0, kCommentIconWidth, kCommentIconHeight);
+			[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
+			[imageView release];
 			usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0 + kCommentIconWidth, 5.0, 100.0, 20.0)];
 			usernameLabel.font = [UIFont boldSystemFontOfSize:12.0];
 			usernameLabel.backgroundColor = [UIColor clearColor];
@@ -934,8 +946,8 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)joinedRoom {
 	isSynced = NO;
 	//MVR - if another request has been made cancel it
-	if (postsRequest)
-		[postsRequest cancel];
+	[postsRequest clearDelegatesAndCancel];
+	self.postsRequest = nil;
 	[self updatePosts];
 }
 
@@ -1170,7 +1182,7 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)updatePostsStreamCell:(PostStreamCell *)streamCell {
 	NSURL *url;
 	ASIHTTPRequest *request;
-	
+
 	url = [self postsUrlWithMaxId:[streamCell.maxId intValue] count:kPostsRequestCount];	
 	request = [ASIHTTPRequest requestWithURL:url];
 	request.userInfo = [NSDictionary dictionaryWithObject:streamCell forKey:@"PostStreamCell"];
@@ -1185,7 +1197,7 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)updatePostsFooter {
 	NSURL *url;
 	ASIHTTPRequest *request;
-	
+
 	url = [self postsUrlWithMaxId:[self.minId intValue] - 1 count:kPostsRequestCount];	
 	request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
@@ -1193,6 +1205,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[request setDidFailSelector:@selector(updatePostsFooterFailed:)];
 	[request startAsynchronous];
 	isUpdatingFooter = YES;
+	self.postsFooterRequest = request;
 }
 
 - (NSURL *)postsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count {

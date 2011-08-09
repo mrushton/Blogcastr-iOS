@@ -32,13 +32,15 @@
 @synthesize infiniteScrollView;
 @synthesize commentMessages;
 @synthesize commentsRequest;
+@synthesize commentsFooterRequest;
 @synthesize streamCellRequests;
 @synthesize fastTimer;
 @synthesize slowTimer;
 
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const CGFloat kScrollCellHeight = 40.0;
-static const CGFloat kCommentIconWidth = 16;
+static const CGFloat kCommentIconWidth = 15.0;
+static const CGFloat kCommentIconHeight = 14.0;
 static const NSInteger kCommentsRequestCount = 20;
 
 #pragma mark -
@@ -204,7 +206,15 @@ static const NSInteger kCommentsRequestCount = 20;
 		cell = (BlogcastrTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Comment"];
 		//MVR - if cell doesn't exist create it
 		if (!cell) {
+			UIImage *image;
+			UIImageView *imageView;
+
 			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Comment"] autorelease];
+			image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"comment" ofType:@"png"]]; 
+			imageView = [[UIImageView alloc] initWithImage:image];
+			imageView.frame = CGRectMake(5.0, 5.0, kCommentIconWidth, kCommentIconHeight);
+			[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
+			[imageView release];
 			usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0 + kCommentIconWidth, 5.0, 100.0, 20.0)];
 			usernameLabel.font = [UIFont boldSystemFontOfSize:12.0];
 			usernameLabel.backgroundColor = [UIColor clearColor];
@@ -340,16 +350,20 @@ static const NSInteger kCommentsRequestCount = 20;
 	[blogcast release];
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
-	if (commentsRequest)
-		[commentsRequest setDelegate:nil];
-	[_commentMessages release];
+	[commentsRequest clearDelegatesAndCancel];
 	[commentsRequest release];
+	[commentsFooterRequest clearDelegatesAndCancel];
+	[commentsFooterRequest release];
+	[_commentMessages release];
 	[_maxId release];
 	[_minId release];
 	[fastTimer invalidate];
 	[fastTimer release];
 	[slowTimer invalidate];
 	[slowTimer release];
+	//AS DESIGNED: if not allocated that is ok
+	for (ASIHTTPRequest *request in _streamCellRequests)
+		[request clearDelegatesAndCancel];
 	[_streamCellRequests release];
 	[_alertView release];
     [super dealloc];
@@ -755,10 +769,8 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)joinedRoom {
 	isSynced = NO;
 	//MVR - if another request has been made cancel it
-	if (commentsRequest) {
-		[commentsRequest cancel];
-		self.commentsRequest = nil;
-	}
+	[commentsRequest clearDelegatesAndCancel];
+	self.commentsRequest = nil;
 	[self updateComments];
 }
 
@@ -987,6 +999,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	[request setDidFailSelector:@selector(updateCommentsFooterFailed:)];
 	[request startAsynchronous];
 	isUpdatingFooter = YES;
+	self.commentsFooterRequest = request;
 }
 
 - (NSURL *)commentsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count {

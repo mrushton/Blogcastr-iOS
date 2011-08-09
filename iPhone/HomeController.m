@@ -139,7 +139,7 @@
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender {
-	//MVR - do manual start if we haven't connected yet
+	//MVR - do manual start if we haven't connected yet and didn't sign out
 	if (didAuthenticate == NO && wasToldToDisconnect == NO)
 		[xmppReconnect manualStart];
 }

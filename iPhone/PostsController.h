@@ -35,6 +35,7 @@
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
 	NSMutableArray *_postMessages;
 	ASIHTTPRequest *postsRequest;
+	ASIHTTPRequest *postsFooterRequest;
 	NSMutableArray *_streamCellRequests;
 	BOOL isSynced;
 	BOOL isUpdatingFooter;
@@ -57,6 +58,7 @@
 @property (nonatomic, readonly) NSMutableArray *postMessages;
 @property (nonatomic, readonly) NSMutableArray *streamCellRequests;
 @property (nonatomic, retain) ASIHTTPRequest *postsRequest;
+@property (nonatomic, retain) ASIHTTPRequest *postsFooterRequest;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
 @property (nonatomic, retain) Timer *fastTimer;

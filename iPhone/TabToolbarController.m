@@ -8,7 +8,6 @@
 
 #import <Three20/Three20.h>
 #import "TabToolbarController.h"
-#import "RootController_iPhone.h"
 
 
 @implementation TabToolbarController
@@ -128,7 +127,6 @@
 	//AS DESIGNED: this does nothing to the tab bar
 	[viewControllers release];
 	viewControllers = [theViewControllers copy];
-	NSLog(@"MVR - setting view controllers %d", [viewControllers count]);
 	//MVR - set up the tab bar views
 	for (int i = 0; i < [viewControllers count]; i++) {
 		UIViewController<TabToolbarControllerProtocol> *viewController;

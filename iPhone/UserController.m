@@ -361,6 +361,8 @@
 		//MVR - hide the loading progress HUD
 		[self.viewProgressHud hide:YES];
 	}
+	//MVR - enable the subscribe button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update user received status code %i", statusCode);
@@ -386,7 +388,6 @@
 	self.tableView.tableFooterView = [self footerView];
 	//MVR - update the navigation button
 	if (subscription) {
-		self.navigationItem.rightBarButtonItem.enabled = YES;
 		if ([subscription.isSubscribed boolValue])
 			self.navigationItem.rightBarButtonItem = [self unsubscribeButton];
 		else
@@ -399,9 +400,9 @@
 	
 	//MVR - hide the subscription progress HUD
 	[self.windowProgressHud hide:YES];
-	statusCode = [theRequest responseStatusCode];
 	//MVR - enable subscribe button
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error subscribe received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Subscribe failed" message:@"Oops! We couldn't subscribe you."];

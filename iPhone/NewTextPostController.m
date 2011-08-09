@@ -71,7 +71,6 @@
 	theTextView.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	self.textView = theTextView;
 	[theTextView release];
-	[self.navigationController.navigationBar changeButtonColor:BLOGCASTRSTYLEVAR(blueButtonColor) withName:@"Post"];
 }
 
 /*
@@ -228,14 +227,14 @@
 
 - (UIActionSheet *)cancelActionSheet {
 	if (!_cancelActionSheet)
-		_cancelActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles: nil];
+		_cancelActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Discard Post" otherButtonTitles: nil];
 	
 	return _cancelActionSheet;
 }
 
 - (UIActionSheet *)cancelRequestActionSheet {
 	if (!_cancelRequestActionSheet)
-		_cancelRequestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear Post" otherButtonTitles:@"Cancel Upload", nil];
+		_cancelRequestActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Discard Post" otherButtonTitles:@"Cancel Upload", nil];
 	
 	return _cancelRequestActionSheet;
 }
@@ -286,7 +285,6 @@
 	NSError *error;
 
 	self.request = nil;
-	error = [theRequest error];
 	//MVR - we need to dismiss the action sheet here for some reason
 	if (self.cancelRequestActionSheet.visible)
 		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
@@ -294,6 +292,7 @@
 	[self.progressHud hide:YES];
 	//MVR - enable post button
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	error = [theRequest error];
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error posting text: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);

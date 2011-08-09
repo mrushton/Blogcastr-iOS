@@ -250,6 +250,8 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
+	//MVR - enable post button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error post comment received status code %i", statusCode);
@@ -263,11 +265,11 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 - (void)postCommentFailed:(ASIHTTPRequest *)theRequest {
 	NSError *error;
 	
-	error = [theRequest error];
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
-	//MVR - enable delete button
+	//MVR - enable post button
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	error = [theRequest error];
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error posting comment: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);

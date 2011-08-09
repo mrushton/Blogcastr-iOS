@@ -256,8 +256,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[managedObjectContext release];
 	[session release];
 	[blogcast release];
-	if (blogcastRequest)
-		[blogcastRequest setDelegate:nil];
+	[blogcastRequest clearDelegatesAndCancel];
 	[blogcastRequest release];
 	[timer invalidate];
 	[timer release];

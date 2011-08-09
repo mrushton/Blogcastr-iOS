@@ -69,13 +69,15 @@
 	theTitleTextField.text = blogcast.title;
 	theTitleTextField.placeholder = @"Title";
 	theTitleTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	theTitleTextField.textColor = TTSTYLEVAR(blueTextColor);
+	theTitleTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	theTitleTextField.returnKeyType = UIReturnKeyNext;
-	[theTitleTextField addTarget:self action:@selector(titleEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
+	[theTitleTextField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
+	[theTitleTextField addTarget:self action:@selector(titleEntered) forControlEvents:UIControlEventEditingDidEndOnExit];
 	self.titleTextField = theTitleTextField;
 	[theTitleTextField release];
 	self.startingAt = blogcast.startingAt;
 	theDescriptionTextView = [[TextViewWithPlaceholder alloc] initWithFrame:CGRectMake(2.0, 4.0, 296.0, 112.0)];
+	theDescriptionTextView.delegate = self;
 	//MVR - slight hack with insets to make the top align a little nicer
 	theDescriptionTextView.contentInset = UIEdgeInsetsMake(-4.0, 0.0, 0.0, 0.0);
 	theDescriptionTextView.backgroundColor = [UIColor clearColor];	
@@ -86,6 +88,7 @@
 	self.descriptionTextView = theDescriptionTextView;
 	[theDescriptionTextView release];
 	theTagsTextView = [[TextViewWithPlaceholder alloc] initWithFrame:CGRectMake(2.0, 4.0, 296.0, 82.0)];
+	theTagsTextView.delegate = self;
 	theTagsTextView.contentInset = UIEdgeInsetsMake(-4.0, 0.0, 0.0, 0.0);
 	theTagsTextView.backgroundColor = [UIColor clearColor];	
 	theTagsTextView.font = [UIFont systemFontOfSize:15.0];
@@ -95,7 +98,9 @@
 	theTagsTextView.autocorrectionType = UITextAutocorrectionTypeNo;
 	theTagsTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.tagsTextView = theTagsTextView;
-	[theTagsTextView release];	
+	[theTagsTextView release];
+	//MVR - disable update button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 /*
@@ -352,7 +357,8 @@
 		[dateFormatter setDateFormat:@"E, MMM d h:mm a"];
 		cell.detailTextLabel.text = [dateFormatter stringFromDate:startingAt];
 		[dateFormatter release];
-	}		
+	}
+	[self updateNavigationButtons];
 }
 
 #pragma mark -
@@ -370,7 +376,7 @@
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update blogcast received status code %i", statusCode);
-		//MVR - enable create button
+		//MVR - enable update button
 		self.navigationItem.rightBarButtonItem.enabled = YES;
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcast."];
 		return;
@@ -383,14 +389,14 @@
 	NSError *error;
 	
 	self.request = nil;
-	error = [theRequest error];
 	//MVR - we need to dismiss the action sheet here for some reason
 	if (self.cancelRequestActionSheet.visible)
 		[self.cancelRequestActionSheet dismissWithClickedButtonIndex:0 animated:YES];
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
-	//MVR - enable create button
+	//MVR - enable update button
 	self.navigationItem.rightBarButtonItem.enabled = YES;
+	error = [theRequest error];
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating blogcast: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
@@ -430,10 +436,19 @@
 				[request cancel];
 			[self dismissModalViewControllerAnimated:YES];
 		} else if (buttonIndex == 1) {
+			//MVR - enable the update button
+			self.navigationItem.rightBarButtonItem.enabled = YES;
 			if (request)
 				[request cancel];
 		}
 	}
+}
+
+#pragma mark -
+#pragma mark UITextView delegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+	[self updateNavigationButtons];
 }
 
 #pragma mark -
@@ -448,6 +463,8 @@
 		[self errorAlertWithTitle:@"Empty field" message:@"Oops! You need to enter a title."];
 		return;
 	}
+	//MVR - disable the update button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 	//MVR - dismiss keyboard
 	if (titleTextField.isFirstResponder)
 		[titleTextField resignFirstResponder];
@@ -488,7 +505,7 @@
 }
 
 - (void)cancel {
-	//MVR - if empty just dismiss the controller
+	//MVR - if no changes just dismiss the controller
 	if ([titleTextField.text isEqualToString:blogcast.title] && [startingAt isEqualToDate:blogcast.startingAt] && (([descriptionTextView.text isEqualToString:@""] && (!blogcast.theDescription || [blogcast.theDescription isEqualToString:@""])) || [descriptionTextView.text isEqual:blogcast.theDescription]) && (([tagsTextView.text isEqualToString:@""] && (!blogcast.tags || [blogcast.tags isEqualToString:@""])) || [tagsTextView.text isEqual:blogcast.tags])) {
 		[self dismissModalViewControllerAnimated:YES];
 		return;
@@ -499,7 +516,11 @@
 		[self.cancelActionSheet showInView:self.navigationController.view];
 }
 
-- (void)titleEntered:(id)object {
+- (void)textChanged {
+	[self updateNavigationButtons];
+}
+
+- (void)titleEntered {
 	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:YES scrollPosition:UITableViewScrollPositionTop];
 	//MVR - make description text view the first responder
 	[descriptionTextView becomeFirstResponder];
@@ -507,6 +528,14 @@
 
 #pragma mark -
 #pragma mark Helpers
+
+- (void)updateNavigationButtons {
+	//MVR - if no changes disable update button
+	if ([titleTextField.text isEqualToString:blogcast.title] && [startingAt isEqualToDate:blogcast.startingAt] && (([descriptionTextView.text isEqualToString:@""] && (!blogcast.theDescription || [blogcast.theDescription isEqualToString:@""])) || [descriptionTextView.text isEqual:blogcast.theDescription]) && (([tagsTextView.text isEqualToString:@""] && (!blogcast.tags || [blogcast.tags isEqualToString:@""])) || [tagsTextView.text isEqual:blogcast.tags]))
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+	else
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+}
 
 - (NSURL *)updateBlogcastUrl {
 	NSString *string;

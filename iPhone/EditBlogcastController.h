@@ -15,7 +15,7 @@
 #import "ASIHTTPRequest.h"
 
 
-@interface EditBlogcastController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate> {
+@interface EditBlogcastController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate, UITextViewDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	Blogcast *blogcast;
@@ -43,6 +43,7 @@
 @property (nonatomic, retain) UIAlertView *alertView;
 @property (nonatomic, retain) ASIHTTPRequest *request;
 
+- (void)updateNavigationButtons;
 - (NSURL *)updateBlogcastUrl;
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;

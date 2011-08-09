@@ -1,6 +1,6 @@
 //
 //  RootController_iPhone.h
-//  Broadcaster
+//  Blogcaster
 //
 //  Created by Matthew Rushton on 8/10/10.
 //  Copyright 2010 Blogcastr. All rights reserved.
@@ -23,6 +23,5 @@
 
 - (void)signIn;
 - (void)signOut;
-- (RootController_iPhone *)initWithRootViewController:(UIViewController *)viewController; 
 
 @end
