@@ -28,16 +28,21 @@
 #pragma mark -
 #pragma mark Initialization
 
-/*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     self = [super initWithStyle:style];
     if (self) {
+		UIImage *image;
+		UITabBarItem *theTabBarItem;
+		
         // Custom initialization.
+		image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"settings" ofType:@"png"]];
+		theTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:image tag:0];
+		self.tabBarItem = theTabBarItem;
+		[theTabBarItem release];
     }
     return self;
 }
-*/
 
 
 #pragma mark -

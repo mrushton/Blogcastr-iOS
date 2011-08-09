@@ -43,7 +43,7 @@
 	theUsernameTextField.placeholder = @"Username/Email";
 	theUsernameTextField.keyboardType = UIKeyboardTypeEmailAddress;
 	theUsernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	theUsernameTextField.textColor = TTSTYLEVAR(blueTextColor);
+	theUsernameTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	theUsernameTextField.returnKeyType = UIReturnKeyNext;
 	theUsernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
 	theUsernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -54,7 +54,7 @@
 	thePasswordTextField.placeholder = @"Password";
 	thePasswordTextField.secureTextEntry = YES;
 	thePasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	thePasswordTextField.textColor = TTSTYLEVAR(blueTextColor);
+	thePasswordTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	thePasswordTextField.returnKeyType = UIReturnKeyGo;
 	thePasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
 	thePasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;

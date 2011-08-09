@@ -40,6 +40,14 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (id)initWithStyle:(UITableViewStyle)style {
 	self = [super initWithStyle:style];
 	if (self) {
+		UIImage *image;
+		UITabBarItem *theTabBarItem;
+		
+        // Custom initialization.
+		image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blogcasts" ofType:@"png"]];
+		theTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Blogcasts" image:image tag:0];
+		self.tabBarItem = theTabBarItem;
+		[theTabBarItem release];		
 		//MVR - created blogcast notification
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createdBlogcast) name:@"createdBlogcast" object:nil];
 	}
@@ -342,7 +350,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	Blogcast *blogcast;
     BlogcastrTableViewCell *cell;
 	TTImageView *imageView;
-	UILabel *title;
+	UILabel *titleLabel;
 	NSString *text;
 	TTStyledTextLabel *styledText;
 
@@ -384,18 +392,17 @@ static const NSInteger kBlogcastsRequestCount = 20;
 
 		
 		//MVR - set up the cell
-		title = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 252.0, 20.0)];
-		title.backgroundColor = [UIColor clearColor];
-		title.textColor = [UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0];//[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
-		title.font = [UIFont boldSystemFontOfSize:15.0];
-		title.tag = TITLE_LABEL_TAG;
-		title.text = [NSString stringWithFormat:@"%@", blogcast.title];
+		titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 252.0, 20.0)];
+		titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.textColor = [UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0];//[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+		titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
+		titleLabel.tag = TITLE_LABEL_TAG;
+		titleLabel.text = [NSString stringWithFormat:@"%@", blogcast.title];
 
-		[cell.contentView insertSubview:title belowSubview:cell.highlightView];
+		[cell.contentView insertSubview:titleLabel belowSubview:cell.highlightView];
 
-		title.text = [NSString stringWithFormat:@"%@", blogcast.title];
 
-		[title release];
+		[titleLabel release];
 	/*	if (blogcast.description) {
 			description = [[UILabel alloc] initWithFrame:CGRectMake(52.0, 22.0, 264.0, 20)];
 			description.tag = DESCRIPTION_VIEW_TAG;
@@ -411,7 +418,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	*/
 		//MVR - add to cell
 	} else {
-		title = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
+		NSLog(@"MVR - FINDGIN TITLE");
+		titleLabel = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
 		imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 		styledText = (TTStyledTextLabel *)[cell viewWithTag:STYLED_TEXT_TAG];
 		//description = (UILabel *)[cell viewWithTag:DESCRIPTION_VIEW_TAG];
@@ -422,7 +430,15 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		imageView.urlPath = [self avatarUrlForSize:@"super"];
 	else
 		imageView.urlPath = [self avatarUrlForSize:@"small"];
-	title.text = [NSString stringWithFormat:@"%@", blogcast.title];
+	if (!titleLabel)
+		NSLog(@"TITLE IS NIL!");
+	titleLabel.text = [NSString stringWithFormat:@"%@", blogcast.title];
+	NSLog(@"MVR - BLOGCAST TITEL IN CELL %@ %@",titleLabel.text,blogcast.title);
+	if ([titleLabel isDescendantOfView:cell])
+		NSLog(@"MVR - IS DESCENDANT");
+	else
+		NSLog(@"MVR - IS NOT DESCENDANT");
+
 	if (blogcast.theDescription)
 		text = [NSString stringWithFormat:@"<b>%@</b> <span class=\"blueText\">%@</span>  <span class=\"timestampInWords\">%@<span>", user.username, blogcast.theDescription, [blogcast.startingAt stringInWords]]; 
 	else

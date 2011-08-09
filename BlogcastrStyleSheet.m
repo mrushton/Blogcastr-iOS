@@ -120,10 +120,11 @@
            [TTReflectiveFillStyle styleWithColor:stateTintColor next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.75] blur:2.0 offset:CGSizeMake(0.0, 1.0) next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.867 green:0.91 blue:0.894 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:
-           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0) next:
-           [TTImageStyle styleWithImageURL:nil defaultImage:nil contentMode:UIViewContentModeTopLeft size:CGSizeMake(10.0, 10.0) next:
-           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(0.0, 20.0, 0.0, 0.0) next:
-           [TTTextStyle styleWithFont:font color:[UIColor whiteColor] minimumFontSize:0.0 shadowColor:textShadowColor shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentLeft verticalAlignment:UIControlContentVerticalAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation numberOfLines:1 next:nil]]]]]]]];
+           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(6.0, 10.0, 0.0, 0.0) next:
+           [TTShapeStyle styleWithShape:[TTRectangleShape shape] next:
+           [TTImageStyle styleWithImageURL:nil defaultImage:nil contentMode:UIViewContentModeTopLeft size:CGSizeMake(17.0, 16.0) next:
+           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(-6.0, 20.0, 0.0, 0.0) next:
+           [TTTextStyle styleWithFont:font color:[UIColor whiteColor] minimumFontSize:0.0 shadowColor:textShadowColor shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentLeft verticalAlignment:UIControlContentVerticalAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation numberOfLines:1 next:nil]]]]]]]]];
 }
 
 - (TTStyle *)orangeButtonWithImage:(UIControlState)state {
@@ -142,10 +143,11 @@
            [TTReflectiveFillStyle styleWithColor:stateTintColor next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.75] blur:2.0 offset:CGSizeMake(0.0, 1.0) next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.867 green:0.91 blue:0.894 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:
-           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0) next:
-           [TTImageStyle styleWithImageURL:nil defaultImage:nil	contentMode:UIViewContentModeTopLeft size:CGSizeMake(10.0, 10.0) next:
-           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(0.0, 20.0, 0.0, 0.0) next:
-           [TTTextStyle styleWithFont:font color:[UIColor whiteColor] minimumFontSize:0.0 shadowColor:textShadowColor shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentLeft verticalAlignment:UIControlContentVerticalAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation numberOfLines:1 next:nil]]]]]]]];
+           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(6.0, 10.0, 0.0, 0.0) next:
+           [TTShapeStyle styleWithShape:[TTRectangleShape shape] next:
+           [TTImageStyle styleWithImageURL:nil defaultImage:nil	contentMode:UIViewContentModeTopLeft size:CGSizeMake(19.0, 16.0) next:
+           [TTBoxStyle styleWithPadding:UIEdgeInsetsMake(-6.0, 22.0, 0.0, 0.0) next:
+           [TTTextStyle styleWithFont:font color:[UIColor whiteColor] minimumFontSize:0.0 shadowColor:textShadowColor shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentLeft verticalAlignment:UIControlContentVerticalAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation numberOfLines:1 next:nil]]]]]]]]];
 }
 
 - (TTStyle *)redTableFooterButton:(UIControlState)state {
