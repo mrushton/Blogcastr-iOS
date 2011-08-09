@@ -145,7 +145,9 @@
 		self.web = nil;
 		theUser.avatarUrl = avatarUrl;
 		self.avatarUrl = nil;
-		theUser.authenticationToken = authenticationToken;
+		//MVR - do not clear the authentication token
+		if (authenticationToken)
+			theUser.authenticationToken = authenticationToken;
 		self.authenticationToken = nil;
 		theUser.numBlogcasts = numBlogcasts;
 		self.numBlogcasts = nil;
