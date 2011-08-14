@@ -1,4 +1,4 @@
-    //
+//
 //  CommentController.m
 //  Blogcastr
 //
@@ -23,6 +23,7 @@
 @synthesize session;
 @synthesize comment;
 @synthesize tableView;
+@synthesize request;
 
 static const CGFloat kTableViewSectionWidth = 284.0;
 
@@ -92,6 +93,9 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 
 - (void)dealloc {
 	[tableView release];
+	//MVR - no need to cancel request
+	[request setDelegate:nil];
+	[request release];
 	[_progressHud release];
 	[_alertView release];
     [super dealloc];
@@ -151,8 +155,6 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 		avatarUrl = [self avatarUrlForUser:comment.user size:@"super"];
 	else
 		avatarUrl = [self avatarUrlForUser:comment.user size:@"small"];
-	NSLog(@"MVR - avatar URL %@",avatarUrl);
-
 	if ([comment.user.type isEqual:@"BlogcastrUser"])
 		username = comment.user.username;
 	else if ([comment.user.type isEqual:@"FacebookUser"])
@@ -247,7 +249,8 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 
 - (void)postCommentFinished:(ASIHTTPRequest *)theRequest {
 	int statusCode;
-	
+
+	self.request = nil;
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	//MVR - enable post button
@@ -264,7 +267,8 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 
 - (void)postCommentFailed:(ASIHTTPRequest *)theRequest {
 	NSError *error;
-	
+
+	self.request = nil;
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	//MVR - enable post button
@@ -300,21 +304,22 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 #pragma mark Actions
 
 - (void)postComment {
-	ASIFormDataRequest *request;
+	ASIFormDataRequest *theRequest;
 	
 	//MVR - disable delete button
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 	[self showProgressHudWithLabelText:@"Posting comment..." animated:YES animationType:MBProgressHUDAnimationZoom];
-	request = [ASIFormDataRequest requestWithURL:[self postCommentUrl]];
-	[request setRequestMethod:@"POST"];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(postCommentFinished:)];
-	[request setDidFailSelector:@selector(postCommentFailed:)];
-	[request addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
+	theRequest = [ASIFormDataRequest requestWithURL:[self postCommentUrl]];
+	[theRequest setRequestMethod:@"POST"];
+	[theRequest setDelegate:self];
+	[theRequest setDidFinishSelector:@selector(postCommentFinished:)];
+	[theRequest setDidFailSelector:@selector(postCommentFailed:)];
+	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	//TODO: currently param format isn't standard
-	[request addPostValue:comment.id forKey:@"comment_id"];
-	[request addPostValue:@"iPhone" forKey:@"from"];
-	[request startAsynchronous];
+	[theRequest addPostValue:comment.id forKey:@"comment_id"];
+	[theRequest addPostValue:@"iPhone" forKey:@"from"];
+	[theRequest startAsynchronous];
+	self.request = theRequest;
 }
 
 - (void)pressAvatar {

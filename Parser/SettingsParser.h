@@ -24,6 +24,7 @@
 
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) User *user;
+//AS DESIGNED: copy always returns an immutable string
 @property (nonatomic, retain) NSMutableString *mutableString;
 @property (nonatomic, retain) NSString *bio;
 @property (nonatomic, retain) NSString *fullName;

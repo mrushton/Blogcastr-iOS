@@ -7,60 +7,117 @@
 //
 
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 #import "SignInController.h"
 #import "UserParser.h"
+#import "ErrorsParser.h"
 #import "BlogcastrStyleSheet.h"
+#import "NSString+Validations.h"
 
 @implementation SignInController
 
 @synthesize managedObjectContext;
 @synthesize session;
 @synthesize delegate;
-@synthesize usernameTextField;
-@synthesize passwordTextField;
+@synthesize signInUsernameTextField;
+@synthesize signInPasswordTextField;
+@synthesize signUpFullNameTextField;
+@synthesize signUpUsernameTextField;
+@synthesize signUpPasswordTextField;
+@synthesize signUpEmailTextField;
 
 #pragma mark -
 #pragma mark View lifecycle
 
+- (id)initWithStyle:(UITableViewStyle)style {
+	self = [super initWithStyle:style];
+    if (self) {
+		UIImage *titleImage;
+		UIImageView *titleView;
+		UITextField *theSignInUsernameTextField;
+		UITextField *theSignInPasswordTextField;
+		UITextField *theSignUpFullNameTextField;
+		UITextField *theSignUpUsernameTextField;
+		UITextField *theSignUpPasswordTextField;
+		UITextField *theSignUpEmailTextField;
+
+		titleImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+		titleView = [[UIImageView alloc] initWithImage:titleImage];
+		self.navigationItem.titleView = titleView;
+		[titleView release];
+		theSignInUsernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignInUsernameTextField.placeholder = @"Username/Email";
+		theSignInUsernameTextField.keyboardType = UIKeyboardTypeEmailAddress;
+		theSignInUsernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignInUsernameTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignInUsernameTextField.returnKeyType = UIReturnKeyNext;
+		theSignInUsernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignInUsernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignInUsernameTextField addTarget:self action:@selector(signInUsernameEntered) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signInUsernameTextField = theSignInUsernameTextField;
+		[theSignInUsernameTextField release];
+		theSignInPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignInPasswordTextField.placeholder = @"Password";
+		theSignInPasswordTextField.secureTextEntry = YES;
+		theSignInPasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignInPasswordTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignInPasswordTextField.returnKeyType = UIReturnKeyGo;
+		theSignInPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignInPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignInPasswordTextField addTarget:self action:@selector(signIn) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signInPasswordTextField = theSignInPasswordTextField;
+		[theSignInPasswordTextField release];
+		theSignUpFullNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignUpFullNameTextField.placeholder = @"Full name";
+		theSignUpFullNameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignUpFullNameTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignUpFullNameTextField.returnKeyType = UIReturnKeyNext;
+		theSignUpFullNameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignUpFullNameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignUpFullNameTextField addTarget:self action:@selector(signUpFullNameEntered) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signUpFullNameTextField = theSignUpFullNameTextField;
+		[theSignUpFullNameTextField release];
+		theSignUpUsernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignUpUsernameTextField.placeholder = @"Username";
+		theSignUpUsernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignUpUsernameTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignUpUsernameTextField.returnKeyType = UIReturnKeyNext;
+		theSignUpUsernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignUpUsernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignUpUsernameTextField addTarget:self action:@selector(signUpUsernameEntered) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signUpUsernameTextField = theSignUpUsernameTextField;
+		[theSignUpUsernameTextField release];
+		theSignUpPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignUpPasswordTextField.placeholder = @"Password";
+		theSignUpPasswordTextField.secureTextEntry = YES;
+		theSignUpPasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignUpPasswordTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignUpPasswordTextField.returnKeyType = UIReturnKeyNext;
+		theSignUpPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignUpPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignUpPasswordTextField addTarget:self action:@selector(signUpPasswordEntered) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signUpPasswordTextField = theSignUpPasswordTextField;
+		[theSignUpPasswordTextField release];
+		theSignUpEmailTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
+		theSignUpEmailTextField.placeholder = @"Email";
+		theSignUpEmailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+		theSignUpEmailTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		theSignUpEmailTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
+		theSignUpEmailTextField.returnKeyType = UIReturnKeyGo;
+		theSignUpEmailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		theSignUpEmailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		[theSignUpEmailTextField addTarget:self action:@selector(signUp) forControlEvents:UIControlEventEditingDidEndOnExit];
+		self.signUpEmailTextField = theSignUpEmailTextField;
+		[theSignUpEmailTextField release];
+    }
+
+    return self;
+}
+
 - (void)viewDidLoad {
-	NSArray *nibArray;
-	UIView *signInView;
-	UITextField *theUsernameTextField;
-	UITextField *thePasswordTextField;
-
-    [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
- 	//MVR - load Sign In View nib
-	//AS DESIGNED: nib loading uses the setter methods so the retain count does not need to be incremented
-	nibArray = [[NSBundle mainBundle] loadNibNamed:@"SignInView_iPhone" owner:self options:nil];
-	signInView = [nibArray objectAtIndex:0];
-	[self.view addSubview:signInView];
-	theUsernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
-	theUsernameTextField.placeholder = @"Username/Email";
-	theUsernameTextField.keyboardType = UIKeyboardTypeEmailAddress;
-	theUsernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	theUsernameTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
-	theUsernameTextField.returnKeyType = UIReturnKeyNext;
-	theUsernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-	theUsernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	[theUsernameTextField addTarget:self action:@selector(usernameEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
-	self.usernameTextField = theUsernameTextField;
-	[theUsernameTextField release];
-	thePasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, 284.0, 43.0)];
-	thePasswordTextField.placeholder = @"Password";
-	thePasswordTextField.secureTextEntry = YES;
-	thePasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-	thePasswordTextField.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
-	thePasswordTextField.returnKeyType = UIReturnKeyGo;
-	thePasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-	thePasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	[thePasswordTextField addTarget:self action:@selector(signIn:) forControlEvents:UIControlEventEditingDidEndOnExit];
-	self.passwordTextField = thePasswordTextField;
-	[thePasswordTextField release];
+	[super viewDidLoad];
+	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 }
 
 /*
@@ -97,13 +154,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+	if (section == 0)
+		return 2;
+	else
+		return 4;
 }
 
 
@@ -113,19 +173,33 @@
 	
 	// Set up the cell...
 
-	//AS DESIGNED: only 2 cells no need to make them reusable
+	//AS DESIGNED: only a few cells no need to make them reusable
 	cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	if (indexPath.row == 0)
-		[cell.contentView addSubview:usernameTextField];
-	else
-		[cell.contentView addSubview:passwordTextField];
-    
+	if (indexPath.section == 0) {
+		if (indexPath.row == 0)
+			[cell.contentView addSubview:signInUsernameTextField];
+		else
+			[cell.contentView addSubview:signInPasswordTextField];
+    } else {
+		if (indexPath.row == 0)
+			[cell.contentView addSubview:signUpFullNameTextField];
+		else if (indexPath.row == 1)
+			[cell.contentView addSubview:signUpUsernameTextField];
+		else if (indexPath.row == 2)
+			[cell.contentView addSubview:signUpPasswordTextField];
+		else
+			[cell.contentView addSubview:signUpEmailTextField];
+	}
+
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return @"Sign In";
+	if (section == 0)
+		return @"Sign In";
+	else
+		return @"Sign Up";
 }
 
 /*
@@ -193,19 +267,23 @@
     // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
+/*
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-	self.usernameTextField = nil;
-	self.passwordTextField = nil;
 }
+*/
 
 
 - (void)dealloc {
 	[managedObjectContext release];
 	[session release];
-	[usernameTextField release];
-	[passwordTextField release];
+	[signInUsernameTextField release];
+	[signInPasswordTextField release];
+	[signUpFullNameTextField release];
+	[signUpUsernameTextField release];
+	[signUpPasswordTextField release];
+	[signUpEmailTextField release];
 	[_alertView release];
 	[_progressHud release];
 	[super dealloc];
@@ -214,7 +292,7 @@
 - (MBProgressHUD *)progressHud {
 	if (!_progressHud) {
 		//MVR - use superview to handle a display bug
-		_progressHud = [[MBProgressHUD alloc] initWithView:self.view.superview];
+		_progressHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
 		_progressHud.delegate = self;
 	}
 	
@@ -241,7 +319,7 @@
 	[self.progressHud hide:YES];
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
-		[self errorAlertWithTitle:@"Authentication error" message:@"Oops! We couldn't sign you in."];
+		[self errorAlertWithTitle:@"Authentication error" message:@"Oops! We couldn't sign you in. Invalid username and password."];
 		return;
 	}
 	//MVR - parse response
@@ -255,12 +333,12 @@
 		return;
 	}
 	//MVR - need to save password for XMPP client
-	parser.user.password = passwordTextField.text;
-	if (![self save])
-		NSLog(@"Error saving user");
-	[parser release];
+	parser.user.password = signInPasswordTextField.text;
 	//MVR - update the session with authenticated user
 	session.user = parser.user;
+	if (![self save])
+		NSLog(@"Error saving user and session on sign in");
+	[parser release];
 	//MVR - sign in to the root view controller
 	//AS DESIGNED: use delegate to avoid compiler warning
 	[delegate signIn];
@@ -293,6 +371,91 @@
 	}	
 }
 
+- (void)signUpRequestFinished:(ASIHTTPRequest *)request {
+	int statusCode;
+	UserParser *userParser;
+	
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	statusCode = [request responseStatusCode];
+	//MVR - Unprocessable entity status may return an error response
+	if (statusCode == 422 && [request responseData]) {
+		ErrorsParser *errorsParser;
+		NSMutableString *errorList;
+		
+		errorsParser = [[ErrorsParser alloc] init];
+		errorsParser.data = [request responseData];
+		if (![errorsParser parse]) {
+			[errorsParser release];
+			NSLog(@"Error parsing sign up response errors");
+			[self errorAlertWithTitle:@"Sign up error" message:@"Oops! We couldn't sign you up."];
+			return;
+		}
+		//MVR - create the error message
+		errorList = [NSMutableString stringWithCapacity:100];
+		[errorList appendString:@"Oops!"];
+		if (errorsParser.errors.count > 0) {
+			for (NSString *error in errorsParser.errors)
+				[errorList appendString:[NSString stringWithFormat:@" %@.", error]];
+		} else {
+			NSLog(@"Sign up parser error list was empty");
+			[errorList appendString:@" We couldn't sign you up."];
+		}
+		[self errorAlertWithTitle:@"Sign up failed" message:errorList];
+		[errorsParser release];
+		return;
+	} else if (statusCode != 200) {
+		[self errorAlertWithTitle:@"Sign up failed" message:@"Oops! We couldn't sign you up."];
+		return;
+	}
+	//MVR - parse response
+	userParser = [[UserParser alloc] init];
+	userParser.data = [request responseData];
+	userParser.managedObjectContext = managedObjectContext;
+	if (![userParser parse]) {
+		NSLog(@"Error parsing sign up response");
+		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't sign you up."];
+		[userParser release];
+		return;
+	}
+	//MVR - need to save password for XMPP client
+	userParser.user.password = signUpPasswordTextField.text;
+	//MVR - update the session with authenticated user
+	session.user = userParser.user;
+	if (![self save])
+		NSLog(@"Error saving user and session on sign up");
+	[userParser release];
+	//MVR - sign in to the root view controller
+	//AS DESIGNED: use delegate to avoid compiler warning
+	[delegate signIn];
+	//MVR - this message gets forwarded to the parent 
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)signUpRequestFailed:(ASIHTTPRequest *)request {
+	NSError *error;
+	
+	//MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+	error = [request error];
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Sign up request error: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't sign you up."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Sign up request error: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't sign you up."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Sign up request cancelled");
+			break;
+		default:
+			NSLog(@"Sign up request error");
+			break;
+	}	
+}
+
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 
@@ -318,26 +481,124 @@
 #pragma mark -
 #pragma mark Actions
 
-- (void)usernameEntered:(id)object {
-	//MVR - make password text field the first responder
-	[passwordTextField becomeFirstResponder];
+- (void)signInUsernameEntered {
+	NSIndexPath *indexPath;
+	
+	indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	[signInPasswordTextField becomeFirstResponder];
 }
 
-- (void)signIn:(id)object {
+- (void)signIn {
 	ASIHTTPRequest *request;
 
-	//MVR - make sure the text fields were filled in
-	//TODO: check to make sure username and password are well formed
-	if (!usernameTextField.text || !passwordTextField.text || [usernameTextField.text isEqualToString:@""] || [passwordTextField.text isEqualToString:@""]) {
+	//AS DESIGNED: do not check validations here only that both fields were entered
+	if (!signInUsernameTextField.text || !signInPasswordTextField.text || [signInUsernameTextField.text isEqualToString:@""] || [signInPasswordTextField.text isEqualToString:@""]) {
 		[self errorAlertWithTitle:@"Empty field" message:@"Oops! Please enter your username and password."];
         return;
 	}
-	[passwordTextField resignFirstResponder];
-	[self showProgressHudWithLabelText:@"Authenticating..." animated:YES animationType:MBProgressHUDAnimationZoom];
+	[signInPasswordTextField resignFirstResponder];
+	[self showProgressHudWithLabelText:@"Signing in..." animated:YES animationType:MBProgressHUDAnimationZoom];
 	request = [ASIHTTPRequest requestWithURL:[self authenticationTokenUrl]];
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(authenticationTokenRequestFinished:)];
 	[request setDidFailSelector:@selector(authenticationTokenRequestFailed:)];
+	[request startAsynchronous];
+}
+
+- (void)signUpFullNameEntered {
+	NSIndexPath *indexPath;
+
+	indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	[signUpUsernameTextField becomeFirstResponder];
+}
+
+- (void)signUpUsernameEntered {
+	NSIndexPath *indexPath;
+	
+	indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	[signUpPasswordTextField becomeFirstResponder];
+}
+
+- (void)signUpPasswordEntered {
+	NSIndexPath *indexPath;
+	
+	indexPath = [NSIndexPath indexPathForRow:3 inSection:1];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	[signUpEmailTextField becomeFirstResponder];
+}
+
+- (void)signUp {
+	ASIFormDataRequest *request;
+	NSMutableString *errorList;
+	BOOL hasErrors = NO;
+	BOOL hasMultipleErrors = NO;
+	NSInteger utcOffset;
+	
+	[signUpEmailTextField resignFirstResponder];
+	errorList = [NSMutableString stringWithCapacity:100];
+	[errorList appendString:@"Oops! We couldn't sign you up."];
+	if (!signUpFullNameTextField.text || [signUpFullNameTextField.text isEqualToString:@""]) {
+		[errorList appendString:@" You must enter your full name."];
+		hasErrors = YES;
+	}
+	if (!signUpUsernameTextField.text || [signUpUsernameTextField.text isEqualToString:@""]) {
+		[errorList appendString:@" You must enter a username."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;
+	} else if (![signUpUsernameTextField.text isValidUsername]) {
+		[errorList appendString:@" Your username must be between 4 and 15 characters and can only contain letters, numbers and underscores."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;	
+	}
+	if (!signUpPasswordTextField.text || [signUpPasswordTextField.text isEqualToString:@""]) {
+		[errorList appendString:@" You must enter a password."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;	
+	} else if (![signUpPasswordTextField.text isValidPassword]) {
+		[errorList appendString:@" Your password must be at least 6 characters."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;
+	}
+	if (!signUpEmailTextField.text || [signUpEmailTextField.text isEqualToString:@""]) {
+		[errorList appendString:@" You must enter your email."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;	
+	} else if (![signUpEmailTextField.text isValidEmail]) {
+		[errorList appendString:@" Your email is invalid."];
+		if (hasErrors)
+			hasMultipleErrors = YES;
+		hasErrors = YES;	
+	}
+	if (hasErrors) {
+		NSString *errorTitle;
+
+		if (hasMultipleErrors)
+			errorTitle = @"Invalid fields";
+		else
+			errorTitle = @"Invalid field";
+		[self errorAlertWithTitle:errorTitle message:errorList];
+        return;		
+	}
+	[self showProgressHudWithLabelText:@"Signing up..." animated:YES animationType:MBProgressHUDAnimationZoom];
+	request = [ASIFormDataRequest requestWithURL:[self signUpUrl]];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(signUpRequestFinished:)];
+	[request setDidFailSelector:@selector(signUpRequestFailed:)];
+	[request addPostValue:signUpFullNameTextField.text forKey:@"setting[full_name]"];
+	[request addPostValue:signUpUsernameTextField.text forKey:@"blogcastr_user[username]"];
+	[request addPostValue:signUpPasswordTextField.text forKey:@"blogcastr_user[password]"];
+	[request addPostValue:signUpEmailTextField.text forKey:@"blogcastr_user[email]"];
+	//MVR - the utc offset is in seconds and used to set the user's timezone
+	utcOffset = [[NSTimeZone systemTimeZone] secondsFromGMT] / 60;
+	[request addPostValue:[NSString stringWithFormat:@"%d", utcOffset] forKey:@"utc_offset"];
 	[request startAsynchronous];
 }
 
@@ -349,9 +610,23 @@
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/authentication_token.xml?username=%@&password=%@", usernameTextField.text, passwordTextField.text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/authentication_token.xml?username=%@&password=%@", signInUsernameTextField.text, signInPasswordTextField.text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 #else //DEVEL
-	string = [[NSString stringWithFormat:@"https://blogcastr.com/authentication_token.xml?username=%@&password=%@", usernameTextField.text, passwordTextField.text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	string = [[NSString stringWithFormat:@"https://blogcastr.com/authentication_token.xml?username=%@&password=%@", signInUsernameTextField.text, signInPasswordTextField.text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#endif //DEVEL
+	url = [NSURL URLWithString:string];
+	
+	return url;
+}
+
+- (NSURL *)signUpUrl {
+	NSString *string;
+	NSURL *url;
+	
+#ifdef DEVEL
+	string = @"http://sandbox.blogcastr.com/users.xml";
+#else //DEVEL
+	string = @"https://blogcastr.com/users.xml";
 #endif //DEVEL
 	url = [NSURL URLWithString:string];
 	
@@ -362,8 +637,7 @@
 	self.progressHud.labelText = labelText;
 	if (animated)
 		self.progressHud.animationType = animationType;
-	//MVR - use superview to handle a display bug
-	[self.view.superview addSubview:self.progressHud];
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self.progressHud];
 	[self.progressHud show:animated];
 }
 

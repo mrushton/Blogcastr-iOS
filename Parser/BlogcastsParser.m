@@ -250,13 +250,14 @@
     self.mutableString = nil;
 }
 
+
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!mutableString) {
-		NSString *string;
+		NSMutableString *theString;
 		
-		string = [[NSMutableString alloc] init];
-		self.mutableString = string;
-		[string release];
+		theString = [[NSMutableString alloc] init];
+		self.mutableString = theString;
+		[theString release];
 	}
 	[mutableString appendString:string];
 }

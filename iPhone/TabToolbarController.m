@@ -30,6 +30,7 @@
 - (void)loadView {
 	CGRect applicationFrame;
 	UIView *theView;
+	UITabBar *theTabBar;
 	CGRect frame;
 	NSMutableArray *items;
 	UIViewController *viewController;
@@ -40,21 +41,25 @@
 	viewController = [viewControllers objectAtIndex:selectedIndex];
 	if (viewController) {
 		viewController.view.frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
+		//MVR - set the tag here in case it was unloaded
+		viewController.view.tag = TAB_TOOLBAR_VIEW_TAG;
 		[theView addSubview:viewController.view];
 	}
 	//MVR - set up the tab bar
 	frame = CGRectMake(0.0, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT, applicationFrame.size.width, TAB_TOOLBAR_HEIGHT);
-	tabBar = [[UITabBar alloc] initWithFrame:frame];
-	tabBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
-	tabBar.delegate = self;
+	theTabBar = [[UITabBar alloc] initWithFrame:frame];
+	theTabBar.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
+	theTabBar.delegate = self;
 	items = [NSMutableArray arrayWithCapacity:5];
 	for (int i = 0; i < [viewControllers count]; i++)
 		[items addObject:[[viewControllers objectAtIndex:i] tabBarItem]];
-	tabBar.items = items;
+	theTabBar.items = items;
 	//TODO: saving state of tab bar
 	if (viewController)
-		tabBar.selectedItem = viewController.tabBarItem;	
-	[theView addSubview:tabBar];
+		theTabBar.selectedItem = viewController.tabBarItem;	
+	[theView addSubview:theTabBar];
+	self.tabBar = theTabBar;
+	[theTabBar release];
 	self.view = theView;
 	[theView release];
 }
@@ -134,7 +139,6 @@
 		viewController = [viewControllers objectAtIndex:i];
 		[viewController setTabToolbarController:self];
 		viewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-		viewController.view.tag = TAB_TOOLBAR_VIEW_TAG;
 	}
 }
 
@@ -150,6 +154,8 @@
 
 	//MVR - remove current view
 	currentView = [self.view viewWithTag:TAB_TOOLBAR_VIEW_TAG];
+	if (!currentView)
+		NSLog(@"Error finding view in tab toolbar view controller");
 	[currentView removeFromSuperview];
 	//MVR - add selected view
 	index = [[theTabBar items] indexOfObject:item];
@@ -164,6 +170,8 @@
 	applicationFrame = [UIScreen mainScreen].applicationFrame;
 	frame = CGRectMake(0.0, 0.0, applicationFrame.size.width, applicationFrame.size.height - TT_TOOLBAR_HEIGHT - TAB_TOOLBAR_HEIGHT);
 	viewController.view.frame = frame;
+	//MVR - set the tag here in case it was unloaded
+	viewController.view.tag = TAB_TOOLBAR_VIEW_TAG;
 	[self.view addSubview:viewController.view];
 	[viewController viewWillAppear:NO];
 }	

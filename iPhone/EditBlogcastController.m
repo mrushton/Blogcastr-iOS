@@ -458,11 +458,6 @@
 	ASIFormDataRequest *theRequest;
 	NSDateFormatter *dateFormatter;
 
-	//MVR - check for errors
-	if (!titleTextField.text || [titleTextField.text isEqualToString:@""]) {
-		[self errorAlertWithTitle:@"Empty field" message:@"Oops! You need to enter a title."];
-		return;
-	}
 	//MVR - disable the update button
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 	//MVR - dismiss keyboard
@@ -531,7 +526,7 @@
 
 - (void)updateNavigationButtons {
 	//MVR - if no changes disable update button
-	if ([titleTextField.text isEqualToString:blogcast.title] && [startingAt isEqualToDate:blogcast.startingAt] && (([descriptionTextView.text isEqualToString:@""] && (!blogcast.theDescription || [blogcast.theDescription isEqualToString:@""])) || [descriptionTextView.text isEqual:blogcast.theDescription]) && (([tagsTextView.text isEqualToString:@""] && (!blogcast.tags || [blogcast.tags isEqualToString:@""])) || [tagsTextView.text isEqual:blogcast.tags]))
+	if ((!titleTextField.text || [titleTextField.text isEqualToString:@""]) || ([titleTextField.text isEqualToString:blogcast.title] && [startingAt isEqualToDate:blogcast.startingAt] && (([descriptionTextView.text isEqualToString:@""] && (!blogcast.theDescription || [blogcast.theDescription isEqualToString:@""])) || [descriptionTextView.text isEqual:blogcast.theDescription]) && (([tagsTextView.text isEqualToString:@""] && (!blogcast.tags || [blogcast.tags isEqualToString:@""])) || [tagsTextView.text isEqual:blogcast.tags])))
 		self.navigationItem.rightBarButtonItem.enabled = NO;
 	else
 		self.navigationItem.rightBarButtonItem.enabled = YES;

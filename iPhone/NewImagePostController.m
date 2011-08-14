@@ -76,6 +76,8 @@
 	theTextView.placeholder = @"(optional)";
 	self.textView = theTextView;
 	[theTextView release];
+	//MVR - disable post button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 /*
@@ -322,6 +324,8 @@
 	self.thumbnailImage = theThumbnailImage;
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 	[self dismissModalViewControllerAnimated:YES];
+	//MVR - enable post button
+	self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -435,11 +439,6 @@
 	ASIFormDataRequest *theRequest;
 	NSData *data;
 	
-	//MVR - check for errors
-	if (!image) {
-		[self errorAlertWithTitle:@"Empty post" message:@"Oops! You need to add an image."];
-		return;
-	}
 	//MVR - dismiss keyboard
 	if (textView.isFirstResponder)
 		[textView resignFirstResponder];

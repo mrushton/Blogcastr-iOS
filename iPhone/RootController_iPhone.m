@@ -67,12 +67,14 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+	NSLog(@"MVR - RootController didReceiveMemWAtn");
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+	NSLog(@"MVR - RootController viewDidUnload");
 }
 
 - (void)dealloc {
@@ -121,14 +123,18 @@
 }
 
 - (void)signOut {
+	UINavigationController *theNavigationController;
 	SignInController *signInController;
 	
-	signInController = [[SignInController alloc] init];
+	signInController = [[SignInController alloc] initWithStyle:UITableViewStyleGrouped];
 	signInController.managedObjectContext = self.managedObjectContext;
-	signInController.session = session;
+	signInController.session = self.session;
 	signInController.delegate = self;
-	[self presentModalViewController:signInController animated:YES];
+	theNavigationController = [[UINavigationController alloc] initWithRootViewController:signInController];
 	[signInController release];
+	theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+	[self presentModalViewController:theNavigationController animated:YES];
+	[theNavigationController release];
 }
 
 @end

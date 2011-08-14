@@ -276,8 +276,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 
 - (MBProgressHUD *)progressHud {
 	if (!_progressHud) {
-		//MVR - use superview to handle a display bug
-		_progressHud = [[MBProgressHUD alloc] initWithView:self.view.superview];
+		_progressHud = [[MBProgressHUD alloc] initWithWindow:[[UIApplication sharedApplication] keyWindow]];
 		_progressHud.delegate = self;
 	}
 	
@@ -301,6 +300,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 		ASIFormDataRequest *request;
 		
 		[self showProgressHudWithLabelText:@"Deleting blogcast..." animated:YES animationType:MBProgressHUDAnimationZoom];
+		//AS DESIGNED: no need to save request since it must run to completion
 		request = [ASIFormDataRequest requestWithURL:[self deleteBlogcastUrl]];
 		[request setRequestMethod:@"DELETE"];
 		[request setDelegate:self];
@@ -653,8 +653,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	self.progressHud.labelText = labelText;
 	if (animated)
 		self.progressHud.animationType = animationType;
-	//MVR - use superview to handle a display bug
-	[self.view.superview addSubview:self.progressHud];
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self.progressHud];
 	[self.progressHud show:animated];
 }
 

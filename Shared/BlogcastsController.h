@@ -24,6 +24,7 @@
 	XMPPStream *xmppStream;
 	TTTableHeaderDragRefreshView *dragRefreshView;
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
+	NSTimer *timer;
 	//MVR - for the drag refresh view
 	BOOL isRefreshing;
 	BOOL isUpdating;
@@ -31,7 +32,6 @@
 	NSNumber *_maxId;
 	NSNumber *_minId;
 	UIAlertView *_alertView;
-	NSTimer *timer;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -43,6 +43,7 @@
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;
 @property (nonatomic, retain) TTTableHeaderDragRefreshView *dragRefreshView;
 @property (nonatomic, retain) TTTableFooterInfiniteScrollView *infiniteScrollView;
+@property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
 @property (nonatomic, readonly) UIAlertView *alertView;

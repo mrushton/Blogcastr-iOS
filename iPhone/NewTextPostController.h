@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 #import "ASIHTTPRequest.h"
 
-@interface NewTextPostController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate> {
+@interface NewTextPostController : UITableViewController <MBProgressHUDDelegate, UIActionSheetDelegate, UITextViewDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
 	Blogcast *blogcast;

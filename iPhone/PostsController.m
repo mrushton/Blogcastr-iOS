@@ -94,8 +94,6 @@ static const NSInteger kPostsRequestCount = 20;
 	newTextPostButton.frame = CGRectMake(5.0, 6.0, 150.0, 28.0);
 	[topBar addSubview:newTextPostButton];
 	newImagePostButton = [TTButton buttonWithStyle:@"orangeButtonWithImage:" title:@"New Image Post"];
-	//MVR - image url based on screen resolution
-	//if ([[UIScreen mainScreen] scale] > 1.0)
 	[newImagePostButton setImage:@"bundle://new-image-post.png" forState:UIControlStateNormal];
 	[newImagePostButton addTarget:self action:@selector(newImagePost:) forControlEvents:UIControlEventTouchUpInside]; 
 	newImagePostButton.frame = CGRectMake(165.0, 6.0, 150.0, 28.0);
@@ -433,6 +431,7 @@ static const NSInteger kPostsRequestCount = 20;
 				imageHeight = [post.imageHeight intValue];
 			}
 		}
+		NSLog(@"MVR - image width %d height %d",imageWidth,imageHeight);
 		imageView.frame = CGRectMake(5.0, 5.0, imageWidth, imageHeight);
 		//MVR - username label
 		usernameLabel.text = post.user.username;

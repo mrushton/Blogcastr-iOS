@@ -41,6 +41,7 @@
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Blogcast *blogcast;
+//AS DESIGNED: copy always returns an immutable string
 @property (nonatomic, retain) NSString *mutableString;
 @property (nonatomic, retain) NSNumber *postId;
 @property (nonatomic, retain) NSString *postType;

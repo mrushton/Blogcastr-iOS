@@ -1,37 +1,26 @@
 //
-//  SettingsParser.m
+//  ErrorsParser.m
 //  Blogcastr
 //
-//  Created by Matthew Rushton on 4/21/11.
+//  Created by Matthew Rushton on 8/14/11.
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
-#import "SettingsParser.h"
+#import "ErrorsParser.h"
 
 
-@implementation SettingsParser
+@implementation ErrorsParser
 
 @synthesize data;
-@synthesize user;
 @synthesize mutableString;
-@synthesize bio;
-@synthesize fullName;
-@synthesize location;
-@synthesize web;
-@synthesize avatarUrl;
+@synthesize errors;
 
 #pragma mark -
-#pragma mark Class methods
-
-- (SettingsParser *)initWithData:(NSData *)theData {
-	self.data = theData;
-	
-	return self;
-}
+#pragma mark Methods
 
 - (BOOL)parse {
 	NSXMLParser *parser;
-
+	
     //MVR - parse xml
 	parser = [[NSXMLParser alloc] initWithData:data];
 	[parser setDelegate:self];
@@ -45,24 +34,24 @@
 }
 
 #pragma mark -
+#pragma mark Memory management
+
+- (void)dealloc {
+	[data release];
+    [mutableString release];
+	[errors release];
+	[super dealloc];
+}
+
+#pragma mark -
 #pragma mark NSXMLParserDelegate methods
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-	//MVR  - save settings to user
-	user.bio = self.bio;
-	user.fullName = self.fullName;
-	user.location = self.location;
-	user.web = self.web;
-	user.avatarUrl = self.avatarUrl;
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	self.mutableString = nil;
-	self.bio = nil;
-	self.fullName = nil;
-	self.location = nil;
-	self.web = nil;
-	self.avatarUrl = nil;
+	self.errors = [NSMutableArray array];
 }
 
 - (void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
@@ -71,25 +60,17 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	if ([elementName isEqual:@"bio"])
-		self.bio = mutableString;
-	else if ([elementName isEqual:@"full-name"])
-		self.fullName = mutableString;
-	else if ([elementName isEqual:@"location"])
-		self.location = mutableString;
-	else if ([elementName isEqual:@"web"])
-		self.web = mutableString;
-	else if ([elementName isEqual:@"avatar-url"])
-		self.avatarUrl = mutableString;
+	//MVR - store error for later processing
+	if ([elementName isEqual:@"error"])
+		[errors addObject:mutableString];
 	//MVR - release string here to handle potential memory leak
     self.mutableString = nil;
 }
 
-
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (!mutableString) {
 		NSMutableString *theString;
-		
+
 		theString = [[NSMutableString alloc] init];
 		self.mutableString = theString;
 		[theString release];
@@ -98,7 +79,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	NSLog(@"Error parsing settings: %@", [parseError localizedDescription]);
+	NSLog(@"Error parsing errors: %@", [parseError localizedDescription]);
 }
 
 @end

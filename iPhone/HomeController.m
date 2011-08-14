@@ -82,12 +82,13 @@
     // Release any cached data, images, etc. that aren't in use.
 }
 
+/*
 - (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
+*/
 
 - (void)dealloc {
 	[xmppStream release];
@@ -121,7 +122,8 @@
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
 	NSLog(@"Error authentication failed with XMPP server");
-	//TODO: the password may have changed so log out 
+	//MVR - the password may have changed so give a warning
+	[self errorAlertWithTitle:@"Authentication failed" message:@"Oops! We couldn't connect to our server. You may want to sign out and try again."];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error {

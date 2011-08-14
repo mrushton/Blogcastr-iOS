@@ -33,10 +33,6 @@
 		CA0D84F513D3CFDF00FC1330 /* UserParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0D84F413D3CFDF00FC1330 /* UserParser.m */; };
 		CA245D4313EF72A500EC0825 /* blogcasts.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4213EF72A500EC0825 /* blogcasts.png */; };
 		CA245D4513EF72AA00EC0825 /* blogcasts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4413EF72AA00EC0825 /* blogcasts@2x.png */; };
-		CA245D4713EF72C800EC0825 /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4613EF72C800EC0825 /* profile@2x.png */; };
-		CA245D4913EF72DF00EC0825 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4813EF72DF00EC0825 /* profile.png */; };
-		CA245D4B13EF72F900EC0825 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4A13EF72F900EC0825 /* settings@2x.png */; };
-		CA245D4D13EF730400EC0825 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CA245D4C13EF730400EC0825 /* settings.png */; };
 		CA3BADE113DFC4C7004F1A39 /* ResizeImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3BADE013DFC4C7004F1A39 /* ResizeImageOperation.m */; };
 		CA40D4D913E8F85C00D3D8F2 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D313E8F85C00D3D8F2 /* comments.png */; };
 		CA40D4DA13E8F85C00D3D8F2 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA40D4D413E8F85C00D3D8F2 /* comments@2x.png */; };
@@ -47,7 +43,6 @@
 		CA40D50F13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m in Sources */ = {isa = PBXBuildFile; fileRef = CA40D50E13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m */; };
 		CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA58CB67133E78FA00BBC5D9 /* Three20.bundle */; };
 		CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */; };
-		CA59BBFF131339F600416E4D /* SignInView_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */; };
 		CA59BC0513133A0D00416E4D /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BC0113133A0D00416E4D /* Session.m */; };
 		CA59BCB6131381E900416E4D /* RootController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCB4131381E900416E4D /* RootController_iPhone.m */; };
 		CA59BCBC131384ED00416E4D /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCBB131384ED00416E4D /* SettingsController.m */; };
@@ -82,16 +77,22 @@
 		CA74E2921353F8F000788D04 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74E2911353F8F000788D04 /* MBProgressHUD.m */; };
 		CA74E2CD13553B8D00788D04 /* BlogcastsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74E2CC13553B8D00788D04 /* BlogcastsParser.m */; };
 		CA74E2FC13569FA800788D04 /* BlogcastStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA74E2FB13569FA800788D04 /* BlogcastStreamCell.m */; };
-		CA87E15213ED1D9100F2C432 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E15113ED1D9100F2C432 /* Default@2x.png */; };
-		CA87E15F13ED1F4B00F2C432 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E15E13ED1F4B00F2C432 /* Default.png */; };
-		CA87E17D13EDE0D700F2C432 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E17C13EDE0D700F2C432 /* icon@2x.png */; };
-		CA87E17F13EDE0E600F2C432 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E17E13EDE0E600F2C432 /* icon.png */; };
 		CA87E19913EDE25B00F2C432 /* new-text-post.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E19713EDE25B00F2C432 /* new-text-post.png */; };
 		CA87E19A13EDE25B00F2C432 /* new-text-post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E19813EDE25B00F2C432 /* new-text-post@2x.png */; };
 		CA87E1C213EDF61800F2C432 /* new-image-post.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E1C013EDF61800F2C432 /* new-image-post.png */; };
 		CA87E1C313EDF61800F2C432 /* new-image-post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E1C113EDF61800F2C432 /* new-image-post@2x.png */; };
 		CA87E1F213EE2EDC00F2C432 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E1F013EE2EDC00F2C432 /* comment.png */; };
 		CA87E1F313EE2EDC00F2C432 /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA87E1F113EE2EDC00F2C432 /* comment@2x.png */; };
+		CA97F51A13F399D10065F772 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F51913F399D10065F772 /* profile.png */; };
+		CA97F51C13F399DF0065F772 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F51B13F399DF0065F772 /* settings.png */; };
+		CA97F53013F3A13A0065F772 /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F52F13F3A13A0065F772 /* profile@2x.png */; };
+		CA97F53713F3A1790065F772 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F53613F3A1790065F772 /* settings@2x.png */; };
+		CA97F56713F4BCE90065F772 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F56613F4BCE90065F772 /* icon.png */; };
+		CA97F56913F4BCF50065F772 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F56813F4BCF50065F772 /* icon@2x.png */; };
+		CA97F60A13F7288F0065F772 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F60913F7288F0065F772 /* Default.png */; };
+		CA97F60C13F728E60065F772 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA97F60B13F728E60065F772 /* Default@2x.png */; };
+		CA97F64F13F758AF0065F772 /* NSString+Validations.m in Sources */ = {isa = PBXBuildFile; fileRef = CA97F64E13F758AF0065F772 /* NSString+Validations.m */; };
+		CA97F6BC13F799FB0065F772 /* ErrorsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CA97F6BB13F799FB0065F772 /* ErrorsParser.m */; };
 		CA99C51813919B1500DCE077 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = CA99C51713919B1500DCE077 /* Timer.m */; };
 		CA99C66F139A981000DCE077 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA99C66E139A981000DCE077 /* CommentsController.m */; };
 		CA99C674139A994300DCE077 /* CommentStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA99C673139A994300DCE077 /* CommentStreamCell.m */; };
@@ -328,10 +329,6 @@
 		CA0D84F413D3CFDF00FC1330 /* UserParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserParser.m; sourceTree = "<group>"; };
 		CA245D4213EF72A500EC0825 /* blogcasts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blogcasts.png; sourceTree = "<group>"; };
 		CA245D4413EF72AA00EC0825 /* blogcasts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blogcasts@2x.png"; sourceTree = "<group>"; };
-		CA245D4613EF72C800EC0825 /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
-		CA245D4813EF72DF00EC0825 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
-		CA245D4A13EF72F900EC0825 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
-		CA245D4C13EF730400EC0825 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		CA3BADDF13DFC4C7004F1A39 /* ResizeImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeImageOperation.h; sourceTree = "<group>"; };
 		CA3BADE013DFC4C7004F1A39 /* ResizeImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeImageOperation.m; sourceTree = "<group>"; };
 		CA40D4D313E8F85C00D3D8F2 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comments.png; path = ../comments.png; sourceTree = "<group>"; };
@@ -345,7 +342,6 @@
 		CA58CB67133E78FA00BBC5D9 /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
 		CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
 		CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
-		CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInView_iPhone.xib; sourceTree = "<group>"; };
 		CA59BC0013133A0D00416E4D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		CA59BC0113133A0D00416E4D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		CA59BCB3131381E900416E4D /* RootController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController_iPhone.h; sourceTree = "<group>"; };
@@ -412,16 +408,24 @@
 		CA74E2CC13553B8D00788D04 /* BlogcastsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogcastsParser.m; sourceTree = "<group>"; };
 		CA74E2FA13569FA800788D04 /* BlogcastStreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlogcastStreamCell.h; path = Shared/BlogcastStreamCell.h; sourceTree = "<group>"; };
 		CA74E2FB13569FA800788D04 /* BlogcastStreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlogcastStreamCell.m; path = Shared/BlogcastStreamCell.m; sourceTree = "<group>"; };
-		CA87E15113ED1D9100F2C432 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		CA87E15E13ED1F4B00F2C432 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		CA87E17C13EDE0D700F2C432 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		CA87E17E13EDE0E600F2C432 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		CA87E19713EDE25B00F2C432 /* new-text-post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-text-post.png"; sourceTree = "<group>"; };
 		CA87E19813EDE25B00F2C432 /* new-text-post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-text-post@2x.png"; sourceTree = "<group>"; };
 		CA87E1C013EDF61800F2C432 /* new-image-post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-image-post.png"; sourceTree = "<group>"; };
 		CA87E1C113EDF61800F2C432 /* new-image-post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new-image-post@2x.png"; sourceTree = "<group>"; };
 		CA87E1F013EE2EDC00F2C432 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
 		CA87E1F113EE2EDC00F2C432 /* comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment@2x.png"; sourceTree = "<group>"; };
+		CA97F51913F399D10065F772 /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
+		CA97F51B13F399DF0065F772 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		CA97F52F13F3A13A0065F772 /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
+		CA97F53613F3A1790065F772 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		CA97F56613F4BCE90065F772 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		CA97F56813F4BCF50065F772 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		CA97F60913F7288F0065F772 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		CA97F60B13F728E60065F772 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		CA97F64D13F758AF0065F772 /* NSString+Validations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Validations.h"; sourceTree = "<group>"; };
+		CA97F64E13F758AF0065F772 /* NSString+Validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Validations.m"; sourceTree = "<group>"; };
+		CA97F6BA13F799FB0065F772 /* ErrorsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorsParser.h; sourceTree = "<group>"; };
+		CA97F6BB13F799FB0065F772 /* ErrorsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorsParser.m; sourceTree = "<group>"; };
 		CA99C51613919B1500DCE077 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		CA99C51713919B1500DCE077 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
 		CA99C66D139A981000DCE077 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
@@ -574,14 +578,14 @@
 				CA99C66E139A981000DCE077 /* CommentsController.m */,
 				CA9A49AA136C87F400E10E51 /* DashboardController.h */,
 				CA9A49AB136C87F400E10E51 /* DashboardController.m */,
-				CA87E15E13ED1F4B00F2C432 /* Default.png */,
-				CA87E15113ED1D9100F2C432 /* Default@2x.png */,
+				CA97F60913F7288F0065F772 /* Default.png */,
+				CA97F60B13F728E60065F772 /* Default@2x.png */,
 				CA0D825E13C3FF7100FC1330 /* EditBlogcastController.h */,
 				CA0D825F13C3FF7100FC1330 /* EditBlogcastController.m */,
 				CA59BE5A13199D7A00416E4D /* HomeController.h */,
 				CA59BE5B13199D7A00416E4D /* HomeController.m */,
-				CA87E17E13EDE0E600F2C432 /* icon.png */,
-				CA87E17C13EDE0D700F2C432 /* icon@2x.png */,
+				CA97F56613F4BCE90065F772 /* icon.png */,
+				CA97F56813F4BCF50065F772 /* icon@2x.png */,
 				CA40D4D513E8F85C00D3D8F2 /* info.png */,
 				CA40D4D613E8F85C00D3D8F2 /* info@2x.png */,
 				CA0024CD13A3C43300A4B36F /* InfoController.h */,
@@ -605,13 +609,12 @@
 				CA40D4D813E8F85C00D3D8F2 /* posts@2x.png */,
 				CA9A49D3136C958C00E10E51 /* PostsController.h */,
 				CA9A49D4136C958C00E10E51 /* PostsController.m */,
-				CA245D4813EF72DF00EC0825 /* profile.png */,
-				CA245D4613EF72C800EC0825 /* profile@2x.png */,
+				CA97F51913F399D10065F772 /* profile.png */,
+				CA97F52F13F3A13A0065F772 /* profile@2x.png */,
 				CA59BCB3131381E900416E4D /* RootController_iPhone.h */,
 				CA59BCB4131381E900416E4D /* RootController_iPhone.m */,
-				CA245D4C13EF730400EC0825 /* settings.png */,
-				CA245D4A13EF72F900EC0825 /* settings@2x.png */,
-				CA59BBFE131339F600416E4D /* SignInView_iPhone.xib */,
+				CA97F51B13F399DF0065F772 /* settings.png */,
+				CA97F53613F3A1790065F772 /* settings@2x.png */,
 				CA59BDBC1318D68100416E4D /* TabToolbarController.h */,
 				CA59BDBD1318D68100416E4D /* TabToolbarController.m */,
 			);
@@ -859,6 +862,8 @@
 				CA74E2CC13553B8D00788D04 /* BlogcastsParser.m */,
 				CA99C68D139AE08500DCE077 /* CommentsParser.h */,
 				CA99C68E139AE08500DCE077 /* CommentsParser.m */,
+				CA97F6BA13F799FB0065F772 /* ErrorsParser.h */,
+				CA97F6BB13F799FB0065F772 /* ErrorsParser.m */,
 				CADF7D53137EF32E0089A234 /* PostsParser.h */,
 				CADF7D54137EF32E0089A234 /* PostsParser.m */,
 				CA9A456F13612B4B00E10E51 /* SettingsParser.h */,
@@ -874,6 +879,8 @@
 			children = (
 				CA9A4D15137387F700E10E51 /* NSDate+Timestamp.h */,
 				CA9A4D16137387F700E10E51 /* NSDate+Timestamp.m */,
+				CA97F64D13F758AF0065F772 /* NSString+Validations.h */,
+				CA97F64E13F758AF0065F772 /* NSString+Validations.m */,
 				CA9A4D1A1373898700E10E51 /* UIImage+Alpha.h */,
 				CA9A4D1B1373898700E10E51 /* UIImage+Alpha.m */,
 				CA9A4D1C1373898700E10E51 /* UIImage+Resize.h */,
@@ -1165,7 +1172,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow_iPad.xib in Resources */,
 				2860E38B111B897F00E27156 /* MainWindow_iPhone.xib in Resources */,
-				CA59BBFF131339F600416E4D /* SignInView_iPhone.xib in Resources */,
 				CA59CBA5132DE31C00416E4D /* logo~iphone.png in Resources */,
 				CA59CBA7132DE32700416E4D /* logo@2x~iphone.png in Resources */,
 				CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */,
@@ -1175,10 +1181,6 @@
 				CA40D4DC13E8F85C00D3D8F2 /* info@2x.png in Resources */,
 				CA40D4DD13E8F85C00D3D8F2 /* posts.png in Resources */,
 				CA40D4DE13E8F85C00D3D8F2 /* posts@2x.png in Resources */,
-				CA87E15213ED1D9100F2C432 /* Default@2x.png in Resources */,
-				CA87E15F13ED1F4B00F2C432 /* Default.png in Resources */,
-				CA87E17D13EDE0D700F2C432 /* icon@2x.png in Resources */,
-				CA87E17F13EDE0E600F2C432 /* icon.png in Resources */,
 				CA87E19913EDE25B00F2C432 /* new-text-post.png in Resources */,
 				CA87E19A13EDE25B00F2C432 /* new-text-post@2x.png in Resources */,
 				CA87E1C213EDF61800F2C432 /* new-image-post.png in Resources */,
@@ -1187,10 +1189,14 @@
 				CA87E1F313EE2EDC00F2C432 /* comment@2x.png in Resources */,
 				CA245D4313EF72A500EC0825 /* blogcasts.png in Resources */,
 				CA245D4513EF72AA00EC0825 /* blogcasts@2x.png in Resources */,
-				CA245D4713EF72C800EC0825 /* profile@2x.png in Resources */,
-				CA245D4913EF72DF00EC0825 /* profile.png in Resources */,
-				CA245D4B13EF72F900EC0825 /* settings@2x.png in Resources */,
-				CA245D4D13EF730400EC0825 /* settings.png in Resources */,
+				CA97F51A13F399D10065F772 /* profile.png in Resources */,
+				CA97F51C13F399DF0065F772 /* settings.png in Resources */,
+				CA97F53013F3A13A0065F772 /* profile@2x.png in Resources */,
+				CA97F53713F3A1790065F772 /* settings@2x.png in Resources */,
+				CA97F56713F4BCE90065F772 /* icon.png in Resources */,
+				CA97F56913F4BCF50065F772 /* icon@2x.png in Resources */,
+				CA97F60A13F7288F0065F772 /* Default.png in Resources */,
+				CA97F60C13F728E60065F772 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,6 +1291,8 @@
 				CA0D84F513D3CFDF00FC1330 /* UserParser.m in Sources */,
 				CA3BADE113DFC4C7004F1A39 /* ResizeImageOperation.m in Sources */,
 				CA40D50F13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m in Sources */,
+				CA97F64F13F758AF0065F772 /* NSString+Validations.m in Sources */,
+				CA97F6BC13F799FB0065F772 /* ErrorsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

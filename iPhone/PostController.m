@@ -550,7 +550,6 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	self.progressHud.labelText = labelText;
 	if (animated)
 		self.progressHud.animationType = animationType;
-	//MVR - use superview to handle a display bug
 	[[[UIApplication sharedApplication] keyWindow] addSubview:self.progressHud];
 	[self.progressHud show:animated];
 }

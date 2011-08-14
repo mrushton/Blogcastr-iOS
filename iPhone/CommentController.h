@@ -11,6 +11,7 @@
 #import "Session.h"
 #import "Comment.h"
 #import "Subscription.h"
+#import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
 
 
@@ -19,6 +20,7 @@
 	Session *session;
 	Comment *comment;
 	UITableView *tableView;
+	ASIHTTPRequest *request;
 	MBProgressHUD *_progressHud;
 	UIAlertView *_alertView;
 }
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) Session *session;
 @property (nonatomic, retain) Comment *comment;
 @property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) ASIHTTPRequest *request;
 @property (nonatomic, readonly) MBProgressHUD *progressHud;
 @property (nonatomic, readonly) UIAlertView *alertView;
 

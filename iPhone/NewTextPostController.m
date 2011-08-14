@@ -64,6 +64,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	theTextView = [[UITextView alloc] initWithFrame:CGRectMake(2.0, 4.0, 296.0, 112.0)];
+	theTextView.delegate = self;
 	//MVR - slight hack with insets to make the top align a little nicer
 	theTextView.contentInset = UIEdgeInsetsMake(-4.0, 0.0, 0.0, 0.0);
 	theTextView.backgroundColor = [UIColor clearColor];	
@@ -71,6 +72,8 @@
 	theTextView.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	self.textView = theTextView;
 	[theTextView release];
+	//MVR - disable post button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 /*
@@ -346,16 +349,21 @@
  */
 
 #pragma mark -
+#pragma mark UITextView delegate
+
+- (void)textViewDidChange:(UITextView *)theTextView {
+	if (!textView.text || [textView.text isEqualToString:@""])
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+	else
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+}
+
+#pragma mark -
 #pragma mark Actions
 
 - (void)post {
 	ASIFormDataRequest *theRequest;
 	
-	//MVR - check for errors
-	if (!textView.text || [textView.text compare:@""] == NSOrderedSame) {
-		[self errorAlertWithTitle:@"Empty post" message:@"Oops! You need to enter some text."];
-		return;
-	}
 	//MVR - dismiss keyboard
 	[textView resignFirstResponder];
 	//MVR - disable post button

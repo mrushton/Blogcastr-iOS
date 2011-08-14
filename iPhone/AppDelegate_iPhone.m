@@ -42,14 +42,18 @@
 	rootController.session = self.session;
 	[window addSubview:rootController.view];
 	if (!self.session.user || !self.session.user.authenticationToken) {
+		UINavigationController *theNavigationController;
 		SignInController *signInController;
 		
-		signInController = [[SignInController alloc] init];
+		signInController = [[SignInController alloc] initWithStyle:UITableViewStyleGrouped];
 		signInController.managedObjectContext = self.managedObjectContext;
 		signInController.session = self.session;
 		signInController.delegate = rootController;
-		[rootController presentModalViewController:signInController animated:NO];
+		theNavigationController = [[UINavigationController alloc] initWithRootViewController:signInController];
 		[signInController release];
+		theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+		[rootController presentModalViewController:theNavigationController animated:NO];
+		[theNavigationController release];
 	} else {
 		[rootController signIn];
 	}

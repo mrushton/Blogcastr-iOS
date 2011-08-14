@@ -39,6 +39,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSData *data;
 @property (nonatomic, retain) Subscription *subscription;
+//AS DESIGNED: copy always returns an immutable string
 @property (nonatomic, retain) NSMutableString *mutableString;
 @property (nonatomic, copy) NSNumber *userId;
 @property (nonatomic, copy) NSString *username;

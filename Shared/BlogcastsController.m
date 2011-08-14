@@ -31,6 +31,7 @@
 @synthesize xmppStream;
 @synthesize dragRefreshView;
 @synthesize infiniteScrollView;
+@synthesize timer;
 
 //MVR - the number of pixels the table needs to be pulled down by in order to initiate the refresh
 static const CGFloat kRefreshDeltaY = -65.0f;
@@ -59,6 +60,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+	TTTableHeaderDragRefreshView *theDragRefreshView;
+	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
 	NSError *error;
 
@@ -67,29 +70,32 @@ static const NSInteger kBlogcastsRequestCount = 20;
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	self.tableView.separatorColor = BLOGCASTRSTYLEVAR(tableViewSeperatorColor);
-	dragRefreshView = [[TTTableHeaderDragRefreshView alloc] initWithFrame:CGRectMake(0, -self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+	theDragRefreshView = [[TTTableHeaderDragRefreshView alloc] initWithFrame:CGRectMake(0, -self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
 	//dragRefreshView.backgroundColor = TTSTYLEVAR(tableRefreshHeaderBackgroundColor);
-	[dragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
-    [self.tableView addSubview:dragRefreshView];
+	[theDragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
+	//if (user.blogcastsUpdatedAt)
+		[theDragRefreshView setUpdateDate:user.blogcastsUpdatedAt];
+	[self.tableView addSubview:theDragRefreshView];
+	self.dragRefreshView = theDragRefreshView;
+	[theDragRefreshView release];
 	//MVR - set footer view to infinite scroll view
-	infiniteScrollView = [[TTTableFooterInfiniteScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.bounds.size.width, kInfiniteScrollViewHeight)];
-	infiniteScrollView.backgroundColor = TTSTYLEVAR(backgroundColor);
-	infiniteScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	theInfiniteScrollView = [[TTTableFooterInfiniteScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.bounds.size.width, kInfiniteScrollViewHeight)];
+	theInfiniteScrollView.backgroundColor = TTSTYLEVAR(backgroundColor);
+	theInfiniteScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	if (![user.blogcastsAtEnd boolValue])
-		[infiniteScrollView setLoading:YES];
-	footerBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, infiniteScrollView.bounds.size.width, 1.0)];
+		[theInfiniteScrollView setLoading:YES];
+	footerBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, theInfiniteScrollView.bounds.size.width, 1.0)];
 	footerBorderView.backgroundColor = BLOGCASTRSTYLEVAR(lightBackgroundColor);
-	[infiniteScrollView addSubview:footerBorderView];
+	[theInfiniteScrollView addSubview:footerBorderView];
 	[footerBorderView release];
-	self.tableView.tableFooterView = infiniteScrollView;
-	if (user.blogcastsUpdatedAt)
-		[dragRefreshView setUpdateDate:user.blogcastsUpdatedAt];
+	self.tableView.tableFooterView = theInfiniteScrollView;
+	self.infiniteScrollView = theInfiniteScrollView;
+	[theInfiniteScrollView release];
 	//MVR - timer updates table view every 10 seconds
-	timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(reloadTableView) userInfo:nil repeats:YES];	
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(reloadTableView) userInfo:nil repeats:YES];	
 	//MVR - now fetch blogcasts
 	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
-	//TODO: viewDIdUnload
 }
 
 
@@ -364,6 +370,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Blogcast"] autorelease];
 		imageView = [[TTImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 40.0, 40.0)];
 		imageView.tag = IMAGE_VIEW_TAG;
+		imageView.backgroundColor = [UIColor redColor];
 		[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
 		[imageView release];
 		
@@ -418,7 +425,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	*/
 		//MVR - add to cell
 	} else {
-		NSLog(@"MVR - FINDGIN TITLE");
 		titleLabel = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
 		imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 		styledText = (TTStyledTextLabel *)[cell viewWithTag:STYLED_TEXT_TAG];
@@ -430,14 +436,12 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		imageView.urlPath = [self avatarUrlForSize:@"super"];
 	else
 		imageView.urlPath = [self avatarUrlForSize:@"small"];
-	if (!titleLabel)
-		NSLog(@"TITLE IS NIL!");
+	
+	
+	NSLog(@"MVR - IMAGE VIEW URL %@",imageView.urlPath);
+	
 	titleLabel.text = [NSString stringWithFormat:@"%@", blogcast.title];
-	NSLog(@"MVR - BLOGCAST TITEL IN CELL %@ %@",titleLabel.text,blogcast.title);
-	if ([titleLabel isDescendantOfView:cell])
-		NSLog(@"MVR - IS DESCENDANT");
-	else
-		NSLog(@"MVR - IS NOT DESCENDANT");
+
 
 	if (blogcast.theDescription)
 		text = [NSString stringWithFormat:@"<b>%@</b> <span class=\"blueText\">%@</span>  <span class=\"timestampInWords\">%@<span>", user.username, blogcast.theDescription, [blogcast.startingAt stringInWords]]; 
@@ -725,7 +729,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
-	[dragRefreshView release];
+	self.dragRefreshView = nil;
+	self.infiniteScrollView = nil;
+	self.timer = nil;
 }
 
 

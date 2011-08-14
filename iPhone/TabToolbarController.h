@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define TAB_TOOLBAR_HEIGHT 49.0
-#define TAB_TOOLBAR_VIEW_TAG 7
+#define TAB_TOOLBAR_VIEW_TAG 99
 
 @class TabToolbarController;
 
