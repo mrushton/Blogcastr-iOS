@@ -311,27 +311,14 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	BlogcastStreamCell *streamCell;
 	Blogcast *blogcast;
+	CGSize descriptionViewSize;
 
-	
-	return 100.0;
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	blogcast = streamCell.blogcast;	
-	if (blogcast.theDescription) {
-		NSString *text;
-		TTStyledTextLabel *styledText;
+	//AS DESIGNED: works without description
+	descriptionViewSize = [blogcast.theDescription sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.bounds.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 
-		text = [NSString stringWithFormat:@"<b>%@</b> <span class=\"blueText\">%@</span>  <span class=\"timestampInWords\">%@<span>", user.username, blogcast.theDescription, [blogcast.startingAt stringInWords]]; 
-		styledText = [[[TTStyledTextLabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 275.0, 0.0)] autorelease];
-		styledText.contentInset = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
-		styledText.textAlignment = UITextAlignmentLeft;
-		styledText.font = [UIFont systemFontOfSize:13.0];
-		styledText.text = [TTStyledText textFromXHTML:text lineBreaks:YES URLs:NO];
-		[styledText sizeToFit];
-		if (styledText.bounds.size.height > 20.0)
-			return styledText.bounds.size.height + 31.0;		
-	}
-
-	return 50.0;
+	return 46.0 + descriptionViewSize.height;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -360,9 +347,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	TTImageView *imageView;
 	UILabel *descriptionView;
 	CGSize timestampLabelSize;
-	CGFloat imageWidth = 0.0;
-	CGFloat imageOffset = 0.0;
-	CGFloat imageHeight = 0.0;
 
 	// Set up the cell...
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -374,7 +358,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		titleLabel = [[UILabel alloc] init];
 		titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
-		titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
 		titleLabel.tag = TITLE_LABEL_TAG;
 		titleLabel.shadowColor = [UIColor whiteColor];
 		titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
@@ -387,7 +371,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
 		[imageView release];
 		usernameLabel = [[UILabel alloc] init];
-		usernameLabel.font = [UIFont boldSystemFontOfSize:11.0];
+		usernameLabel.font = [UIFont boldSystemFontOfSize:12.0];
 		usernameLabel.backgroundColor = [UIColor clearColor];
 		usernameLabel.tag = USERNAME_LABEL_TAG;
 		[cell.contentView insertSubview:usernameLabel belowSubview:cell.highlightView];
@@ -396,7 +380,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[cell.contentView insertSubview:timestampLabel belowSubview:cell.highlightView];
 		//MVR - add the description view whether a description exists or not
 		descriptionView = [[UILabel alloc] init];
-		descriptionView.font = [UIFont systemFontOfSize:11.0];
+		descriptionView.font = [UIFont systemFontOfSize:12.0];
 		descriptionView.textColor = BLOGCASTRSTYLEVAR(blueGrayTextColor);
 		descriptionView.backgroundColor = [UIColor clearColor];
 		descriptionView.lineBreakMode = UILineBreakModeWordWrap;
@@ -411,53 +395,22 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 		descriptionView = (UILabel *)[cell viewWithTag:DESCRIPTION_VIEW_TAG];
 	}
-	if (blogcast.imageUrl) {
-		NSString *imagePostUrl;
-
-		//MVR - image view
-		imagePostUrl = [self imageUrl:blogcast.imageUrl forSize:@"default"];
-		//MVR - unset the image unless it's the same
-		if (![imageView.urlPath isEqualToString:imagePostUrl])
-			[imageView unsetImage];
-		imageView.urlPath = imagePostUrl;
-		if ([blogcast.imageWidth intValue] > [blogcast.imageHeight intValue]) {
-			if ([blogcast.imageWidth intValue] > 60.0) {
-				imageWidth = 60.0;
-				imageHeight = 60.0 * [blogcast.imageHeight intValue] / [blogcast.imageWidth intValue];
-			} else {
-				imageWidth = [blogcast.imageWidth intValue];
-				imageHeight = [blogcast.imageHeight intValue];
-			}
-		} else {
-			if ([blogcast.imageHeight intValue] > 60.0) {
-				imageWidth = 60.0 * [blogcast.imageWidth intValue] / [blogcast.imageHeight intValue];
-				imageHeight = 60.0;
-			} else {
-				imageWidth = [blogcast.imageWidth intValue];
-				imageHeight = [blogcast.imageHeight intValue];
-			}
-		}
-		imageView.frame = CGRectMake(5.0, 5.0, imageWidth, imageHeight);
-		imageOffset = 5.0;
-	} else {
-		[imageView unsetImage];
-	}
 	//MVR - timestamp label
 	timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [blogcast.startingAt stringInWords]]];
 	timestampLabelSize = [[blogcast.startingAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
 	timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
 	//MVR - title label
 	titleLabel.text = blogcast.title;
-	titleLabel.frame = CGRectMake(5.0 + imageWidth + imageOffset, 5.0, tableView.bounds.size.width - 15.0 - imageWidth - imageOffset - timestampLabel.bounds.size.width, 19.0);
+	titleLabel.frame = CGRectMake(5.0, 5.0, tableView.bounds.size.width - 15.0 - timestampLabel.bounds.size.width, 20.0);
 	//MVR - username label
-	usernameLabel.frame = CGRectMake(5.0 + imageWidth + imageOffset, 24.0, 100.0, 14.0);
+	usernameLabel.frame = CGRectMake(5.0, 25.0, 100.0, 15.0);
 	usernameLabel.text = blogcast.user.username;
 	[usernameLabel sizeToFit];
 	//MVR - description
-	descriptionView.frame = CGRectMake(5.0 + imageWidth + imageOffset, 38.0, tableView.bounds.size.width - 10.0 - imageWidth - imageOffset, 14.0);
+	descriptionView.frame = CGRectMake(5.0, 40.0, tableView.bounds.size.width - 10.0, 100.0);
 	descriptionView.text = blogcast.theDescription;
 	[descriptionView sizeToFit];
-
+	
 	return cell;
 }
 
@@ -1012,7 +965,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	timestampLabel = [[[TTStyledTextLabel alloc] init] autorelease];
 	timestampLabel.contentInset = UIEdgeInsetsMake(0.0, 3.0, 0.0, 0.0);
 	timestampLabel.textAlignment = UITextAlignmentRight;
-	timestampLabel.font = [UIFont systemFontOfSize:8.0];
+	timestampLabel.font = [UIFont systemFontOfSize:9.0];
 	timestampLabel.tag = TIMESTAMP_LABEL_TAG;
 	
 	return timestampLabel;

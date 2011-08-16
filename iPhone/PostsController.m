@@ -231,7 +231,7 @@ static const NSInteger kPostsRequestCount = 20;
 		
 		//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 		usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [post.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 11.0;
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		CGFloat imageWidth;

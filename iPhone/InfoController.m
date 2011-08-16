@@ -425,7 +425,6 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 }
 
 - (void)timerExpired:(Timer *)timer {
-	NSLog(@"MVR - timer expired");
 	if (!blogcastRequest)
 		[self updateBlogcast];
 }

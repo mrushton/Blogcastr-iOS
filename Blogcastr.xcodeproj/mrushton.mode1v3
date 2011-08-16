@@ -275,13 +275,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>32</integer>
+									<integer>51</integer>
 									<integer>6</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 223}, {230, 740}}</string>
+							<string>{{0, 461}, {230, 740}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -300,7 +300,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>536 194 1243 799 0 0 1920 1178 </string>
+						<string>517 231 1243 799 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>InfoController.m</string>
+								<string>PostsController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>InfoController.m</string>
+										<string>PostsController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CAD3703713FA32ED009E3E3B</string>
+										<string>CAD3708713FA4E84009E3E3B</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -560,7 +560,6 @@
 											<string>CAD36EFA13F86D7F009E3E3B</string>
 											<string>CAD36EFB13F86D7F009E3E3B</string>
 											<string>CAD36EFC13F86D7F009E3E3B</string>
-											<string>CAD36EFE13F86D7F009E3E3B</string>
 											<string>CAD36EFF13F86D7F009E3E3B</string>
 											<string>CAD36F0013F86D7F009E3E3B</string>
 											<string>CAD36F0113F86D7F009E3E3B</string>
@@ -584,17 +583,18 @@
 											<string>CAD36F5B13F89ABD009E3E3B</string>
 											<string>CAD36F8013F8A306009E3E3B</string>
 											<string>CAD36F8113F8A306009E3E3B</string>
-											<string>CAD36F9A13F8A70A009E3E3B</string>
 											<string>CAD36FAD13F8AAF3009E3E3B</string>
 											<string>CAD36FAE13F8AAF3009E3E3B</string>
 											<string>CAD36FB413F8AD4D009E3E3B</string>
 											<string>CAD36FBD13F8BEB8009E3E3B</string>
-											<string>CAD36FBF13F8BEB8009E3E3B</string>
-											<string>CAD36FC413F8C17C009E3E3B</string>
-											<string>CAD3702C13FA3167009E3E3B</string>
 											<string>CAD3703413FA32ED009E3E3B</string>
 											<string>CAD3703513FA32ED009E3E3B</string>
-											<string>CAD3703613FA32ED009E3E3B</string>
+											<string>CAD3703A13FA3D73009E3E3B</string>
+											<string>CAD3706113FA464F009E3E3B</string>
+											<string>CAD3706213FA464F009E3E3B</string>
+											<string>CAD3706E13FA4AEA009E3E3B</string>
+											<string>CAD3707F13FA4DD1009E3E3B</string>
+											<string>CAD3708013FA4DD1009E3E3B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -608,7 +608,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {991, 574}}</string>
 								<key>RubberWindowFrame</key>
-								<string>536 194 1243 799 0 0 1920 1178 </string>
+								<string>517 231 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -628,7 +628,7 @@
 								<key>Frame</key>
 								<string>{{0, 579}, {991, 179}}</string>
 								<key>RubberWindowFrame</key>
-								<string>536 194 1243 799 0 0 1920 1178 </string>
+								<string>517 231 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -800,7 +800,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>536 194 1243 799 0 0 1920 1178 </string>
+	<string>517 231 1243 799 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -821,7 +821,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>CommentsController.h</string>
+								<string>BlogcastsController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

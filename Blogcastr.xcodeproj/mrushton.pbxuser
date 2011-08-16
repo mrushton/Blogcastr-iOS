@@ -707,6 +707,39 @@
 			CAD3703513FA32ED009E3E3B /* PBXTextBookmark */ = CAD3703513FA32ED009E3E3B /* PBXTextBookmark */;
 			CAD3703613FA32ED009E3E3B /* PBXTextBookmark */ = CAD3703613FA32ED009E3E3B /* PBXTextBookmark */;
 			CAD3703713FA32ED009E3E3B /* PBXTextBookmark */ = CAD3703713FA32ED009E3E3B /* PBXTextBookmark */;
+			CAD3703A13FA3D73009E3E3B /* PBXTextBookmark */ = CAD3703A13FA3D73009E3E3B /* PBXTextBookmark */;
+			CAD3703B13FA3D73009E3E3B /* PBXTextBookmark */ = CAD3703B13FA3D73009E3E3B /* PBXTextBookmark */;
+			CAD3703C13FA3D73009E3E3B /* PBXTextBookmark */ = CAD3703C13FA3D73009E3E3B /* PBXTextBookmark */;
+			CAD3703F13FA3DDD009E3E3B /* PBXTextBookmark */ = CAD3703F13FA3DDD009E3E3B /* PBXTextBookmark */;
+			CAD3704213FA3FAB009E3E3B /* PBXTextBookmark */ = CAD3704213FA3FAB009E3E3B /* PBXTextBookmark */;
+			CAD3704513FA3FF8009E3E3B /* PBXTextBookmark */ = CAD3704513FA3FF8009E3E3B /* PBXTextBookmark */;
+			CAD3704C13FA41C8009E3E3B /* PBXTextBookmark */ = CAD3704C13FA41C8009E3E3B /* PBXTextBookmark */;
+			CAD3704F13FA421D009E3E3B /* PBXTextBookmark */ = CAD3704F13FA421D009E3E3B /* PBXTextBookmark */;
+			CAD3705213FA4262009E3E3B /* PBXTextBookmark */ = CAD3705213FA4262009E3E3B /* PBXTextBookmark */;
+			CAD3705513FA427B009E3E3B /* PBXTextBookmark */ = CAD3705513FA427B009E3E3B /* PBXTextBookmark */;
+			CAD3705813FA428D009E3E3B /* PBXTextBookmark */ = CAD3705813FA428D009E3E3B /* PBXTextBookmark */;
+			CAD3705B13FA42B6009E3E3B /* PBXTextBookmark */ = CAD3705B13FA42B6009E3E3B /* PBXTextBookmark */;
+			CAD3705E13FA4420009E3E3B /* PBXTextBookmark */ = CAD3705E13FA4420009E3E3B /* PBXTextBookmark */;
+			CAD3706113FA464F009E3E3B /* PBXTextBookmark */ = CAD3706113FA464F009E3E3B /* PBXTextBookmark */;
+			CAD3706213FA464F009E3E3B /* PBXTextBookmark */ = CAD3706213FA464F009E3E3B /* PBXTextBookmark */;
+			CAD3706313FA464F009E3E3B /* PBXTextBookmark */ = CAD3706313FA464F009E3E3B /* PBXTextBookmark */;
+			CAD3706413FA464F009E3E3B /* PBXTextBookmark */ = CAD3706413FA464F009E3E3B /* PBXTextBookmark */;
+			CAD3706513FA464F009E3E3B /* PBXTextBookmark */ = CAD3706513FA464F009E3E3B /* PBXTextBookmark */;
+			CAD3706D13FA4AEA009E3E3B /* PBXTextBookmark */ = CAD3706D13FA4AEA009E3E3B /* PBXTextBookmark */;
+			CAD3706E13FA4AEA009E3E3B /* PBXTextBookmark */ = CAD3706E13FA4AEA009E3E3B /* PBXTextBookmark */;
+			CAD3706F13FA4AEA009E3E3B /* PBXTextBookmark */ = CAD3706F13FA4AEA009E3E3B /* PBXTextBookmark */;
+			CAD3707013FA4AEA009E3E3B /* PBXTextBookmark */ = CAD3707013FA4AEA009E3E3B /* PBXTextBookmark */;
+			CAD3707313FA4BB2009E3E3B /* PBXTextBookmark */ = CAD3707313FA4BB2009E3E3B /* PBXTextBookmark */;
+			CAD3707613FA4BE5009E3E3B /* PBXTextBookmark */ = CAD3707613FA4BE5009E3E3B /* PBXTextBookmark */;
+			CAD3707913FA4CC9009E3E3B /* PBXTextBookmark */ = CAD3707913FA4CC9009E3E3B /* PBXTextBookmark */;
+			CAD3707A13FA4D95009E3E3B /* PBXTextBookmark */ = CAD3707A13FA4D95009E3E3B /* PBXTextBookmark */;
+			CAD3707B13FA4D95009E3E3B /* XCBuildMessageTextBookmark */ = CAD3707B13FA4D95009E3E3B /* XCBuildMessageTextBookmark */;
+			CAD3707C13FA4D95009E3E3B /* PBXTextBookmark */ = CAD3707C13FA4D95009E3E3B /* PBXTextBookmark */;
+			CAD3707F13FA4DD1009E3E3B /* PBXTextBookmark */ = CAD3707F13FA4DD1009E3E3B /* PBXTextBookmark */;
+			CAD3708013FA4DD1009E3E3B /* PBXTextBookmark */ = CAD3708013FA4DD1009E3E3B /* PBXTextBookmark */;
+			CAD3708113FA4DD1009E3E3B /* PBXTextBookmark */ = CAD3708113FA4DD1009E3E3B /* PBXTextBookmark */;
+			CAD3708213FA4E08009E3E3B /* PBXTextBookmark */ = CAD3708213FA4E08009E3E3B /* PBXTextBookmark */;
+			CAD3708713FA4E84009E3E3B /* PBXTextBookmark */ = CAD3708713FA4E84009E3E3B /* PBXTextBookmark */;
 			CAD970B8132F350800996CC1 = CAD970B8132F350800996CC1 /* PBXTextBookmark */;
 			CADF7F631384E88D0089A234 = CADF7F631384E88D0089A234 /* PBXTextBookmark */;
 			CAFA7C9F13477B6E0077AD98 = CAFA7C9F13477B6E0077AD98 /* PBXTextBookmark */;
@@ -724,10 +757,10 @@
 	};
 	CA0024CE13A3C43300A4B36F /* InfoController.m */ = {
 		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{7111, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{7162, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{7212, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 22409}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1447, 8762}}";
-			sepNavSelRange = "{1946, 0}";
-			sepNavVisRange = "{12776, 757}";
+			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{7111, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{7162, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{7212, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 22377}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1447, 8749}}";
+			sepNavSelRange = "{13186, 0}";
+			sepNavVisRange = "{12776, 773}";
 		};
 	};
 	CA054F88134302F700307B90 /* TTPhotoViewController.m */ = {
@@ -1765,9 +1798,9 @@
 	};
 	CA6609A713AD420400EEC2F3 /* PostController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1419, 7618}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1139, 7358}}";
 			sepNavSelRange = "{13097, 18}";
-			sepNavVisRange = "{12601, 817}";
+			sepNavVisRange = "{12553, 906}";
 			sepNavWindowFrame = "{{15, 371}, {1252, 802}}";
 		};
 	};
@@ -2845,7 +2878,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 1126";
 		rLen = 718;
-		rLoc = 44170;
+		rLoc = 44166;
 		rType = 0;
 		vrLen = 1952;
 		vrLoc = 43391;
@@ -3256,7 +3289,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 373";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1261;
 		vrLoc = 15656;
@@ -3774,7 +3807,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {971, 1118}}";
 			sepNavSelRange = "{397, 0}";
-			sepNavVisRange = "{141, 796}";
+			sepNavVisRange = "{141, 874}";
 			sepNavWindowFrame = "{{443, 212}, {1252, 802}}";
 		};
 	};
@@ -3892,17 +3925,17 @@
 	};
 	CA9A49D3136C958C00E10E51 /* PostsController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1223, 1144}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1223, 1131}}";
 			sepNavSelRange = "{392, 0}";
-			sepNavVisRange = "{140, 816}";
+			sepNavVisRange = "{136, 1281}";
 			sepNavWindowFrame = "{{245, 161}, {1252, 802}}";
 		};
 	};
 	CA9A49D4136C958C00E10E51 /* PostsController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1517, 20280}}";
-			sepNavSelRange = "{18258, 67}";
-			sepNavVisRange = "{16981, 1767}";
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 19565}}";
+			sepNavSelRange = "{8315, 0}";
+			sepNavVisRange = "{7979, 2149}";
 			sepNavWindowFrame = "{{61, 329}, {1252, 802}}";
 		};
 	};
@@ -4528,7 +4561,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 373";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1268;
 		vrLoc = 15652;
@@ -4578,7 +4611,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 1126";
 		rLen = 718;
-		rLoc = 44170;
+		rLoc = 44166;
 		rType = 0;
 		vrLen = 1725;
 		vrLoc = 43618;
@@ -4588,7 +4621,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 434";
 		rLen = 0;
-		rLoc = 18258;
+		rLoc = 18254;
 		rType = 0;
 		vrLen = 1940;
 		vrLoc = 17931;
@@ -4598,7 +4631,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 434";
 		rLen = 0;
-		rLoc = 18258;
+		rLoc = 18254;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 17400;
@@ -4608,7 +4641,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 434";
 		rLen = 0;
-		rLoc = 18258;
+		rLoc = 18254;
 		rType = 0;
 		vrLen = 1779;
 		vrLoc = 17400;
@@ -4728,7 +4761,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 371";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1671;
 		vrLoc = 12366;
@@ -4738,7 +4771,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 442";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 1332;
 		vrLoc = 15995;
@@ -4748,7 +4781,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1454;
 		vrLoc = 12340;
@@ -4758,7 +4791,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1612;
 		vrLoc = 12391;
@@ -4768,7 +4801,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1748;
 		vrLoc = 12391;
@@ -4778,7 +4811,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1827;
 		vrLoc = 12625;
@@ -4788,7 +4821,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1772;
 		vrLoc = 12684;
@@ -4798,7 +4831,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13996;
+		rLoc = 13436;
 		rType = 0;
 		vrLen = 1843;
 		vrLoc = 12684;
@@ -4870,7 +4903,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 374";
 		rLen = 0;
-		rLoc = 13996;
+		rLoc = 13436;
 		rType = 0;
 		vrLen = 2218;
 		vrLoc = 1755;
@@ -4880,7 +4913,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 379";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1967;
 		vrLoc = 12826;
@@ -4890,7 +4923,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 383";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1808;
 		vrLoc = 13071;
@@ -4900,7 +4933,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 385";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1890;
 		vrLoc = 13118;
@@ -4910,7 +4943,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 382";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1213;
 		vrLoc = 16427;
@@ -4920,7 +4953,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 448";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 1254;
 		vrLoc = 16040;
@@ -4930,7 +4963,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 375";
 		rLen = 0;
-		rLoc = 13996;
+		rLoc = 13436;
 		rType = 0;
 		vrLen = 1789;
 		vrLoc = 12706;
@@ -4940,7 +4973,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 375";
 		rLen = 0;
-		rLoc = 13996;
+		rLoc = 13436;
 		rType = 0;
 		vrLen = 1819;
 		vrLoc = 12756;
@@ -4950,7 +4983,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 375";
 		rLen = 0;
-		rLoc = 13996;
+		rLoc = 13436;
 		rType = 0;
 		vrLen = 1864;
 		vrLoc = 12803;
@@ -4960,7 +4993,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 381";
 		rLen = 0;
-		rLoc = 13997;
+		rLoc = 13437;
 		rType = 0;
 		vrLen = 1834;
 		vrLoc = 12901;
@@ -5311,7 +5344,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 1529";
 		rLen = 392;
-		rLoc = 59124;
+		rLoc = 59120;
 		rType = 0;
 		vrLen = 1189;
 		vrLoc = 58405;
@@ -5331,7 +5364,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 354";
 		rLen = 0;
-		rLoc = 12356;
+		rLoc = 11879;
 		rType = 0;
 		vrLen = 1795;
 		vrLoc = 12216;
@@ -5341,7 +5374,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 426";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 1475;
 		vrLoc = 14966;
@@ -5351,7 +5384,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 357";
 		rLen = 0;
-		rLoc = 12680;
+		rLoc = 12203;
 		rType = 0;
 		vrLen = 1855;
 		vrLoc = 12297;
@@ -5361,7 +5394,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 357";
 		rLen = 0;
-		rLoc = 12680;
+		rLoc = 12203;
 		rType = 0;
 		vrLen = 1815;
 		vrLoc = 12337;
@@ -5371,7 +5404,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13626;
+		rLoc = 13066;
 		rType = 0;
 		vrLen = 1904;
 		vrLoc = 12339;
@@ -5381,7 +5414,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13621;
+		rLoc = 13061;
 		rType = 0;
 		vrLen = 2032;
 		vrLoc = 12339;
@@ -5391,7 +5424,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13617;
+		rLoc = 13057;
 		rType = 0;
 		vrLen = 2036;
 		vrLoc = 12339;
@@ -5401,7 +5434,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 496";
 		rLen = 479;
-		rLoc = 21898;
+		rLoc = 21894;
 		rType = 0;
 		vrLen = 2145;
 		vrLoc = 20850;
@@ -5411,7 +5444,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13617;
+		rLoc = 13057;
 		rType = 0;
 		vrLen = 1881;
 		vrLoc = 12494;
@@ -5421,7 +5454,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 414";
 		rLen = 0;
-		rLoc = 15342;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 2065;
 		vrLoc = 14136;
@@ -5431,7 +5464,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 414";
 		rLen = 0;
-		rLoc = 15342;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 2149;
 		vrLoc = 14293;
@@ -5441,7 +5474,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 496";
 		rLen = 479;
-		rLoc = 21898;
+		rLoc = 21894;
 		rType = 0;
 		vrLen = 2281;
 		vrLoc = 19802;
@@ -5471,7 +5504,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 423";
 		rLen = 0;
-		rLoc = 17300;
+		rLoc = 15572;
 		rType = 0;
 		vrLen = 1852;
 		vrLoc = 15026;
@@ -5481,7 +5514,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 417";
 		rLen = 0;
-		rLoc = 17254;
+		rLoc = 15526;
 		rType = 0;
 		vrLen = 1823;
 		vrLoc = 15065;
@@ -5739,7 +5772,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 417";
 		rLen = 0;
-		rLoc = 17254;
+		rLoc = 15526;
 		rType = 0;
 		vrLen = 1704;
 		vrLoc = 14896;
@@ -5759,7 +5792,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 1225";
 		rLen = 580;
-		rLoc = 47961;
+		rLoc = 47957;
 		rType = 0;
 		vrLen = 1528;
 		vrLoc = 47170;
@@ -5779,7 +5812,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 1005";
 		rLen = 69;
-		rLoc = 36216;
+		rLoc = 34436;
 		rType = 0;
 		vrLen = 1229;
 		vrLoc = 36345;
@@ -5789,7 +5822,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 421";
 		rLen = 0;
-		rLoc = 15465;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1925;
 		vrLoc = 15108;
@@ -5799,7 +5832,7 @@
 		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
 		name = "PostsController.m: 434";
 		rLen = 67;
-		rLoc = 18258;
+		rLoc = 18254;
 		rType = 0;
 		vrLen = 1767;
 		vrLoc = 16981;
@@ -5809,7 +5842,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 421";
 		rLen = 0;
-		rLoc = 15465;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1863;
 		vrLoc = 15170;
@@ -5819,7 +5852,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 447";
 		rLen = 0;
-		rLoc = 16425;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1737;
 		vrLoc = 15538;
@@ -5829,7 +5862,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 443";
 		rLen = 0;
-		rLoc = 16338;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1535;
 		vrLoc = 15831;
@@ -5839,7 +5872,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 443";
 		rLen = 0;
-		rLoc = 16339;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1425;
 		vrLoc = 15999;
@@ -5849,7 +5882,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 316";
 		rLen = 0;
-		rLoc = 10986;
+		rLoc = 11399;
 		rType = 0;
 		vrLen = 1532;
 		vrLoc = 10781;
@@ -5859,7 +5892,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 316";
 		rLen = 0;
-		rLoc = 10981;
+		rLoc = 11399;
 		rType = 0;
 		vrLen = 1496;
 		vrLoc = 10818;
@@ -5869,7 +5902,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 316";
 		rLen = 0;
-		rLoc = 10981;
+		rLoc = 11399;
 		rType = 0;
 		vrLen = 1496;
 		vrLoc = 10818;
@@ -5879,7 +5912,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 364";
 		rLen = 0;
-		rLoc = 12815;
+		rLoc = 12283;
 		rType = 0;
 		vrLen = 1870;
 		vrLoc = 12356;
@@ -5889,7 +5922,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 364";
 		rLen = 0;
-		rLoc = 12815;
+		rLoc = 12283;
 		rType = 0;
 		vrLen = 1877;
 		vrLoc = 12405;
@@ -5899,7 +5932,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 438";
 		rLen = 0;
-		rLoc = 16176;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1429;
 		vrLoc = 16008;
@@ -5909,7 +5942,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 438";
 		rLen = 0;
-		rLoc = 16176;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1531;
 		vrLoc = 16008;
@@ -5919,7 +5952,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 428";
 		rLen = 0;
-		rLoc = 15769;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1509;
 		vrLoc = 16030;
@@ -5929,7 +5962,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 377";
 		rLen = 0;
-		rLoc = 13489;
+		rLoc = 12929;
 		rType = 0;
 		vrLen = 1932;
 		vrLoc = 12543;
@@ -5939,7 +5972,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 1036";
 		rLen = 0;
-		rLoc = 37069;
+		rLoc = 35289;
 		rType = 0;
 		vrLen = 1145;
 		vrLoc = 36858;
@@ -5949,7 +5982,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 390";
 		rLen = 0;
-		rLoc = 14093;
+		rLoc = 13533;
 		rType = 0;
 		vrLen = 2095;
 		vrLoc = 12761;
@@ -5959,7 +5992,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 445";
 		rLen = 0;
-		rLoc = 16369;
+		rLoc = 14782;
 		rType = 0;
 		vrLen = 1342;
 		vrLoc = 16516;
@@ -5969,7 +6002,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 456";
 		rLen = 0;
-		rLoc = 17168;
+		rLoc = 15467;
 		rType = 0;
 		vrLen = 1470;
 		vrLoc = 16101;
@@ -5979,7 +6012,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 455";
 		rLen = 0;
-		rLoc = 17167;
+		rLoc = 15466;
 		rType = 0;
 		vrLen = 1568;
 		vrLoc = 16009;
@@ -5989,7 +6022,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 456";
 		rLen = 0;
-		rLoc = 17168;
+		rLoc = 15467;
 		rType = 0;
 		vrLen = 1717;
 		vrLoc = 16030;
@@ -5999,7 +6032,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 454";
 		rLen = 0;
-		rLoc = 17039;
+		rLoc = 15365;
 		rType = 0;
 		vrLen = 1672;
 		vrLoc = 16079;
@@ -6009,7 +6042,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 454";
 		rLen = 0;
-		rLoc = 17039;
+		rLoc = 15365;
 		rType = 0;
 		vrLen = 1619;
 		vrLoc = 16135;
@@ -6019,7 +6052,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 454";
 		rLen = 0;
-		rLoc = 17039;
+		rLoc = 15365;
 		rType = 0;
 		vrLen = 1592;
 		vrLoc = 16195;
@@ -6029,7 +6062,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 454";
 		rLen = 0;
-		rLoc = 17135;
+		rLoc = 15434;
 		rType = 0;
 		vrLen = 1861;
 		vrLoc = 16195;
@@ -6039,7 +6072,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 454";
 		rLen = 0;
-		rLoc = 17071;
+		rLoc = 15397;
 		rType = 0;
 		vrLen = 1773;
 		vrLoc = 16321;
@@ -6049,7 +6082,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 461";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 1896;
 		vrLoc = 16421;
@@ -6059,7 +6092,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 461";
 		rLen = 0;
-		rLoc = 17328;
+		rLoc = 15600;
 		rType = 0;
 		vrLen = 1947;
 		vrLoc = 16426;
@@ -6069,7 +6102,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 456";
 		rLen = 0;
-		rLoc = 17236;
+		rLoc = 15508;
 		rType = 0;
 		vrLen = 1735;
 		vrLoc = 16195;
@@ -6079,7 +6112,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 453";
 		rLen = 0;
-		rLoc = 17144;
+		rLoc = 15443;
 		rType = 0;
 		vrLen = 1853;
 		vrLoc = 16309;
@@ -6089,7 +6122,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 461";
 		rLen = 0;
-		rLoc = 17455;
+		rLoc = 15700;
 		rType = 0;
 		vrLen = 1841;
 		vrLoc = 16426;
@@ -6099,7 +6132,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 462";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 2008;
 		vrLoc = 16497;
@@ -6109,7 +6142,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 463";
 		rLen = 0;
-		rLoc = 17572;
+		rLoc = 15792;
 		rType = 0;
 		vrLen = 1987;
 		vrLoc = 16497;
@@ -6119,7 +6152,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 458";
 		rLen = 0;
-		rLoc = 17328;
+		rLoc = 15600;
 		rType = 0;
 		vrLen = 2062;
 		vrLoc = 16426;
@@ -6129,7 +6162,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13437;
+		rLoc = 12877;
 		rType = 0;
 		vrLen = 2054;
 		vrLoc = 12733;
@@ -6139,7 +6172,7 @@
 		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
 		name = "BlogcastsController.m: 376";
 		rLen = 0;
-		rLoc = 13437;
+		rLoc = 12877;
 		rType = 0;
 		vrLen = 2054;
 		vrLoc = 12733;
@@ -6169,7 +6202,7 @@
 		fRef = CA0024CE13A3C43300A4B36F /* InfoController.m */;
 		name = "InfoController.m: 426";
 		rLen = 0;
-		rLoc = 13271;
+		rLoc = 13243;
 		rType = 0;
 		vrLen = 718;
 		vrLoc = 12722;
@@ -6199,7 +6232,7 @@
 		fRef = CA0024CE13A3C43300A4B36F /* InfoController.m */;
 		name = "InfoController.m: 426";
 		rLen = 0;
-		rLoc = 13271;
+		rLoc = 13243;
 		rType = 0;
 		vrLen = 1381;
 		vrLoc = 622;
@@ -6213,6 +6246,335 @@
 		rType = 0;
 		vrLen = 757;
 		vrLoc = 12833;
+	};
+	CAD3703A13FA3D73009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA0024CE13A3C43300A4B36F /* InfoController.m */;
+		name = "InfoController.m: 428";
+		rLen = 0;
+		rLoc = 13243;
+		rType = 0;
+		vrLen = 773;
+		vrLoc = 12833;
+	};
+	CAD3703B13FA3D73009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 376";
+		rLen = 0;
+		rLoc = 12877;
+		rType = 0;
+		vrLen = 1995;
+		vrLoc = 12733;
+	};
+	CAD3703C13FA3D73009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 414";
+		rLen = 0;
+		rLoc = 14782;
+		rType = 0;
+		vrLen = 2200;
+		vrLoc = 14993;
+	};
+	CAD3703F13FA3DDD009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 984";
+		rLen = 0;
+		rLoc = 35289;
+		rType = 0;
+		vrLen = 1151;
+		vrLoc = 35126;
+	};
+	CAD3704213FA3FAB009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 423";
+		rLen = 0;
+		rLoc = 15702;
+		rType = 0;
+		vrLen = 2221;
+		vrLoc = 14222;
+	};
+	CAD3704513FA3FF8009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 374";
+		rLen = 0;
+		rLoc = 12929;
+		rType = 0;
+		vrLen = 2112;
+		vrLoc = 12860;
+	};
+	CAD3704C13FA41C8009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 419";
+		rLen = 0;
+		rLoc = 15443;
+		rType = 0;
+		vrLen = 2012;
+		vrLoc = 14587;
+	};
+	CAD3704F13FA421D009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 419";
+		rLen = 0;
+		rLoc = 15521;
+		rType = 0;
+		vrLen = 1991;
+		vrLoc = 14587;
+	};
+	CAD3705213FA4262009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 419";
+		rLen = 0;
+		rLoc = 15508;
+		rType = 0;
+		vrLen = 1991;
+		vrLoc = 14587;
+	};
+	CAD3705513FA427B009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 425";
+		rLen = 0;
+		rLoc = 15664;
+		rType = 0;
+		vrLen = 1991;
+		vrLoc = 14587;
+	};
+	CAD3705813FA428D009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 425";
+		rLen = 0;
+		rLoc = 15707;
+		rType = 0;
+		vrLen = 1992;
+		vrLoc = 14587;
+	};
+	CAD3705B13FA42B6009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 429";
+		rLen = 0;
+		rLoc = 15791;
+		rType = 0;
+		vrLen = 2100;
+		vrLoc = 14587;
+	};
+	CAD3705E13FA4420009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 425";
+		rLen = 0;
+		rLoc = 15791;
+		rType = 0;
+		vrLen = 1440;
+		vrLoc = 11608;
+	};
+	CAD3706113FA464F009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA6609A713AD420400EEC2F3 /* PostController.m */;
+		name = "PostController.m: 408";
+		rLen = 18;
+		rLoc = 13097;
+		rType = 0;
+		vrLen = 906;
+		vrLoc = 12553;
+	};
+	CAD3706213FA464F009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D3136C958C00E10E51 /* PostsController.h */;
+		name = "PostsController.h: 20";
+		rLen = 0;
+		rLoc = 392;
+		rType = 0;
+		vrLen = 1281;
+		vrLoc = 136;
+	};
+	CAD3706313FA464F009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 262";
+		rLen = 172;
+		rLoc = 9394;
+		rType = 0;
+		vrLen = 1973;
+		vrLoc = 8455;
+	};
+	CAD3706413FA464F009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 318";
+		rLen = 0;
+		rLoc = 11398;
+		rType = 0;
+		vrLen = 1600;
+		vrLoc = 11230;
+	};
+	CAD3706513FA464F009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 325";
+		rLen = 0;
+		rLoc = 11399;
+		rType = 0;
+		vrLen = 1403;
+		vrLoc = 10761;
+	};
+	CAD3706D13FA4AEA009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 262";
+		rLen = 172;
+		rLoc = 9394;
+		rType = 0;
+		vrLen = 1417;
+		vrLoc = 7403;
+	};
+	CAD3706E13FA4AEA009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA713477C020077AD98 /* BlogcastsController.h */;
+		name = "BlogcastsController.h: 59";
+		rLen = 0;
+		rLoc = 2105;
+		rType = 0;
+		vrLen = 1592;
+		vrLoc = 228;
+	};
+	CAD3706F13FA4AEA009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 320";
+		rLen = 0;
+		rLoc = 11149;
+		rType = 0;
+		vrLen = 1326;
+		vrLoc = 10761;
+	};
+	CAD3707013FA4AEA009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 416";
+		rLen = 0;
+		rLoc = 15791;
+		rType = 0;
+		vrLen = 1987;
+		vrLoc = 14664;
+	};
+	CAD3707313FA4BB2009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 321";
+		rLen = 0;
+		rLoc = 11366;
+		rType = 0;
+		vrLen = 1349;
+		vrLoc = 10380;
+	};
+	CAD3707613FA4BE5009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 317";
+		rLen = 0;
+		rLoc = 11149;
+		rType = 0;
+		vrLen = 1406;
+		vrLoc = 10380;
+	};
+	CAD3707913FA4CC9009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 413";
+		rLen = 0;
+		rLoc = 15791;
+		rType = 0;
+		vrLen = 2014;
+		vrLoc = 14495;
+	};
+	CAD3707A13FA4D95009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA99C66D139A981000DCE077 /* CommentsController.h */;
+		name = "CommentsController.h: 20";
+		rLen = 0;
+		rLoc = 397;
+		rType = 0;
+		vrLen = 874;
+		vrLoc = 141;
+	};
+	CAD3707B13FA4D95009E3E3B /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Incompatible types in assignment";
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 319;
+		rType = 1;
+	};
+	CAD3707C13FA4D95009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 319";
+		rLen = 0;
+		rLoc = 11150;
+		rType = 0;
+		vrLen = 1034;
+		vrLoc = 10999;
+	};
+	CAD3707F13FA4DD1009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 413";
+		rLen = 0;
+		rLoc = 15791;
+		rType = 0;
+		vrLen = 2005;
+		vrLoc = 14495;
+	};
+	CAD3708013FA4DD1009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 262";
+		rLen = 172;
+		rLoc = 9394;
+		rType = 0;
+		vrLen = 1417;
+		vrLoc = 7403;
+	};
+	CAD3708113FA4DD1009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 353";
+		rLen = 0;
+		rLoc = 14246;
+		rType = 0;
+		vrLen = 2269;
+		vrLoc = 12356;
+	};
+	CAD3708213FA4E08009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 353";
+		rLen = 0;
+		rLoc = 14246;
+		rType = 0;
+		vrLen = 2373;
+		vrLoc = 12198;
+	};
+	CAD3708713FA4E84009E3E3B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA9A49D4136C958C00E10E51 /* PostsController.m */;
+		name = "PostsController.m: 234";
+		rLen = 0;
+		rLoc = 8315;
+		rType = 0;
+		vrLen = 2149;
+		vrLoc = 7979;
 	};
 	CAD970B8132F350800996CC1 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -6352,15 +6714,15 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {930, 832}}";
 			sepNavSelRange = "{2105, 0}";
-			sepNavVisRange = "{645, 1648}";
+			sepNavVisRange = "{228, 1592}";
 		};
 	};
 	CAFA7CA813477C020077AD98 /* BlogcastsController.m */ = {
 		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{19437, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{19488, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{19538, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 37364}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1496, 13325}}";
-			sepNavSelRange = "{13437, 0}";
-			sepNavVisRange = "{12733, 2054}";
+			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{17657, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{17708, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{17758, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 35584}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1202, 12415}}";
+			sepNavSelRange = "{15791, 0}";
+			sepNavVisRange = "{14495, 2005}";
 			sepNavWindowFrame = "{{38, 350}, {1252, 802}}";
 		};
 	};
