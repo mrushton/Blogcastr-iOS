@@ -24,6 +24,9 @@
 @synthesize userUsername;
 @synthesize userAvatarUrl;
 @synthesize tags;
+@synthesize imageUrl;
+@synthesize imageWidth;
+@synthesize imageHeight;
 @synthesize numCurrentViewers;
 @synthesize numPosts;
 @synthesize numComments;
@@ -73,6 +76,9 @@
 	[userUsername release];
 	[userAvatarUrl release];
 	[tags release];
+	[imageUrl release];
+	[imageWidth release];
+	[imageHeight release];
 	[numCurrentViewers release];
 	[numPosts release];
 	[numComments release];
@@ -100,6 +106,9 @@
 	self.userUsername = nil;
 	self.userAvatarUrl = nil;
 	self.tags = nil;
+	self.imageUrl = nil;
+	self.imageWidth = nil;
+	self.imageHeight = nil;
 	self.numCurrentViewers = nil;
 	self.numPosts = nil;
 	self.numComments = nil;
@@ -158,6 +167,12 @@
 		self.user = nil;
 		blogcast.tags = tags;
 		self.tags = nil;
+		blogcast.imageUrl = imageUrl;
+		self.imageUrl = nil;
+		blogcast.imageWidth = imageWidth;
+		self.imageWidth = nil;
+		blogcast.imageHeight = imageHeight;
+		self.imageHeight = nil;
 		blogcast.numCurrentViewers = numCurrentViewers;
 		self.numCurrentViewers = nil;
 		blogcast.numPosts = numPosts;
@@ -224,6 +239,12 @@
 			else
 				self.tags = mutableString;
 		}
+	} else if ([elementName isEqual:@"image-url"]) {
+		self.imageUrl = mutableString;
+	} else if ([elementName isEqual:@"image-width"]) {
+		self.imageWidth = [NSNumber numberWithInteger:[mutableString integerValue]];
+	} else if ([elementName isEqual:@"image-height"]) {
+		self.imageHeight = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"stats"]) {
 		inStats = NO;
 	} else if ([elementName isEqual:@"current-viewers"]) {

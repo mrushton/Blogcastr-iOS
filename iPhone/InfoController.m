@@ -62,6 +62,8 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	self.tableView.tableFooterView = [self footerView];
 	//MVR - timer
 	timer = [[Timer alloc] initWithTimeInterval:TIMER_INTERVAL delegate:self];
+	//MVR - do not wait to fire timer
+	[timer.timer fire];
 }
 
 /*
@@ -423,6 +425,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 }
 
 - (void)timerExpired:(Timer *)timer {
+	NSLog(@"MVR - timer expired");
 	if (!blogcastRequest)
 		[self updateBlogcast];
 }

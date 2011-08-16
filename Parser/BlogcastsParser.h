@@ -24,6 +24,9 @@
 	NSString *userUsername;
 	NSString *userAvatarUrl;
 	NSString *tags;
+	NSString *imageUrl;
+	NSNumber *imageWidth;
+	NSNumber *imageHeight;
 	NSNumber *numCurrentViewers;
 	NSNumber *numPosts;
 	NSNumber *numComments;
@@ -49,6 +52,9 @@
 @property (nonatomic, retain) NSString *userUsername;
 @property (nonatomic, retain) NSString *userAvatarUrl;
 @property (nonatomic, retain) NSString *tags;
+@property (nonatomic, retain) NSString *imageUrl;
+@property (nonatomic, retain) NSNumber *imageWidth;
+@property (nonatomic, retain) NSNumber *imageHeight;
 @property (nonatomic, retain) NSNumber *numCurrentViewers;
 @property (nonatomic, retain) NSNumber *numPosts;
 @property (nonatomic, retain) NSNumber *numComments;

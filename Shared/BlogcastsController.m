@@ -311,7 +311,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	BlogcastStreamCell *streamCell;
 	Blogcast *blogcast;
+
 	
+	return 100.0;
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	blogcast = streamCell.blogcast;	
 	if (blogcast.theDescription) {
@@ -347,20 +349,21 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	return [sectionInfo numberOfObjects];
 }
 
-#define TITLE_LABEL_TAG 7
-#define IMAGE_VIEW_TAG 1
-#define STYLED_TEXT_TAG 8
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	BlogcastStreamCell *streamCell;
 	Blogcast *blogcast;
     BlogcastrTableViewCell *cell;
-	TTImageView *imageView;
 	UILabel *titleLabel;
-	NSString *text;
-	TTStyledTextLabel *styledText;
+	TTStyledTextLabel *timestampLabel;
+	UILabel *usernameLabel;
+	TTImageView *imageView;
+	UILabel *descriptionView;
+	CGSize timestampLabelSize;
+	CGFloat imageWidth = 0.0;
+	CGFloat imageOffset = 0.0;
+	CGFloat imageHeight = 0.0;
 
-//	NSLog(@"MVR - setting up table view cell");
 	// Set up the cell...
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	blogcast = streamCell.blogcast;
@@ -368,95 +371,93 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	//MVR - if cell doesn't exist create it
     if (!cell) {	
 		cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Blogcast"] autorelease];
-		imageView = [[TTImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 40.0, 40.0)];
+		titleLabel = [[UILabel alloc] init];
+		titleLabel.backgroundColor = [UIColor clearColor];
+		titleLabel.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+		titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		titleLabel.tag = TITLE_LABEL_TAG;
+		titleLabel.shadowColor = [UIColor whiteColor];
+		titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+		titleLabel.text = blogcast.title;
+		[cell.contentView insertSubview:titleLabel belowSubview:cell.highlightView];
+		[titleLabel release];
+		imageView = [[TTImageView alloc] init];
+		imageView.backgroundColor = [UIColor clearColor];
 		imageView.tag = IMAGE_VIEW_TAG;
-		imageView.backgroundColor = [UIColor redColor];
 		[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
 		[imageView release];
-		
-		
-
-		
-		
-		/*@"This is a test of styled labels.  Styled labels support \
-		<b>bold text</b>, <i>italic text</i>, <span class=\"blueText\">colored text</span>, \
-		<span class=\"largeText\">font sizes</span>, \
-		<span class=\"blueBox\">spans with backgrounds</span>, inline images \
-		<img src=\"bundle://smiley.png\"/>, and <a href=\"http://www.google.com\">hyperlinks</a> you can \
-		actually touch. URLs are automatically converted into links, like this: http://www.foo.com\
-		<div>You can enclose blocks within an HTML div.</div>\
-		Both line break characters\n\nand HTML line breaks<br/>are respected.";*/
-		
-		styledText = [[TTStyledTextLabel alloc] initWithFrame:CGRectMake(45.0, 25.0, 275.0, 0.0)];
-		styledText.contentInset = UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0);
-		styledText.textAlignment = UITextAlignmentLeft;
-		styledText.font = [UIFont systemFontOfSize:13.0];
-		styledText.tag = STYLED_TEXT_TAG;
-		//styledText.backgroundColor = [UIColor grayColor];
-		[cell.contentView insertSubview:styledText belowSubview:cell.highlightView];
-
-		[styledText release];
-
-		
-		//MVR - set up the cell
-		titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0, 5.0, 252.0, 20.0)];
-		titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.textColor = [UIColor colorWithRed:0.159 green:0.226 blue:0.311 alpha:1.0];//[UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
-		titleLabel.font = [UIFont boldSystemFontOfSize:15.0];
-		titleLabel.tag = TITLE_LABEL_TAG;
-		titleLabel.text = [NSString stringWithFormat:@"%@", blogcast.title];
-
-		[cell.contentView insertSubview:titleLabel belowSubview:cell.highlightView];
-
-
-		[titleLabel release];
-	/*	if (blogcast.description) {
-			description = [[UILabel alloc] initWithFrame:CGRectMake(52.0, 22.0, 264.0, 20)];
-			description.tag = DESCRIPTION_VIEW_TAG;
-			description.font = [description.font fontWithSize:12.0];
-			description.backgroundColor = [UIColor clearColor];
-			description.highlightedTextColor = [UIColor whiteColor];
-			description.lineBreakMode = UILineBreakModeWordWrap;
-			description.numberOfLines = 0;
-			[cell.contentView addSubview:description];
-		} else {
-			description = nil;
-		}
-	*/
-		//MVR - add to cell
+		usernameLabel = [[UILabel alloc] init];
+		usernameLabel.font = [UIFont boldSystemFontOfSize:11.0];
+		usernameLabel.backgroundColor = [UIColor clearColor];
+		usernameLabel.tag = USERNAME_LABEL_TAG;
+		[cell.contentView insertSubview:usernameLabel belowSubview:cell.highlightView];
+		[usernameLabel release];
+		timestampLabel = [self timestampLabel];
+		[cell.contentView insertSubview:timestampLabel belowSubview:cell.highlightView];
+		//MVR - add the description view whether a description exists or not
+		descriptionView = [[UILabel alloc] init];
+		descriptionView.font = [UIFont systemFontOfSize:11.0];
+		descriptionView.textColor = BLOGCASTRSTYLEVAR(blueGrayTextColor);
+		descriptionView.backgroundColor = [UIColor clearColor];
+		descriptionView.lineBreakMode = UILineBreakModeWordWrap;
+		descriptionView.numberOfLines = 0;
+		descriptionView.tag = DESCRIPTION_VIEW_TAG;
+		[cell.contentView insertSubview:descriptionView belowSubview:cell.highlightView];
+		[descriptionView release];
 	} else {
 		titleLabel = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
+		timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
+		usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 		imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
-		styledText = (TTStyledTextLabel *)[cell viewWithTag:STYLED_TEXT_TAG];
-		//description = (UILabel *)[cell viewWithTag:DESCRIPTION_VIEW_TAG];
-
+		descriptionView = (UILabel *)[cell viewWithTag:DESCRIPTION_VIEW_TAG];
 	}
-	//MVR - image url based on screen resolution
-	if ([[UIScreen mainScreen] scale] > 1.0)
-		imageView.urlPath = [self avatarUrlForSize:@"super"];
-	else
-		imageView.urlPath = [self avatarUrlForSize:@"small"];
-	
-	
-	NSLog(@"MVR - IMAGE VIEW URL %@",imageView.urlPath);
-	
-	titleLabel.text = [NSString stringWithFormat:@"%@", blogcast.title];
+	if (blogcast.imageUrl) {
+		NSString *imagePostUrl;
 
+		//MVR - image view
+		imagePostUrl = [self imageUrl:blogcast.imageUrl forSize:@"default"];
+		//MVR - unset the image unless it's the same
+		if (![imageView.urlPath isEqualToString:imagePostUrl])
+			[imageView unsetImage];
+		imageView.urlPath = imagePostUrl;
+		if ([blogcast.imageWidth intValue] > [blogcast.imageHeight intValue]) {
+			if ([blogcast.imageWidth intValue] > 60.0) {
+				imageWidth = 60.0;
+				imageHeight = 60.0 * [blogcast.imageHeight intValue] / [blogcast.imageWidth intValue];
+			} else {
+				imageWidth = [blogcast.imageWidth intValue];
+				imageHeight = [blogcast.imageHeight intValue];
+			}
+		} else {
+			if ([blogcast.imageHeight intValue] > 60.0) {
+				imageWidth = 60.0 * [blogcast.imageWidth intValue] / [blogcast.imageHeight intValue];
+				imageHeight = 60.0;
+			} else {
+				imageWidth = [blogcast.imageWidth intValue];
+				imageHeight = [blogcast.imageHeight intValue];
+			}
+		}
+		imageView.frame = CGRectMake(5.0, 5.0, imageWidth, imageHeight);
+		imageOffset = 5.0;
+	} else {
+		[imageView unsetImage];
+	}
+	//MVR - timestamp label
+	timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [blogcast.startingAt stringInWords]]];
+	timestampLabelSize = [[blogcast.startingAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
+	timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+	//MVR - title label
+	titleLabel.text = blogcast.title;
+	titleLabel.frame = CGRectMake(5.0 + imageWidth + imageOffset, 5.0, tableView.bounds.size.width - 15.0 - imageWidth - imageOffset - timestampLabel.bounds.size.width, 19.0);
+	//MVR - username label
+	usernameLabel.frame = CGRectMake(5.0 + imageWidth + imageOffset, 24.0, 100.0, 14.0);
+	usernameLabel.text = blogcast.user.username;
+	[usernameLabel sizeToFit];
+	//MVR - description
+	descriptionView.frame = CGRectMake(5.0 + imageWidth + imageOffset, 38.0, tableView.bounds.size.width - 10.0 - imageWidth - imageOffset, 14.0);
+	descriptionView.text = blogcast.theDescription;
+	[descriptionView sizeToFit];
 
-	if (blogcast.theDescription)
-		text = [NSString stringWithFormat:@"<b>%@</b> <span class=\"blueText\">%@</span>  <span class=\"timestampInWords\">%@<span>", user.username, blogcast.theDescription, [blogcast.startingAt stringInWords]]; 
-	else
-		
-		text = [NSString stringWithFormat:@"<b>%@</b>  <span class=\"timestampInWords\">%@<span>", user.username, [blogcast.startingAt stringInWords]]; 
-
-	styledText.text = [TTStyledText textFromXHTML:text lineBreaks:YES URLs:NO];
-
-	[styledText sizeToFit];
-
-
-	//if (description)
-	//	description.text = [NSString stringWithFormat:@"%@", blogcast.description];
-	
 	return cell;
 }
 
@@ -987,22 +988,34 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	return url;
 }
 
-- (NSString *)avatarUrlForSize:(NSString *)size {
-	NSString *avatarUrl;
+- (NSString *)imageUrl:(NSString *)string forSize:(NSString *)size {
+	NSString *imageUrl;
 	NSRange range;
 	
 #ifdef DEVEL
-	avatarUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com%@", user.avatarUrl];
+	imageUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com%@", string];
 #else //DEVEL
-	avatarUrl = [[user.avatarUrl copy] autorelease];
+	imageUrl = [[string copy] autorelease];
 #endif //DEVEL
-	range = [avatarUrl rangeOfString:@"original"];
+	range = [imageUrl rangeOfString:@"original"];
 	if (range.location != NSNotFound) {
-		return [avatarUrl stringByReplacingCharactersInRange:range withString:size];
+		return [imageUrl stringByReplacingCharactersInRange:range withString:size];
 	} else {
-		NSLog(@"Error replacing size in avatar url: %@", avatarUrl);
-		return avatarUrl;
+		NSLog(@"Error replacing size in image post url: %@", imageUrl);
+		return imageUrl;
 	}
+}
+
+- (TTStyledTextLabel *)timestampLabel {
+	TTStyledTextLabel *timestampLabel;
+	
+	timestampLabel = [[[TTStyledTextLabel alloc] init] autorelease];
+	timestampLabel.contentInset = UIEdgeInsetsMake(0.0, 3.0, 0.0, 0.0);
+	timestampLabel.textAlignment = UITextAlignmentRight;
+	timestampLabel.font = [UIFont systemFontOfSize:8.0];
+	timestampLabel.tag = TIMESTAMP_LABEL_TAG;
+	
+	return timestampLabel;
 }
 
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {

@@ -19,6 +19,9 @@
 @dynamic postsBadgeVal;
 @dynamic title;
 @dynamic tags;
+@dynamic imageUrl;
+@dynamic imageWidth;
+@dynamic imageHeight;
 @dynamic commentsBadgeVal;
 @dynamic numCurrentViewers;
 @dynamic numViews;

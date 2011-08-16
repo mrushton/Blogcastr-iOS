@@ -21,6 +21,9 @@
 @property (nonatomic, retain) NSNumber * postsBadgeVal;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * tags;
+@property (nonatomic, retain) NSString * imageUrl;
+@property (nonatomic, retain) NSNumber * imageWidth;
+@property (nonatomic, retain) NSNumber * imageHeight;
 @property (nonatomic, retain) NSNumber * commentsBadgeVal;
 @property (nonatomic, retain) NSNumber * numCurrentViewers;
 @property (nonatomic, retain) NSNumber * numViews;

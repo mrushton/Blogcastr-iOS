@@ -56,7 +56,8 @@
 - (void)reloadTableView;
 - (BOOL)save;
 - (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count;
-- (NSString *)avatarUrlForSize:(NSString *)size;
+- (NSString *)imageUrl:(NSString *)string forSize:(NSString *)size;
+- (TTStyledTextLabel *)timestampLabel;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end

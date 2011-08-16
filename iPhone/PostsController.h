@@ -17,10 +17,6 @@
 #import "ASIHTTPRequest.h"
 #import "Timer.h"
 
-#define USERNAME_LABEL_TAG 1
-#define TIMESTAMP_LABEL_TAG 2
-#define TEXT_VIEW_TAG 3
-#define IMAGE_VIEW_TAG 4
 #define FAST_TIMER_INTERVAL 2.0
 #define SLOW_TIMER_INTERVAL 30.0
 

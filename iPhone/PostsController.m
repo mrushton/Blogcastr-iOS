@@ -431,7 +431,6 @@ static const NSInteger kPostsRequestCount = 20;
 				imageHeight = [post.imageHeight intValue];
 			}
 		}
-		NSLog(@"MVR - image width %d height %d",imageWidth,imageHeight);
 		imageView.frame = CGRectMake(5.0, 5.0, imageWidth, imageHeight);
 		//MVR - username label
 		usernameLabel.text = post.user.username;
