@@ -275,13 +275,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>51</integer>
-									<integer>6</integer>
+									<integer>128</integer>
+									<integer>80</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 461}, {230, 740}}</string>
+							<string>{{0, 1608}, {230, 740}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PostsController.m</string>
+								<string>UserController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PostsController.m</string>
+										<string>UserController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CAD3708713FA4E84009E3E3B</string>
+										<string>CAD370A413FB40CC009E3E3B</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -462,7 +462,6 @@
 											<string>CA87E09213EA4BE400F2C432</string>
 											<string>CA87E0BD13EBC6C700F2C432</string>
 											<string>CA87E0CF13EBC6C700F2C432</string>
-											<string>CA87E0D013EBC6C700F2C432</string>
 											<string>CA87E0D113EBC6C700F2C432</string>
 											<string>CA87E10313ECFAE900F2C432</string>
 											<string>CA87E18C13EDE0F900F2C432</string>
@@ -480,7 +479,6 @@
 											<string>CA245D3213EF488400EC0825</string>
 											<string>CA245D5613EF74E700EC0825</string>
 											<string>CA245D5713EF74E700EC0825</string>
-											<string>CA245D9413F0E5B300EC0825</string>
 											<string>CA245D9713F0E5B300EC0825</string>
 											<string>CA245DB013F20C6F00EC0825</string>
 											<string>CA245DB413F20C6F00EC0825</string>
@@ -521,7 +519,6 @@
 											<string>CA97F5BF13F715AE0065F772</string>
 											<string>CA97F5C013F715AE0065F772</string>
 											<string>CA97F5C113F715AE0065F772</string>
-											<string>CA97F5C413F715AE0065F772</string>
 											<string>CA97F5F213F723BE0065F772</string>
 											<string>CA97F5FC13F7254D0065F772</string>
 											<string>CA97F5FD13F7254D0065F772</string>
@@ -540,7 +537,6 @@
 											<string>CA97F69E13F78E4F0065F772</string>
 											<string>CA97F69F13F78E4F0065F772</string>
 											<string>CA97F6AC13F793820065F772</string>
-											<string>CA97F70313F7AD7B0065F772</string>
 											<string>CA97F70413F7AD7B0065F772</string>
 											<string>CA97F70613F7AD7B0065F772</string>
 											<string>CA97F70813F7AD7B0065F772</string>
@@ -561,7 +557,6 @@
 											<string>CAD36EFB13F86D7F009E3E3B</string>
 											<string>CAD36EFC13F86D7F009E3E3B</string>
 											<string>CAD36EFF13F86D7F009E3E3B</string>
-											<string>CAD36F0013F86D7F009E3E3B</string>
 											<string>CAD36F0113F86D7F009E3E3B</string>
 											<string>CAD36F1913F872FE009E3E3B</string>
 											<string>CAD36F1B13F872FE009E3E3B</string>
@@ -594,7 +589,12 @@
 											<string>CAD3706213FA464F009E3E3B</string>
 											<string>CAD3706E13FA4AEA009E3E3B</string>
 											<string>CAD3707F13FA4DD1009E3E3B</string>
-											<string>CAD3708013FA4DD1009E3E3B</string>
+											<string>CAD3708F13FB3D29009E3E3B</string>
+											<string>CAD3709013FB3D29009E3E3B</string>
+											<string>CAD3709113FB3D29009E3E3B</string>
+											<string>CAD3709913FB3F79009E3E3B</string>
+											<string>CAD3709A13FB3F79009E3E3B</string>
+											<string>CAD3709213FB3D29009E3E3B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

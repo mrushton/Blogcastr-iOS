@@ -334,6 +334,7 @@
 	}
 	//MVR - need to save password for XMPP client
 	parser.user.password = signInPasswordTextField.text;
+	parser.user.updatedAt = [NSDate date];
 	//MVR - update the session with authenticated user
 	session.user = parser.user;
 	if (![self save])
@@ -420,6 +421,7 @@
 	}
 	//MVR - need to save password for XMPP client
 	userParser.user.password = signUpPasswordTextField.text;
+	userParser.user.updatedAt = [NSDate date];
 	//MVR - update the session with authenticated user
 	session.user = userParser.user;
 	if (![self save])

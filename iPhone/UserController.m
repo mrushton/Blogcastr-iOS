@@ -95,36 +95,29 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+	NSInteger numSections = 1;
+
+	// Return the number of sections.
+	if (user.web)
+		numSections++;
 	if (user.bio)
-		return 2;
-	else
-		return 1;
+		numSections++;
+
+	return numSections;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	switch (section) {
-		case 0:
-			if (user.web)
-				return 2;
-			else
-				return 1;
-		case 1:
-			return 1;
-		default:
-			return 0;
-	}
+	return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0){
-		if (indexPath.row == 0)
-			return 86.0;
-		else if (indexPath.row == 1)
-			return 44.0;
-	} else if (indexPath.section == 1) {
+		return 86.0;
+	} else if (user.web && indexPath.section == 1) {
+		return 44.0;
+	} else if ((!user.web && indexPath.section == 1) || indexPath.section == 2) {
 		CGSize size;
 		
 		size = [user.bio sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(284.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
@@ -140,45 +133,43 @@
 	
     // Configure the cell...
 	if (indexPath.section == 0) {
-		if (indexPath.row == 0) {
-			CGRect rect;
-			UILabel *label;
+		CGRect rect;
+		UILabel *label;
 
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-			cell.selectionStyle = UITableViewCellSelectionStyleNone;
-			TTButton *avatarButton = [TTButton buttonWithStyle:@"roundedAvatar:"];
-			rect = CGRectMake(18.0, 9.0, 69.0, 69.0);
-			avatarButton.frame = rect;
-			[avatarButton addTarget:self action:@selector(pressAvatar:) forControlEvents:UIControlEventTouchUpInside];
-			//MVR - image url based on screen resolution
-			if ([[UIScreen mainScreen] scale] > 1.0)
-				[avatarButton setImage:[self avatarUrlForSize:@"super"] forState:UIControlStateNormal];
-			else
-				[avatarButton setImage:[self avatarUrlForSize:@"large"] forState:UIControlStateNormal];
-			[cell addSubview:avatarButton];
-			rect = CGRectMake(95.0, 14.0, 207.0, 22.0);
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		TTButton *avatarButton = [TTButton buttonWithStyle:@"roundedAvatar:"];
+		rect = CGRectMake(18.0, 9.0, 69.0, 69.0);
+		avatarButton.frame = rect;
+		[avatarButton addTarget:self action:@selector(pressAvatar:) forControlEvents:UIControlEventTouchUpInside];
+		//MVR - image url based on screen resolution
+		if ([[UIScreen mainScreen] scale] > 1.0)
+			[avatarButton setImage:[self avatarUrlForSize:@"super"] forState:UIControlStateNormal];
+		else
+			[avatarButton setImage:[self avatarUrlForSize:@"large"] forState:UIControlStateNormal];
+		[cell addSubview:avatarButton];
+		rect = CGRectMake(95.0, 14.0, 207.0, 22.0);
+		label = [[UILabel alloc] initWithFrame:rect];
+		label.text = user.fullName;
+		label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+		label.font = [UIFont boldSystemFontOfSize:18.0];
+		[cell addSubview:label];
+		[label release];
+		if (user.location) {
+			rect = CGRectMake(95.0, 38.0, 207.0, 18.0);
 			label = [[UILabel alloc] initWithFrame:rect];
-			label.text = user.fullName;
-			label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
-			label.font = [UIFont boldSystemFontOfSize:18.0];
+			label.text = user.location;
+			label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
+			label.font = [UIFont boldSystemFontOfSize:14.0];
 			[cell addSubview:label];
 			[label release];
-			if (user.location) {
-				rect = CGRectMake(95.0, 38.0, 207.0, 18.0);
-				label = [[UILabel alloc] initWithFrame:rect];
-				label.text = user.location;
-				label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
-				label.font = [UIFont boldSystemFontOfSize:14.0];
-				[cell addSubview:label];
-				[label release];
-			}
-		} else if (indexPath.row == 1) {
-			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
-			cell.textLabel.text = @"Web";
-			cell.detailTextLabel.text = user.web;
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
-	} else if (indexPath.section == 1) {
+	} else if (user.web && indexPath.section == 1) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+		cell.textLabel.text = @"Web";
+		cell.detailTextLabel.text = user.web;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	} else if ((!user.web && indexPath.section == 1) || indexPath.section == 2) {
 		CGRect rect;
 		UILabel *label;
 		
@@ -199,10 +190,15 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 1)
-		return @"Bio";
-	else
-		return nil;
+	if (user.web) {
+		if (section == 2)
+			return @"Bio";
+	} else {
+		if (section == 1)
+			return @"Bio";
+	}
+
+	return nil;
 }
 
 /*
@@ -257,18 +253,16 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
     */
-	if (indexPath.section == 0) {
-		if (indexPath.row == 1) {
-			TTWebController *webController;
+	if (user.web && indexPath.section == 1) {
+		TTWebController *webController;
 
-			webController = [[TTWebController alloc] init];
-			[webController openURL:[NSURL URLWithString:user.web]];
-			//MVR - controller can be part of tab toolbar controller
-			if (tabToolbarController)
-				[self.tabToolbarController.navigationController pushViewController:webController animated:YES];
-			else
-				[self.navigationController pushViewController:webController animated:YES];
-		}
+		webController = [[TTWebController alloc] init];
+		[webController openURL:[NSURL URLWithString:user.web]];
+		//MVR - controller can be part of tab toolbar controller
+		if (tabToolbarController)
+			[self.tabToolbarController.navigationController pushViewController:webController animated:YES];
+		else
+			[self.navigationController pushViewController:webController animated:YES];
 	}
 }
 
