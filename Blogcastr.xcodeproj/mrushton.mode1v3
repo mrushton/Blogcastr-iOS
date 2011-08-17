@@ -275,13 +275,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>128</integer>
-									<integer>80</integer>
+									<integer>40</integer>
+									<integer>6</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1608}, {230, 740}}</string>
+							<string>{{0, 132}, {230, 740}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -300,7 +300,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>517 231 1243 799 0 0 1920 1178 </string>
+						<string>379 243 1243 799 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -318,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>UserController.m</string>
+								<string>NewBlogcastController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>UserController.m</string>
+										<string>NewBlogcastController.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CAD370A413FB40CC009E3E3B</string>
+										<string>CAD370B613FB5637009E3E3B</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -424,7 +424,6 @@
 											<string>CA660B9D13BFCFF200EEC2F3</string>
 											<string>CA660BEC13BFEFD600EEC2F3</string>
 											<string>CA660C4113C1199A00EEC2F3</string>
-											<string>CA0D829313C58E2500FC1330</string>
 											<string>CA0D841B13CBFF0000FC1330</string>
 											<string>CA0D85DD13D7F83F00FC1330</string>
 											<string>CA0D85DF13D7F83F00FC1330</string>
@@ -511,7 +510,6 @@
 											<string>CA97F5AD13F6E0E30065F772</string>
 											<string>CA97F5AE13F6E0E30065F772</string>
 											<string>CA97F5AF13F6E0E30065F772</string>
-											<string>CA97F5B013F6E0E30065F772</string>
 											<string>CA97F5B113F6E0E30065F772</string>
 											<string>CA97F5B313F6E0E30065F772</string>
 											<string>CA97F5BC13F715AE0065F772</string>
@@ -549,13 +547,10 @@
 											<string>CA97F71813F830CC0065F772</string>
 											<string>CA97F71913F830CC0065F772</string>
 											<string>CA97F72D13F841250065F772</string>
-											<string>CA97F73213F842CA0065F772</string>
 											<string>CAD36E8813F84784009E3E3B</string>
 											<string>CAD36E9A13F854E0009E3E3B</string>
 											<string>CAD36EF713F86D7F009E3E3B</string>
 											<string>CAD36EFA13F86D7F009E3E3B</string>
-											<string>CAD36EFB13F86D7F009E3E3B</string>
-											<string>CAD36EFC13F86D7F009E3E3B</string>
 											<string>CAD36EFF13F86D7F009E3E3B</string>
 											<string>CAD36F0113F86D7F009E3E3B</string>
 											<string>CAD36F1913F872FE009E3E3B</string>
@@ -591,10 +586,15 @@
 											<string>CAD3707F13FA4DD1009E3E3B</string>
 											<string>CAD3708F13FB3D29009E3E3B</string>
 											<string>CAD3709013FB3D29009E3E3B</string>
-											<string>CAD3709113FB3D29009E3E3B</string>
 											<string>CAD3709913FB3F79009E3E3B</string>
 											<string>CAD3709A13FB3F79009E3E3B</string>
-											<string>CAD3709213FB3D29009E3E3B</string>
+											<string>CAD370A913FB55D3009E3E3B</string>
+											<string>CAD370AA13FB55D3009E3E3B</string>
+											<string>CAD370AB13FB55D3009E3E3B</string>
+											<string>CAD370AC13FB55D3009E3E3B</string>
+											<string>CAD370B313FB5637009E3E3B</string>
+											<string>CAD370B413FB5637009E3E3B</string>
+											<string>CAD370B513FB5637009E3E3B</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -608,7 +608,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {991, 574}}</string>
 								<key>RubberWindowFrame</key>
-								<string>517 231 1243 799 0 0 1920 1178 </string>
+								<string>379 243 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -628,7 +628,7 @@
 								<key>Frame</key>
 								<string>{{0, 579}, {991, 179}}</string>
 								<key>RubberWindowFrame</key>
-								<string>517 231 1243 799 0 0 1920 1178 </string>
+								<string>379 243 1243 799 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -800,7 +800,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>517 231 1243 799 0 0 1920 1178 </string>
+	<string>379 243 1243 799 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

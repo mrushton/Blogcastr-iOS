@@ -354,8 +354,8 @@
 		CA59BE5B13199D7A00416E4D /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
 		CA59BE961319BA2E00416E4D /* SignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInController.h; sourceTree = "<group>"; };
 		CA59BE971319BA2E00416E4D /* SignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInController.m; sourceTree = "<group>"; };
-		CA59C38C1322FCE500416E4D /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserController.h; path = iPhone/UserController.h; sourceTree = "<group>"; };
-		CA59C38D1322FCE500416E4D /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserController.m; path = iPhone/UserController.m; sourceTree = "<group>"; };
+		CA59C38C1322FCE500416E4D /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
+		CA59C38D1322FCE500416E4D /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		CA59C51E132453CD00416E4D /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		CA59C57D1325D7ED00416E4D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Shared/Settings.h; sourceTree = "<group>"; };
 		CA59C57E1325D7ED00416E4D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Shared/Settings.m; sourceTree = "<group>"; };
@@ -617,6 +617,8 @@
 				CA97F53613F3A1790065F772 /* settings@2x.png */,
 				CA59BDBC1318D68100416E4D /* TabToolbarController.h */,
 				CA59BDBD1318D68100416E4D /* TabToolbarController.m */,
+				CA59C38C1322FCE500416E4D /* UserController.h */,
+				CA59C38D1322FCE500416E4D /* UserController.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -669,8 +671,6 @@
 				CA99C51713919B1500DCE077 /* Timer.m */,
 				CA0D840A13CBE33D00FC1330 /* User.h */,
 				CA0D840B13CBE33D00FC1330 /* User.m */,
-				CA59C38C1322FCE500416E4D /* UserController.h */,
-				CA59C38D1322FCE500416E4D /* UserController.m */,
 				8D1107310486CEB800E47090 /* Blogcastr-Info.plist */,
 			);
 			name = Shared;

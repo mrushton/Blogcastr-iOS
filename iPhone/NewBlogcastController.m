@@ -68,6 +68,7 @@
 	theTitleTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 	theTitleTextField.textColor = TTSTYLEVAR(blueTextColor);
 	theTitleTextField.returnKeyType = UIReturnKeyNext;
+	[theTitleTextField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
 	[theTitleTextField addTarget:self action:@selector(titleEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
 	self.titleTextField = theTitleTextField;
 	[theTitleTextField release];
@@ -90,6 +91,8 @@
 	theTagsTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.tagsTextView = theTagsTextView;
 	[theTagsTextView release];
+	//MVR - disable update button
+	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 /*
@@ -439,11 +442,6 @@
 - (void)create {
 	ASIFormDataRequest *theRequest;
 
-	//MVR - check for errors
-	if (!titleTextField.text || [titleTextField.text isEqualToString:@""]) {
-		[self errorAlertWithTitle:@"Empty field" message:@"Oops! You need to enter a title."];
-		return;
-	}
 	//MVR - dismiss keyboard
 	if (titleTextField.isFirstResponder)
 		[titleTextField resignFirstResponder];
@@ -499,6 +497,10 @@
 		[self.cancelActionSheet showInView:self.navigationController.view];
 }
 
+- (void)textChanged {
+	[self updateNavigationButtons];
+}
+
 - (void)titleEntered:(id)object {
 	[self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:YES scrollPosition:UITableViewScrollPositionTop];
 	//MVR - make description text view the first responder
@@ -507,6 +509,14 @@
 
 #pragma mark -
 #pragma mark Helpers
+
+- (void)updateNavigationButtons {
+	//MVR - title must be entered
+	if (!titleTextField.text || [titleTextField.text isEqualToString:@""])
+		self.navigationItem.rightBarButtonItem.enabled = NO;
+	else
+		self.navigationItem.rightBarButtonItem.enabled = YES;
+}
 
 - (NSURL *)newBlogcastUrl {
 	NSString *string;

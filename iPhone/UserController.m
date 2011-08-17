@@ -51,7 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	//MVR - if never updated load info
+	//MVR - loading hud handles case of missing user info
 	if (!user.updatedAt && !isLoading) {
 		isLoading = YES;
 		isUpdating = YES;
@@ -60,7 +60,7 @@
 		//MVR - disable subscribe button as well
 		self.navigationItem.rightBarButtonItem.enabled = NO;
 		[self updateUser];
-	} else if ([user.updatedAt timeIntervalSinceNow] < -86400.0 && !isUpdating) {
+	} else if ((!subscription.updatedAt || [subscription.updatedAt timeIntervalSinceNow] < -86400.0 || [user.updatedAt timeIntervalSinceNow] < -86400.0) && !isUpdating) {
 		//MVR - update user info if it's been longer than a day
 		isUpdating = YES;
 		[self updateUser];
@@ -375,6 +375,7 @@
 		return;
 	}
 	user.updatedAt = [NSDate date];
+	subscription.updatedAt = [NSDate date];
 	if (![self save])
 		NSLog(@"Save error updating user");
 	//MVR - reload everything after the update

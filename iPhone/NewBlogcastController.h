@@ -41,6 +41,7 @@
 @property (nonatomic, retain) UIAlertView *alertView;
 @property (nonatomic, retain) ASIHTTPRequest *request;
 
+- (void)updateNavigationButtons;
 - (NSURL *)newBlogcastUrl;
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
