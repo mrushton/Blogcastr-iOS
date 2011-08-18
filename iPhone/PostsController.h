@@ -35,6 +35,7 @@
 	NSMutableArray *_streamCellRequests;
 	BOOL isSynced;
 	BOOL isUpdatingFooter;
+	BOOL retryUpdate;
 	NSNumber *_maxId;
 	NSNumber *_minId;
 	Timer *fastTimer;

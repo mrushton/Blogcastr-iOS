@@ -35,6 +35,7 @@
 	BOOL isSynced;
 	BOOL isUpdatingFooter;
 	BOOL isTableViewRendered;
+	BOOL retryUpdate;
 	NSNumber *_maxId;
 	NSNumber *_minId;
 	Timer *fastTimer;

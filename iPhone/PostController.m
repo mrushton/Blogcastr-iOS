@@ -152,7 +152,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	if (postText) {
 		CGSize postTextViewSize;
 
-		postTextViewSize = [postText sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(kTableViewSectionWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		postTextViewSize = [postText sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(kTableViewSectionWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return 57.0 + textOffset + postTextViewSize.height + 8.0;
 	} else {
 		return 57.0 + textOffset;

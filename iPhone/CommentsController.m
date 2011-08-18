@@ -148,7 +148,7 @@ static const NSInteger kCommentsRequestCount = 20;
 			usernameLabelSize = [comment.user.facebookFullName sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		else if ([comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kCommentIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kCommentIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 11.0;
 	}
 	
@@ -547,6 +547,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	if (statusCode != 200) {
 		NSLog(@"Update comments received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the comments."];
+		retryUpdate = YES;
 		return;
 	}
 	//MVR - parse xml
@@ -558,6 +559,7 @@ static const NSInteger kCommentsRequestCount = 20;
 		NSLog(@"Error parsing update comments response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the comments."];
 		[parser release];
+		retryUpdate = YES;
 		return;
 	}
 	//MVR - add posts above max id
@@ -629,16 +631,19 @@ static const NSInteger kCommentsRequestCount = 20;
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating comments: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
 			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the comments."];
+			retryUpdate = YES;
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating comments: request timed out");
 			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the comments."];
+			retryUpdate = YES;
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Update comments request cancelled");
 			break;
 		default:
 			NSLog(@"Error updating comments");
+			retryUpdate = YES;
 			break;
 	}
 }
@@ -936,7 +941,10 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)timerExpired:(Timer *)timer {
 	if (timer == slowTimer) {
 		//MVR - reload the entire table to update timestamps since there's no easy way to get the text out of the TTStyledTextLabel
-		[self.tableView reloadData];		
+		[self.tableView reloadData];
+		//MVR - the update may have failed so retry
+		if (retryUpdate)
+			[self updateComments];
 	} else if (timer == fastTimer) {
 		//MVR - scroll cell logic
 		for (UITableViewCell *cell in self.tableView.visibleCells) {
@@ -963,7 +971,9 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)updateComments {
 	NSURL *url;
 	ASIHTTPRequest *request;
-	
+
+	//MVR - clear retry flag before making request
+	retryUpdate = NO;
 	url = [self commentsUrlWithMaxId:0 count:kCommentsRequestCount];	
 	request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];

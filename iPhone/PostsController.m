@@ -231,7 +231,7 @@ static const NSInteger kPostsRequestCount = 20;
 		
 		//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 		usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 11.0;
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		CGFloat imageWidth;
@@ -722,6 +722,7 @@ static const NSInteger kPostsRequestCount = 20;
 	if (statusCode != 200) {
 		NSLog(@"Update posts received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the posts."];
+		retryUpdate = YES;
 		return;
 	}
 	//MVR - parse xml
@@ -733,6 +734,7 @@ static const NSInteger kPostsRequestCount = 20;
 		NSLog(@"Error parsing update posts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the posts."];
 		[parser release];
+		retryUpdate = YES;
 		return;
 	}
 	//MVR - add posts above max id
@@ -804,16 +806,19 @@ static const NSInteger kPostsRequestCount = 20;
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating posts: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
 			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the posts."];
+			retryUpdate = YES;
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating posts: request timed out");
 			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the posts."];
+			retryUpdate = YES;
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Update posts request cancelled");
 			break;
 		default:
 			NSLog(@"Error updating posts");
+			retryUpdate = YES;
 			break;
 	}	
 }
@@ -1140,7 +1145,10 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)timerExpired:(Timer *)timer {
 	if (timer == slowTimer) {
 		//MVR - reload the entire table to update timestamps since there's no easy way to get the text out of the TTStyledTextLabel
-		[tableView reloadData];		
+		[tableView reloadData];
+		//MVR - the update may have failed so retry
+		if (retryUpdate)
+			[self updatePosts];
 	} else if (timer == fastTimer) {
 		//MVR - scroll cell logic
 		for (UITableViewCell *cell in tableView.visibleCells) {
@@ -1167,7 +1175,9 @@ static const NSInteger kPostsRequestCount = 20;
 - (void)updatePosts {
 	NSURL *url;
 	ASIHTTPRequest *request;
-	
+
+	//MVR - clear retry flag before making request
+	retryUpdate = NO;
 	url = [self postsUrlWithMaxId:0 count:kPostsRequestCount];	
 	request = [ASIHTTPRequest requestWithURL:url];
 	[request setDelegate:self];
