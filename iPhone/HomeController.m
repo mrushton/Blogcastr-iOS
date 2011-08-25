@@ -34,6 +34,7 @@
 		self.navigationItem.rightBarButtonItem = newBlogcastButton;		
 		[newBlogcastButton release];
 		theXmppStream = [[XMPPStream alloc] init];
+		theXmppStream.keepAliveInterval = 30.0;
 		[theXmppStream addDelegate:self];
 		self.xmppStream = theXmppStream;
 		[theXmppStream release];
