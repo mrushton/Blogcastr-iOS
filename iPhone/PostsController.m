@@ -6,6 +6,7 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <AudioToolbox/AudioServices.h>
 #import <Three20/Three20.h>
 #import "PostsController.h"
 #import "NewTextPostController.h"
@@ -37,8 +38,8 @@
 @synthesize postsRequest;
 @synthesize postsFooterRequest;
 @synthesize streamCellRequests;
-@synthesize fastTimer;
 @synthesize slowTimer;
+@synthesize fastTimer;
 
 static const CGFloat kPostBarViewHeight = 40.0;
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
@@ -80,6 +81,8 @@ static const NSInteger kPostsRequestCount = 20;
 	CGRect frame;
 	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
+	NSTimer *theSlowTimer;
+	NSTimer *theFastTimer;
 	NSError *error;
 
 	[super viewDidLoad];
@@ -123,8 +126,12 @@ static const NSInteger kPostsRequestCount = 20;
 	self.infiniteScrollView = theInfiniteScrollView;
 	[theInfiniteScrollView release];
 	//MVR - timers
-	fastTimer = [[Timer alloc] initWithTimeInterval:FAST_TIMER_INTERVAL delegate:self];
-	slowTimer = [[Timer alloc] initWithTimeInterval:SLOW_TIMER_INTERVAL delegate:self];
+	theSlowTimer = [[Timer alloc] initWithTimeInterval:SLOW_TIMER_INTERVAL delegate:self];
+	self.slowTimer = theSlowTimer;
+	[theSlowTimer release];
+	theFastTimer = [[Timer alloc] initWithTimeInterval:FAST_TIMER_INTERVAL delegate:self];
+	self.fastTimer = theFastTimer;
+	[theFastTimer release];
 	//MVR - now fetch blogcasts
 	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
@@ -699,6 +706,9 @@ static const NSInteger kPostsRequestCount = 20;
 				NSLog(@"Error saving post");
 			if (self.view.window == nil)
 				[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + 1];
+			//MVR - vibrate the phone
+			if ([session.user.vibrate boolValue])
+				AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 		} else {
 			NSLog(@"Could not add post to stream");
 		}
@@ -795,6 +805,9 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updatePostsFailed:(ASIHTTPRequest *)request {
@@ -876,6 +889,9 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updatePostsStreamCellFailed:(ASIHTTPRequest *)request {
@@ -935,6 +951,9 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.postsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
@@ -1429,8 +1448,12 @@ static const NSInteger kPostsRequestCount = 20;
 	post.id = [NSNumber numberWithInteger:[postId integerValue]];
 	post.blogcast = blogcast;
 	post.type = postType;
+	//MVR - parse timestamp based on whether it is in UTC format or not
+	if ([postCreatedAt length] == 20)
+		string = [NSString stringWithFormat:@"%@ %@ +0000", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)]];
+	else
+		string = [NSString stringWithFormat:@"%@ %@ %@%@", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)], [postCreatedAt substringWithRange:NSMakeRange(19, 3)], [postCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 	//MVR - convert date string
-	string = [NSString stringWithFormat:@"%@ %@ %@%@", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)], [postCreatedAt substringWithRange:NSMakeRange(19, 3)], [postCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 	date = [[NSDate alloc] initWithString:string];
 	post.createdAt = date;
 	[date release];

@@ -6,6 +6,7 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <AudioToolbox/AudioServices.h>
 #import <Three20/Three20.h>
 #import "CommentsController.h"
 #import "CommentController.h"
@@ -34,8 +35,8 @@
 @synthesize commentsRequest;
 @synthesize commentsFooterRequest;
 @synthesize streamCellRequests;
-@synthesize fastTimer;
 @synthesize slowTimer;
+@synthesize fastTimer;
 
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const CGFloat kScrollCellHeight = 40.0;
@@ -69,6 +70,8 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)viewDidLoad {
 	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
+	NSTimer *theSlowTimer;
+	NSTimer *theFastTimer;
 	NSError *error;
 	
 	[super viewDidLoad];
@@ -87,8 +90,12 @@ static const NSInteger kCommentsRequestCount = 20;
 	self.infiniteScrollView = theInfiniteScrollView;
 	[theInfiniteScrollView release];
 	//MVR - timers
-	fastTimer = [[Timer alloc] initWithTimeInterval:FAST_TIMER_INTERVAL delegate:self];
-	slowTimer = [[Timer alloc] initWithTimeInterval:SLOW_TIMER_INTERVAL delegate:self];
+	theSlowTimer = [[Timer alloc] initWithTimeInterval:SLOW_TIMER_INTERVAL delegate:self];
+	self.slowTimer = theSlowTimer;
+	[theSlowTimer release];
+	theFastTimer = [[Timer alloc] initWithTimeInterval:FAST_TIMER_INTERVAL delegate:self];
+	self.fastTimer = theFastTimer;
+	[theFastTimer release];
 	//MVR - now fetch blogcasts
 	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
@@ -524,6 +531,9 @@ static const NSInteger kCommentsRequestCount = 20;
 				NSLog(@"Error saving comment");
 			if (self.view.window == nil)
 				[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + 1];
+			//MVR - vibrate the phone
+			if ([session.user.vibrate boolValue])
+				AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 		} else {
 			NSLog(@"Could not add comment to stream");
 		}
@@ -620,6 +630,9 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updateCommentsFailed:(ASIHTTPRequest *)request {
@@ -701,6 +714,9 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updateCommentsStreamCellFailed:(ASIHTTPRequest *)request {
@@ -760,6 +776,9 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - update the badge value
 	if (self.view.window == nil)
 		[self setBadgeVal:[blogcast.commentsBadgeVal integerValue] + numAdded];
+	//MVR - vibrate the phone
+	if ([session.user.vibrate boolValue] && numAdded > 0)
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
@@ -1128,8 +1147,12 @@ static const NSInteger kCommentsRequestCount = 20;
 		comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 		comment.id = [NSNumber numberWithInteger:[commentId integerValue]];
 		comment.blogcast = blogcast;
+		//MVR - parse timestamp based on whether it is in UTC format or not
+		if ([commentCreatedAt length] == 20)
+			string = [NSString stringWithFormat:@"%@ %@ +0000", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)]];
+		else
+			string = [NSString stringWithFormat:@"%@ %@ %@%@", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)], [commentCreatedAt substringWithRange:NSMakeRange(19, 3)], [commentCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 		//MVR - convert date string
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)], [commentCreatedAt substringWithRange:NSMakeRange(19, 3)], [commentCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 		date = [[NSDate alloc] initWithString:string];
 		comment.createdAt = date;
 		[date release];
