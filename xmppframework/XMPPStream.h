@@ -342,6 +342,14 @@ typedef enum XMPPStreamErrorCode XMPPStreamErrorCode;
 - (void)disconnect;
 - (void)disconnectAfterSending;
 
+/**
+ * Reconnects to the remote host by closing and opening the underlying TCP socket connection.
+ * 
+ * This is the same as calling disconnect and then connect with the exception that the
+ * xmppStreamWasToldToDisconnect is not called.
+ **/
+- (BOOL)reconnect:(NSError **)errPtr;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Security
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

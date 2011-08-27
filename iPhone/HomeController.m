@@ -34,11 +34,13 @@
 		self.navigationItem.rightBarButtonItem = newBlogcastButton;		
 		[newBlogcastButton release];
 		theXmppStream = [[XMPPStream alloc] init];
-		theXmppStream.keepAliveInterval = 30.0;
+		//MVR - use ping instead of keep alive
+		theXmppStream.keepAliveInterval = 0.0;
 		[theXmppStream addDelegate:self];
 		self.xmppStream = theXmppStream;
 		[theXmppStream release];
 		theXmppReconnect = [[XMPPReconnect alloc] initWithStream:xmppStream];
+		theXmppReconnect.pingInterval = 60.0;
 		self.xmppReconnect = theXmppReconnect;
 		[theXmppReconnect release];
 		didAuthenticate = NO;

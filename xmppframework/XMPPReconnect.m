@@ -1,5 +1,9 @@
 #import "XMPPReconnect.h"
 #import "XMPPStream.h"
+#import "XMPPIQ.h"
+#import "NSXMLElementAdditions.h"
+#import "XMPPJID.h"
+#import "DDLog.h"
 
 #define IMPOSSIBLE_REACHABILITY_FLAGS 0xFFFFFFFF
 
@@ -27,6 +31,9 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 - (void)maybeAttemptReconnect:(NSTimer *)timer;
 - (void)maybeAttemptReconnectWithReachabilityFlags:(SCNetworkReachabilityFlags)reachabilityFlags;
 
+- (void)setupPingTimer;
+- (void)teardownPingTimer;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +46,7 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 @dynamic    autoReconnect;
 @synthesize reconnectDelay;
 @synthesize reconnectTimerInterval;
+@synthesize pingInterval;
 
 - (id)initWithStream:(XMPPStream *)aXmppStream
 {
@@ -55,6 +63,8 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 		reconnectTimerInterval = DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL;
 		
 		previousReachabilityFlags = IMPOSSIBLE_REACHABILITY_FLAGS;
+		
+		pingInterval = DEFAULT_PING_INTERVAL;
 	}
 	return self;
 }
@@ -70,6 +80,7 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 	
 	[self teardownReconnectTimer];
 	[self teardownNetworkMonitoring];
+	[self teardownPingTimer];
 	
 	[super dealloc];
 }
@@ -204,6 +215,8 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 	// We're now connected and properly authenticated.
 	// Should we get accidentally disconnected we should automatically reconnect (if autoReconnect is set).
 	[self setShouldReconnect:YES];
+	//MVR - start the ping timer on authentication
+	[self setupPingTimer];
 }
 
 - (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender
@@ -236,6 +249,25 @@ typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
 		
 		// Note: We delay the method call until the next runloop cycle.
 		// This allows the other delegates to be notified of the closed stream prior to our reconnect attempt.
+	}
+	//MVR - no need to send pings anymore
+	[self teardownPingTimer];
+}
+
+- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
+	NSInteger theId;
+
+	if (![iq isResultIQ])
+		return NO;
+	theId = [iq attributeIntValueForName:@"id"];
+	if (theId == pingIdSent)
+	{
+		pingIdReceived = theId;
+		return YES;
+	}
+	else
+	{
+		return NO;
 	}
 }
 
@@ -377,8 +409,7 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 			
 			if (shouldAttemptReconnect)
 			{
-				[xmppStream connect:nil];
-				
+				[xmppStream connect:nil];				
 				previousReachabilityFlags = reachabilityFlags;
 				[self setMultipleReachabilityChanges:NO];
 			}
@@ -404,6 +435,76 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 				[self setMultipleReachabilityChanges:YES];
 			}
 		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark Ping
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)setPingInterval:(NSTimeInterval)interval
+{
+	if (pingInterval != interval)
+	{
+		pingInterval = interval;
+		
+		[self setupPingTimer];
+	}
+}
+
+- (void)setupPingTimer
+{
+	[pingTimer invalidate];
+	[pingTimer release];
+	pingTimer = nil;
+
+	if ([xmppStream isAuthenticated])
+	{
+		if (pingInterval > 0)
+		{
+			pingIdSent = 0;
+			pingIdReceived = 0;
+			pingTimer = [[NSTimer scheduledTimerWithTimeInterval:pingInterval
+															   target:self
+															 selector:@selector(ping:)
+															 userInfo:nil
+															  repeats:YES] retain];
+		}
+	}
+}
+
+- (void)teardownPingTimer
+{
+	if (pingTimer)
+	{
+		[pingTimer invalidate];
+		[pingTimer release];
+		pingTimer = nil;
+	}
+}
+
+- (void)ping:(NSTimer *)aTimer
+{
+	DDLogTrace();
+	if ([xmppStream isConnected] && pingIdSent != pingIdReceived)
+	{
+		NSError *error = nil;
+
+		//MVR - we have not received a response so restart the connection
+		if (![xmppStream reconnect:&error])
+			NSLog(@"Error reconnecting to XMPP server: %@", error);
+	}
+	else if ([xmppStream isAuthenticated])
+	{
+		NSXMLElement *ping;
+		XMPPIQ *iq;
+		
+		ping = [NSXMLElement elementWithName:@"ping"];
+		[ping addAttributeWithName:@"xmlns" stringValue:@"urn:xmpp:ping"];
+		pingIdSent++;
+		iq = [XMPPIQ iqWithType:@"get" to:nil elementID:[NSString stringWithFormat:@"%d", pingIdSent] child:ping];
+		[iq addAttributeWithName:@"from" stringValue:[xmppStream.myJID full]];
+		[xmppStream sendElement:iq];
 	}
 }
 

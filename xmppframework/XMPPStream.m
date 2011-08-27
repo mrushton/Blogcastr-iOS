@@ -549,6 +549,22 @@ enum XMPPStreamFlags
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark Reconnect
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Reconnects to the remote host.
+ **/
+- (BOOL)reconnect:(NSError **)errPtr
+{
+	[asyncSocket disconnect];
+	
+	// Note: The state is updated automatically in the onSocketDidDisconnect: method.
+
+	return [self connect:errPtr];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Security
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1909,7 +1925,6 @@ enum XMPPStreamFlags
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (BOOL)onSocketWillConnect:(AsyncSocket *)socket {
-	NSLog(@"MVR - WILL CONNECt");
     [multicastDelegate xmppStream:self socketWillConnect:socket];
 
 	return YES;
@@ -1922,7 +1937,6 @@ enum XMPPStreamFlags
 {
 	// The TCP connection is now established
 	
-	NSLog(@"MVR - SOCKET CONNECTED");
 	[srvResolver release];
 	srvResolver = nil;
 	
@@ -1959,8 +1973,6 @@ enum XMPPStreamFlags
 **/
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-	NSLog(@"MVR - READ data");
-
 	if (DEBUG_RECV_PRE)
 	{
 		NSString *dataAsStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -1980,7 +1992,6 @@ enum XMPPStreamFlags
 **/
 - (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-	NSLog(@"MVR - data WITH flag");
 	if ((tag >= 0) && (tag <= UINT16_MAX))
 	{
 		[multicastDelegate xmppStream:self didSendElementWithTag:tag];
@@ -1997,7 +2008,6 @@ enum XMPPStreamFlags
 **/
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err
 {
-	NSLog(@"MVR - disconnecting WITH ERROR");
 	[multicastDelegate xmppStream:self didReceiveError:err];
 }
 
@@ -2007,7 +2017,7 @@ enum XMPPStreamFlags
 **/
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
-	NSLog(@"MVR - disconnecting");
+	NSLog(@"MVR - ON SOCKET DID DISCONNECT");
 	if (srvResults && (++srvResultsIndex < [srvResults count]))
 	{
 		[self tryNextSrvResult];

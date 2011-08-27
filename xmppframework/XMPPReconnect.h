@@ -6,6 +6,8 @@
 
 #define DEFAULT_XMPP_RECONNECT_TIMER_INTERVAL 20.0
 
+#define DEFAULT_PING_INTERVAL 0.0
+
 
 @class XMPPStream;
 @protocol XMPPReconnectDelegate;
@@ -67,6 +69,12 @@
 #else
 	SCNetworkReachabilityFlags previousReachabilityFlags;
 #endif
+
+	//MVR - add a ping to handle dropped tcp connections
+	NSTimeInterval pingInterval;
+	NSTimer *pingTimer;
+	NSInteger pingIdSent;
+	NSInteger pingIdReceived;
 }
 
 - (id)initWithStream:(XMPPStream *)xmppStream;
@@ -115,6 +123,8 @@
  * Note: NSTimeInterval is a double that specifies the time in seconds.
 **/
 @property (nonatomic, assign) NSTimeInterval reconnectTimerInterval;
+
+@property (nonatomic, assign) NSTimeInterval pingInterval;
 
 /**
  * As opposed to using autoReconnect, this method may be used to manually start the reconnect process.
