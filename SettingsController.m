@@ -109,7 +109,7 @@
     // Return the number of rows in the section.
 	switch (section) {
 		case 0:
-			return 2;
+			return 3;
 		case 1:
 			return 1;
 		default:
@@ -131,10 +131,19 @@
 			cell.textLabel.text = @"Save original images";
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			theSwitch = [[UISwitch alloc] init];
-			[theSwitch setOn:[session.user.settings.saveOriginalImages boolValue] animated:NO];
+			[theSwitch setOn:[session.user.saveOriginalImages boolValue] animated:NO];
 			[theSwitch addTarget:self action:@selector(saveOriginalImages:) forControlEvents:UIControlEventValueChanged];
 			cell.accessoryView = theSwitch;
-		} else {
+		} else if (indexPath.row == 1) {
+			UISwitch *theSwitch;
+			
+			cell.textLabel.text = @"Vibrate";
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			theSwitch = [[UISwitch alloc] init];
+			[theSwitch setOn:[session.user.vibrate boolValue] animated:NO];
+			[theSwitch addTarget:self action:@selector(vibrate:) forControlEvents:UIControlEventValueChanged];
+			cell.accessoryView = theSwitch;
+		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Change avatar";
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		}
@@ -143,35 +152,7 @@
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"%d.%d", VERSION_MAJOR, VERSION_MINOR];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
-	//cell.backgroundColor = [UIColor whiteColor];
-	//cell.detailTextLabel.text = [NSString stringWithFormat:@"%d.%d", VERSION_MAJOR, VERSION_MINOR];
 
-
-	/*
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	cell.textLabel.textColor = [UIColor colorWithRed:0.318 green:0.345 blue:0.439 alpha:1.0];
-	rect = CGRectMake(106.0, 11.0, 190.0, 30.0);
-	textField = [[UITextField alloc] initWithFrame:rect];
-	textField.textColor = [UIColor colorWithRed:0.31 green:0.31 blue:0.31 alpha:1.0];
-	textField.autocorrectionType = UITextAutocorrectionTypeNo;
-	textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-	//textField.font = [UIFont systemFontOfSize:17.0];
-	if (indexPath.row == 0) {
-		cell.textLabel.text = @"Username";
-		textField.keyboardType = UIKeyboardTypeEmailAddress;
-		textField.returnKeyType = UIReturnKeyNext;
-		[textField addTarget:self action:@selector(usernameEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
-		self.usernameTextField = textField;
-	}
-	else {
-		cell.textLabel.text = @"Password";
-		textField.secureTextEntry = YES;
-		textField.returnKeyType = UIReturnKeyGo;
-		[textField addTarget:self action:@selector(signIn:) forControlEvents:UIControlEventEditingDidEndOnExit];
-		self.passwordTextField = textField;
-	}
-	[cell.contentView addSubview:textField];
-    */
     return cell;
 }
 
@@ -220,7 +201,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	if (indexPath.section == 0 && indexPath.row == 1)
+	if (indexPath.section == 0 && indexPath.row == 2)
 		[self.avatarActionSheet showInView:tabToolbarController.view];
 }
 
@@ -255,7 +236,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if (actionSheet == self.avatarActionSheet && buttonIndex == 2)
-		[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES];
+		[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES];
 }
 
 #pragma mark -
@@ -334,17 +315,6 @@
 	}
 	
 	return _windowProgressHud;
-}
-
-#pragma mark -
-#pragma mark Settings
-
-- (void)saveOriginalImages:(UISwitch *)theSwitch {
-	NSError *error;
-
-	session.user.settings.saveOriginalImages = [NSNumber numberWithBool:theSwitch.on];
-	if (![managedObjectContext save:&error])
-		NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
 }
 
 #pragma mark -
@@ -427,6 +397,21 @@
 	}
 	
 	return TRUE;
+}
+
+#pragma mark -
+#pragma mark Actions
+
+- (void)saveOriginalImages:(UISwitch *)theSwitch {
+	session.user.saveOriginalImages = [NSNumber numberWithBool:theSwitch.on];
+	if (![self save])
+		NSLog(@"Error saving save original images setting");
+}
+
+- (void)vibrate:(UISwitch *)theSwitch {
+	session.user.vibrate = [NSNumber numberWithBool:theSwitch.on];
+	if (![self save])
+		NSLog(@"Error saving vibrate setting");
 }
 
 #pragma mark -

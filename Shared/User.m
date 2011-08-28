@@ -11,7 +11,6 @@
 #import "Blogcast.h"
 #import "Comment.h"
 #import "Post.h"
-#import "Settings.h"
 
 @implementation User 
 
@@ -42,7 +41,8 @@
 @dynamic username;
 @dynamic blogcasts;
 @dynamic subscriptions;
-@dynamic settings;
+@dynamic saveOriginalImages;
+@dynamic vibrate;
 @dynamic subscribers;
 @dynamic posts;
 @dynamic comments;

@@ -44,7 +44,8 @@
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSSet* blogcasts;
 @property (nonatomic, retain) NSSet* subscriptions;
-@property (nonatomic, retain) Settings * settings;
+@property (nonatomic, retain) NSNumber * saveOriginalImages;
+@property (nonatomic, retain) NSNumber * vibrate;
 @property (nonatomic, retain) NSSet* subscribers;
 @property (nonatomic, retain) NSSet* posts;
 @property (nonatomic, retain) NSSet* comments;

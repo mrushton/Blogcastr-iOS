@@ -39,13 +39,6 @@
 #pragma mark -
 #pragma mark Methods
 
-- (BlogcastsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext {
-	self.data = theData;
-	self.managedObjectContext = theManagedObjectContext;
-	
-	return self;
-}
-
 - (BOOL)parse {
 	NSXMLParser *parser;
 	

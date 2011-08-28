@@ -15,7 +15,7 @@
 @synthesize image;
 @synthesize imageViewerController;
 
-static const CGFloat kScaleFactor = 2.0f;
+static const CGFloat kScaleFactor = 4.0f;
 
 - (void)dealloc {
 	[image release];

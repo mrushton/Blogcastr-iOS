@@ -116,7 +116,7 @@
 - (void)editBlogcast {
 	UINavigationController *theNavigationController;
 	EditBlogcastController *editBlogcastController;
-	
+
 	editBlogcastController = [[EditBlogcastController alloc] initWithStyle:UITableViewStyleGrouped];
 	editBlogcastController.managedObjectContext = managedObjectContext;
 	editBlogcastController.session = session;

@@ -38,8 +38,8 @@
 	BOOL retryUpdate;
 	NSNumber *_maxId;
 	NSNumber *_minId;
-	Timer *fastTimer;
 	Timer *slowTimer;
+	Timer *fastTimer;
 	UIAlertView *_alertView;
 }
 

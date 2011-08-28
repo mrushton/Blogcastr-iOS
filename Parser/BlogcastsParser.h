@@ -64,7 +64,6 @@
 @property (nonatomic, retain) NSDate *blogcastUpdatedAt;
 @property (nonatomic, retain) NSMutableArray *blogcasts;
 
-- (BlogcastsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext;
 - (BOOL)parse;
 - (NSDate *)parseTimestamp: (NSString *)timestamp;
 

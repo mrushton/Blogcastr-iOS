@@ -17,8 +17,8 @@
 #import "ASIHTTPRequest.h"
 #import "Timer.h"
 
-#define FAST_TIMER_INTERVAL 2.0
 #define SLOW_TIMER_INTERVAL 30.0
+#define FAST_TIMER_INTERVAL 2.0
 
 @interface PostsController : UIViewController <TabToolbarControllerProtocol, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, TimerProtocol> {
 	TabToolbarController *tabToolbarController;
@@ -38,8 +38,8 @@
 	BOOL retryUpdate;
 	NSNumber *_maxId;
 	NSNumber *_minId;
-	Timer *fastTimer;
 	Timer *slowTimer;
+	Timer *fastTimer;
 	UIAlertView *_alertView;
 }
 

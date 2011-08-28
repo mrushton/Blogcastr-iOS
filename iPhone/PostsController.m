@@ -81,8 +81,8 @@ static const NSInteger kPostsRequestCount = 20;
 	CGRect frame;
 	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
-	NSTimer *theSlowTimer;
-	NSTimer *theFastTimer;
+	Timer *theSlowTimer;
+	Timer *theFastTimer;
 	NSError *error;
 
 	[super viewDidLoad];
@@ -179,6 +179,7 @@ static const NSInteger kPostsRequestCount = 20;
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
 	[tableView release];
+	[infiniteScrollView release];
 	[postsRequest clearDelegatesAndCancel];
 	[postsRequest release];
 	[postsFooterRequest clearDelegatesAndCancel];
@@ -323,18 +324,16 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - if the post doesn't exist the cell is a place holder to load more
 	if (!post) {
 		cell = (BlogcastrTableViewCell *)[theTableView dequeueReusableCellWithIdentifier:@"ScrollCell"];
+		//MVR - if cell doesn't exist create it
 		if (!cell) {	
-			//MVR - if cell doesn't exist create it
-			if (!cell) {
-				UIActivityIndicatorView *activityIndicatorView;
+			UIActivityIndicatorView *activityIndicatorView;
 
-				cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ScrollCell"] autorelease];
-				activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-				activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |	UIViewAutoresizingFlexibleRightMargin;
-				activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
-				[activityIndicatorView startAnimating];
-				[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
-			}
+			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ScrollCell"] autorelease];
+			activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+			activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |	UIViewAutoresizingFlexibleRightMargin;
+			activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
+			[activityIndicatorView startAnimating];
+			[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
 		}
 	} else if ([post.type isEqual:@"TextPost"]) {
 		cell = (BlogcastrTableViewCell *)[theTableView dequeueReusableCellWithIdentifier:@"TextPost"];
@@ -588,10 +587,8 @@ static const NSInteger kPostsRequestCount = 20;
 	if (indexPath)
 		[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 	//MVR - footer logic
-	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![blogcast.postsAtEnd boolValue] && !isUpdatingFooter && [self.minId intValue] > 0) {
-		isUpdatingFooter = YES;
+	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![blogcast.postsAtEnd boolValue] && !isUpdatingFooter && [self.minId intValue] > 0)
 		[self updatePostsFooter];
-	}
 }
 
 #pragma mark -
@@ -725,7 +722,6 @@ static const NSInteger kPostsRequestCount = 20;
 	int statusCode;
 	NSInteger numAdded = 0;
 	PostsParser *parser;
-	Post *post;
 
 	self.postsRequest = nil;
 	statusCode = [request responseStatusCode];
@@ -748,10 +744,7 @@ static const NSInteger kPostsRequestCount = 20;
 		return;
 	}
 	//MVR - add posts above max id
-	for (int i = 0; i < parser.posts.count; i++) {
-		Post *post;
-		
-		post = [parser.posts objectAtIndex:i];
+	for (Post *post in parser.posts) {
 		if ([post.id intValue] > [self.maxId intValue]) {
 			PostStreamCell *streamCell;
 			
@@ -764,18 +757,23 @@ static const NSInteger kPostsRequestCount = 20;
 	}
 	//MVR - handle either the footer scroll or cell scroll
 	if ([self.maxId intValue] == 0) {
+
 		if (numAdded < kPostsRequestCount) {
 			blogcast.postsAtEnd = [NSNumber numberWithBool:YES];
 			[infiniteScrollView setLoading:NO];
 		} else {
+			Post *post;
+
 			//MVR - update min id if there may be more to load
 			post = [parser.posts objectAtIndex:numAdded - 1];
 			self.minId = post.id;
 		}
 	} else if (numAdded == kPostsRequestCount) {
+		Post *post;
+
 		post = [parser.posts objectAtIndex:kPostsRequestCount - 1];
 		//MVR - add one to make sure there is actually a gap
-		if (post.id > self.maxId + 1) {
+		if ([post.id intValue] > [self.maxId intValue] + 1) {
 			PostStreamCell *streamCell;
 
 			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"PostStreamCell" inManagedObjectContext:managedObjectContext];
@@ -785,6 +783,8 @@ static const NSInteger kPostsRequestCount = 20;
 		}
 	}
 	if (numAdded > 0) {
+		Post *post;
+
 		post = [parser.posts objectAtIndex:0];
 		self.maxId = post.id;
 	}
@@ -847,7 +847,7 @@ static const NSInteger kPostsRequestCount = 20;
 	streamCell = (PostStreamCell *)[request.userInfo objectForKey:@"PostStreamCell"];
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
-		NSLog(@"Error update posts footer received status code %i", statusCode);
+		NSLog(@"Error update posts stream cell received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your posts."];
 		return;
 	}
@@ -857,7 +857,7 @@ static const NSInteger kPostsRequestCount = 20;
 	parser.managedObjectContext = managedObjectContext;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
-		NSLog(@"Error parsing update footer posts response");
+		NSLog(@"Error parsing update stream cell posts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your posts."];
 		[parser release];
 		return;
@@ -865,24 +865,21 @@ static const NSInteger kPostsRequestCount = 20;
 	//MVR - assume all posts are below the stream cell id so add posts above the min id
 	for (Post *thePost in parser.posts) {
 		if ([thePost.id intValue] >= [streamCell.id intValue]) {
-			PostStreamCell *streamCell;
+			PostStreamCell *theStreamCell;
 			
-			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"PostStreamCell" inManagedObjectContext:managedObjectContext];
-			streamCell.id = thePost.id;
-			streamCell.post = thePost;
-			streamCell.blogcast = blogcast;
+			theStreamCell = [NSEntityDescription insertNewObjectForEntityForName:@"PostStreamCell" inManagedObjectContext:managedObjectContext];
+			theStreamCell.id = thePost.id;
+			theStreamCell.post = thePost;
+			theStreamCell.blogcast = blogcast;
 			numAdded++;
 		}
 	}
 	post = [parser.posts lastObject];
-	if (numAdded == kPostsRequestCount && post.id != streamCell.id) {
-		//MVR - adjust stream cell
-		post = [parser.posts objectAtIndex:kPostsRequestCount - 1];
+	//MVR - adjust stream cell or delete it
+	if (numAdded == kPostsRequestCount && [post.id intValue] != [streamCell.id intValue])
 		streamCell.maxId = [NSNumber numberWithInteger:[post.id integerValue] - 1];
-	} else {
-		//MVR - delete the scroll cell
+	else
 		[self.managedObjectContext deleteObject:streamCell];
-	}
 	[parser release];
 	if (![self save])
 		NSLog(@"Error saving posts");
@@ -905,6 +902,7 @@ static const NSInteger kPostsRequestCount = 20;
 	NSInteger numAdded = 0;
 	PostsParser *parser;
 
+	self.postsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
@@ -957,6 +955,7 @@ static const NSInteger kPostsRequestCount = 20;
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
+	self.postsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	NSLog(@"Error update posts footer failed");
 	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your posts."];

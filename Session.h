@@ -8,7 +8,6 @@
 
 #import <CoreData/CoreData.h>
 #import "User.h"
-#import "Settings.h"
 
 
 @interface Session :  NSManagedObject  

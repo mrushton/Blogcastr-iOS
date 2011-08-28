@@ -37,7 +37,7 @@
 	//MVR - increase default timeout for ASIHTTPRequest
 	[ASIHTTPRequest setDefaultTimeOutSeconds:60.0];
 	//MVR - always add the root controller and present the sign in controller modally if not signed in
-	rootController = [[RootController_iPhone alloc] init]; 
+	rootController = [[RootController alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;
 	rootController.session = self.session;
 	[window addSubview:rootController.view];

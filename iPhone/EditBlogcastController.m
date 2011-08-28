@@ -11,7 +11,7 @@
 #import "DatePickerController.h"
 #import "TextViewWithPlaceholder.h"
 #import "ASIFormDataRequest.h"
-#import "UINavigationBar+ButtonColor.h"
+#import "BlogcastsParser.h"
 
 
 @implementation EditBlogcastController
@@ -366,6 +366,7 @@
 
 - (void)updateBlogcastFinished:(ASIHTTPRequest *)theRequest {
 	int statusCode;
+	BlogcastsParser *parser;
 	
 	self.request = nil;
 	//MVR - we need to dismiss the action sheet here for some reason
@@ -381,6 +382,19 @@
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcast."];
 		return;
 	}
+	//MVR - parse xml
+	parser = [[BlogcastsParser alloc] init];
+	parser.managedObjectContext = managedObjectContext;
+	parser.data = [theRequest responseData];
+	if (![parser parse]) {
+		NSLog(@"Error parsing update blogcast response");
+		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the blogcast."];
+		[parser release];
+		return;
+	}
+	[parser release];
+	if (![self save])
+		NSLog(@"Error updating blogcast");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"updatedBlogcast" object:self];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -449,6 +463,27 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
 	[self updateNavigationButtons];
+}
+
+#pragma mark -
+#pragma mark Core Data
+
+- (BOOL)save {
+	NSError *error;
+
+	NSLog(@"MVR - attempting SAVE 0x%x", managedObjectContext);
+    if (![managedObjectContext save:&error]) {
+		NSLog(@"MVR - attempting SAVE FAILED");
+
+	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
+		NSLog(@"MVR - attempting SAVE FAILED 2");
+
+		return FALSE;
+	}
+	NSLog(@"MVR - attempting SAVE 2");
+
+	
+	return TRUE;
 }
 
 #pragma mark -

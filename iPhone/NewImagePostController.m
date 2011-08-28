@@ -313,7 +313,7 @@
 	UIImage *theThumbnailImage;
 
 	//MVR - save the image to the photo library if it's from the camera and the setting is enabled
-	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && [session.user.settings.saveOriginalImages boolValue])
+	if (picker.sourceType == UIImagePickerControllerSourceTypeCamera && [session.user.saveOriginalImages boolValue])
 		UIImageWriteToSavedPhotosAlbum(theImage, self, @selector(savedImage:withError:contextInfo:), nil);
 	self.image = theImage;
 	//MVR - thumbnail based on screen resolution

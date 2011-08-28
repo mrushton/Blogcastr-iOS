@@ -70,8 +70,8 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)viewDidLoad {
 	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
-	NSTimer *theSlowTimer;
-	NSTimer *theFastTimer;
+	Timer *theSlowTimer;
+	Timer *theFastTimer;
 	NSError *error;
 	
 	[super viewDidLoad];
@@ -195,19 +195,17 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - if the comment doesn't exist the cell is a place holder to load more
 	if (!comment) {
 		cell = (BlogcastrTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ScrollCell"];
-		if (!cell) {	
-			//MVR - if cell doesn't exist create it
-			if (!cell) {
-				UIActivityIndicatorView *activityIndicatorView;
-				
-				cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ScrollCell"] autorelease];
-				activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-				activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |	UIViewAutoresizingFlexibleRightMargin;
-				activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
-				[activityIndicatorView startAnimating];
-				[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
-				[activityIndicatorView release];
-			}
+		//MVR - if cell doesn't exist create it
+		if (!cell) {
+			UIActivityIndicatorView *activityIndicatorView;
+
+			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ScrollCell"] autorelease];
+			activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+			activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |	UIViewAutoresizingFlexibleRightMargin;
+			activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
+			[activityIndicatorView startAnimating];
+			[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
+			[activityIndicatorView release];
 		}
 	} else {
 		cell = (BlogcastrTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Comment"];
@@ -357,6 +355,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	[blogcast release];
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
+	[infiniteScrollView release];
 	[commentsRequest clearDelegatesAndCancel];
 	[commentsRequest release];
 	[commentsFooterRequest clearDelegatesAndCancel];
@@ -410,10 +409,8 @@ static const NSInteger kCommentsRequestCount = 20;
 	if (indexPath)
 		[self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 	//MVR - footer logic
-	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![blogcast.commentsAtEnd boolValue] && !isUpdatingFooter && [self.minId intValue] > 0) {
-		isUpdatingFooter = YES;
+	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![blogcast.commentsAtEnd boolValue] && !isUpdatingFooter && [self.minId intValue] > 0)
 		[self updateCommentsFooter];
-	}
 }
 
 #pragma mark -
@@ -550,7 +547,6 @@ static const NSInteger kCommentsRequestCount = 20;
 	int statusCode;
 	NSInteger numAdded = 0;
 	CommentsParser *parser;
-	Comment *comment;
 
 	self.commentsRequest = nil;
 	statusCode = [request responseStatusCode];
@@ -572,11 +568,8 @@ static const NSInteger kCommentsRequestCount = 20;
 		retryUpdate = YES;
 		return;
 	}
-	//MVR - add posts above max id
-	for (int i = 0; i < parser.comments.count; i++) {
-		Comment *comment;
-		
-		comment = [parser.comments objectAtIndex:i];
+	//MVR - add comments above max id
+	for (Comment *comment in parser.comments) {
 		if ([comment.id intValue] > [self.maxId intValue]) {
 			CommentStreamCell *streamCell;
 			
@@ -593,14 +586,18 @@ static const NSInteger kCommentsRequestCount = 20;
 			blogcast.commentsAtEnd = [NSNumber numberWithBool:YES];
 			[infiniteScrollView setLoading:NO];
 		} else {
+			Comment *comment;
+
 			//MVR - update min id if there may be more to load
 			comment = [parser.comments objectAtIndex:numAdded - 1];
 			self.minId = comment.id;
 		}
 	} else if (numAdded == kCommentsRequestCount) {
+		Comment *comment;
+
 		comment = [parser.comments objectAtIndex:kCommentsRequestCount - 1];
 		//MVR - add one to make sure there is actually a gap
-		if (comment.id > self.maxId + 1) {
+		if ([comment.id intValue] > [self.maxId intValue] + 1) {
 			CommentStreamCell *streamCell;
 			
 			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"CommentStreamCell" inManagedObjectContext:managedObjectContext];
@@ -610,6 +607,8 @@ static const NSInteger kCommentsRequestCount = 20;
 		}
 	}
 	if (numAdded > 0) {
+		Comment *comment;
+
 		comment = [parser.comments objectAtIndex:0];
 		self.maxId = comment.id;
 	}
@@ -672,7 +671,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	streamCell = (CommentStreamCell *)[request.userInfo objectForKey:@"CommentStreamCell"];
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
-		NSLog(@"Error update comments footer received status code %i", statusCode);
+		NSLog(@"Error update comments stream cell received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your comments."];
 		return;
 	}
@@ -682,7 +681,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	parser.managedObjectContext = managedObjectContext;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
-		NSLog(@"Error parsing update footer comments response");
+		NSLog(@"Error parsing update stream cell comments response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your comments."];
 		[parser release];
 		return;
@@ -690,24 +689,21 @@ static const NSInteger kCommentsRequestCount = 20;
 	//MVR - assume all comments are below the stream cell id so add posts above the min id
 	for (Comment *theComment in parser.comments) {
 		if ([theComment.id intValue] >= [streamCell.id intValue]) {
-			CommentStreamCell *streamCell;
+			CommentStreamCell *theStreamCell;
 			
-			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"CommentStreamCell" inManagedObjectContext:managedObjectContext];
-			streamCell.id = theComment.id;
-			streamCell.comment = theComment;
-			streamCell.blogcast = blogcast;
+			theStreamCell = [NSEntityDescription insertNewObjectForEntityForName:@"CommentStreamCell" inManagedObjectContext:managedObjectContext];
+			theStreamCell.id = theComment.id;
+			theStreamCell.comment = theComment;
+			theStreamCell.blogcast = blogcast;
 			numAdded++;
 		}
 	}
 	comment = [parser.comments lastObject];
-	if (numAdded == kCommentsRequestCount && comment.id != streamCell.id) {
-		//MVR - adjust stream cell
-		comment = [parser.comments objectAtIndex:kCommentsRequestCount - 1];
+	//MVR - adjust stream cell or delete it
+	if (numAdded == kCommentsRequestCount && [comment.id intValue] != [streamCell.id intValue])
 		streamCell.maxId = [NSNumber numberWithInteger:[comment.id integerValue] - 1];
-	} else {
-		//MVR - delete the scroll cell
+	else
 		[self.managedObjectContext deleteObject:streamCell];
-	}
 	[parser release];
 	if (![self save])
 		NSLog(@"Error saving comments");
@@ -729,7 +725,8 @@ static const NSInteger kCommentsRequestCount = 20;
 	int statusCode;
 	NSInteger numAdded = 0;
 	CommentsParser *parser;
-	
+
+	self.commentsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
@@ -782,6 +779,7 @@ static const NSInteger kCommentsRequestCount = 20;
 }
 
 - (void)updatePostsFooterFailed:(ASIHTTPRequest *)request {
+	self.commentsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	NSLog(@"Error update comments footer failed");
 	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your comments."];

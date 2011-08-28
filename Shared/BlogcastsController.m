@@ -21,21 +21,26 @@
 #import "BlogcastrStyleSheet.h"
 #import "NSDate+Timestamp.h"
 #import "XMPPRoom.h"
+#import "Timer.h"
 
 @implementation BlogcastsController
 
 @synthesize tabToolbarController;
 @synthesize managedObjectContext;
 @synthesize session;
-@synthesize user;
 @synthesize xmppStream;
 @synthesize dragRefreshView;
 @synthesize infiniteScrollView;
-@synthesize timer;
+@synthesize blogcastsRequest;
+@synthesize blogcastsFooterRequest;
+@synthesize streamCellRequests;
+@synthesize slowTimer;
+@synthesize fastTimer;
 
 //MVR - the number of pixels the table needs to be pulled down by in order to initiate the refresh
 static const CGFloat kRefreshDeltaY = -65.0f;
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
+static const CGFloat kScrollCellHeight = 40.0;
 static const NSInteger kBlogcastsRequestCount = 20;
 
 - (id)initWithStyle:(UITableViewStyle)style {
@@ -51,6 +56,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[theTabBarItem release];		
 		//MVR - created blogcast notification
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createdBlogcast) name:@"createdBlogcast" object:nil];
+		//MVR - updated blogcast notification
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedBlogcast) name:@"updatedBlogcast" object:nil];
 	}
 	
 	return self;
@@ -63,6 +70,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	TTTableHeaderDragRefreshView *theDragRefreshView;
 	TTTableFooterInfiniteScrollView *theInfiniteScrollView;
 	UIView *footerBorderView;
+	Timer *theSlowTimer;
+	Timer *theFastTimer;
 	NSError *error;
 
     [super viewDidLoad];
@@ -73,8 +82,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	theDragRefreshView = [[TTTableHeaderDragRefreshView alloc] initWithFrame:CGRectMake(0, -self.tableView.bounds.size.height, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
 	//dragRefreshView.backgroundColor = TTSTYLEVAR(tableRefreshHeaderBackgroundColor);
 	[theDragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
-	//if (user.blogcastsUpdatedAt)
-		[theDragRefreshView setUpdateDate:user.blogcastsUpdatedAt];
+	[theDragRefreshView setUpdateDate:session.user.blogcastsUpdatedAt];
 	[self.tableView addSubview:theDragRefreshView];
 	self.dragRefreshView = theDragRefreshView;
 	[theDragRefreshView release];
@@ -82,7 +90,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	theInfiniteScrollView = [[TTTableFooterInfiniteScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.bounds.size.width, kInfiniteScrollViewHeight)];
 	theInfiniteScrollView.backgroundColor = TTSTYLEVAR(backgroundColor);
 	theInfiniteScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	if (![user.blogcastsAtEnd boolValue])
+	if (![session.user.blogcastsAtEnd boolValue])
 		[theInfiniteScrollView setLoading:YES];
 	footerBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, theInfiniteScrollView.bounds.size.width, 1.0)];
 	footerBorderView.backgroundColor = BLOGCASTRSTYLEVAR(lightBackgroundColor);
@@ -91,8 +99,13 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	self.tableView.tableFooterView = theInfiniteScrollView;
 	self.infiniteScrollView = theInfiniteScrollView;
 	[theInfiniteScrollView release];
-	//MVR - timer updates table view every 10 seconds
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(reloadTableView) userInfo:nil repeats:YES];	
+	//MVR - timers
+	theSlowTimer = [[Timer alloc] initWithTimeInterval:SLOW_TIMER_INTERVAL delegate:self];
+	self.slowTimer = theSlowTimer;
+	[theSlowTimer release];
+	theFastTimer = [[Timer alloc] initWithTimeInterval:FAST_TIMER_INTERVAL delegate:self];
+	self.fastTimer = theFastTimer;
+	[theFastTimer release];
 	//MVR - now fetch blogcasts
 	if (![self.fetchedResultsController performFetch:&error])
 		NSLog(@"Perform fetch failed with error: %@", [error localizedDescription]);
@@ -103,43 +116,33 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	
     [super viewWillAppear:animated];
 	//MVR - update blogcasts if it's the first time or been longer than a day
-	if ((!user.blogcastsUpdatedAt || [user.blogcastsUpdatedAt timeIntervalSinceNow] < -86400.0) && isUpdating == NO) {
+	if ((!session.user.blogcastsUpdatedAt || [session.user.blogcastsUpdatedAt timeIntervalSinceNow] < -86400.0) && isUpdating == NO) {
 		isUpdating = YES;
 		[self updateBlogcasts];
-/*		[dragRefreshView setStatus:TTTableHeaderDragRefreshLoading];
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:ttkDefaultFastTransitionDuration];
-		self.tableView.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
-		[UIView commitAnimations];*/
+		//AS DESIGNED: don't pull down the loading animation
 	}
 }
 
-- (void)updateBlogcasts {
-	NSURL *url;
-	ASIHTTPRequest *request;
-	
-	url = [self blogcastsUrlWithMaxId:0 count:kBlogcastsRequestCount];	
-	request = [ASIHTTPRequest requestWithURL:url];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(updateBlogcastsFinished:)];
-	[request setDidFailSelector:@selector(updateBlogcastsFailed:)];
-	[request startAsynchronous];
-}
+#pragma mark -
+#pragma mark ASIHTTPRequest callbacks
 
 - (void)updateBlogcastsFinished:(ASIHTTPRequest *)request {
 	int statusCode;
 	NSInteger numAdded = 0;
 	BlogcastsParser *parser;
 
+	self.blogcastsRequest = nil;
 	isUpdating = NO;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
-		NSLog(@"Error update blogcasts received status code %i", statusCode);
+		NSLog(@"Update blogcasts received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
 		return;
 	}
 	//MVR - parse xml
-	parser = [[BlogcastsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[BlogcastsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update blogcasts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
@@ -154,14 +157,14 @@ static const NSInteger kBlogcastsRequestCount = 20;
 			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 			streamCell.id = blogcast.id;
 			streamCell.blogcast = blogcast;
-			streamCell.user = user;
+			streamCell.user = session.user;
 			numAdded++;
 		}
 	}
 	//MVR - handle either the footer scroll or cell scroll
 	if ([self.maxId intValue] == 0) {
 		if (numAdded < kBlogcastsRequestCount) {
-			user.blogcastsAtEnd = [NSNumber numberWithBool:YES];
+			session.user.blogcastsAtEnd = [NSNumber numberWithBool:YES];
 			[infiniteScrollView setLoading:NO];
 		} else {
 			Blogcast *blogcast;
@@ -175,10 +178,13 @@ static const NSInteger kBlogcastsRequestCount = 20;
 
 		blogcast = [parser.blogcasts objectAtIndex:kBlogcastsRequestCount - 1];
 		//MVR - add one to make sure there is actually a gap
-		if (blogcast.id > self.maxId + 1) {
-			//TODO: add a scrolling cell
-			//id = blogcast.id - 1
-			//minId = self.maxId + 1
+		if ([blogcast.id intValue] > [self.maxId intValue] + 1) {
+			BlogcastStreamCell *streamCell;
+			
+			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
+			streamCell.id = [NSNumber numberWithInteger:[self.maxId integerValue] + 1];
+			streamCell.maxId = [NSNumber numberWithInteger:[blogcast.id integerValue] - 1];
+			streamCell.user = session.user;
 		}
 	}
 	//MVR - update max id
@@ -188,8 +194,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		blogcast = [parser.blogcasts objectAtIndex:0];
 		self.maxId = blogcast.id;
 	}
-	user.blogcastsUpdatedAt = [NSDate date];
-	[dragRefreshView setUpdateDate:user.blogcastsUpdatedAt];
+	[parser release];
+	session.user.blogcastsUpdatedAt = [NSDate date];
+	[dragRefreshView setUpdateDate:session.user.blogcastsUpdatedAt];
 	if (isRefreshing) {
 		[dragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
 		[UIView beginAnimations:nil context:NULL];
@@ -198,14 +205,32 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[UIView commitAnimations];
 		isRefreshing = NO;
 	}
-	//TODO: handle save failure gracefully
-	[self save];
+	if (![self save])
+		NSLog(@"Error saving blogcasts");
 }
 
 - (void)updateBlogcastsFailed:(ASIHTTPRequest *)request {
-	NSLog(@"Error update blogcasts failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
+	NSError *error;
+
+	self.blogcastsRequest = nil;
 	isUpdating = NO;
+	error = [request error];
+	switch ([error code]) {
+		case ASIConnectionFailureErrorType:
+			NSLog(@"Error updating blogcasts: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
+			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the blogcasts."];
+			break;
+		case ASIRequestTimedOutErrorType:
+			NSLog(@"Error updating blogcasts: request timed out");
+			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the blogcasts."];
+			break;
+		case ASIRequestCancelledErrorType:
+			NSLog(@"Update blogcasts request cancelled");
+			break;
+		default:
+			NSLog(@"Error updating blogcasts");
+			break;
+	}
 	if (isRefreshing) {
 		[dragRefreshView setStatus:TTTableHeaderDragRefreshPullToReload];
 		[UIView beginAnimations:nil context:NULL];
@@ -216,24 +241,66 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	}
 }
 
-- (void)updateBlogcastsFooter {
-	NSURL *url;
-	ASIHTTPRequest *request;
+- (void)updateBlogcastsStreamCellFinished:(ASIHTTPRequest *)request {
+	BlogcastStreamCell *streamCell;
+	int statusCode;
+	BlogcastsParser *parser;
+	NSInteger numAdded = 0;
+	Blogcast *blogcast;
 	
-	isUpdatingFooter = YES;
-	url = [self blogcastsUrlWithMaxId:[self.minId intValue] - 1 count:kBlogcastsRequestCount];	
-	request = [ASIHTTPRequest requestWithURL:url];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(updateBlogcastsFooterFinished:)];
-	[request setDidFailSelector:@selector(updateBlogcastsFooterFailed:)];
-	[request startAsynchronous];
+	[self.streamCellRequests removeObject:request];
+	streamCell = (BlogcastStreamCell *)[request.userInfo objectForKey:@"BlogcastStreamCell"];
+	statusCode = [request responseStatusCode];
+	if (statusCode != 200) {
+		NSLog(@"Error update blogcasts stream cell received status code %i", statusCode);
+		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
+		return;
+	}
+	//MVR - parse response
+	parser = [[BlogcastsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;
+	if (![parser parse]) {
+		NSLog(@"Error parsing update stream cell blogcasts response");
+		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
+		[parser release];
+		return;
+	}
+	//MVR - assume all blogcasts are below the stream cell id so add blogcasts above the min id
+	for (Blogcast *theBlogcast in parser.blogcasts) {
+		if ([theBlogcast.id intValue] >= [streamCell.id intValue]) {
+			BlogcastStreamCell *theStreamCell;
+			
+			theStreamCell = [NSEntityDescription insertNewObjectForEntityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
+			theStreamCell.id = theBlogcast.id;
+			theStreamCell.blogcast = theBlogcast;
+			theStreamCell.user = session.user;
+			numAdded++;
+		}
+	}
+	blogcast = [parser.blogcasts lastObject];
+	//MVR - adjust stream cell or delete it
+	if (numAdded == kBlogcastsRequestCount && [blogcast.id intValue] != [streamCell.id intValue])
+		streamCell.maxId = [NSNumber numberWithInteger:[blogcast.id integerValue] - 1];
+	else
+		[self.managedObjectContext deleteObject:streamCell];
+	[parser release];
+	if (![self save])
+		NSLog(@"Error saving blogcasts");
+}
+
+- (void)updatePostsStreamCellFailed:(ASIHTTPRequest *)request {
+	NSLog(@"Update blogcasts stream cell failed");
+	[self.streamCellRequests removeObject:request];
+	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcasts."];
 }
 
 - (void)updateBlogcastsFooterFinished:(ASIHTTPRequest *)request {
 	int statusCode;
 	NSInteger numAdded = 0;
 	BlogcastsParser *parser;
-	
+
+	isUpdatingFooter = NO;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update blogcasts footer received status code %i", statusCode);
@@ -241,14 +308,16 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		return;
 	}
 	//MVR - parse response
-	parser = [[BlogcastsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[BlogcastsParser alloc] init];
+	parser.data = [request responseData];
+	parser.managedObjectContext = managedObjectContext;		   
 	if (![parser parse]) {
-		NSLog(@"Error parsing update blogcasts response");
+		NSLog(@"Error parsing update footer blogcasts response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
 		[parser release];
 		return;
 	}
-	//MVR - add blogcasts above max id
+	//MVR - add blogcasts below min id
 	for (Blogcast *blogcast in parser.blogcasts) {
 		if ([blogcast.id integerValue] < [self.minId integerValue]) {
 			BlogcastStreamCell *streamCell;
@@ -256,13 +325,13 @@ static const NSInteger kBlogcastsRequestCount = 20;
 			streamCell = [NSEntityDescription insertNewObjectForEntityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 			streamCell.id = blogcast.id;
 			streamCell.blogcast = blogcast;
-			streamCell.user = user;
+			streamCell.user = session.user;
 			numAdded++;
 		}
 	}
 	//MVR - handle the footer scroll
 	if (numAdded < kBlogcastsRequestCount) {
-		user.blogcastsAtEnd = [NSNumber numberWithBool:YES];
+		session.user.blogcastsAtEnd = [NSNumber numberWithBool:YES];
 		[infiniteScrollView setLoading:NO];
 	} else {
 		Blogcast *blogcast;
@@ -270,13 +339,15 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		blogcast = [parser.blogcasts objectAtIndex:kBlogcastsRequestCount - 1];
 		self.minId = blogcast.id;
 	}
-	isUpdatingFooter = NO;
-	[self save];
 	[parser release];
+	if (![self save])
+		NSLog(@"Error saving blogcasts");
 }
 
 - (void)updateBlogcastsFooterFailed:(ASIHTTPRequest *)request {
-	
+	isUpdatingFooter = NO;
+	NSLog(@"Error update blogcasts footer failed");
+	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
 }
 
 /*
@@ -312,9 +383,11 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	BlogcastStreamCell *streamCell;
 	Blogcast *blogcast;
 	CGSize descriptionViewSize;
-
+	
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	blogcast = streamCell.blogcast;	
+	blogcast = streamCell.blogcast;
+	if (!blogcast)
+		return kScrollCellHeight;
 	//AS DESIGNED: works without description
 	descriptionViewSize = [blogcast.theDescription sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.bounds.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 
@@ -351,6 +424,22 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	// Set up the cell...
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	blogcast = streamCell.blogcast;
+	//MVR - if the blogcast doesn't exist the cell is a place holder to load more
+	if (!blogcast) {
+		cell = (BlogcastrTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"ScrollCell"];
+		//MVR - if cell doesn't exist create it
+		if (!cell) {
+			UIActivityIndicatorView *activityIndicatorView;
+				
+			cell = [[[BlogcastrTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ScrollCell"] autorelease];
+			activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+			activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |	UIViewAutoresizingFlexibleRightMargin;
+			activityIndicatorView.center = CGPointMake(tableView.bounds.size.width / 2.0, kScrollCellHeight / 2.0);
+			[activityIndicatorView startAnimating];
+			[cell.contentView insertSubview:activityIndicatorView belowSubview:cell.highlightView];
+		}
+		return cell;
+	}	
     cell = (BlogcastrTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Blogcast"];
 	//MVR - if cell doesn't exist create it
     if (!cell) {	
@@ -480,6 +569,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
 	blogcast = streamCell.blogcast;
 	dashboardController = [[DashboardController alloc] init];
+	dashboardController.managedObjectContext = managedObjectContext;
 	dashboardController.session = session;
 	dashboardController.blogcast = blogcast;
 	dashboardController.xmppStream = xmppStream;
@@ -551,7 +641,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 			[dragRefreshView setStatus:TTTableHeaderDragRefreshReleaseToReload];
 	}
 	//MVR - footer logic
-	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![user.blogcastsAtEnd boolValue] && !isUpdatingFooter && self.minId > 0)
+	if (scrollView.contentOffset.y > scrollView.contentSize.height - kInfiniteScrollViewHeight - scrollView.bounds.size.height && ![session.user.blogcastsAtEnd boolValue] && !isUpdatingFooter && self.minId > 0)
 		[self updateBlogcastsFooter];
 }	
 
@@ -581,7 +671,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
 	float systemVersion;
-	
+
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	if (systemVersion >= 4.0) {
@@ -595,7 +685,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
      forChangeType:(NSFetchedResultsChangeType)type
 {
 	float systemVersion;
-	
+
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	if (systemVersion >= 4.0) {
@@ -619,7 +709,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
       newIndexPath:(NSIndexPath*)newIndexPath
 {
 	float systemVersion;
-	
+
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	if (systemVersion >= 4.0) {
@@ -649,7 +739,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
 	float systemVersion;
-	
+
 	//AS DESIGNED: work around 3.* UITableView bug
 	systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
 	if (systemVersion >= 4.0) {
@@ -685,7 +775,10 @@ static const NSInteger kBlogcastsRequestCount = 20;
     // For example: self.myOutlet = nil;
 	self.dragRefreshView = nil;
 	self.infiniteScrollView = nil;
-	self.timer = nil;
+	[fastTimer invalidate];
+	self.fastTimer = nil;
+	[slowTimer invalidate];
+	self.slowTimer = nil;
 }
 
 
@@ -693,11 +786,24 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	[managedObjectContext release];
 	[_fetchedResultsController release];
 	[session release];
-	[user release];
 	[xmppStream release];
+	[dragRefreshView release];
+	[infiniteScrollView release];
 	[_maxId release];
 	[_minId release];
 	[_alertView release];
+	[blogcastsRequest clearDelegatesAndCancel];
+	[blogcastsRequest release];
+	[blogcastsFooterRequest clearDelegatesAndCancel];
+	[blogcastsFooterRequest release];
+	//AS DESIGNED: if not allocated that is ok
+	for (ASIHTTPRequest *request in _streamCellRequests)
+		[request clearDelegatesAndCancel];
+	[_streamCellRequests release];
+	[fastTimer invalidate];
+	[fastTimer release];
+	[slowTimer invalidate];
+	[slowTimer release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
@@ -727,7 +833,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	fetchRequest = [[NSFetchRequest alloc] init];
 	entityDescription = [NSEntityDescription entityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 	[fetchRequest setEntity:entityDescription];
-	predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"user.id == %d", [user.id intValue]]];
+	predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"user.id == %d", [session.user.id intValue]]];
 	fetchRequest.predicate = predicate;
 	sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"id" ascending:NO];
 	array = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -744,7 +850,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 - (BOOL)save {
 	NSError *error;
 
-	NSLog(@"MVR - saving blogcasts");
     if (![managedObjectContext save:&error]) {
 	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
 		return FALSE;
@@ -773,7 +878,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	entity = [NSEntityDescription entityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 	[request setEntity:entity];
 	//MVR - set predicate
-	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", [user.id intValue]];
+	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", [session.user.id intValue]];
 	[request setPredicate:predicate];		
 	//MVR - specify that the request should return dictionaries	
 	[request setResultType:NSDictionaryResultType];	
@@ -827,7 +932,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	entity = [NSEntityDescription entityForName:@"BlogcastStreamCell" inManagedObjectContext:managedObjectContext];
 	[request setEntity:entity];
 	//MVR - set predicate
-	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", [user.id intValue]];
+	predicate = [NSPredicate predicateWithFormat:@"user.id == %d", [session.user.id intValue]];
 	[request setPredicate:predicate];		
 	//MVR - specify that the request should return dictionaries	
 	[request setResultType:NSDictionaryResultType];	
@@ -865,48 +970,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 }
 
 #pragma mark -
-#pragma mark Progress HUD
-/*
-- (MBProgressHUD *)progressHUD {
-	if (!_progressHUD)
-		_progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-	
-	return _progressHUD;
-}
-
-- (void)showProgressHudWithLabelText:(NSString *)labelText animationType:(MBProgressHUDAnimation)animationType{
-	self.progressHUD.labelText = labelText;
-	self.progressHUD.animationType = animationType;
-	[self.view addSubview:self.progressHUD];
-	[self.progressHUD show:NO];
-}
-*/
-#pragma mark -
-#pragma mark Network
-
-- (NSURLConnection *)getUrl:(NSString *)url {
-	NSURL *theUrl;
-	NSURLRequest *urlRequest;
-	NSMutableData *mutableData;
-	NSURLConnection *urlConnection;
-	
-	theUrl = [NSURL URLWithString:url];
-	urlRequest = [NSURLRequest requestWithURL:theUrl];
-	urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
-	mutableData = [[NSMutableData alloc] initWithCapacity:1024];
-
-	return urlConnection;
-}
-
-#pragma mark -
-#pragma mark Timer
-
-- (void)reloadTableView {
-//	NSLog(@"MVR - reload data vview");
-//	[self.tableView reloadData];
-}
-
-#pragma mark -
 #pragma mark Actions
 
 - (void)createdBlogcast {
@@ -916,26 +979,89 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	}
 }
 
+- (void)updatedBlogcast {
+	[self.tableView reloadData];
+}
+
+- (void)timerExpired:(Timer *)timer {
+	if (timer == slowTimer) {
+		//MVR - reload the entire table to update timestamps since there's no easy way to get the text out of the TTStyledTextLabel
+		[self.tableView reloadData];
+	} else if (timer == fastTimer) {
+		//MVR - scroll cell logic
+		for (UITableViewCell *cell in self.tableView.visibleCells) {
+			BlogcastStreamCell *streamCell;
+			NSIndexPath *indexPath;
+			
+			indexPath = [self.tableView indexPathForCell:cell];
+			if (!indexPath) {
+				NSLog(@"Could not find blogcast stream cell index path");
+				continue;
+			}
+			streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
+			if (!streamCell.blogcast) {
+				if (![self isStreamCellRequested:streamCell])
+					[self updateBlogcastsStreamCell:streamCell];
+			}
+		}
+	}
+}
+
 #pragma mark -
 #pragma mark Helpers
+
+- (void)updateBlogcasts {
+	NSURL *url;
+	ASIHTTPRequest *request;
+	
+	url = [self blogcastsUrlWithMaxId:0 count:kBlogcastsRequestCount];	
+	request = [ASIHTTPRequest requestWithURL:url];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(updateBlogcastsFinished:)];
+	[request setDidFailSelector:@selector(updateBlogcastsFailed:)];
+	[request startAsynchronous];
+}
+
+- (void)updateBlogcastsStreamCell:(BlogcastStreamCell *)streamCell {
+	NSURL *url;
+	ASIHTTPRequest *request;
+	
+	url = [self blogcastsUrlWithMaxId:[streamCell.maxId intValue] count:kBlogcastsRequestCount];	
+	request = [ASIHTTPRequest requestWithURL:url];
+	request.userInfo = [NSDictionary dictionaryWithObject:streamCell forKey:@"BlogcastStreamCell"];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(updateBlogcastsStreamCellFinished:)];
+	[request setDidFailSelector:@selector(updateBlogcastsStreamCellFailed:)];
+	[request startAsynchronous];
+	//MVR - add to stream cell request array
+	[self.streamCellRequests addObject:request];
+}
+
+- (void)updateBlogcastsFooter {
+	NSURL *url;
+	ASIHTTPRequest *request;
+	
+	isUpdatingFooter = YES;
+	url = [self blogcastsUrlWithMaxId:[self.minId intValue] - 1 count:kBlogcastsRequestCount];	
+	request = [ASIHTTPRequest requestWithURL:url];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(updateBlogcastsFooterFinished:)];
+	[request setDidFailSelector:@selector(updateBlogcastsFooterFailed:)];
+	[request startAsynchronous];
+}
 
 - (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count {
 	NSString *string;
 	NSURL *url;
 	
 #ifdef DEVEL
-	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	string = [[NSString stringWithFormat:@"http://sandbox.blogcastr.com/users/%d/blogcasts.xml?count=%d", [session.user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 #else //DEVEL
-	string = [[NSString stringWithFormat:@"http://blogcastr.com/users/%d/blogcasts.xml?count=%d", [user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-#endif //DEVEL
-	
-	
-	
+	string = [[NSString stringWithFormat:@"http://blogcastr.com/users/%d/blogcasts.xml?count=%d", [session.user.id intValue], count] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#endif //DEVEL	
 	//MVR - add a max id if set
 	if (maxId)
 		string = [string stringByAppendingString:[[NSString stringWithFormat:@"&max_id=%d", maxId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	NSLog(@"MVR - BLOGCASTS URL %@",string);
-
 	url = [NSURL URLWithString:string];
 	
 	return url;
@@ -957,6 +1083,18 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		NSLog(@"Error replacing size in image post url: %@", imageUrl);
 		return imageUrl;
 	}
+}
+
+- (BOOL)isStreamCellRequested:(BlogcastStreamCell *)streamCell {
+	for (ASIHTTPRequest *request in self.streamCellRequests) {
+		BlogcastStreamCell *theStreamCell;
+		
+		theStreamCell = (BlogcastStreamCell *)[request.userInfo objectForKey:@"BlogcastStreamCell"];
+		if (theStreamCell == streamCell)
+			return YES;
+	}
+	
+	return NO;
 }
 
 - (TTStyledTextLabel *)timestampLabel {

@@ -43,6 +43,7 @@
 
 - (BOOL)save;
 - (void)updateBlogcast;
+- (void)reloadBlogcast;
 - (void)deleteBlogcast;
 - (void)timerExpired:(Timer *)timer;
 - (TTLabel *)tagLabelFor:(NSString *)name;

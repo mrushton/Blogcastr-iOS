@@ -273,7 +273,6 @@ static NSOperationQueue *sharedOperationQueue;
 	ResizeImageOperation *resizeImageOperation;
 	TTURLImageResponse *response;
 
-	NSLog(@"MVR - request FINISHED WELL");
 	resizeImageOperation = [[ResizeImageOperation alloc] init];
 	response = theRequest.response;
 	resizeImageOperation.image = response.image;

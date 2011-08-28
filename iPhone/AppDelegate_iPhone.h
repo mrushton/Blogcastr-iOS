@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate_Shared.h"
-#import "RootController_iPhone.h"
+#import "RootController.h"
 
 @interface AppDelegate_iPhone : AppDelegate_Shared {
-	RootController_iPhone *rootController;
+	RootController *rootController;
 }
 
-@property (nonatomic, retain) RootController_iPhone *rootController;
+@property (nonatomic, retain) RootController *rootController;
 
 
 @end

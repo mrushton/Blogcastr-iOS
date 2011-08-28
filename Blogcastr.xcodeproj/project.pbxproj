@@ -44,13 +44,12 @@
 		CA58CB68133E78FA00BBC5D9 /* Three20.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CA58CB67133E78FA00BBC5D9 /* Three20.bundle */; };
 		CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */; };
 		CA59BC0513133A0D00416E4D /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BC0113133A0D00416E4D /* Session.m */; };
-		CA59BCB6131381E900416E4D /* RootController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCB4131381E900416E4D /* RootController_iPhone.m */; };
+		CA59BCB6131381E900416E4D /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCB4131381E900416E4D /* RootController.m */; };
 		CA59BCBC131384ED00416E4D /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BCBB131384ED00416E4D /* SettingsController.m */; };
 		CA59BDBE1318D68100416E4D /* TabToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BDBD1318D68100416E4D /* TabToolbarController.m */; };
 		CA59BE5D13199D7A00416E4D /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BE5B13199D7A00416E4D /* HomeController.m */; };
 		CA59BE991319BA2E00416E4D /* SignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59BE971319BA2E00416E4D /* SignInController.m */; };
 		CA59C38E1322FCE500416E4D /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C38D1322FCE500416E4D /* UserController.m */; };
-		CA59C57F1325D7ED00416E4D /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C57E1325D7ED00416E4D /* Settings.m */; };
 		CA59C918132C5D3900416E4D /* BlogcastrStyleSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */; };
 		CA59CBA5132DE31C00416E4D /* logo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59CBA4132DE31C00416E4D /* logo~iphone.png */; };
 		CA59CBA7132DE32700416E4D /* logo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CA59CBA6132DE32700416E4D /* logo@2x~iphone.png */; };
@@ -135,6 +134,7 @@
 		CA9A5052137A39A400E10E51 /* XMPPMessage+XEP0045.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9A504D137A39A400E10E51 /* XMPPMessage+XEP0045.m */; };
 		CA9A5053137A39A400E10E51 /* XMPPRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9A504F137A39A400E10E51 /* XMPPRoom.m */; };
 		CA9A5054137A39A400E10E51 /* XMPPRoomOccupant.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9A5051137A39A400E10E51 /* XMPPRoomOccupant.m */; };
+		CA9FC0D213FCDFB2001EFC26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9FC0D113FCDFB2001EFC26 /* AudioToolbox.framework */; };
 		CAC184F3134A94E0006DF673 /* BlogcastrTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC184F2134A94E0006DF673 /* BlogcastrTableViewCell.m */; };
 		CADF7D55137EF32E0089A234 /* PostsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF7D54137EF32E0089A234 /* PostsParser.m */; };
 		CADF7DCB13807AF60089A234 /* PostStreamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CADF7DCA13807AF60089A234 /* PostStreamCell.m */; };
@@ -340,25 +340,23 @@
 		CA40D50D13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ButtonColor.h"; sourceTree = "<group>"; };
 		CA40D50E13E918BE00D3D8F2 /* UINavigationBar+ButtonColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ButtonColor.m"; sourceTree = "<group>"; };
 		CA58CB67133E78FA00BBC5D9 /* Three20.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Three20.bundle; path = ../three20/src/Three20.bundle; sourceTree = SOURCE_ROOT; };
-		CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerController.h; sourceTree = "<group>"; };
-		CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerController.m; sourceTree = "<group>"; };
+		CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageViewerController.h; path = ../ImageViewerController.h; sourceTree = "<group>"; };
+		CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageViewerController.m; path = ../ImageViewerController.m; sourceTree = "<group>"; };
 		CA59BC0013133A0D00416E4D /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		CA59BC0113133A0D00416E4D /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
-		CA59BCB3131381E900416E4D /* RootController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController_iPhone.h; sourceTree = "<group>"; };
-		CA59BCB4131381E900416E4D /* RootController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController_iPhone.m; sourceTree = "<group>"; };
-		CA59BCBA131384ED00416E4D /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
-		CA59BCBB131384ED00416E4D /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		CA59BCB3131381E900416E4D /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
+		CA59BCB4131381E900416E4D /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
+		CA59BCBA131384ED00416E4D /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsController.h; path = ../SettingsController.h; sourceTree = "<group>"; };
+		CA59BCBB131384ED00416E4D /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsController.m; path = ../SettingsController.m; sourceTree = "<group>"; };
 		CA59BDBC1318D68100416E4D /* TabToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabToolbarController.h; sourceTree = "<group>"; };
 		CA59BDBD1318D68100416E4D /* TabToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabToolbarController.m; sourceTree = "<group>"; };
 		CA59BE5A13199D7A00416E4D /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
 		CA59BE5B13199D7A00416E4D /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
-		CA59BE961319BA2E00416E4D /* SignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInController.h; sourceTree = "<group>"; };
-		CA59BE971319BA2E00416E4D /* SignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInController.m; sourceTree = "<group>"; };
+		CA59BE961319BA2E00416E4D /* SignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInController.h; path = ../SignInController.h; sourceTree = "<group>"; };
+		CA59BE971319BA2E00416E4D /* SignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInController.m; path = ../SignInController.m; sourceTree = "<group>"; };
 		CA59C38C1322FCE500416E4D /* UserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
 		CA59C38D1322FCE500416E4D /* UserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		CA59C51E132453CD00416E4D /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
-		CA59C57D1325D7ED00416E4D /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = Shared/Settings.h; sourceTree = "<group>"; };
-		CA59C57E1325D7ED00416E4D /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = Shared/Settings.m; sourceTree = "<group>"; };
 		CA59C916132C5D3900416E4D /* BlogcastrStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogcastrStyleSheet.h; sourceTree = "<group>"; };
 		CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogcastrStyleSheet.m; sourceTree = "<group>"; };
 		CA59CBA4132DE31C00416E4D /* logo~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo~iphone.png"; sourceTree = "<group>"; };
@@ -436,8 +434,8 @@
 		CA99C68E139AE08500DCE077 /* CommentsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsParser.m; sourceTree = "<group>"; };
 		CA9A456F13612B4B00E10E51 /* SettingsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsParser.h; sourceTree = "<group>"; };
 		CA9A457013612B4B00E10E51 /* SettingsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsParser.m; sourceTree = "<group>"; };
-		CA9A47651366709600E10E51 /* DatePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerController.h; sourceTree = "<group>"; };
-		CA9A47661366709600E10E51 /* DatePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerController.m; sourceTree = "<group>"; };
+		CA9A47651366709600E10E51 /* DatePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickerController.h; path = ../DatePickerController.h; sourceTree = "<group>"; };
+		CA9A47661366709600E10E51 /* DatePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickerController.m; path = ../DatePickerController.m; sourceTree = "<group>"; };
 		CA9A4855136926C600E10E51 /* TextViewWithPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewWithPlaceholder.h; sourceTree = "<group>"; };
 		CA9A4856136926C600E10E51 /* TextViewWithPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewWithPlaceholder.m; sourceTree = "<group>"; };
 		CA9A49AA136C87F400E10E51 /* DashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardController.h; sourceTree = "<group>"; };
@@ -513,14 +511,15 @@
 		CA9A504F137A39A400E10E51 /* XMPPRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRoom.m; sourceTree = "<group>"; };
 		CA9A5050137A39A400E10E51 /* XMPPRoomOccupant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRoomOccupant.h; sourceTree = "<group>"; };
 		CA9A5051137A39A400E10E51 /* XMPPRoomOccupant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRoomOccupant.m; sourceTree = "<group>"; };
+		CA9FC0D113FCDFB2001EFC26 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CAC184F1134A94E0006DF673 /* BlogcastrTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogcastrTableViewCell.h; sourceTree = "<group>"; };
 		CAC184F2134A94E0006DF673 /* BlogcastrTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogcastrTableViewCell.m; sourceTree = "<group>"; };
 		CADF7D53137EF32E0089A234 /* PostsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsParser.h; sourceTree = "<group>"; };
 		CADF7D54137EF32E0089A234 /* PostsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsParser.m; sourceTree = "<group>"; };
 		CADF7DC913807AF60089A234 /* PostStreamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostStreamCell.h; path = Shared/PostStreamCell.h; sourceTree = "<group>"; };
 		CADF7DCA13807AF60089A234 /* PostStreamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostStreamCell.m; path = Shared/PostStreamCell.m; sourceTree = "<group>"; };
-		CAFA7CA713477C020077AD98 /* BlogcastsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlogcastsController.h; path = Shared/BlogcastsController.h; sourceTree = "<group>"; };
-		CAFA7CA813477C020077AD98 /* BlogcastsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlogcastsController.m; path = Shared/BlogcastsController.m; sourceTree = "<group>"; };
+		CAFA7CA713477C020077AD98 /* BlogcastsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlogcastsController.h; path = ../Shared/BlogcastsController.h; sourceTree = "<group>"; };
+		CAFA7CA813477C020077AD98 /* BlogcastsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlogcastsController.m; path = ../Shared/BlogcastsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -547,6 +546,7 @@
 				CA9A4EC71377210100E10E51 /* libxml2.dylib in Frameworks */,
 				CA9A4F871377371200E10E51 /* libidn.a in Frameworks */,
 				CA9A4F8F13773A1300E10E51 /* libresolv.dylib in Frameworks */,
+				CA9FC0D213FCDFB2001EFC26 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +568,8 @@
 				2860E388111B897F00E27156 /* AppDelegate_iPhone.m */,
 				CA245D4213EF72A500EC0825 /* blogcasts.png */,
 				CA245D4413EF72AA00EC0825 /* blogcasts@2x.png */,
+				CAFA7CA713477C020077AD98 /* BlogcastsController.h */,
+				CAFA7CA813477C020077AD98 /* BlogcastsController.m */,
 				CA660C0813C0F74D00EEC2F3 /* CommentController.h */,
 				CA660C0913C0F74D00EEC2F3 /* CommentController.m */,
 				CA87E1F013EE2EDC00F2C432 /* comment.png */,
@@ -578,6 +580,8 @@
 				CA99C66E139A981000DCE077 /* CommentsController.m */,
 				CA9A49AA136C87F400E10E51 /* DashboardController.h */,
 				CA9A49AB136C87F400E10E51 /* DashboardController.m */,
+				CA9A47651366709600E10E51 /* DatePickerController.h */,
+				CA9A47661366709600E10E51 /* DatePickerController.m */,
 				CA97F60913F7288F0065F772 /* Default.png */,
 				CA97F60B13F728E60065F772 /* Default@2x.png */,
 				CA0D825E13C3FF7100FC1330 /* EditBlogcastController.h */,
@@ -586,6 +590,8 @@
 				CA59BE5B13199D7A00416E4D /* HomeController.m */,
 				CA97F56613F4BCE90065F772 /* icon.png */,
 				CA97F56813F4BCF50065F772 /* icon@2x.png */,
+				CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */,
+				CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */,
 				CA40D4D513E8F85C00D3D8F2 /* info.png */,
 				CA40D4D613E8F85C00D3D8F2 /* info@2x.png */,
 				CA0024CD13A3C43300A4B36F /* InfoController.h */,
@@ -611,10 +617,14 @@
 				CA9A49D4136C958C00E10E51 /* PostsController.m */,
 				CA97F51913F399D10065F772 /* profile.png */,
 				CA97F52F13F3A13A0065F772 /* profile@2x.png */,
-				CA59BCB3131381E900416E4D /* RootController_iPhone.h */,
-				CA59BCB4131381E900416E4D /* RootController_iPhone.m */,
+				CA59BCB3131381E900416E4D /* RootController.h */,
+				CA59BCB4131381E900416E4D /* RootController.m */,
 				CA97F51B13F399DF0065F772 /* settings.png */,
 				CA97F53613F3A1790065F772 /* settings@2x.png */,
+				CA59BCBA131384ED00416E4D /* SettingsController.h */,
+				CA59BCBB131384ED00416E4D /* SettingsController.m */,
+				CA59BE961319BA2E00416E4D /* SignInController.h */,
+				CA59BE971319BA2E00416E4D /* SignInController.m */,
 				CA59BDBC1318D68100416E4D /* TabToolbarController.h */,
 				CA59BDBD1318D68100416E4D /* TabToolbarController.m */,
 				CA59C38C1322FCE500416E4D /* UserController.h */,
@@ -635,18 +645,12 @@
 				CA59C917132C5D3900416E4D /* BlogcastrStyleSheet.m */,
 				CAC184F1134A94E0006DF673 /* BlogcastrTableViewCell.h */,
 				CAC184F2134A94E0006DF673 /* BlogcastrTableViewCell.m */,
-				CAFA7CA713477C020077AD98 /* BlogcastsController.h */,
-				CAFA7CA813477C020077AD98 /* BlogcastsController.m */,
 				CA74E2FA13569FA800788D04 /* BlogcastStreamCell.h */,
 				CA74E2FB13569FA800788D04 /* BlogcastStreamCell.m */,
 				CA660C1A13C1170200EEC2F3 /* Comment.h */,
 				CA660C1B13C1170200EEC2F3 /* Comment.m */,
 				CA99C672139A994300DCE077 /* CommentStreamCell.h */,
 				CA99C673139A994300DCE077 /* CommentStreamCell.m */,
-				CA9A47651366709600E10E51 /* DatePickerController.h */,
-				CA9A47661366709600E10E51 /* DatePickerController.m */,
-				CA58CC0A13415F0E00BBC5D9 /* ImageViewerController.h */,
-				CA58CC0B13415F0E00BBC5D9 /* ImageViewerController.m */,
 				CA660C1F13C1171100EEC2F3 /* Post.h */,
 				CA660C2013C1171100EEC2F3 /* Post.m */,
 				CADF7DC913807AF60089A234 /* PostStreamCell.h */,
@@ -656,14 +660,8 @@
 				CA3BADE013DFC4C7004F1A39 /* ResizeImageOperation.m */,
 				CA59BC0013133A0D00416E4D /* Session.h */,
 				CA59BC0113133A0D00416E4D /* Session.m */,
-				CA59C57D1325D7ED00416E4D /* Settings.h */,
-				CA59C57E1325D7ED00416E4D /* Settings.m */,
-				CA59BE961319BA2E00416E4D /* SignInController.h */,
-				CA59BE971319BA2E00416E4D /* SignInController.m */,
 				CA0D840F13CBE36400FC1330 /* Subscription.h */,
 				CA0D841013CBE36400FC1330 /* Subscription.m */,
-				CA59BCBA131384ED00416E4D /* SettingsController.h */,
-				CA59BCBB131384ED00416E4D /* SettingsController.m */,
 				CA58CB67133E78FA00BBC5D9 /* Three20.bundle */,
 				CA9A4855136926C600E10E51 /* TextViewWithPlaceholder.h */,
 				CA9A4856136926C600E10E51 /* TextViewWithPlaceholder.m */,
@@ -694,6 +692,7 @@
 				CA9A4F2A137724FE00E10E51 /* Reachability */,
 				28EEBF621118D79A00187D67 /* Shared */,
 				CA9A4F3C1377343900E10E51 /* xmppframework */,
+				CA9FC0D113FCDFB2001EFC26 /* AudioToolbox.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1213,13 +1212,12 @@
 				2819307D112F81BE00ECF9B4 /* Blogcastr.xcdatamodeld in Sources */,
 				2860E38A111B897F00E27156 /* AppDelegate_iPhone.m in Sources */,
 				CA59BC0513133A0D00416E4D /* Session.m in Sources */,
-				CA59BCB6131381E900416E4D /* RootController_iPhone.m in Sources */,
+				CA59BCB6131381E900416E4D /* RootController.m in Sources */,
 				CA59BCBC131384ED00416E4D /* SettingsController.m in Sources */,
 				CA59BDBE1318D68100416E4D /* TabToolbarController.m in Sources */,
 				CA59BE5D13199D7A00416E4D /* HomeController.m in Sources */,
 				CA59BE991319BA2E00416E4D /* SignInController.m in Sources */,
 				CA59C38E1322FCE500416E4D /* UserController.m in Sources */,
-				CA59C57F1325D7ED00416E4D /* Settings.m in Sources */,
 				CA59C918132C5D3900416E4D /* BlogcastrStyleSheet.m in Sources */,
 				CA58CC0C13415F0E00BBC5D9 /* ImageViewerController.m in Sources */,
 				CAFA7CA913477C020077AD98 /* BlogcastsController.m in Sources */,

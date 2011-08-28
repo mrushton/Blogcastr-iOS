@@ -96,6 +96,7 @@
 - (void)dealloc {
 	[xmppStream release];
 	[xmppReconnect release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 
@@ -191,8 +192,8 @@
 }
 
 - (void)disconnect {
+	//AS DESIGNED: the reconnect object will be stopped when disconnecting
 	[xmppStream disconnect];
-	[xmppReconnect stop];
 }
 
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message {

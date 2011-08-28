@@ -335,7 +335,9 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 		return;
 	}
 	//MVR - parse xml
-	parser = [[BlogcastsParser alloc] initWithData:[request responseData] managedObjectContext:managedObjectContext];
+	parser = [[BlogcastsParser alloc] init];
+	parser.managedObjectContext = managedObjectContext;
+	parser.data = [request responseData];		   
 	if (![parser parse]) {
 		NSLog(@"Error parsing update blogcast response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the blogcast."];
@@ -343,16 +345,11 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 		return;
 	}
 	[parser release];
-	//MVR - reload table and update footer
-	[self.tableView reloadData];
-	self.tableView.tableFooterView = [self footerView];
-	//MVR - update the title of the tab bar controller as well
-	self.tabToolbarController.title = blogcast.title;
+	[self reloadBlogcast];
 }
 
 - (void)updateBlogcastFailed:(ASIHTTPRequest *)request {
 	NSLog(@"Update blogcast failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcast."];
 	self.blogcastRequest = nil;
 }
 
@@ -365,7 +362,8 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	statusCode = [theRequest responseStatusCode];
-	if (statusCode != 200) {
+	//MVR - 404 indicates the blogcast may have already been deleted
+	if (statusCode != 200 && statusCode != 404) {
 		NSLog(@"Error delete blogcast received status code %i", statusCode);
 		[self errorAlertWithTitle:@"Delete failed" message:@"Oops! We couldn't delete the blogcast."];
 		return;
@@ -430,9 +428,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 }
 
 - (void)updatedBlogcast {
-	//AS DESIGNED: issue a new request to update info asap
-	if (!blogcastRequest)
-		[self updateBlogcast];
+	[self reloadBlogcast];
 }
 
 #pragma mark -
@@ -449,6 +445,14 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[request setDidFailSelector:@selector(updateBlogcastFailed:)];
 	[request startAsynchronous];
 	self.blogcastRequest = request;
+}
+
+- (void)reloadBlogcast {
+	//MVR - reload table and update footer
+	[self.tableView reloadData];
+	self.tableView.tableFooterView = [self footerView];
+	//MVR - update the title of the tab bar controller as well
+	self.tabToolbarController.title = blogcast.title;
 }
 
 - (TTLabel *)tagLabelFor:(NSString *)name {

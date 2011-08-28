@@ -338,7 +338,8 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	//MVR - hide the progress HUD
 	[self.progressHud hide:YES];
 	statusCode = [theRequest responseStatusCode];
-	if (statusCode != 200) {
+	//MVR - 404 indicates the post may have already been deleted
+	if (statusCode != 200 && statusCode != 404) {
 		NSLog(@"Error delete post received status code %i", statusCode);
 		//MVR - enable delete button
 		self.navigationItem.rightBarButtonItem.enabled = YES;

@@ -12,19 +12,28 @@
 #import "RequestServer.h"
 #import "Session.h"
 #import "User.h"
+#import "BlogcastStreamCell.h"
 #import "MBProgressHUD.h"
 #import "XMPPStream.h"
+#import "ASIHTTPRequest.h"
+#import "Timer.h"
 
-@interface BlogcastsController : UITableViewController <TabToolbarControllerProtocol, NSFetchedResultsControllerDelegate> {
+#define SLOW_TIMER_INTERVAL 30.0
+#define FAST_TIMER_INTERVAL 2.0
+
+@interface BlogcastsController : UITableViewController <TabToolbarControllerProtocol, NSFetchedResultsControllerDelegate, TimerProtocol> {
 	TabToolbarController *tabToolbarController;
 	NSManagedObjectContext *managedObjectContext;
 	NSFetchedResultsController *_fetchedResultsController;
 	Session *session;
-	User *user;
 	XMPPStream *xmppStream;
 	TTTableHeaderDragRefreshView *dragRefreshView;
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
-	NSTimer *timer;
+	ASIHTTPRequest *blogcastsRequest;
+	ASIHTTPRequest *blogcastsFooterRequest;
+	NSMutableArray *_streamCellRequests;
+	Timer *slowTimer;
+	Timer *fastTimer;
 	//MVR - for the drag refresh view
 	BOOL isRefreshing;
 	BOOL isUpdating;
@@ -37,26 +46,27 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) Session *session;
-@property (nonatomic, retain) User *user;
 @property (nonatomic, retain) XMPPStream *xmppStream;
 //AS DESIGNED: keep a weak reference to avoid retian cycles
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;
 @property (nonatomic, retain) TTTableHeaderDragRefreshView *dragRefreshView;
 @property (nonatomic, retain) TTTableFooterInfiniteScrollView *infiniteScrollView;
-@property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic, readonly) NSMutableArray *streamCellRequests;
+@property (nonatomic, retain) ASIHTTPRequest *blogcastsRequest;
+@property (nonatomic, retain) ASIHTTPRequest *blogcastsFooterRequest;
+@property (nonatomic, retain) Timer *slowTimer;
+@property (nonatomic, retain) Timer *fastTimer;
 @property (nonatomic, retain) NSNumber *maxId;
 @property (nonatomic, retain) NSNumber *minId;
 @property (nonatomic, readonly) UIAlertView *alertView;
 
-- (NSURLConnection *)getUrl:(NSString *)url;
 - (void)updateBlogcasts;
-- (void)updateBlogcastsCell;
+- (void)updateBlogcastsStreamCell:(BlogcastStreamCell *)streamCell;
 - (void)updateBlogcastsFooter;
-- (void)showProgressHudWithLabelText:(NSString *)labelText animationType:(MBProgressHUDAnimation)animationType;
-- (void)reloadTableView;
 - (BOOL)save;
 - (NSURL *)blogcastsUrlWithMaxId:(NSInteger)maxId count:(NSInteger)count;
 - (NSString *)imageUrl:(NSString *)string forSize:(NSString *)size;
+- (BOOL)isStreamCellRequested:(BlogcastStreamCell *)streamCell;
 - (TTStyledTextLabel *)timestampLabel;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 

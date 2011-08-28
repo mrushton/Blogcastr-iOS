@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface SettingsController : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate> {
+@interface SettingsController : UITableViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate, UINavigationControllerDelegate> {
 	TabToolbarController *tabToolbarController;
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
@@ -33,8 +33,10 @@
 @property (nonatomic, retain) UIAlertView *alertView;
 
 - (void)saveOriginalImages:(UISwitch *)theSwitch;
-- (void)signOut:(id)object;
+- (void)vibrate:(UISwitch *)theSwitch;
+- (void)signOut;
 - (BOOL)save;
+- (NSURL *)settingsUrl;
 - (void)showWindowProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType;
 - (void)errorAlertWithTitle:(NSString *)title message:(NSString *)message;
 
