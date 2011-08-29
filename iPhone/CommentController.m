@@ -398,7 +398,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 }
 
 - (Subscription *)subscriptionForUser:(User *)user {
-	NSFetchRequest *request;
+	NSFetchRequest *theRequest;
 	NSEntityDescription *entity;
 	NSPredicate *predicate;
 	NSArray *array;
@@ -406,13 +406,13 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	NSError *error;
 	
 	//MVR - find subscription if it exists
-	request = [[NSFetchRequest alloc] init];
+	theRequest = [[NSFetchRequest alloc] init];
 	entity = [NSEntityDescription entityForName:@"Subscription" inManagedObjectContext:managedObjectContext];
-	[request setEntity:entity];
+	[theRequest setEntity:entity];
 	predicate = [NSPredicate predicateWithFormat:@"(subscriber == %@) AND (subscription == %@)", session.user, user];
-	[request setPredicate:predicate];
+	[theRequest setPredicate:predicate];
 	//MVR - execute the fetch
-	array = [managedObjectContext executeFetchRequest:request error:&error];
+	array = [managedObjectContext executeFetchRequest:theRequest error:&error];
 	//MVR - create subscription if it doesn't exist
 	if ([array count] > 0) {
 		subscription = [array objectAtIndex:0];
@@ -422,7 +422,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 		subscription.subscription = user;
 		subscription.isSubscribed = [NSNumber numberWithBool:NO];
 	}
-	[request release];
+	[theRequest release];
 	
 	return subscription;	
 }

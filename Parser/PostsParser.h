@@ -62,7 +62,6 @@
 @property (nonatomic, retain) NSDate *postCreatedAt;
 @property (nonatomic, retain) NSMutableArray *posts;
 
-- (PostsParser *)initWithData:(NSData *)theData managedObjectContext:(NSManagedObjectContext *)theManagedObjectContext;
 - (BOOL)parse;
 - (NSDate *)parseTimestamp: (NSString *)timestamp;
 

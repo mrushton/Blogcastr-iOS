@@ -12,13 +12,13 @@
 #import "HomeController.h"
 #import "UserController.h"
 #import "SignInController.h"
-#import "RequestServer.h"
 #import "BlogcastrStyleSheet.h"
 #import "ASIHTTPRequest.h"
 #import "NSDate+Timestamp.h"
 
 @implementation AppDelegate_iPhone
 
+@synthesize rootController;
 
 #pragma mark -
 #pragma mark Application lifecycle

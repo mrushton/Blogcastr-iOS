@@ -471,17 +471,10 @@
 - (BOOL)save {
 	NSError *error;
 
-	NSLog(@"MVR - attempting SAVE 0x%x", managedObjectContext);
     if (![managedObjectContext save:&error]) {
-		NSLog(@"MVR - attempting SAVE FAILED");
-
 	    NSLog(@"Error saving managed object context: %@", [error localizedDescription]);
-		NSLog(@"MVR - attempting SAVE FAILED 2");
-
 		return FALSE;
 	}
-	NSLog(@"MVR - attempting SAVE 2");
-
 	
 	return TRUE;
 }
