@@ -155,6 +155,7 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 	settingsController.managedObjectContext = self.managedObjectContext;
 	settingsController.session = session;
 	homeController.viewControllers = [NSArray arrayWithObjects:blogcastsController, userController, settingsController, nil];
+	[blogcastsController release];
 	[userController release];
 	[settingsController release];
 	//MVR - set the navigation stack
