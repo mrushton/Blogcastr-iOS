@@ -19,6 +19,7 @@
     NSMutableString *mutableString;
 	NSNumber *commentId;
 	NSString *commentText;
+	User *user;
 	NSNumber *userId;
 	NSString *userType;
 	NSString *userUsername;
@@ -36,6 +37,7 @@
 @property (nonatomic, retain) NSString *mutableString;
 @property (nonatomic, retain) NSNumber *commentId;
 @property (nonatomic, retain) NSString *commentText;
+@property (nonatomic, retain) User *user;
 @property (nonatomic, retain) NSNumber *userId;
 @property (nonatomic, retain) NSString *userType;
 @property (nonatomic, retain) NSString *userUsername;

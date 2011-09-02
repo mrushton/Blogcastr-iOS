@@ -20,19 +20,19 @@
 @synthesize mutableString;
 @synthesize postId;
 @synthesize postType;
-@synthesize postUserId;
-@synthesize postUserUsername;
-@synthesize postUserAvatarUrl;
-@synthesize postText;
+@synthesize postUser;
+@synthesize commentUser;
+@synthesize userId;
+@synthesize userType;
+@synthesize userUsername;
+@synthesize userUrl;
+@synthesize userAvatarUrl;
+@synthesize text;
 @synthesize postImageUrl;
 @synthesize postImageWidth;
 @synthesize postImageHeight;
+@synthesize comment;
 @synthesize commentId;
-@synthesize commentUserId;
-@synthesize commentUserType;
-@synthesize commentUserUsername;
-@synthesize commentUserUrl;
-@synthesize commentUserAvatarUrl;
 @synthesize commentCreatedAt;
 @synthesize postCreatedAt;
 @synthesize posts;
@@ -65,19 +65,19 @@
     [mutableString release];
 	[postId release];
 	[postType release];
-	[postUserId release];
-	[postUserUsername release];
-	[postUserAvatarUrl release];
-	[postText release];
+	[postUser release];
+	[userId release];
+	[userType release];
+	[userUsername release];
+	[userAvatarUrl release];
+	[userUrl release];
+	[text release];
 	[postImageUrl release];
 	[postImageWidth release];
 	[postImageHeight release];
+	[comment release];
 	[commentId release];
-	[commentUserId release];
-	[commentUserType release];
-	[commentUserUsername release];
-	[commentUserUrl release];
-	[commentUserAvatarUrl release];
+	[commentUser release];
 	[commentCreatedAt release];
 	[postCreatedAt release];
 	[posts release];
@@ -94,19 +94,19 @@
 	self.mutableString = nil;
 	self.postId = nil;
 	self.postType = nil;
-	self.postUserId = nil;
-	self.postUserUsername = nil;
-	self.postUserAvatarUrl = nil;
-	self.postText = nil;
+	self.postUser = nil;
+	self.userId = nil;
+	self.userType = nil;
+	self.userUsername = nil;
+	self.userUrl = nil;
+	self.userAvatarUrl = nil;
+	self.text = nil;
 	self.postImageUrl = nil;
 	self.postImageWidth = nil;
 	self.postImageHeight = nil;
+	self.comment = nil;
 	self.commentId = nil;
-	self.commentUserId = nil;
-	self.commentUserType = nil;
-	self.commentUserUsername = nil;
-	self.commentUserUrl = nil;
-	self.commentUserAvatarUrl = nil;
+	self.commentUser = nil;
 	self.commentCreatedAt = nil;
 	self.postCreatedAt = nil;
 	inUser = FALSE;
@@ -124,14 +124,14 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+	NSFetchRequest *request;
+	NSEntityDescription *entity;
+	NSPredicate *predicate;
+	NSArray *array;
+	NSError *error;
+
 	if ([elementName isEqual:@"post"]) {
-		NSFetchRequest *request;
-		NSEntityDescription *entity;
-		NSPredicate *predicate;
-		NSArray *array;
 		Post *post;
-		User *user;
-		NSError *error;
 		
 		//MVR - find post if it exists
 		request = [[NSFetchRequest alloc] init];
@@ -152,35 +152,15 @@
 		post.blogcast = blogcast;
 		post.type = postType;
 		self.postType = nil;
-		//MVR - find post user if they exist
-		request = [[NSFetchRequest alloc] init];
-		entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
-		[request setEntity:entity];
-		predicate = [NSPredicate predicateWithFormat:@"id = %d", [postUserId intValue]];
-		[request setPredicate:predicate];
-		//MVR - execute the fetch
-		array = [managedObjectContext executeFetchRequest:request error:&error];
-		//MVR - create post user if they don't exist
-		if ([array count] > 0)
-			user = [array objectAtIndex:0];
-		else
-			user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
-		[request release];
-		user.id = postUserId;
-		self.postUserId = nil;
-		user.username = postUserUsername;
-		self.postUserUsername = nil;
-		user.avatarUrl = postUserAvatarUrl;
-		self.postUserAvatarUrl = nil;
-		user.type = @"BlogcastrUser";
-		post.user = user;
+		post.user = postUser;
+		self.postUser = nil;
 		if ([post.type isEqual:@"TextPost"]) {
-			post.text = postText;
-			self.postText = nil;
+			post.text = text;
+			self.text = nil;
 		} else if ([post.type isEqual:@"ImagePost"]) {
-			if (postText) {
-				post.text = postText;
-				self.postText = nil;
+			if (text) {
+				post.text = text;
+				self.text = nil;
 			}
 			post.imageUrl = postImageUrl;
 			self.postImageUrl = nil;
@@ -189,65 +169,8 @@
 			post.imageHeight = postImageHeight;
 			self.postImageHeight = nil;
 		} else if ([post.type isEqual:@"CommentPost"]) {
-			Comment *comment;
-
-			//MVR - find comment if it exists
-			request = [[NSFetchRequest alloc] init];
-			entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:managedObjectContext];
-			[request setEntity:entity];
-			predicate = [NSPredicate predicateWithFormat:@"id = %d", [commentId intValue]];
-			[request setPredicate:predicate];
-			//MVR - execute the fetch
-			array = [managedObjectContext executeFetchRequest:request error:&error];
-			//MVR - create user if they don't exist
-			if ([array count] > 0)
-				comment = [array objectAtIndex:0];
-			else
-				comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
-			[request release];
-			comment.id = commentId;
-			self.commentId = nil;
-			comment.blogcast = blogcast;
-			//AS DESIGNED: use the post equivalent variable
-			comment.text = postText;
-			self.postText = nil;
-			//MVR - find comment user if they exist
-			request = [[NSFetchRequest alloc] init];
-			entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
-			[request setEntity:entity];
-			predicate = [NSPredicate predicateWithFormat:@"id = %d", [commentUserId intValue]];
-			[request setPredicate:predicate];
-			//MVR - execute the fetch
-			array = [managedObjectContext executeFetchRequest:request error:&error];
-			//MVR - create user if they don't exist
-			if ([array count] > 0) {
-				user = [array objectAtIndex:0];}
-		else{
-				user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];}
-			NSLog(@"MVR - comment user 0x%x",user);
-			[request release];
-			user.id = commentUserId;
-			self.commentUserId = nil;
-			user.type = commentUserType;
-			self.commentUserType = nil;
-			if ([user.type isEqual:@"BlogcastrUser"]) {
-				user.username = commentUserUsername;
-				self.commentUserUsername = nil;
-			} else if ([user.type isEqual:@"FacebookUser"]) {
-				user.facebookFullName = commentUserUsername;
-				self.commentUserUsername = nil;
-				user.facebookLink = commentUserUrl;
-				self.commentUserUrl = nil;
-			} else if ([user.type isEqual:@"TwitterUser"]) {
-				user.twitterUsername = commentUserUsername;
-				self.commentUserUsername = nil;
-			}
-			user.avatarUrl = commentUserAvatarUrl;
-			self.commentUserAvatarUrl = nil;
-			comment.createdAt = commentCreatedAt;
-			self.commentCreatedAt = nil;
-			comment.user = user;
 			post.comment = comment;
+			self.comment = nil;
 		}
 		post.createdAt = postCreatedAt;
 		self.postCreatedAt = nil;
@@ -257,44 +180,27 @@
 		NSNumberFormatter *formatter;
 		
 		formatter = [[NSNumberFormatter alloc] init];
-		if (inComment) {
-			if (inUser)
-				self.commentUserId = [formatter numberFromString:mutableString];
-			else
-				self.commentId = [formatter numberFromString:mutableString];					
-		}
-		else {
-			if (inUser)
-				self.postUserId = [formatter numberFromString:mutableString];
-			else
-				self.postId = [formatter numberFromString:mutableString];
-		}
+		if (inUser)
+			self.userId = [formatter numberFromString:mutableString];
+		else if (inComment)
+			self.commentId = [formatter numberFromString:mutableString];					
+		else
+			self.postId = [formatter numberFromString:mutableString];
 		[formatter release];
 	} else if ([elementName isEqual:@"type"]){
-		if (inComment) {
-			//AS DESIGNED: there is only one comment type
-			self.commentUserType = mutableString;
+		if (inUser) {
+			self.userType = mutableString;
 		} else {
-			//AS DESIGNED: to post the user must be a BlogastrUser
-			if (!inUser)
-				self.postType = mutableString;
+			self.postType = mutableString;
 		}
 	} else if ([elementName isEqual:@"username"]) {
-		if (inComment)		
-			self.commentUserUsername = mutableString;
-		else
-			self.postUserUsername = mutableString;
+		self.userUsername = mutableString;
 	} else if ([elementName isEqual:@"url"]) {
-		if (inComment)		
-			self.commentUserUrl = mutableString;
+		self.userUrl = mutableString;
 	} else if ([elementName isEqual:@"avatar-url"]) {
-		if (inComment)		
-			self.commentUserAvatarUrl = mutableString;
-		else
-			self.postUserAvatarUrl = mutableString;
+		self.userAvatarUrl = mutableString;
 	} else if ([elementName isEqual:@"text"]) {
-		//AS DESIGNED: use the post equivalent variable
-		self.postText = mutableString;
+		self.text = mutableString;
 	} else if ([elementName isEqual:@"image-url"]) {
 		self.postImageUrl = mutableString;
 	} else if ([elementName isEqual:@"image-width"]) {
@@ -318,9 +224,68 @@
 		else
 			self.postCreatedAt = date;
 	} else if ([elementName isEqual:@"user"]) {
-		inUser = FALSE;
+		User *theUser;
+		
+		request = [[NSFetchRequest alloc] init];
+		entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request setEntity:entity];	
+		predicate = [NSPredicate predicateWithFormat:@"id = %d", [userId intValue]];
+		[request setPredicate:predicate];
+		//MVR - execute the fetch
+		array = [managedObjectContext executeFetchRequest:request error:&error];
+		//MVR - create user if they don't exist
+		if ([array count] > 0)
+			theUser = [array objectAtIndex:0];
+		else
+			theUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request release];
+		theUser.id = userId;
+		self.userId = nil;
+		theUser.type = userType;
+		if ([userType isEqual:@"BlogcastrUser"]) {
+			theUser.username = userUsername;
+		} else if ([userType isEqual:@"FacebookUser"]) {
+			theUser.facebookFullName = userUsername;
+			theUser.facebookLink = userUrl;
+		} else if ([userType isEqual:@"TwitterUser"]) {
+			theUser.twitterUsername = userUsername;
+		}
+		self.userType = nil;
+		self.userUsername = nil;
+		theUser.avatarUrl = userAvatarUrl;
+		self.userAvatarUrl = nil;
+		if (inComment)
+			self.commentUser = theUser;
+		else
+			self.postUser = theUser;
+		inUser = NO;
 	} else if ([elementName isEqual:@"comment"]) {
-		inComment = FALSE;
+		Comment *theComment;
+		
+		//MVR - find comment if it exists
+		request = [[NSFetchRequest alloc] init];
+		entity = [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:managedObjectContext];
+		[request setEntity:entity];
+		predicate = [NSPredicate predicateWithFormat:@"id = %d", [commentId intValue]];
+		[request setPredicate:predicate];
+		//MVR - execute the fetch
+		array = [managedObjectContext executeFetchRequest:request error:&error];
+		//MVR - create user if they don't exist
+		if ([array count] > 0)
+			theComment = [array objectAtIndex:0];
+		else
+			theComment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
+		[request release];
+		theComment.id = commentId;
+		self.commentId = nil;
+		theComment.blogcast = blogcast;
+		theComment.user = commentUser;
+		self.commentUser = nil;
+		theComment.text = text;
+		self.text = nil;
+		theComment.createdAt = commentCreatedAt;
+		self.comment = theComment;
+		inComment = NO;
 	}
 	//MVR - release string here to handle potential memory leak
     self.mutableString = nil;

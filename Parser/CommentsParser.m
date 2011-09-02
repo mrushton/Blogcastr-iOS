@@ -20,6 +20,7 @@
 @synthesize mutableString;
 @synthesize commentId;
 @synthesize commentText;
+@synthesize user;
 @synthesize userId;
 @synthesize userType;
 @synthesize userUsername;
@@ -56,6 +57,7 @@
     [mutableString release];
 	[commentId release];
 	[commentText release];
+	[user release];
 	[userId release];
 	[userType release];
 	[userUsername release];
@@ -76,6 +78,7 @@
 	self.mutableString = nil;
 	self.commentId = nil;
 	self.commentText = nil;
+	self.user = nil;
 	self.userId = nil;
 	self.userType = nil;
 	self.userUsername = nil;
@@ -94,14 +97,14 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+	NSFetchRequest *request;
+	NSEntityDescription *entity;
+	NSPredicate *predicate;
+	NSArray *array;
+	NSError *error;
+
 	if ([elementName isEqual:@"comment"]) {
-		NSFetchRequest *request;
-		NSEntityDescription *entity;
-		NSPredicate *predicate;
-		NSArray *array;
 		Comment *comment;
-		User *user;
-		NSError *error;
 		
 		//MVR - find comment if it exists
 		request = [[NSFetchRequest alloc] init];
@@ -112,47 +115,16 @@
 		//MVR - execute the fetch
 		array = [managedObjectContext executeFetchRequest:request error:&error];
 		[request release];
-		//MVR - create post if it doesn't exist
-		if ([array count] > 0) {
+		//MVR - create comment if it doesn't exist
+		if ([array count] > 0)
 			comment = [array objectAtIndex:0];
-		} else {
+		else
 			comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
-			comment.id = commentId;
-			comment.blogcast = blogcast;
-			comment.text = commentText;
-			comment.createdAt = commentCreatedAt;			
-			//MVR - find comment user if they exist
-			request = [[NSFetchRequest alloc] init];
-			entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
-			[request setEntity:entity];
-			predicate = [NSPredicate predicateWithFormat:@"id = %d", [userId intValue]];
-			[request setPredicate:predicate];
-			//MVR - execute the fetch
-			array = [managedObjectContext executeFetchRequest:request error:&error];
-			//MVR - create post user if they don't exist
-			if ([array count] > 0) {
-				user = [array objectAtIndex:0];
-			} else {
-				user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
-				user.id = userId;
-				user.type = userType;
-				if ([userType isEqual:@"BlogcastrUser"]) {
-					user.username = userUsername;
-				} else if ([userType isEqual:@"FacebookUser"]) {
-					user.facebookFullName = userUsername;
-					user.facebookLink = userUrl;
-				} else if ([userType isEqual:@"TwitterUser"]) {
-					user.twitterUsername = userUsername;
-				}
-				user.avatarUrl = userAvatarUrl;
-			}
-			comment.user = user;			
-		}
-		self.userId = nil;
-		self.userType = nil;
-		self.userUsername = nil;
-		self.userUrl = nil;
-		self.userAvatarUrl = nil;
+		comment.id = commentId;
+		comment.blogcast = blogcast;
+		comment.text = commentText;
+		comment.createdAt = commentCreatedAt;			
+		comment.user = user;			
 		self.commentId = nil;
 		self.commentText = nil;
 		self.commentCreatedAt = nil;
@@ -176,6 +148,38 @@
 	} else if ([elementName isEqual:@"created-at"]) {
 		self.commentCreatedAt = [self parseTimestamp:mutableString];
 	} else if ([elementName isEqual:@"user"]) {
+		User *theUser;
+
+		//MVR - find user if they exist
+		request = [[NSFetchRequest alloc] init];
+		entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request setEntity:entity];	
+		predicate = [NSPredicate predicateWithFormat:@"id = %d", [userId intValue]];
+		[request setPredicate:predicate];
+		//MVR - execute the fetch
+		array = [managedObjectContext executeFetchRequest:request error:&error];
+		//MVR - create blogcast if it doesn't exist
+		if ([array count] > 0)
+			theUser = [array objectAtIndex:0];
+		else
+			theUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
+		[request release];
+		theUser.id = userId;
+		self.userId = nil;
+		theUser.type = userType;
+		if ([userType isEqual:@"BlogcastrUser"]) {
+			theUser.username = userUsername;
+		} else if ([userType isEqual:@"FacebookUser"]) {
+			theUser.facebookFullName = userUsername;
+			theUser.facebookLink = userUrl;
+		} else if ([userType isEqual:@"TwitterUser"]) {
+			theUser.twitterUsername = userUsername;
+		}
+		self.userType = nil;
+		self.userUsername = nil;
+		theUser.avatarUrl = userAvatarUrl;
+		self.userAvatarUrl = nil;
+		self.user = theUser;
 		inUser = NO;
 	}
 	//MVR - release string here to handle potential memory leak

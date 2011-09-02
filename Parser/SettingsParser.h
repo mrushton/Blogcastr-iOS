@@ -32,7 +32,6 @@
 @property (nonatomic, retain) NSString *web;
 @property (nonatomic, retain) NSString *avatarUrl;
 
-- (SettingsParser *)initWithData:(NSData *)theData;
 - (BOOL)parse;
 
 @end

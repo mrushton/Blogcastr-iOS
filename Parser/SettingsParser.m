@@ -23,12 +23,6 @@
 #pragma mark -
 #pragma mark Class methods
 
-- (SettingsParser *)initWithData:(NSData *)theData {
-	self.data = theData;
-	
-	return self;
-}
-
 - (BOOL)parse {
 	NSXMLParser *parser;
 
