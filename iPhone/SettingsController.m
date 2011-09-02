@@ -11,7 +11,7 @@
 #import "AppDelegate_Shared.h"
 #import "Session.h"
 #import "ASIFormDataRequest.h"
-#import "SettingsParser.h"
+#import "UserParser.h"
 
 
 @implementation SettingsController
@@ -329,7 +329,7 @@
 
 - (void)uploadAvatarFinished:(ASIHTTPRequest *)request {
 	int statusCode;
-	SettingsParser *parser;
+	UserParser *parser;
 	
 	//MVR - hide the progress HUD
 	[self.windowProgressHud hide:YES];
@@ -340,7 +340,8 @@
 		return;
 	}
 	//MVR - parse response
-	parser = [[SettingsParser alloc] initWithData:[request responseData]];
+	parser = [[UserParser alloc] init];
+	parser.data = [request responseData];
 	parser.user = session.user;
 	if (![parser parse]) {
 		NSLog(@"Error parsing settings response");
