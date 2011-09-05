@@ -116,7 +116,7 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 		HomeController *homeController = (HomeController *)info;
 		
 		NSLog(@"Network connection is down");
-		[homeController errorAlertWithTitle:@"No connection" message:@"Oops! We don't have a network connection."];
+		[homeController errorAlertWithTitle:@"No connection" message:@"Oops! You don't have a network connection."];
 	}
 }
 
@@ -183,7 +183,6 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 }
 
 - (void)resignActive:(NSNotification *)notification {
-	NSLog(@"MVR - DID BECOME INACTIVE");
 }
 
 #pragma mark -

@@ -147,7 +147,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	} else {
 		CGSize usernameLabelSize;
 		CGSize textViewSize;
-		
+	
 		//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 		if ([comment.user.type isEqual:@"BlogcastrUser"])
 			usernameLabelSize = [comment.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
@@ -156,7 +156,7 @@ static const NSInteger kCommentsRequestCount = 20;
 		else if ([comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		textViewSize = [comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kCommentIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-		return usernameLabelSize.height + textViewSize.height + 11.0;
+		return usernameLabelSize.height + textViewSize.height + 12.0;
 	}
 	
 	return 0.0;
@@ -254,12 +254,12 @@ static const NSInteger kCommentsRequestCount = 20;
 		//MVR - timestamp label
 		timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [comment.createdAt stringInWords]]];
 		timestampLabelSize = [[comment.createdAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
-		timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+		timestampLabel.frame = CGRectMake(15.0 + kCommentIconWidth + usernameLabel.frame.size.width, 6.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
 		//MVR - text view
 		textView.text = comment.text;
 		//MVR - determine the height of the text
 		textSize = [comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 15.0 - kCommentIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-		textView.frame = CGRectMake(10.0 + kCommentIconWidth, usernameLabel.frame.size.height + 5.0, textSize.width, textSize.height);
+		textView.frame = CGRectMake(10.0 + kCommentIconWidth, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
 	}
 
 	return cell;
@@ -907,7 +907,6 @@ static const NSInteger kCommentsRequestCount = 20;
 	NSError *error;
 	NSArray *objects;
 	
-	NSLog(@"MVR _ inside min_id %d",[_minId intValue]);
 	if (_minId)
 		return _minId;
 	//MVR - get the max blogcast stream cell id

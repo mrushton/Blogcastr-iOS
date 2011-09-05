@@ -150,13 +150,13 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[label release];
 	//MVR - starting at
 	label = [[UILabel alloc] init];
+	label.text = [blogcast.startingAt stringInWords];
 	/*
 	dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MMM d, yyyy h:mm a"];
 	label.text = [dateFormatter stringFromDate:blogcast.startingAt];
 	[dateFormatter release];
-	*/
-	label.text = [blogcast.startingAt stringInWords];
+	 */
 	label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
 	label.font = [UIFont boldSystemFontOfSize:14.0];
 	label.frame = CGRectMake(23.0 + usernameWidth, 33.0, 100.0, 18.0);

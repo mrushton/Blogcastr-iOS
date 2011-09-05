@@ -13,6 +13,7 @@
 #import "CommentsController.h"
 #import "InfoController.h"
 #import "BlogcastrTableViewCell.h"
+#import "ThumbnailImageView.h"
 #import "BlogcastsParser.h"
 #import "Blogcast.h"
 #import "BlogcastStreamCell.h"
@@ -380,18 +381,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 #pragma mark Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	BlogcastStreamCell *streamCell;
-	Blogcast *blogcast;
-	CGSize descriptionViewSize;
-	
-	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
-	blogcast = streamCell.blogcast;
-	if (!blogcast)
-		return kScrollCellHeight;
-	//AS DESIGNED: works without description
-	descriptionViewSize = [blogcast.theDescription sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.bounds.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-
-	return 46.0 + descriptionViewSize.height;
+	return 80.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -417,9 +407,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	UILabel *titleLabel;
 	TTStyledTextLabel *timestampLabel;
 	UILabel *usernameLabel;
-	TTImageView *imageView;
-	UILabel *descriptionView;
+	ThumbnailImageView *imageView;
 	CGSize timestampLabelSize;
+	NSString *imageUrl;
 
 	// Set up the cell...
 	streamCell = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -454,7 +444,7 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		titleLabel.text = blogcast.title;
 		[cell.contentView insertSubview:titleLabel belowSubview:cell.highlightView];
 		[titleLabel release];
-		imageView = [[TTImageView alloc] init];
+		imageView = [[ThumbnailImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 70.0, 70.0)];
 		imageView.backgroundColor = [UIColor clearColor];
 		imageView.tag = IMAGE_VIEW_TAG;
 		[cell.contentView insertSubview:imageView belowSubview:cell.highlightView];
@@ -467,39 +457,30 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[usernameLabel release];
 		timestampLabel = [self timestampLabel];
 		[cell.contentView insertSubview:timestampLabel belowSubview:cell.highlightView];
-		//MVR - add the description view whether a description exists or not
-		descriptionView = [[UILabel alloc] init];
-		descriptionView.font = [UIFont systemFontOfSize:12.0];
-		descriptionView.textColor = BLOGCASTRSTYLEVAR(blueGrayTextColor);
-		descriptionView.backgroundColor = [UIColor clearColor];
-		descriptionView.lineBreakMode = UILineBreakModeWordWrap;
-		descriptionView.numberOfLines = 0;
-		descriptionView.tag = DESCRIPTION_VIEW_TAG;
-		[cell.contentView insertSubview:descriptionView belowSubview:cell.highlightView];
-		[descriptionView release];
 	} else {
 		titleLabel = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
 		timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
 		usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
-		imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
-		descriptionView = (UILabel *)[cell viewWithTag:DESCRIPTION_VIEW_TAG];
+		imageView = (ThumbnailImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 	}
+	//MVR - image view
+	imageUrl = [self imageUrl:blogcast.imageUrl forSize:@"default"];
+	//MVR - unset the image unless it's the same
+	if (![imageView.urlPath isEqualToString:imageUrl])
+		[imageView unsetImage];
+	imageView.urlPath = imageUrl;
+	//MVR - title label
+	titleLabel.text = blogcast.title;
+	titleLabel.frame = CGRectMake(10.0 + 75.0, 18.0, tableView.bounds.size.width - 90.0, 20.0);
+	//MVR - username label
+	usernameLabel.frame = CGRectMake(10.0 + 75.0, 43.0, 100.0, 15.0);
+	usernameLabel.text = blogcast.user.username;
+	[usernameLabel sizeToFit];
 	//MVR - timestamp label
 	timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [blogcast.startingAt stringInWords]]];
 	timestampLabelSize = [[blogcast.startingAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
-	timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
-	//MVR - title label
-	titleLabel.text = blogcast.title;
-	titleLabel.frame = CGRectMake(5.0, 5.0, tableView.bounds.size.width - 15.0 - timestampLabel.bounds.size.width, 20.0);
-	//MVR - username label
-	usernameLabel.frame = CGRectMake(5.0, 25.0, 100.0, 15.0);
-	usernameLabel.text = blogcast.user.username;
-	[usernameLabel sizeToFit];
-	//MVR - description
-	descriptionView.frame = CGRectMake(5.0, 40.0, tableView.bounds.size.width - 10.0, 100.0);
-	descriptionView.text = blogcast.theDescription;
-	[descriptionView sizeToFit];
-	
+	timestampLabel.frame = CGRectMake(75.0 + 15.0 + usernameLabel.frame.size.width, 44.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+
 	return cell;
 }
 

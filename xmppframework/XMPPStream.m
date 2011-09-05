@@ -2017,7 +2017,6 @@ enum XMPPStreamFlags
 **/
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock
 {
-	NSLog(@"MVR - ON SOCKET DID DISCONNECT");
 	if (srvResults && (++srvResultsIndex < [srvResults count]))
 	{
 		[self tryNextSrvResult];

@@ -240,7 +240,7 @@ static const NSInteger kPostsRequestCount = 20;
 		//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 		usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-		return usernameLabelSize.height + textViewSize.height + 11.0;
+		return usernameLabelSize.height + textViewSize.height + 12.0;
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		CGFloat imageWidth;
 		CGFloat imageHeight;
@@ -270,7 +270,7 @@ static const NSInteger kPostsRequestCount = 20;
 			usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(1000.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 			textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - imageWidth - 15.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 			if (imageHeight < usernameLabelSize.height + textViewSize.height)
-				return usernameLabelSize.height + textViewSize.height + 11.0;
+				return usernameLabelSize.height + textViewSize.height + 12.0;
 		}
 		return imageHeight + 11.0;
 	} else if ([post.type isEqual:@"CommentPost"]) {
@@ -285,7 +285,7 @@ static const NSInteger kPostsRequestCount = 20;
 		else if ([post.comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [post.comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		textViewSize = [post.comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kCommentIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		return usernameLabelSize.height + textViewSize.height + 11.0;
+		return usernameLabelSize.height + textViewSize.height + 12.0;
 	} else {
 		NSLog(@"Error setting cell height for unknown post type %@");
 	}
@@ -369,12 +369,12 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - timestamp label
 		timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [post.createdAt stringInWords]]];
 		timestampLabelSize = [[post.createdAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
-		timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+		timestampLabel.frame = CGRectMake(10.0 + usernameLabel.frame.size.width, 6.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
 		//MVR - text view
 		textView.text = post.text;
 		//MVR - determine the height of the text
 		textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-		textView.frame = CGRectMake(5.0, usernameLabel.frame.size.height + 5.0, textSize.width, textSize.height);
+		textView.frame = CGRectMake(5.0, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		TTImageView *imageView;
 		CGFloat imageWidth;
@@ -445,13 +445,13 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - timestamp label
 		timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [post.createdAt stringInWords]]];
 		timestampLabelSize = [[post.createdAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
-		timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+		timestampLabel.frame = CGRectMake(15.0 + imageWidth + usernameLabel.frame.size.width, 6.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
 		//MVR - text view
 		if (post.text) {
 			textView.text = post.text;
 			//MVR - determine the height of the text
 			textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - imageWidth - 15.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-			textView.frame = CGRectMake(imageWidth + 10.0, usernameLabel.frame.size.height + 5.0, tableView.frame.size.width - imageWidth - 15.0, textSize.height);
+			textView.frame = CGRectMake(imageWidth + 10.0, usernameLabel.frame.size.height + 6.0, tableView.frame.size.width - imageWidth - 15.0, textSize.height);
 		} else {
 			textView.text = nil;	
 		}
@@ -502,12 +502,12 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - timestamp label
 		timestampLabel.text = [TTStyledText textFromXHTML:[NSString stringWithFormat:@"<span class=\"timestampInWords\">%@<span>", [post.createdAt stringInWords]]];
 		timestampLabelSize = [[post.createdAt stringInWords] sizeWithFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:9.0]];
-		timestampLabel.frame = CGRectMake(tableView.frame.size.width - timestampLabelSize.width - 11.0, 5.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
+		timestampLabel.frame = CGRectMake(15.0 + kCommentIconWidth + usernameLabel.frame.size.width, 6.0, timestampLabelSize.width + 6.0, timestampLabelSize.height + 1.0);
 		//MVR - text view
 		textView.text = post.comment.text;
 		//MVR - determine the height of the text
 		textSize = [post.comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 15.0 - kCommentIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-		textView.frame = CGRectMake(10.0 + kCommentIconWidth, usernameLabel.frame.size.height + 5.0, textSize.width, textSize.height);
+		textView.frame = CGRectMake(10.0 + kCommentIconWidth, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
 	}
 
 	return cell;
