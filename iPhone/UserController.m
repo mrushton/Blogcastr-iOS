@@ -622,27 +622,45 @@
 	[footerView addSubview:statsLabel];
 	[statsLabel release];
 	//MVR - blogcasts
-	statView = [self statViewFor:@"BLOGCASTS" value:user.numBlogcasts];
+	if ([user.numBlogcasts intValue] == 1)
+		statView = [self statViewFor:@"BLOGCAST" value:user.numBlogcasts];
+	else
+		statView = [self statViewFor:@"BLOGCASTS" value:user.numBlogcasts];
 	statView.frame = CGRectOffset(statView.frame, 9.0, 36.0);
 	[footerView addSubview:statView];
 	//MVR - subscriptions
-	statView = [self statViewFor:@"SUBSCRIPTIONS" value:user.numSubscriptions];
+	if ([user.numSubscriptions intValue] == 1)
+		statView = [self statViewFor:@"SUBSCRIPTION" value:user.numSubscriptions];
+	else
+		statView = [self statViewFor:@"SUBSCRIPTIONS" value:user.numSubscriptions];
 	statView.frame = CGRectOffset(statView.frame, 165.0, 36.0);
 	[footerView addSubview:statView];
 	//MVR - subscribers
-	statView = [self statViewFor:@"SUBSCRIBERS" value:user.numSubscribers];
+	if ([user.numSubscribers intValue] == 1)
+		statView = [self statViewFor:@"SUBSCRIBER" value:user.numSubscribers];
+	else
+		statView = [self statViewFor:@"SUBSCRIBERS" value:user.numSubscribers];
 	statView.frame = CGRectOffset(statView.frame, 9.0, 76.0);
 	[footerView addSubview:statView];
 	//MVR - posts
-	statView = [self statViewFor:@"POSTS" value:user.numPosts];
+	if ([user.numPosts intValue] == 1)
+		statView = [self statViewFor:@"POST" value:user.numPosts];
+	else
+		statView = [self statViewFor:@"POSTS" value:user.numPosts];
 	statView.frame = CGRectOffset(statView.frame, 165.0, 76.0);
 	[footerView addSubview:statView];
 	//MVR - comments
-	statView = [self statViewFor:@"COMMENTS" value:user.numComments];
+	if ([user.numComments intValue] == 1)
+		statView = [self statViewFor:@"COMMENT" value:user.numComments];
+	else
+		statView = [self statViewFor:@"COMMENTS" value:user.numComments];
 	statView.frame = CGRectOffset(statView.frame, 9.0, 116.0);
 	[footerView addSubview:statView];
 	//MVR - likes
-	statView = [self statViewFor:@"LIKES" value:user.numLikes];
+	if ([user.numLikes intValue] == 1)
+		statView = [self statViewFor:@"LIKE" value:user.numLikes];
+	else
+		statView = [self statViewFor:@"LIKES" value:user.numLikes];
 	statView.frame = CGRectOffset(statView.frame, 165.0, 116.0);
 	[footerView addSubview:statView];
 	

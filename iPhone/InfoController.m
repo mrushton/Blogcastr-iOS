@@ -601,19 +601,31 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	theView.frame = CGRectOffset(theView.frame, kGroupedTableViewMargin, tagsHeight + 36.0);
 	[footerView addSubview:theView];
 	//MVR - posts
-	theView = [self statViewFor:@"POSTS" value:blogcast.numPosts];
+	if ([blogcast.numPosts intValue] == 1)
+		theView = [self statViewFor:@"POST" value:blogcast.numPosts];
+	else
+		theView = [self statViewFor:@"POSTS" value:blogcast.numPosts];
 	theView.frame = CGRectOffset(theView.frame, 165.0, tagsHeight + 36.0);
 	[footerView addSubview:theView];
 	//MVR - comments
-	theView = [self statViewFor:@"COMMENTS" value:blogcast.numComments];
+	if ([blogcast.numComments intValue] == 1)
+		theView = [self statViewFor:@"COMMENT" value:blogcast.numComments];
+	else
+		theView = [self statViewFor:@"COMMENTS" value:blogcast.numComments];
 	theView.frame = CGRectOffset(theView.frame, 165.0, tagsHeight + 76.0);
 	[footerView addSubview:theView];
 	//MVR - likes
-	theView = [self statViewFor:@"LIKES" value:blogcast.numLikes];
+	if ([blogcast.numLikes intValue] == 1)
+		theView = [self statViewFor:@"LIKE" value:blogcast.numLikes];
+	else
+		theView = [self statViewFor:@"LIKES" value:blogcast.numLikes];
 	theView.frame = CGRectOffset(theView.frame, kGroupedTableViewMargin, tagsHeight + 116.0);
 	[footerView addSubview:theView];
 	//MVR - views
-	theView = [self statViewFor:@"VIEWS" value:blogcast.numViews];
+	if ([blogcast.numViews intValue] == 1)
+		theView = [self statViewFor:@"VIEWS" value:blogcast.numViews];
+	else
+		theView = [self statViewFor:@"VIEWS" value:blogcast.numViews];
 	theView.frame = CGRectOffset(theView.frame, 165.0, tagsHeight + 116.0);
 	[footerView addSubview:theView];
 	//MVR - set up delete blogcast button
