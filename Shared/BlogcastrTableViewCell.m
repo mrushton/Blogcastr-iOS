@@ -15,6 +15,10 @@
 
 @synthesize highlightView;
 
+//MVR - there's currently a strange bug where view controllers can get pushed multiple times
+//to reproduce it you need to press a cell and then press it again a few times while selected
+//it appears to have something to do with the highlight view and setting its alpha to zero
+//it looks like an SDK bug however since it also happens with the iPod app
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -41,6 +45,7 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
 	[super setHighlighted:highlighted animated:animated];
+
 	if (highlighted)
 		highlightView.alpha = 0.3;
 	else
@@ -50,7 +55,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
 
     [super setSelected:selected animated:animated];
-    
+
     // Configure the view for the selected state.
 	if (selected) {
 		highlightView.alpha = 0.3;
