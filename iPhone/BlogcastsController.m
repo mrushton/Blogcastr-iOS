@@ -539,7 +539,6 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	NSString *roomName;
 	NSString *nickname;
 
-	NSLog(@"MVR - DID SELECT BLOGCASTS TABLE VIEW");
     // Navigation logic may go here. Create and push another view controller.
     /*
     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

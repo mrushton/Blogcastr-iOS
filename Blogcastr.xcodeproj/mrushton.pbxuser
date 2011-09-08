@@ -602,6 +602,14 @@
 			CAE51E091418664900BE5A3F /* PBXBookmark */ = CAE51E091418664900BE5A3F /* PBXBookmark */;
 			CAE51E0A1418664900BE5A3F /* PBXBookmark */ = CAE51E0A1418664900BE5A3F /* PBXBookmark */;
 			CAE51E0B1418664900BE5A3F /* PBXBookmark */ = CAE51E0B1418664900BE5A3F /* PBXBookmark */;
+			CAE51E281418A0DF00BE5A3F /* PBXBookmark */ = CAE51E281418A0DF00BE5A3F /* PBXBookmark */;
+			CAE51E291418A0DF00BE5A3F /* PBXBookmark */ = CAE51E291418A0DF00BE5A3F /* PBXBookmark */;
+			CAE51E2A1418A0DF00BE5A3F /* PBXBookmark */ = CAE51E2A1418A0DF00BE5A3F /* PBXBookmark */;
+			CAE51E2B1418A0DF00BE5A3F /* PBXTextBookmark */ = CAE51E2B1418A0DF00BE5A3F /* PBXTextBookmark */;
+			CAE51E2C1418A0DF00BE5A3F /* PBXBookmark */ = CAE51E2C1418A0DF00BE5A3F /* PBXBookmark */;
+			CAE51E2D1418A0DF00BE5A3F /* PBXTextBookmark */ = CAE51E2D1418A0DF00BE5A3F /* PBXTextBookmark */;
+			CAE51E2E1418A0DF00BE5A3F /* PBXTextBookmark */ = CAE51E2E1418A0DF00BE5A3F /* PBXTextBookmark */;
+			CAE51E2F1418A0DF00BE5A3F /* PBXTextBookmark */ = CAE51E2F1418A0DF00BE5A3F /* PBXTextBookmark */;
 			CAFA7C9F13477B6E0077AD98 = CAFA7C9F13477B6E0077AD98 /* PBXTextBookmark */;
 		};
 		sourceControlManager = CA59BBF21313358400416E4D /* Source Control */;
@@ -4852,6 +4860,62 @@
 		isa = PBXBookmark;
 		fRef = CAE51DFE1418663100BE5A3F /* new-image-post@2x.png */;
 	};
+	CAE51E281418A0DF00BE5A3F /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = CAE51DFE1418663100BE5A3F /* new-image-post@2x.png */;
+	};
+	CAE51E291418A0DF00BE5A3F /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = CAE51E2014189ECC00BE5A3F /* blogcasts@2x.png */;
+	};
+	CAE51E2A1418A0DF00BE5A3F /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = CAE51E1F14189ECB00BE5A3F /* blogcasts.png */;
+	};
+	CAE51E2B1418A0DF00BE5A3F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CA660C0813C0F74D00EEC2F3 /* CommentController.h */;
+		name = "CommentController.h: 32";
+		rLen = 0;
+		rLoc = 907;
+		rType = 0;
+		vrLen = 1389;
+		vrLoc = 0;
+	};
+	CAE51E2C1418A0DF00BE5A3F /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = CA87E1C013EDF61800F2C432 /* new-image-post.png */;
+	};
+	CAE51E2D1418A0DF00BE5A3F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA713477C020077AD98 /* BlogcastsController.h */;
+		name = "BlogcastsController.h: 65";
+		rLen = 0;
+		rLoc = 2337;
+		rType = 0;
+		vrLen = 2124;
+		vrLoc = 88;
+	};
+	CAE51E2E1418A0DF00BE5A3F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 542";
+		rLen = 0;
+		rLoc = 20448;
+		rType = 0;
+		vrLen = 1826;
+		vrLoc = 11416;
+	};
+	CAE51E2F1418A0DF00BE5A3F /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = CAFA7CA813477C020077AD98 /* BlogcastsController.m */;
+		name = "BlogcastsController.m: 542";
+		rLen = 0;
+		rLoc = 20448;
+		rType = 0;
+		vrLen = 1885;
+		vrLoc = 11440;
+	};
 	CAFA7C9F13477B6E0077AD98 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = CAFA7CA013477B6E0077AD98 /* TTImageStyle.h */;
@@ -4878,10 +4942,10 @@
 	};
 	CAFA7CA813477C020077AD98 /* BlogcastsController.m */ = {
 		uiCtxt = {
-			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{20587, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{20638, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{20688, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 40669}\";\n    s = 0;\n}";
-			sepNavIntBoundsRect = "{{0, 0}, {1055, 14261}}";
-			sepNavSelRange = "{15850, 0}";
-			sepNavVisRange = "{14360, 2867}";
+			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{20537, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{20588, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{20638, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 40619}\";\n    s = 0;\n}";
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 14378}}";
+			sepNavSelRange = "{20448, 0}";
+			sepNavVisRange = "{11440, 1885}";
 			sepNavWindowFrame = "{{38, 350}, {1252, 802}}";
 		};
 	};

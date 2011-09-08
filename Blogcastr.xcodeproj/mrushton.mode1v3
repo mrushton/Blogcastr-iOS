@@ -274,13 +274,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>47</integer>
+									<integer>16</integer>
 									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 261}, {230, 983}}</string>
+							<string>{{0, 181}, {230, 983}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -299,7 +299,7 @@
 							<real>230</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>291 122 1368 1042 0 0 1920 1178 </string>
+						<string>236 115 1368 1042 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>new-image-post@2x.png</string>
+								<string>BlogcastsController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>new-image-post@2x.png</string>
+										<string>BlogcastsController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>CAE51E0B1418664900BE5A3F</string>
+										<string>CAE51E2F1418A0DF00BE5A3F</string>
 										<key>history</key>
 										<array>
 											<string>CA59C92F132C5F8600416E4D</string>
@@ -499,9 +499,6 @@
 											<string>CAC6EACD1412A19A0004696B</string>
 											<string>CAC6EACE1412A19A0004696B</string>
 											<string>CAC6EACF1412A19A0004696B</string>
-											<string>CAC6EAD01412A19A0004696B</string>
-											<string>CAC6EAD11412A19A0004696B</string>
-											<string>CAC6EAD21412A19A0004696B</string>
 											<string>CAC6EAD51412A19A0004696B</string>
 											<string>CAC6EAD61412A19A0004696B</string>
 											<string>CAC6EAD81412A19A0004696B</string>
@@ -588,14 +585,16 @@
 											<string>CAC6ECA61415B2C00004696B</string>
 											<string>CAC6ECBA1415BBDC0004696B</string>
 											<string>CAE51E021418664900BE5A3F</string>
-											<string>CAE51E031418664900BE5A3F</string>
 											<string>CAE51E041418664900BE5A3F</string>
 											<string>CAE51E051418664900BE5A3F</string>
 											<string>CAE51E061418664900BE5A3F</string>
-											<string>CAE51E071418664900BE5A3F</string>
-											<string>CAE51E081418664900BE5A3F</string>
-											<string>CAE51E091418664900BE5A3F</string>
-											<string>CAE51E0A1418664900BE5A3F</string>
+											<string>CAE51E281418A0DF00BE5A3F</string>
+											<string>CAE51E291418A0DF00BE5A3F</string>
+											<string>CAE51E2A1418A0DF00BE5A3F</string>
+											<string>CAE51E2B1418A0DF00BE5A3F</string>
+											<string>CAE51E2C1418A0DF00BE5A3F</string>
+											<string>CAE51E2D1418A0DF00BE5A3F</string>
+											<string>CAE51E2E1418A0DF00BE5A3F</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -609,7 +608,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1116, 765}}</string>
 								<key>RubberWindowFrame</key>
-								<string>291 122 1368 1042 0 0 1920 1178 </string>
+								<string>236 115 1368 1042 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -629,7 +628,7 @@
 								<key>Frame</key>
 								<string>{{0, 770}, {1116, 231}}</string>
 								<key>RubberWindowFrame</key>
-								<string>291 122 1368 1042 0 0 1920 1178 </string>
+								<string>236 115 1368 1042 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -801,7 +800,7 @@
 		<string>/Users/mrushton/Desktop/Blogcastr-iOS/Blogcastr.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>291 122 1368 1042 0 0 1920 1178 </string>
+	<string>236 115 1368 1042 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
