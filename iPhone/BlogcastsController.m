@@ -43,6 +43,8 @@ static const CGFloat kRefreshDeltaY = -65.0f;
 static const CGFloat kInfiniteScrollViewHeight = 40.0;
 static const CGFloat kScrollCellHeight = 40.0;
 static const NSInteger kBlogcastsRequestCount = 20;
+static const CGFloat kRightArrowIconWidth = 9.0;
+static const CGFloat kRightArrowIconHeight = 14.0;
 
 - (id)initWithStyle:(UITableViewStyle)style {
 	self = [super initWithStyle:style];
@@ -408,6 +410,8 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	TTStyledTextLabel *timestampLabel;
 	UILabel *usernameLabel;
 	ThumbnailImageView *imageView;
+	UIImage *rightArrowImage;
+	UIImageView *rightArrowView;
 	CGSize timestampLabelSize;
 	NSString *imageUrl;
 
@@ -457,6 +461,11 @@ static const NSInteger kBlogcastsRequestCount = 20;
 		[usernameLabel release];
 		timestampLabel = [self timestampLabel];
 		[cell.contentView insertSubview:timestampLabel belowSubview:cell.highlightView];
+		rightArrowImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"right-arrow" ofType:@"png"]]; 
+		rightArrowView = [[UIImageView alloc] initWithImage:rightArrowImage];
+		rightArrowView.frame = CGRectMake(self.tableView.frame.size.width - kRightArrowIconWidth - 5.0, 40.0 - (kRightArrowIconHeight / 2.0), kRightArrowIconWidth, kRightArrowIconHeight);
+		[cell.contentView insertSubview:rightArrowView belowSubview:cell.highlightView];
+		[rightArrowView release];
 	} else {
 		titleLabel = (UILabel *)[cell viewWithTag:TITLE_LABEL_TAG];
 		timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
@@ -471,9 +480,9 @@ static const NSInteger kBlogcastsRequestCount = 20;
 	imageView.urlPath = imageUrl;
 	//MVR - title label
 	titleLabel.text = blogcast.title;
-	titleLabel.frame = CGRectMake(10.0 + 75.0, 18.0, tableView.bounds.size.width - 90.0, 20.0);
+	titleLabel.frame = CGRectMake(85.0, 18.0, tableView.bounds.size.width - 100.0 - kRightArrowIconWidth, 20.0);
 	//MVR - username label
-	usernameLabel.frame = CGRectMake(10.0 + 75.0, 43.0, 100.0, 15.0);
+	usernameLabel.frame = CGRectMake(85.0, 43.0, 100.0, 15.0);
 	usernameLabel.text = blogcast.user.username;
 	[usernameLabel sizeToFit];
 	//MVR - timestamp label

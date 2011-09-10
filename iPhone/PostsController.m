@@ -47,6 +47,8 @@ static const CGFloat kScrollCellHeight = 40.0;
 static const CGFloat kCommentIconWidth = 15.0;
 static const CGFloat kCommentIconHeight = 14.0;
 static const NSInteger kPostsRequestCount = 20;
+static const CGFloat kRightArrowIconWidth = 9.0;
+static const CGFloat kRightArrowIconHeight = 14.0;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -239,7 +241,7 @@ static const NSInteger kPostsRequestCount = 20;
 		
 		//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 		usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 12.0;
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		CGFloat imageWidth;
@@ -268,7 +270,7 @@ static const NSInteger kPostsRequestCount = 20;
 		if (post.text) {
 			//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 			usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(1000.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-			textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - imageWidth - 15.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+			textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - imageWidth - 20.0 - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 			if (imageHeight < usernameLabelSize.height + textViewSize.height)
 				return usernameLabelSize.height + textViewSize.height + 12.0;
 		}
@@ -284,7 +286,7 @@ static const NSInteger kPostsRequestCount = 20;
 			usernameLabelSize = [post.comment.user.facebookFullName sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		else if ([post.comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [post.comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [post.comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 15.0 - kCommentIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [post.comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 12.0;
 	} else {
 		NSLog(@"Error setting cell height for unknown post type %@");
@@ -315,6 +317,8 @@ static const NSInteger kPostsRequestCount = 20;
 	UILabel *usernameLabel;
 	TTStyledTextLabel *timestampLabel;
 	UILabel *textView;
+	UIImage *rightArrowImage;
+	UIImageView *rightArrowView;
 	CGSize timestampLabelSize;
 	CGSize textSize;
 
@@ -358,10 +362,16 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
 			[textView release];
+			rightArrowImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"right-arrow" ofType:@"png"]]; 
+			rightArrowView = [[UIImageView alloc] initWithImage:rightArrowImage];
+			rightArrowView.tag = RIGHT_ARROW_VIEW_TAG;
+			[cell.contentView insertSubview:rightArrowView belowSubview:cell.highlightView];
+			[rightArrowView release];
 		} else {
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
 			textView = (UILabel *)[cell viewWithTag:TEXT_VIEW_TAG];
+			rightArrowView = (UIImageView *)[cell viewWithTag:RIGHT_ARROW_VIEW_TAG];
 		}
 		//MVR - username label
 		usernameLabel.text = post.user.username;
@@ -373,8 +383,9 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - text view
 		textView.text = post.text;
 		//MVR - determine the height of the text
-		textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 10.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+		textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 15.0 - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		textView.frame = CGRectMake(5.0, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
+		rightArrowView.frame = CGRectMake(self.tableView.frame.size.width - kRightArrowIconWidth - 5.0, ([self tableView:theTableView heightForRowAtIndexPath:indexPath] / 2.0 ) - (kRightArrowIconHeight / 2.0), kRightArrowIconWidth, kRightArrowIconHeight);
 	} else if ([post.type isEqual:@"ImagePost"]) {
 		TTImageView *imageView;
 		CGFloat imageWidth;
@@ -408,11 +419,17 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
 			[textView release];
+			rightArrowImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"right-arrow" ofType:@"png"]]; 
+			rightArrowView = [[UIImageView alloc] initWithImage:rightArrowImage];
+			rightArrowView.tag = RIGHT_ARROW_VIEW_TAG;
+			[cell.contentView insertSubview:rightArrowView belowSubview:cell.highlightView];
+			[rightArrowView release];
 		} else {
 			imageView = (TTImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
 			textView = (UILabel *)[cell viewWithTag:TEXT_VIEW_TAG];
+			rightArrowView = (UIImageView *)[cell viewWithTag:RIGHT_ARROW_VIEW_TAG];
 		}
 		//MVR - image view
 		imagePostUrl = [self imagePostUrlForPost:post size:@"default"];
@@ -450,11 +467,12 @@ static const NSInteger kPostsRequestCount = 20;
 		if (post.text) {
 			textView.text = post.text;
 			//MVR - determine the height of the text
-			textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - imageWidth - 15.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-			textView.frame = CGRectMake(imageWidth + 10.0, usernameLabel.frame.size.height + 6.0, tableView.frame.size.width - imageWidth - 15.0, textSize.height);
+			textSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - imageWidth - 20.0 - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+			textView.frame = CGRectMake(imageWidth + 10.0, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
 		} else {
 			textView.text = nil;	
 		}
+		rightArrowView.frame = CGRectMake(self.tableView.frame.size.width - kRightArrowIconWidth - 5.0, ([self tableView:theTableView heightForRowAtIndexPath:indexPath] / 2.0 ) - (kRightArrowIconHeight / 2.0), kRightArrowIconWidth, kRightArrowIconHeight);
 	} else if ([post.type isEqual:@"CommentPost"]) {
 		cell = (BlogcastrTableViewCell *)[theTableView dequeueReusableCellWithIdentifier:@"CommentPost"];
 		//MVR - if cell doesn't exist create it
@@ -486,10 +504,16 @@ static const NSInteger kPostsRequestCount = 20;
 			textView.tag = TEXT_VIEW_TAG;
 			[cell.contentView insertSubview:textView belowSubview:cell.highlightView];
 			[textView release];
+			rightArrowImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"right-arrow" ofType:@"png"]]; 
+			rightArrowView = [[UIImageView alloc] initWithImage:rightArrowImage];
+			rightArrowView.tag = RIGHT_ARROW_VIEW_TAG;
+			[cell.contentView insertSubview:rightArrowView belowSubview:cell.highlightView];
+			[rightArrowView release];
 		} else {
 			usernameLabel = (UILabel *)[cell viewWithTag:USERNAME_LABEL_TAG];
 			timestampLabel = (TTStyledTextLabel *)[cell viewWithTag:TIMESTAMP_LABEL_TAG];
 			textView = (UILabel *)[cell viewWithTag:TEXT_VIEW_TAG];
+			rightArrowView = (UIImageView *)[cell viewWithTag:RIGHT_ARROW_VIEW_TAG];
 		}
 		//MVR - username label
 		if ([post.comment.user.type isEqual:@"BlogcastrUser"])
@@ -506,8 +530,9 @@ static const NSInteger kPostsRequestCount = 20;
 		//MVR - text view
 		textView.text = post.comment.text;
 		//MVR - determine the height of the text
-		textSize = [post.comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 15.0 - kCommentIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+		textSize = [post.comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(tableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		textView.frame = CGRectMake(10.0 + kCommentIconWidth, usernameLabel.frame.size.height + 6.0, textSize.width, textSize.height);
+		rightArrowView.frame = CGRectMake(self.tableView.frame.size.width - kRightArrowIconWidth - 5.0, ([self tableView:theTableView heightForRowAtIndexPath:indexPath] / 2.0 ) - (kRightArrowIconHeight / 2.0), kRightArrowIconWidth, kRightArrowIconHeight);
 	}
 
 	return cell;

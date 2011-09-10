@@ -15,6 +15,7 @@
 #define USERNAME_LABEL_TAG 4
 #define DESCRIPTION_VIEW_TAG 5
 #define TEXT_VIEW_TAG 6
+#define RIGHT_ARROW_VIEW_TAG 7
 
 @interface BlogcastrTableViewCell : UITableViewCell {
 	UIView *highlightView;
