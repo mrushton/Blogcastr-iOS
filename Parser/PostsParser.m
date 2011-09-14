@@ -177,22 +177,17 @@
 		//MVR - store post for later processing
 		[posts addObject:post];
 	} else if ([elementName isEqual:@"id"]) {
-		NSNumberFormatter *formatter;
-		
-		formatter = [[NSNumberFormatter alloc] init];
 		if (inUser)
-			self.userId = [formatter numberFromString:mutableString];
+			self.userId = [NSNumber numberWithInteger:[mutableString integerValue]];
 		else if (inComment)
-			self.commentId = [formatter numberFromString:mutableString];					
+			self.commentId = [NSNumber numberWithInteger:[mutableString integerValue]];					
 		else
-			self.postId = [formatter numberFromString:mutableString];
-		[formatter release];
+			self.postId = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"type"]){
-		if (inUser) {
+		if (inUser)
 			self.userType = mutableString;
-		} else {
+		else
 			self.postType = mutableString;
-		}
 	} else if ([elementName isEqual:@"username"]) {
 		self.userUsername = mutableString;
 	} else if ([elementName isEqual:@"url"]) {
@@ -204,17 +199,9 @@
 	} else if ([elementName isEqual:@"image-url"]) {
 		self.postImageUrl = mutableString;
 	} else if ([elementName isEqual:@"image-width"]) {
-		NSNumberFormatter *formatter;
-		
-		formatter = [[NSNumberFormatter alloc] init];
-		self.postImageWidth = [formatter numberFromString:mutableString];
-		[formatter release];
+		self.postImageWidth = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"image-height"]) {
-		NSNumberFormatter *formatter;
-		
-		formatter = [[NSNumberFormatter alloc] init];
-		self.postImageHeight = [formatter numberFromString:mutableString];
-		[formatter release];
+		self.postImageHeight = [NSNumber numberWithInteger:[mutableString integerValue]];
 	} else if ([elementName isEqual:@"created-at"]) {
 		NSDate *date;
 

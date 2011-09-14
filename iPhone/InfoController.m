@@ -113,7 +113,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	if (blogcast.theDescription) {
 		CGSize descriptionViewSize;
 
-		descriptionViewSize = [blogcast.theDescription sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(284.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		descriptionViewSize = [blogcast.theDescription sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(284.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return 62.0 + descriptionViewSize.height;
 	} else {
 		return 59.0;
@@ -623,7 +623,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[footerView addSubview:theView];
 	//MVR - views
 	if ([blogcast.numViews intValue] == 1)
-		theView = [self statViewFor:@"VIEWS" value:blogcast.numViews];
+		theView = [self statViewFor:@"VIEW" value:blogcast.numViews];
 	else
 		theView = [self statViewFor:@"VIEWS" value:blogcast.numViews];
 	theView.frame = CGRectOffset(theView.frame, 165.0, tagsHeight + 116.0);

@@ -473,11 +473,15 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 		imageView = (ThumbnailImageView *)[cell viewWithTag:IMAGE_VIEW_TAG];
 	}
 	//MVR - image view
-	imageUrl = [self imageUrl:blogcast.imageUrl forSize:@"default"];
-	//MVR - unset the image unless it's the same
-	if (![imageView.urlPath isEqualToString:imageUrl])
-		[imageView unsetImage];
-	imageView.urlPath = imageUrl;
+	if (blogcast.imageUrl) {
+		imageUrl = [self imageUrl:blogcast.imageUrl forSize:@"default"];
+		//MVR - unset the image unless it's the same
+		if (![imageView.urlPath isEqualToString:imageUrl])
+			[imageView unsetImage];
+		imageView.urlPath = imageUrl;
+	} else {
+		imageView.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"no-image" ofType:@"jpg"]];
+	}
 	//MVR - title label
 	titleLabel.text = blogcast.title;
 	titleLabel.frame = CGRectMake(85.0, 18.0, tableView.bounds.size.width - 100.0 - kRightArrowIconWidth, 20.0);

@@ -407,12 +407,17 @@
 		return;
 	} else if (statusCode != 200) {
 		[self errorAlertWithTitle:@"Sign up failed" message:@"Oops! We couldn't sign you up."];
+		NSLog(@"MVR DATA %@",[[NSString alloc] initWithData:[request responseData] encoding:NSASCIIStringEncoding]);
+
 		return;
 	}
 	//MVR - parse response
 	userParser = [[UserParser alloc] init];
 	userParser.data = [request responseData];
 	userParser.managedObjectContext = managedObjectContext;
+	
+	
+	NSLog(@"MVR DATA %@",[[NSString alloc] initWithData:[request responseData] encoding:NSASCIIStringEncoding]);
 	if (![userParser parse]) {
 		NSLog(@"Error parsing sign up response");
 		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't sign you up."];

@@ -23,6 +23,7 @@
 @synthesize blogcast;
 @synthesize image;
 @synthesize thumbnailImage;
+@synthesize data;
 @synthesize textView;
 @synthesize progressHud;
 @synthesize imageActionSheet;
@@ -30,6 +31,7 @@
 @synthesize cancelRequestActionSheet;
 @synthesize alertView;
 @synthesize request;
+@synthesize mutableString;
 
 #pragma mark -
 #pragma mark Initialization
@@ -244,11 +246,13 @@
 - (void)dealloc {
 	[image release];
 	[thumbnailImage release];
+	[data release];
 	[_imageActionSheet release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
 	[_progressHud release];
 	[_alertView release];
+	[mutableString release];
     [super dealloc];
 }
 
@@ -337,7 +341,9 @@
 
 - (void)newImagePostFinished:(ASIHTTPRequest *)theRequest {
 	int statusCode;
-	
+	NSXMLParser *parser;
+	NSString *imagePostUrl;
+
 	self.request = nil;
 	//MVR - we need to dismiss the action sheet here for some reason
 	if (self.cancelRequestActionSheet.visible)
@@ -352,6 +358,23 @@
 		[self errorAlertWithTitle:@"Post failed" message:@"Oops! We couldn't make the image post."];
 		return;
 	}
+    //MVR - parse xml
+	parser = [[NSXMLParser alloc] initWithData:[theRequest responseData]];
+	[parser setDelegate:self];
+	[parser parse];
+	[parser release];
+	if (!theId) {
+		NSLog(@"Failed parsing id from image post xml response");
+		[self dismissModalViewControllerAnimated:YES];
+		return;
+	}
+	//MVR - cache original data sent
+#ifdef DEVEL
+	imagePostUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/system/images/%d/original/image.jpg", theId];
+#else //DEVEL
+	imagePostUrl = [NSString stringWithFormat:@"http://s3.amazonaws.com/blogcastr/images/%d/original/image.jpg", theId];
+#endif //DEVEL
+	[[TTURLCache sharedCache] storeData:data forURL:imagePostUrl];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -432,12 +455,58 @@
 		[self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES];
 }
 
+
+#pragma mark -
+#pragma mark NSXMLParserDelegate methods
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser {
+}
+
+- (void)parserDidStartDocument:(NSXMLParser *)parser {
+	self.mutableString = nil;
+	theId = 0;
+	inUser = NO;
+}
+
+- (void)parser:(NSXMLParser*)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
+	if ([elementName isEqual:@"user"])
+		inUser = TRUE;
+	//MVR - need to reset string here to handle white space
+    self.mutableString = nil;
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+	if ([elementName isEqual:@"id"]) {
+		if (!inUser)
+			theId = [mutableString integerValue];
+	} else if ([elementName isEqual:@"user"]) {
+		inUser = NO;
+	}
+	//MVR - release string here to handle potential memory leak
+    self.mutableString = nil;
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    if (!mutableString) {
+		NSMutableString *theString;
+		
+		theString = [[NSMutableString alloc] init];
+		self.mutableString = theString;
+		[theString release];
+	}
+	[mutableString appendString:string];
+}
+
+- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+	NSLog(@"Error parsing image post response: %@", [parseError localizedDescription]);
+}
+
 #pragma mark -
 #pragma mark Actions
 
 - (void)post {
 	ASIFormDataRequest *theRequest;
-	NSData *data;
+	NSData *theData;
 	
 	//MVR - dismiss keyboard
 	if (textView.isFirstResponder)
@@ -456,9 +525,10 @@
 	[theRequest addPostValue:textView.text forKey:@"image_post[text]"];
 	[theRequest addPostValue:@"iPhone" forKey:@"image_post[from]"];
 	//MVR - data is autoreleased
-	data = UIImageJPEGRepresentation(image, 0.5);
-	[theRequest addData:data withFileName:@"iPhone.jpg" andContentType:@"image/jpeg" forKey:@"image_post[image]"];	
+	theData = UIImageJPEGRepresentation(image, 0.5);
+	[theRequest addData:theData withFileName:@"image.jpg" andContentType:@"image/jpeg" forKey:@"image_post[image]"];	
 	[theRequest startAsynchronous];
+	self.data = theData;
 	self.request = theRequest;
 }
 
