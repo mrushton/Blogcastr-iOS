@@ -16,6 +16,7 @@
 #import "XMPPStream.h"
 #import "ASIHTTPRequest.h"
 #import "Timer.h"
+#import "FBConnect.h"
 
 #define SLOW_TIMER_INTERVAL 30.0
 #define FAST_TIMER_INTERVAL 2.0
@@ -25,6 +26,7 @@
 	NSManagedObjectContext *managedObjectContext;
 	NSFetchedResultsController *_fetchedResultsController;
 	Session *session;
+    Facebook *facebook;
 	Blogcast *blogcast;
 	XMPPStream *xmppStream;
 	UITableView *tableView;
@@ -48,6 +50,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) Blogcast *blogcast;
 @property (nonatomic, retain) XMPPStream *xmppStream;
 @property (nonatomic, retain) UITableView *tableView;

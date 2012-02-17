@@ -34,6 +34,8 @@
 	NSNumber *numViews;
 	NSDate *startingAt;
 	NSDate *blogcastUpdatedAt;
+    NSString *url;
+    NSString *shortUrl;
 	BOOL inUser;
 	BOOL inTags;
 	BOOL inStats;
@@ -62,9 +64,10 @@
 @property (nonatomic, retain) NSNumber *numViews;
 @property (nonatomic, retain) NSDate *startingAt;
 @property (nonatomic, retain) NSDate *blogcastUpdatedAt;
+@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *shortUrl;
 @property (nonatomic, retain) NSMutableArray *blogcasts;
 
 - (BOOL)parse;
-- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

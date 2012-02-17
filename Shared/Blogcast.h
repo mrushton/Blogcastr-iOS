@@ -40,6 +40,8 @@
 @property (nonatomic, retain) User * user;
 @property (nonatomic, retain) NSSet* posts;
 @property (nonatomic, retain) NSSet* comments;
+@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSString * shortUrl;
 
 @end
 

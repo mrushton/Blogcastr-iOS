@@ -26,7 +26,7 @@
 		UIView *borderView;
 
 		// Initialization code.
-		self.backgroundColor == BLOGCASTRSTYLEVAR(backgroundColor);
+		self.backgroundColor = BLOGCASTRSTYLEVAR(backgroundColor);
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		borderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.contentView.bounds.size.width, 1.0)];
 		borderView.autoresizingMask = UIViewAutoresizingFlexibleWidth;

@@ -47,6 +47,5 @@
 @property (nonatomic, retain) NSMutableArray *comments;
 
 - (BOOL)parse;
-- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

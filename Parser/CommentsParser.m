@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "User.h"
 #import "Comment.h"
+#import "NSDate+Format.h"
 
 @implementation CommentsParser
 
@@ -146,7 +147,7 @@
 	} else if ([elementName isEqual:@"text"]) {
 		self.commentText = mutableString;
 	} else if ([elementName isEqual:@"created-at"]) {
-		self.commentCreatedAt = [self parseTimestamp:mutableString];
+		self.commentCreatedAt = [NSDate dateWithIso8601:mutableString];
 	} else if ([elementName isEqual:@"user"]) {
 		User *theUser;
 
@@ -199,23 +200,6 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Error parsing comments: %@", [parseError localizedDescription]);
-}
-
-#pragma mark -
-#pragma mark Helpers
-
-- (NSDate *)parseTimestamp: (NSString *)timestamp {
-	NSString *string;
-	NSDate *date;
-	
-	//MVR - parse timestamp based on whether it is in UTC format or not
-	if ([timestamp length] == 20)
-		string = [NSString stringWithFormat:@"%@ %@ +0000", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)]];
-	else
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)], [timestamp substringWithRange:NSMakeRange(19, 3)], [timestamp substringWithRange:NSMakeRange(23, 2)]];
-	date = [[[NSDate alloc] initWithString:string] autorelease];
-	
-	return date;
 }
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "NewBlogcastController.h"
+#import "AppDelegate_iPhone.h"
+#import "TwitterConnectController.h"
 #import "BlogcastrStyleSheet.h"
 #import "DatePickerController.h"
 #import "TextViewWithPlaceholder.h"
@@ -18,10 +20,13 @@
 
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize titleTextField;
 @synthesize startingAt;
 @synthesize descriptionTextView;
 @synthesize tagsTextView;
+@synthesize twitterSwitch;
+@synthesize facebookSwitch;
 @synthesize progressHud;
 @synthesize cancelActionSheet;
 @synthesize cancelRequestActionSheet;
@@ -60,6 +65,7 @@
 	UITextField *theTitleTextField;
 	TextViewWithPlaceholder *theDescriptionTextView;
 	TextViewWithPlaceholder *theTagsTextView;
+	UISwitch *theSwitch;
 	
     [super viewDidLoad];
 	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
@@ -91,15 +97,27 @@
 	theTagsTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 	self.tagsTextView = theTagsTextView;
 	[theTagsTextView release];
+	theSwitch = [[UISwitch alloc] init];
+    [theSwitch addTarget:self action:@selector(twitterSwitchChanged) forControlEvents:UIControlEventValueChanged];
+	self.twitterSwitch = theSwitch;
+	[theSwitch release];
+	theSwitch = [[UISwitch alloc] init];
+    [theSwitch addTarget:self action:@selector(facebookSwitchChanged) forControlEvents:UIControlEventValueChanged];
+	self.facebookSwitch = theSwitch;
+	[theSwitch release];
 	//MVR - disable update button
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //MVR - make sure Facebook session is valid if SSO is cancelled
+    if (![facebook isSessionValid])
+        [facebookSwitch setOn:NO animated:NO];
+    if (!session.user.twitterAccessToken || !session.user.twitterTokenSecret)
+        [twitterSwitch setOn:NO animated:NO];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -129,7 +147,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 
@@ -141,6 +159,8 @@
 			return 1;
 		case 2:
 			return 1;
+        case 3:
+			return 2;
 		default:
 			return 0;
 	}
@@ -153,6 +173,8 @@
 		return 120.0;
 	else if (indexPath.section == 2)
 		return 90.0;
+	else if (indexPath.section == 3)
+		return 44.0;
 	
 	return 0;
 }
@@ -190,6 +212,15 @@
 	} else if (indexPath.section == 2) {
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		[cell.contentView addSubview:tagsTextView];
+	} else if (indexPath.section == 3) {
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		if (indexPath.row == 0) {
+			cell.textLabel.text = @"Facebook";
+			cell.accessoryView = facebookSwitch;		
+		} else if (indexPath.row == 1) {
+			cell.textLabel.text = @"Twitter";
+			cell.accessoryView = twitterSwitch;
+		}
 	}
 	
     return cell;
@@ -240,6 +271,8 @@
 		return @"Description";
 	else if (section == 2)
 		return @"Tags";
+	else if (section == 3)
+		return @"Share";
 
 	return nil;
 }
@@ -284,6 +317,8 @@
 	self.titleTextField = nil;
 	self.descriptionTextView = nil;
 	self.tagsTextView = nil;
+	self.facebookSwitch = nil;
+	self.twitterSwitch = nil;
 }
 
 - (UIAlertView *)alertView {
@@ -321,10 +356,21 @@
 
 
 - (void)dealloc {
+    UIApplication *application;
+    AppDelegate_iPhone *appDelegate;
+    
 	[managedObjectContext release];
 	[session release];
+    //MVR - set Facebook delegate to nil
+    application = [UIApplication sharedApplication];
+    appDelegate = (AppDelegate_iPhone *)application.delegate;
+    appDelegate.facebookConnectDelegate = nil;
+    [facebook release];
 	[startingAt release];
 	[titleTextField release];
+	[facebookSwitch release];
+	[twitterSwitch release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
@@ -371,7 +417,7 @@
 		NSLog(@"Error create blogcast received status code %i", statusCode);
 		//MVR - enable create button
 		self.navigationItem.rightBarButtonItem.enabled = YES;
-		[self errorAlertWithTitle:@"Create failed" message:@"Oops! We couldn't create the blogcast."];
+		[self errorAlertWithTitle:@"Create Failed" message:@"Oops! We couldn't create the blogcast."];
 		return;
 	}
 	//AS DESIGNED: a delegate could have been used but this makes things easier since it's not the parent controller that needs to know 
@@ -394,11 +440,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error creating blogcast: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't create the blogcast."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't create the blogcast."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error creating blogcast: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't create the blogcast."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't create the blogcast."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Create blogcast request cancelled");
@@ -434,6 +480,31 @@
 				[request cancel];
 		}
 	}
+}
+
+#pragma mark -
+#pragma mark FacebookConnectDelegate methods
+
+- (void)facebookIsConnecting {
+    //MVR - display HUD
+	[self showProgressHudWithLabelText:@"Connecting Facebook..." animated:NO animationType:MBProgressHUDAnimationFade];
+}
+
+- (void)facebookDidConnect {
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+}
+
+- (void)facebookDidNotConnect:(BOOL)cancelled {
+    [facebookSwitch setOn:NO animated:NO];
+}
+
+- (void)facebookConnectFailed:(NSError *)error {
+    NSLog(@"Facebook connect failed");
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+    [self errorAlertWithTitle:@"Connect Failed" message:@"Oops! We couldn't connect your Facebook account."];
+    [facebookSwitch setOn:NO animated:NO];
 }
 
 #pragma mark -
@@ -481,8 +552,46 @@
 		[theRequest addPostValue:descriptionTextView.text forKey:@"blogcast[description]"];
 	if (tagsTextView.text && ![tagsTextView.text isEqualToString:@""])
 		[theRequest addPostValue:tagsTextView.text forKey:@"tags"];
+    if (facebookSwitch.on)
+        [theRequest addPostValue:@"1" forKey:@"facebook_share"];
+    if (twitterSwitch.on)
+        [theRequest addPostValue:@"1" forKey:@"tweet"];
 	self.request = theRequest;
 	[theRequest startAsynchronous];
+}
+
+- (void)facebookSwitchChanged {
+    if (![facebook isSessionValid]) {
+        UIApplication *application;
+        AppDelegate_iPhone *appDelegate;
+        NSArray *permissions;
+    
+        //MVR - set Facebook connect delegate
+        application = [UIApplication sharedApplication];
+        appDelegate = (AppDelegate_iPhone *)application.delegate;
+        appDelegate.facebookConnectDelegate = self;
+        permissions = [[NSArray alloc] initWithObjects:@"publish_stream", nil];
+        [facebook authorize:permissions];
+        [permissions release];
+    }
+}
+
+- (void)twitterSwitchChanged {
+    //MVR - connect to Twitter if not connected
+    if (!session.user.twitterAccessToken || !session.user.twitterTokenSecret) {
+        UINavigationController *theNavigationController;
+        TwitterConnectController *twitterConnectController;
+        
+        twitterConnectController = [[TwitterConnectController alloc] initWithStyle:UITableViewStyleGrouped];
+        twitterConnectController.managedObjectContext = managedObjectContext;
+        twitterConnectController.session = session;
+        twitterConnectController.navigationItem.leftBarButtonItem = twitterConnectController.cancelButton;
+        theNavigationController = [[UINavigationController alloc] initWithRootViewController:twitterConnectController];
+        [twitterConnectController release];
+        theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+        [self presentModalViewController:theNavigationController animated:YES];
+        [theNavigationController release];
+    }
 }
 
 - (void)cancel {

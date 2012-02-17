@@ -285,6 +285,7 @@
 	[signUpPasswordTextField release];
 	[signUpEmailTextField release];
 	[_alertView release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[super dealloc];
 }
@@ -319,7 +320,7 @@
 	[self.progressHud hide:YES];
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
-		[self errorAlertWithTitle:@"Authentication error" message:@"Oops! We couldn't sign you in. Invalid username and password."];
+		[self errorAlertWithTitle:@"Authentication Failed" message:@"Oops! We couldn't sign you in. Invalid username and password."];
 		return;
 	}
 	//MVR - parse response
@@ -328,7 +329,7 @@
 	parser.managedObjectContext = managedObjectContext;
 	if (![parser parse]) {
 		NSLog(@"Error parsing authentication token response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't sign you in."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't sign you in."];
 		[parser release];
 		return;
 	}
@@ -357,11 +358,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Authentication token request error: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't sign you in."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't sign you in."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Authentication token request error: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't sign you in."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't sign you in."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Authentication token request cancelled");
@@ -389,7 +390,7 @@
 		if (![errorsParser parse]) {
 			[errorsParser release];
 			NSLog(@"Error parsing sign up response errors");
-			[self errorAlertWithTitle:@"Sign up error" message:@"Oops! We couldn't sign you up."];
+			[self errorAlertWithTitle:@"Sign Up Failed" message:@"Oops! We couldn't sign you up."];
 			return;
 		}
 		//MVR - create the error message
@@ -402,11 +403,11 @@
 			NSLog(@"Sign up parser error list was empty");
 			[errorList appendString:@" We couldn't sign you up."];
 		}
-		[self errorAlertWithTitle:@"Sign up failed" message:errorList];
+		[self errorAlertWithTitle:@"Sign Up Failed" message:errorList];
 		[errorsParser release];
 		return;
 	} else if (statusCode != 200) {
-		[self errorAlertWithTitle:@"Sign up failed" message:@"Oops! We couldn't sign you up."];
+		[self errorAlertWithTitle:@"Sign Up Failed" message:@"Oops! We couldn't sign you up."];
 		NSLog(@"MVR DATA %@",[[NSString alloc] initWithData:[request responseData] encoding:NSASCIIStringEncoding]);
 
 		return;
@@ -415,12 +416,9 @@
 	userParser = [[UserParser alloc] init];
 	userParser.data = [request responseData];
 	userParser.managedObjectContext = managedObjectContext;
-	
-	
-	NSLog(@"MVR DATA %@",[[NSString alloc] initWithData:[request responseData] encoding:NSASCIIStringEncoding]);
 	if (![userParser parse]) {
 		NSLog(@"Error parsing sign up response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't sign you up."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't sign you up."];
 		[userParser release];
 		return;
 	}
@@ -448,11 +446,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Sign up request error: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't sign you up."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't sign you up."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Sign up request error: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't sign you up."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't sign you up."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Sign up request cancelled");
@@ -501,7 +499,7 @@
 
 	//AS DESIGNED: do not check validations here only that both fields were entered
 	if (!signInUsernameTextField.text || !signInPasswordTextField.text || [signInUsernameTextField.text isEqualToString:@""] || [signInPasswordTextField.text isEqualToString:@""]) {
-		[self errorAlertWithTitle:@"Empty field" message:@"Oops! Please enter your username and password."];
+		[self errorAlertWithTitle:@"Empty Field" message:@"Oops! Please enter your username and password."];
         return;
 	}
 	[signInPasswordTextField resignFirstResponder];
@@ -588,9 +586,9 @@
 		NSString *errorTitle;
 
 		if (hasMultipleErrors)
-			errorTitle = @"Invalid fields";
+			errorTitle = @"Invalid Fields";
 		else
-			errorTitle = @"Invalid field";
+			errorTitle = @"Invalid Field";
 		[self errorAlertWithTitle:errorTitle message:errorList];
         return;		
 	}

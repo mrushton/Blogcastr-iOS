@@ -20,7 +20,7 @@
 #import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 #import "XMPPRoom.h"
 #import "Timer.h"
 
@@ -29,6 +29,7 @@
 @synthesize tabToolbarController;
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize xmppStream;
 @synthesize dragRefreshView;
 @synthesize infiniteScrollView;
@@ -139,7 +140,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update blogcasts received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your blogcasts."];
 		return;
 	}
 	//MVR - parse xml
@@ -148,7 +149,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.managedObjectContext = managedObjectContext;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update blogcasts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your blogcasts."];
 		[parser release];
 		return;
 	}
@@ -221,11 +222,11 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating blogcasts: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the blogcasts."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't update the blogcasts."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating blogcasts: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the blogcasts."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't update the blogcasts."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Update blogcasts request cancelled");
@@ -256,7 +257,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update blogcasts stream cell received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your blogcasts."];
 		return;
 	}
 	//MVR - parse response
@@ -265,7 +266,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.managedObjectContext = managedObjectContext;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update stream cell blogcasts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your blogcasts."];
 		[parser release];
 		return;
 	}
@@ -295,7 +296,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 - (void)updatePostsStreamCellFailed:(ASIHTTPRequest *)request {
 	NSLog(@"Update blogcasts stream cell failed");
 	[self.streamCellRequests removeObject:request];
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcasts."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the blogcasts."];
 }
 
 - (void)updateBlogcastsFooterFinished:(ASIHTTPRequest *)request {
@@ -316,7 +317,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.managedObjectContext = managedObjectContext;		   
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer blogcasts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your blogcasts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your blogcasts."];
 		[parser release];
 		return;
 	}
@@ -350,7 +351,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 - (void)updateBlogcastsFooterFailed:(ASIHTTPRequest *)request {
 	isUpdatingFooter = NO;
 	NSLog(@"Error update blogcasts footer failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your blogcasts."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your blogcasts."];
 }
 
 /*
@@ -585,6 +586,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	postsController = [[PostsController alloc] initWithNibName:nil bundle:nil];
 	postsController.managedObjectContext = self.managedObjectContext;
 	postsController.session = session;
+    postsController.facebook = facebook;
 	postsController.blogcast = blogcast;
 	postsController.xmppStream = xmppStream;
 	[xmppStream addDelegate:postsController];
@@ -602,9 +604,10 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	//MVR - XMPP notifications
 	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(joinedRoom) name:@"joinedRoom" object:dashboardController];
 	[[NSNotificationCenter defaultCenter] addObserver:commentsController selector:@selector(leftRoom) name:@"leftRoom" object:dashboardController];
-	infoController = [[InfoController alloc] initWithStyle:UITableViewStyleGrouped];
+	infoController = [[InfoController alloc] initWithNibName:nil bundle:nil];
 	infoController.managedObjectContext = self.managedObjectContext;
 	infoController.session = session;
+    infoController.facebook = facebook;
 	infoController.blogcast = blogcast;
 	infoController.tabBarItem.title = @"Info";
 	dashboardController.viewControllers = [NSArray arrayWithObjects:postsController, commentsController, infoController, nil];

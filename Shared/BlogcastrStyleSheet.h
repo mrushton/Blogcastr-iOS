@@ -22,5 +22,6 @@
 - (UIColor *)redButtonColor;
 - (UIColor *)blueTextColor;
 - (UIColor *)blueGrayTextColor;
+- (UIColor *)topBarLabelColor;
 
 @end

@@ -6,9 +6,13 @@
 //  Copyright 2011 Blogcastr. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import <Three20/Three20.h>
 #import "InfoController.h"
-#import "NSDate+Timestamp.h"
+#import "TwitterConnectController.h"
+#import "TwitterShareController.h"
+#import "NSDate+Format.h"
 #import "BlogcastrStyleSheet.h"
 #import "BlogcastsParser.h"
 #import "ASIHTTPRequest.h"
@@ -22,22 +26,26 @@
 @synthesize tabToolbarController;
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize blogcast;
+@synthesize tableView;
 @synthesize blogcastRequest;
 @synthesize timer;
+@synthesize twitterTimer;
 
+static const CGFloat kPostBarViewHeight = 40.0;
 static const CGFloat kGroupedTableViewMargin = 9.0;
 
 #pragma mark -
 #pragma mark Initialization
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    self = [super initWithStyle:style];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 		UIImage *image;
 		UITabBarItem *theTabBarItem;
-
+        UIBarButtonItem *deletePostButton;
+        
         // Custom initialization.
 		image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"png"]];
 		theTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:image tag:0];
@@ -45,21 +53,77 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 		[theTabBarItem release];
 		//MVR - updated blogcast notification
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedBlogcast) name:@"updatedBlogcast" object:nil];
-	}
-    return self;
+		//MVR - add bar button item
+		deletePostButton = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleBordered target:self action:@selector(deletePost)];
+		deletePostButton.title = @"Delete";
+		self.navigationItem.rightBarButtonItem = deletePostButton;		
+		[deletePostButton release];
+    }
+    
+	return self;
 }
-
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+    TTView *topBar;
+    UILabel *label;
+    TTButton *facebookShareButton;
+	TTButton *twitterShareButton;
+	TTButton *emailShareButton;
+    TTStyleSheet *styleSheet;
+    TTStyle *style;
+	UITableView *theTableView;
+	CGRect frame;
+    CGFloat buttonWidth;
+
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.tableView.backgroundColor = TTSTYLEVAR(backgroundColor);
-	self.tableView.tableFooterView = [self footerView];
+    topBar = [[TTView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.bounds.size.width, kPostBarViewHeight)];
+	styleSheet = [TTStyleSheet globalStyleSheet];
+	style = [styleSheet styleWithSelector:@"topBar" forState:UIControlStateNormal];
+	topBar.style = style;
+    //MVR - set up the top bar label
+    label = [[UILabel alloc] init];
+    label.text = @"Share";
+    label.font = [UIFont boldSystemFontOfSize:16.0];
+    label.textColor = BLOGCASTRSTYLEVAR(topBarLabelColor);
+    label.shadowColor = [UIColor whiteColor];
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+    label.frame = CGRectMake(5.0, (kPostBarViewHeight - label.frame.size.height) / 2.0, label.frame.size.width, label.frame.size.height);
+    [topBar addSubview:label];
+    [label release];
+	//MVR - set up the share buttons
+    buttonWidth = (topBar.frame.size.width - label.frame.size.width - 40.0) / 3.0;
+    facebookShareButton = [TTButton buttonWithStyle:@"blueButton:" title:@"Facebook"];
+	[facebookShareButton addTarget:self action:@selector(facebookShare) forControlEvents:UIControlEventTouchUpInside]; 
+	facebookShareButton.frame = CGRectMake(label.frame.size.width + 15.0, 6.0, buttonWidth, 28.0);
+	[topBar addSubview:facebookShareButton];    
+	twitterShareButton = [TTButton buttonWithStyle:@"blueButton:" title:@"Twitter"];
+	[twitterShareButton addTarget:self action:@selector(twitterShare) forControlEvents:UIControlEventTouchUpInside]; 
+	twitterShareButton.frame = CGRectMake(label.frame.size.width + buttonWidth + 25.0, 6.0, buttonWidth, 28.0);
+	[topBar addSubview:twitterShareButton];    
+    emailShareButton = [TTButton buttonWithStyle:@"blueButton:" title:@"Email"];
+	[emailShareButton addTarget:self action:@selector(emailShare) forControlEvents:UIControlEventTouchUpInside]; 
+	emailShareButton.frame = CGRectMake(label.frame.size.width + (buttonWidth * 2.0) + 35.0, 6.0, buttonWidth, 28.0);
+	[topBar addSubview:emailShareButton];    
+	[self.view addSubview:topBar];
+	[topBar release];
+	frame = CGRectMake(0.0, kPostBarViewHeight, self.view.bounds.size.width, self.view.bounds.size.height - kPostBarViewHeight);
+    theTableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStyleGrouped];
+	theTableView.backgroundColor = TTSTYLEVAR(backgroundColor);
+	theTableView.separatorColor = BLOGCASTRSTYLEVAR(tableViewSeperatorColor);
+	theTableView.delegate = self;
+	theTableView.dataSource = self;
+	theTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    theTableView.tableFooterView = [self footerView];
+	[self.view addSubview:theTableView];
+	self.tableView = theTableView;
+	[theTableView release];    
 	//MVR - timer
 	timer = [[Timer alloc] initWithTimeInterval:TIMER_INTERVAL delegate:self];
 	//MVR - do not wait to fire timer
@@ -134,6 +198,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	label = [[UILabel alloc] init];
 	label.text = blogcast.title;
 	label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:18.0];
 	label.frame = CGRectMake(18.0, 9.0, 284.0, 22.0);
 	[cell addSubview:label];
@@ -142,6 +207,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	label = [[UILabel alloc] init];
 	label.text = blogcast.user.username;
 	label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:14.0];
 	label.frame = CGRectMake(18.0, 33.0, 100.0, 18.0);
 	[label sizeToFit];
@@ -158,6 +224,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[dateFormatter release];
 	 */
 	label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:14.0];
 	label.frame = CGRectMake(23.0 + usernameWidth, 33.0, 100.0, 18.0);
 	[label sizeToFit];
@@ -169,6 +236,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 		label.text = blogcast.theDescription;
 		label.font = [UIFont systemFontOfSize:13.0];
 		label.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+        label.backgroundColor = [UIColor clearColor];
 		label.lineBreakMode = UILineBreakModeWordWrap;
 		label.numberOfLines = 0;
 		label.frame = CGRectMake(18.0, 54.0, 284.0, 100.0);
@@ -257,12 +325,16 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 - (void)dealloc {
 	[managedObjectContext release];
 	[session release];
+    [facebook release];
 	[blogcast release];
 	[blogcastRequest clearDelegatesAndCancel];
 	[blogcastRequest release];
 	[timer invalidate];
 	[timer release];
+    [twitterTimer invalidate];
+    [twitterTimer release];
 	[_actionSheet release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[_alertView release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -331,7 +403,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update blogcast received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcast."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the blogcast."];
 		return;
 	}
 	//MVR - parse xml
@@ -340,7 +412,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	parser.data = [request responseData];		   
 	if (![parser parse]) {
 		NSLog(@"Error parsing update blogcast response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the blogcast."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update the blogcast."];
 		[parser release];
 		return;
 	}
@@ -365,7 +437,7 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	//MVR - 404 indicates the blogcast may have already been deleted
 	if (statusCode != 200 && statusCode != 404) {
 		NSLog(@"Error delete blogcast received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Delete failed" message:@"Oops! We couldn't delete the blogcast."];
+		[self errorAlertWithTitle:@"Delete Failed" message:@"Oops! We couldn't delete the blogcast."];
 		return;
 	}
 	[self.managedObjectContext deleteObject:blogcast];
@@ -386,11 +458,11 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error deleting blogcast: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't delete the blogcast."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't delete the blogcast."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error deleting blogcast: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't delete the blogcast."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't delete the blogcast."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Delete blogcast request cancelled");
@@ -399,6 +471,53 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 			NSLog(@"Error deleting blogcast");
 			break;
 	}	
+}
+
+#pragma mark -
+#pragma mark FacebookConnectDelegate methods
+
+- (void)facebookIsConnecting {
+    //MVR - display HUD
+    [self showProgressHudWithLabelText:@"Connecting Facebook..." animated:NO animationType:MBProgressHUDAnimationFade];
+}
+
+- (void)facebookDidConnect {
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+    [self presentFacebookDialog];
+}
+
+- (void)facebookDidNotConnect:(BOOL)cancelled {
+    NSLog(@"Facebook did not connect");
+}
+
+- (void)facebookConnectFailed:(NSError *)error {
+    NSLog(@"Facebook connect failed");
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+    [self errorAlertWithTitle:@"Connect Failed" message:@"Oops! We couldn't connect your Facebook account."];
+}
+
+#pragma mark -
+#pragma mark FBDialogDelegate methods
+
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
+    NSLog(@"Facebook dialog failed with error %@", [error localizedDescription]);
+    [self errorAlertWithTitle:@"Facebook Share Failed" message:@"Oops! We couldn't open the Facebook share dialog."];
+}
+
+#pragma mark -
+#pragma mark TwitterConnectControllerDelegate methods
+
+- (void)didConnectTwitter:(TwitterConnectController *)twitterConnectController {
+    self.twitterTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(twitterTimerExpired) userInfo:nil repeats:NO];
+}
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate methods
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [tabToolbarController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -422,6 +541,66 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[self.actionSheet showInView:self.tabToolbarController.view];
 }
 
+- (void)facebookShare {    
+    if ([self.facebook isSessionValid]) {
+        [self presentFacebookDialog];
+    } else {
+        UIApplication *application;
+        AppDelegate_iPhone *appDelegate;
+        NSArray *permissions;
+        
+        //MVR - set Facebook connect delegate
+        application = [UIApplication sharedApplication];
+        appDelegate = (AppDelegate_iPhone *)application.delegate;
+        appDelegate.facebookConnectDelegate = self;
+        permissions = [[NSArray alloc] initWithObjects:@"publish_stream", nil];
+        [facebook authorize:permissions];
+        [permissions release];
+    }
+}
+
+- (void)twitterShare {
+    //MVR - avoid any race condition with the timer
+    [twitterTimer invalidate];
+    //MVR - connect to Twitter if not connected
+    if (!session.user.twitterAccessToken || !session.user.twitterTokenSecret) {
+        UINavigationController *theNavigationController;
+        TwitterConnectController *twitterConnectController;
+        
+        twitterConnectController = [[TwitterConnectController alloc] initWithStyle:UITableViewStyleGrouped];
+        twitterConnectController.managedObjectContext = managedObjectContext;
+        twitterConnectController.session = session;
+        twitterConnectController.delegate = self;
+        twitterConnectController.navigationItem.leftBarButtonItem = twitterConnectController.cancelButton;
+        theNavigationController = [[UINavigationController alloc] initWithRootViewController:twitterConnectController];
+        [twitterConnectController release];
+        theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+        [tabToolbarController presentModalViewController:theNavigationController animated:YES];
+        [theNavigationController release];
+        return;
+    }
+    [self presentTwitterShareController];
+}
+
+- (void)emailShare {
+    MFMailComposeViewController *mailViewController;
+    NSString *body;
+    
+    if (![MFMailComposeViewController canSendMail]) {
+        NSLog(@"Can't send email");
+        [self errorAlertWithTitle:@"Mail Configuration" message:@"Oops! You need to configure your email."];
+        return;
+    }
+    mailViewController = [[MFMailComposeViewController alloc] init];
+    mailViewController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+    mailViewController.mailComposeDelegate = self;
+    body = [NSString stringWithFormat:@"Check out my blogcast:\n\n%@", blogcast.url];
+    [mailViewController setSubject:blogcast.title];
+    [mailViewController setMessageBody:body isHTML:NO]; 
+    [tabToolbarController presentModalViewController:mailViewController animated:YES];
+    [mailViewController release];
+}
+
 - (void)timerExpired:(Timer *)timer {
 	if (!blogcastRequest)
 		[self updateBlogcast];
@@ -431,8 +610,44 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	[self reloadBlogcast];
 }
 
+- (void)twitterTimerExpired {
+    self.twitterTimer = nil;
+    //AS DESIGNED: this can only come after authenticating Twitter via the share button
+    [self presentTwitterShareController];
+}
+
 #pragma mark -
 #pragma mark Helpers
+
+- (void)presentFacebookDialog {
+    NSMutableDictionary *params;
+    
+    params = [NSMutableDictionary dictionaryWithObjectsAndKeys:blogcast.url, @"link", blogcast.title, @"name", nil];
+    if (blogcast.theDescription)
+        [params setObject:blogcast.theDescription forKey:@"description"];
+    if (blogcast.imageUrl)
+        [params setObject:[self imageUrl:blogcast.imageUrl forSize:@"default"] forKey:@"picture"];
+    [facebook dialog:@"feed" andParams:params andDelegate:self];
+}
+
+- (void)presentTwitterShareController {
+    UINavigationController *theNavigationController;
+    TwitterShareController *twitterShareController;
+    NSString *url;
+    
+    twitterShareController = [[TwitterShareController alloc] initWithStyle:UITableViewStyleGrouped];
+    twitterShareController.session = session;
+    if (blogcast.shortUrl)
+        url = blogcast.shortUrl;
+    else
+        url = blogcast.url;
+    twitterShareController.text = [NSString stringWithFormat:@"Check out \"%@\" via @blogcastr %@", blogcast.title, url];
+    theNavigationController = [[UINavigationController alloc] initWithRootViewController:twitterShareController];
+    [twitterShareController release];
+    theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+    [tabToolbarController presentModalViewController:theNavigationController animated:YES];
+    [theNavigationController release];
+}
 
 - (void)updateBlogcast {
 	NSURL *url;
@@ -665,6 +880,24 @@ static const CGFloat kGroupedTableViewMargin = 9.0;
 	url = [NSURL URLWithString:string];
 	
 	return url;
+}
+
+- (NSString *)imageUrl:(NSString *)string forSize:(NSString *)size {
+	NSString *imageUrl;
+	NSRange range;
+	
+#ifdef DEVEL
+	imageUrl = [NSString stringWithFormat:@"http://sandbox.blogcastr.com%@", string];
+#else //DEVEL
+	imageUrl = [[string copy] autorelease];
+#endif //DEVEL
+	range = [imageUrl rangeOfString:@"original"];
+	if (range.location != NSNotFound) {
+		return [imageUrl stringByReplacingCharactersInRange:range withString:size];
+	} else {
+		NSLog(@"Error replacing size in image post url: %@", imageUrl);
+		return imageUrl;
+	}
 }
 
 - (void)showProgressHudWithLabelText:(NSString *)labelText animated:(BOOL)animated animationType:(MBProgressHUDAnimation)animationType {

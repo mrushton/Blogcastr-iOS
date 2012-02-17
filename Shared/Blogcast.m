@@ -38,5 +38,7 @@
 @dynamic user;
 @dynamic posts;
 @dynamic comments;
+@dynamic url;
+@dynamic shortUrl;
 
 @end

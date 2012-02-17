@@ -20,7 +20,6 @@
 @property (nonatomic, retain) NSNumber * numComments;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSNumber * numBlogcasts;
-@property (nonatomic, retain) NSNumber * facebookId;
 @property (nonatomic, retain) NSString * facebookFullName;
 @property (nonatomic, retain) NSDate * blogcastsUpdatedAt;
 @property (nonatomic, retain) NSNumber * numSubscriptions;
@@ -40,6 +39,7 @@
 @property (nonatomic, retain) NSNumber * numSubscribers;
 @property (nonatomic, retain) NSString * facebookAccessToken;
 @property (nonatomic, retain) NSString * twitterAccessToken;
+@property (nonatomic, retain) NSString * twitterTokenSecret;
 @property (nonatomic, retain) NSString * fullName;
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSSet* blogcasts;
@@ -49,6 +49,9 @@
 @property (nonatomic, retain) NSSet* subscribers;
 @property (nonatomic, retain) NSSet* posts;
 @property (nonatomic, retain) NSSet* comments;
+@property (nonatomic, retain) NSNumber *facebookId;
+@property (nonatomic, retain) NSDate *facebookExpiresAt;
+@property (nonatomic, retain) NSNumber *hasFacebookPublishStream;
 
 @end
 

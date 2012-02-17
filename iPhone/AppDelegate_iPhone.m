@@ -14,7 +14,7 @@
 #import "SignInController.h"
 #import "BlogcastrStyleSheet.h"
 #import "ASIHTTPRequest.h"
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 
 @implementation AppDelegate_iPhone
 
@@ -40,6 +40,7 @@
 	rootController = [[RootController alloc] init]; 
 	rootController.managedObjectContext = self.managedObjectContext;
 	rootController.session = self.session;
+    rootController.facebook = self.facebook;
 	[window addSubview:rootController.view];
 	if (!self.session.user || !self.session.user.authenticationToken) {
 		UINavigationController *theNavigationController;
@@ -55,7 +56,7 @@
 		[rootController presentModalViewController:theNavigationController animated:NO];
 		[theNavigationController release];
 	} else {
-		[rootController signIn];
+        [rootController signIn];
 	}
     [self.window makeKeyAndVisible];
     
@@ -93,6 +94,7 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [self.facebook extendAccessTokenIfNeeded];
 }
 
 

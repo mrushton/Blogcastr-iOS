@@ -18,6 +18,7 @@
 
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize user;
 @synthesize subscription;
 @synthesize tabToolbarController;
@@ -26,16 +27,16 @@
 #pragma mark -
 #pragma mark Initialization
 
-/*
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization.
+        //MVR - Twitter notifications
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedSettings) name:@"updatedSettings" object:nil];
     }
     return self;
 }
-*/
 
 
 #pragma mark -
@@ -98,7 +99,7 @@
 	NSInteger numSections = 1;
 
 	// Return the number of sections.
-	if (user.web)
+	if (user.web || (user.facebookFullName && user.facebookLink) || user.twitterUsername)
 		numSections++;
 	if (user.bio)
 		numSections++;
@@ -109,20 +110,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	return 1;
+    if ((!user.bio && section == 1) || section == 2) {
+        NSInteger numRows = 0;
+
+        if (user.web)
+            numRows++;
+        if (user.facebookFullName && user.facebookLink)
+            numRows++;
+        if (user.twitterUsername)
+            numRows++;
+
+        return numRows;
+    } else {
+        return 1;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0){
 		return 86.0;
-	} else if (user.web && indexPath.section == 1) {
-		return 44.0;
-	} else if ((!user.web && indexPath.section == 1) || indexPath.section == 2) {
-		CGSize size;
+	} else if (indexPath.section == 1 && user.bio) {
+        CGSize size;
 		
 		size = [user.bio sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(284.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		return size.height + 17.0;
-	}
+		return size.height + 17.0;         
+    } else if ((indexPath.section == 1 && !user.bio) || indexPath.section == 2) {
+        return 44.0;
+    }
 
 	return 0;
 }
@@ -152,6 +166,7 @@
 		label = [[UILabel alloc] initWithFrame:rect];
 		label.text = user.fullName;
 		label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+        label.backgroundColor = [UIColor clearColor];
 		label.font = [UIFont boldSystemFontOfSize:18.0];
 		[cell addSubview:label];
 		[label release];
@@ -160,17 +175,13 @@
 			label = [[UILabel alloc] initWithFrame:rect];
 			label.text = user.location;
 			label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
+            label.backgroundColor = [UIColor clearColor];
 			label.font = [UIFont boldSystemFontOfSize:14.0];
 			[cell addSubview:label];
 			[label release];
 		}
-	} else if (user.web && indexPath.section == 1) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
-		cell.textLabel.text = @"Web";
-		cell.detailTextLabel.text = user.web;
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	} else if ((!user.web && indexPath.section == 1) || indexPath.section == 2) {
-		CGRect rect;
+	} else if (indexPath.section == 1 && user.bio) {
+        CGRect rect;
 		UILabel *label;
 		
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
@@ -179,24 +190,37 @@
 		label = [[UILabel alloc] initWithFrame:rect];
 		label.text = user.bio;
 		label.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+        label.backgroundColor = [UIColor clearColor];
 		label.font = [UIFont systemFontOfSize:13.0];
 		label.lineBreakMode = UILineBreakModeWordWrap;
 		label.numberOfLines = 0;
 		[label sizeToFit];
 		[cell addSubview:label];
+    } else if (indexPath.section == 1 || indexPath.section == 2) {    
+        if (indexPath.row == 0 && user.web) {        
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+            cell.textLabel.text = @"Web";
+            cell.detailTextLabel.text = user.web;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        } else if ((indexPath.row == 0 || (indexPath.row == 1 && user.web)) && user.facebookFullName && user.facebookLink) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+            cell.textLabel.text = @"Facebook";
+            cell.detailTextLabel.text = user.facebookFullName;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;            
+        } else {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil] autorelease];
+            cell.textLabel.text = @"Twitter";
+            cell.detailTextLabel.text = user.twitterUsername;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;        
+        }
 	}
 
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (user.web) {
-		if (section == 2)
-			return @"Bio";
-	} else {
-		if (section == 1)
-			return @"Bio";
-	}
+	if (section == 1 && user.bio)
+		return @"Bio";
 
 	return nil;
 }
@@ -253,11 +277,18 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
     [detailViewController release];
     */
-	if (user.web && indexPath.section == 1) {
+	if ((indexPath.section == 1 && !user.bio) || indexPath.section == 2) {
 		TTWebController *webController;
-
+        NSString *url;
+        
 		webController = [[TTWebController alloc] init];
-		[webController openURL:[NSURL URLWithString:user.web]];
+        if (indexPath.row == 0 && user.web)     
+            url = user.web;
+        else if ((indexPath.row == 0 || (indexPath.row == 1 && user.web)) && user.facebookFullName && user.facebookLink)
+            url = user.facebookLink;
+        else
+            url = [NSString stringWithFormat:@"http://twitter.com/%@", user.twitterUsername];
+        [webController openURL:[NSURL URLWithString:url]];
 		//MVR - controller can be part of tab toolbar controller
 		if (tabToolbarController)
 			[self.tabToolbarController.navigationController pushViewController:webController animated:YES];
@@ -289,7 +320,9 @@
 - (void)dealloc {
 	[_subscribeButton release];
 	[_unsubscribeButton release];
+    _viewProgressHud.delegate = nil;
 	[_viewProgressHud release];
+    _windowProgressHud.delegate = nil;
 	[_windowProgressHud release];
 	[_alertView release];
     [super dealloc];
@@ -360,7 +393,7 @@
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update user received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the user."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the user."];
 		return;
 	}
 	//MVR - parse xml
@@ -370,7 +403,7 @@
 	parser.subscription = subscription;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update user response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the user."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update the user."];
 		[parser release];
 		return;
 	}
@@ -400,7 +433,7 @@
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error subscribe received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Subscribe failed" message:@"Oops! We couldn't subscribe you."];
+		[self errorAlertWithTitle:@"Subscribe Failed" message:@"Oops! We couldn't subscribe you."];
 		return;
 	}
 	//MVR - set subscribed and updatedAt to now
@@ -423,11 +456,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error subscribing: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't subscribe you."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't subscribe you."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error subscribing: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't subscribe you."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't subscribe you."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Subscibe request cancelled");
@@ -448,7 +481,7 @@
 	statusCode = [theRequest responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error subscribe received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Unsubscribe failed" message:@"Oops! We couldn't unsubscribe you."];
+		[self errorAlertWithTitle:@"Unsubscribe Failed" message:@"Oops! We couldn't unsubscribe you."];
 		return;
 	}
 	//MVR - set subscribed and updatedAt to now
@@ -471,11 +504,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error unsubscribing: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't unsubscribe you."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't unsubscribe you."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error unsubscribing: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't unsubscribe you."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't unsubscribe you."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Unsubscibe request cancelled");
@@ -551,6 +584,10 @@
 	else
 		[self.navigationController pushViewController:imageViewerController animated:YES];
 	[imageViewerController release];
+}
+
+- (void)updatedSettings {
+    [self.tableView reloadData];
 }
 
 #pragma mark -

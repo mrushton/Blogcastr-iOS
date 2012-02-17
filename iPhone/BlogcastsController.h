@@ -12,10 +12,10 @@
 #import "Session.h"
 #import "User.h"
 #import "BlogcastStreamCell.h"
-#import "MBProgressHUD.h"
 #import "XMPPStream.h"
 #import "ASIHTTPRequest.h"
 #import "Timer.h"
+#import "FBConnect.h"
 
 #define SLOW_TIMER_INTERVAL 30.0
 #define FAST_TIMER_INTERVAL 2.0
@@ -25,6 +25,7 @@
 	NSManagedObjectContext *managedObjectContext;
 	NSFetchedResultsController *_fetchedResultsController;
 	Session *session;
+    Facebook *facebook;
 	XMPPStream *xmppStream;
 	TTTableHeaderDragRefreshView *dragRefreshView;
 	TTTableFooterInfiniteScrollView *infiniteScrollView;
@@ -45,6 +46,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, readonly) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) XMPPStream *xmppStream;
 //AS DESIGNED: keep a weak reference to avoid retian cycles
 @property (nonatomic, assign) TabToolbarController *tabToolbarController;

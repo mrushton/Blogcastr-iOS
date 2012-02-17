@@ -21,6 +21,7 @@
 
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 
 - (RootController *)init {
 	self = [super init];
@@ -116,7 +117,7 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 		HomeController *homeController = (HomeController *)info;
 		
 		NSLog(@"Network connection is down");
-		[homeController errorAlertWithTitle:@"No connection" message:@"Oops! You don't have a network connection."];
+		[homeController errorAlertWithTitle:@"No Connection" message:@"Oops! You don't have a network connection."];
 	}
 }
 
@@ -131,16 +132,21 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 	UIImage *image;
 	UITabBarItem *theTabBarItem;
 
+    //MVR - set Facebook credentials
+    facebook.accessToken = session.user.facebookAccessToken;
+    facebook.expirationDate = session.user.facebookExpiresAt;
 	//MVR - create the Home Controller at the bottom of the navigation controller stack
 	homeController = [[HomeController alloc] init];
 	homeController.title = session.user.username;
 	homeController.session = session;
+    homeController.facebook = facebook;
 	//MVR - connect to XMPP server
 	[homeController connect];
 	//MVR - now create each tab
 	blogcastsController = [[BlogcastsController alloc] initWithStyle:UITableViewStylePlain];
 	blogcastsController.managedObjectContext = self.managedObjectContext;
 	blogcastsController.session = session;
+    blogcastsController.facebook = facebook;
 	blogcastsController.xmppStream = homeController.xmppStream;
 	userController = [[UserController alloc] initWithStyle:UITableViewStyleGrouped];
 	//MVR - the user controller does not create a tab bar item
@@ -150,10 +156,12 @@ static void ReachabilityChanged(SCNetworkReachabilityRef target, SCNetworkReacha
 	[theTabBarItem release];
 	userController.managedObjectContext = self.managedObjectContext;
 	userController.session = session;
+    userController.facebook = facebook;
 	userController.user = session.user;
 	settingsController = [[SettingsController alloc] initWithStyle:UITableViewStyleGrouped];
 	settingsController.managedObjectContext = self.managedObjectContext;
 	settingsController.session = session;
+    settingsController.facebook = facebook;
 	homeController.viewControllers = [NSArray arrayWithObjects:blogcastsController, userController, settingsController, nil];
 	[blogcastsController release];
 	[userController release];

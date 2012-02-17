@@ -7,11 +7,15 @@
 //
 
 #import "AppDelegate_Shared.h"
+#import "ASIFormDataRequest.h"
+#import "UserParser.h"
+#import "NSDate+Format.h"
 
 
 @implementation AppDelegate_Shared
 
 @synthesize window;
+@synthesize facebookConnectDelegate;
 
 
 #pragma mark -
@@ -100,7 +104,9 @@
     
     NSError *error = nil;
     persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    //MVR - added for lightweight migrations
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -131,7 +137,6 @@
     return persistentStoreCoordinator_;
 }
 
-
 #pragma mark -
 #pragma mark Application's Documents directory
 
@@ -142,6 +147,19 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+
+#pragma mark -
+#pragma mark URL management
+
+// Pre 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+// For 4.2+ support
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url]; 
+}
 
 #pragma mark -
 #pragma mark Memory management
@@ -159,6 +177,7 @@
     [managedObjectModel_ release];
     [persistentStoreCoordinator_ release];
     [_session release];
+    [_facebook release];
     [window release];
     [super dealloc];
 }
@@ -188,6 +207,192 @@
 		_session = [NSEntityDescription insertNewObjectForEntityForName:@"Session" inManagedObjectContext:self.managedObjectContext];
 
 	return _session;
+}
+
+- (Facebook *)facebook {
+    if (!_facebook)
+        _facebook = [[Facebook alloc] initWithAppId:@"130902392002" andDelegate:self];
+    
+    return _facebook;
+}
+
+#pragma mark -
+#pragma mark FBSessionDelegate methods
+
+- (void)fbDidLogin {
+    ASIFormDataRequest *request;
+
+    [facebookConnectDelegate facebookIsConnecting];
+    request = [self facebookConnectRequest];
+    [request startAsynchronous];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    [facebookConnectDelegate facebookDidNotConnect:cancelled];
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken expiresAt:(NSDate*)expiresAt {
+    ASIFormDataRequest *request;
+    
+    //MVR - extend the Facebook token
+    request = [ASIFormDataRequest requestWithURL:[self facebookExtendUrl]];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(facebookExtendFinished:)];
+	[request setDidFailSelector:@selector(facebookExtendFailed:)];
+	[request addPostValue:self.session.user.authenticationToken forKey:@"authentication_token"];
+	[request addPostValue:self.facebook.accessToken forKey:@"blogcastr_user[facebook_access_token]"];
+    [request addPostValue:[self.facebook.expirationDate iso8601] forKey:@"blogcastr_user[facebook_expires_at]"];  
+    [request startAsynchronous];
+}
+
+- (void)fbDidLogout {
+    
+}
+
+- (void)fbSessionInvalidated {
+    ASIFormDataRequest *request;
+    
+    //MVR - invalidate the Facebook token
+    request = [ASIFormDataRequest requestWithURL:[self facebookInvalidateUrl]];
+    [request setRequestMethod:@"DELETE"];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(facebookInvalidateFinished:)];
+	[request setDidFailSelector:@selector(facebookInvalidateFailed:)];
+    [request startAsynchronous];
+}
+
+#pragma mark -
+#pragma mark ASIHTTPRequest delegate
+
+- (void)facebookConnectFinished:(ASIHTTPRequest *)request {
+	int statusCode;
+	UserParser *userParser;
+
+	statusCode = [request responseStatusCode];
+	if (statusCode != 200) {
+        NSLog(@"Facebook connect received status %d", statusCode);
+        if (facebookConnectDelegate)
+            [facebookConnectDelegate facebookConnectFailed:nil];
+        [self.facebook logout];
+		return;
+	}
+	//MVR - parse response
+	userParser = [[UserParser alloc] init];
+	userParser.data = [request responseData];
+	userParser.managedObjectContext = [self managedObjectContext];
+	if (![userParser parse]) {
+		NSLog(@"Error parsing Facebook connect response");
+        [userParser release];
+        if (facebookConnectDelegate)
+            [facebookConnectDelegate facebookConnectFailed:nil];
+        [self.facebook logout];
+		return;
+	}
+	userParser.user.updatedAt = [NSDate date];
+	[self saveContext];
+	[userParser release];
+    if (facebookConnectDelegate)
+        [facebookConnectDelegate facebookDidConnect];
+    //MVR - send settings updated notification
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"updatedSettings" object:self];
+    //MVR - always update the token to work around a bug in the Facebook library
+    [self.facebook extendAccessToken];
+}
+
+- (void)facebookConnectFailed:(ASIHTTPRequest *)request {
+    NSLog(@"Facebook connect failed");
+    if (facebookConnectDelegate)
+        [facebookConnectDelegate facebookConnectFailed:[request error]];
+    [self.facebook logout];
+}
+
+- (void)facebookExtendFinished:(ASIHTTPRequest *)request {
+    int statusCode;
+    
+	statusCode = [request responseStatusCode];
+	if (statusCode != 200) {
+        NSLog(@"Facebook extend received status %d", statusCode);
+        return;
+    }
+    //MVR - save the updated expiration
+    self.session.user.facebookExpiresAt = self.facebook.expirationDate;
+    [self saveContext];
+}
+
+- (void)facebookExtendFailed:(ASIHTTPRequest *)request {
+    NSLog(@"Facebook extend failed");
+}
+
+- (void)facebookInvalidateFinished:(ASIHTTPRequest *)request {
+    int statusCode;
+
+	statusCode = [request responseStatusCode];
+	if (statusCode != 200)
+        NSLog(@"Facebook invalidate received status %d", statusCode);
+}
+
+- (void)facebookInvalidateFailed:(ASIHTTPRequest *)request {
+    NSLog(@"Facebook invalidate failed");
+}
+
+#pragma mark -
+#pragma mark Helpers
+     
+- (NSURL *)facebookConnectUrl {
+    NSString *string;
+    NSURL *url;
+         
+#ifdef DEVEL
+    string = @"http://sandbox.blogcastr.com/facebook_connect.xml";
+#else //DEVEL
+    string = @"http://blogcastr.com/facebook_connect.xml";
+#endif //DEVEL
+    url = [NSURL URLWithString:string];
+         
+    return url;
+}
+
+- (ASIFormDataRequest *)facebookConnectRequest {
+    ASIFormDataRequest *request;
+    
+    //MVR - save to server and get Facebook info
+    request = [ASIFormDataRequest requestWithURL:[self facebookConnectUrl]];
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(facebookConnectFinished:)];
+	[request setDidFailSelector:@selector(facebookConnectFailed:)];
+	[request addPostValue:self.session.user.authenticationToken forKey:@"authentication_token"];
+	[request addPostValue:self.facebook.accessToken forKey:@"blogcastr_user[facebook_access_token]"];
+    [request addPostValue:[self.facebook.expirationDate iso8601] forKey:@"blogcastr_user[facebook_expires_at]"];  
+    
+    return request;
+}
+
+- (NSURL *)facebookExtendUrl {
+    NSString *string;
+    NSURL *url;
+    
+#ifdef DEVEL
+    string = @"http://sandbox.blogcastr.com/facebook_extend.xml";
+#else //DEVEL
+    string = @"http://blogcastr.com/facebook_extend.xml";
+#endif //DEVEL
+    url = [NSURL URLWithString:string];
+    
+    return url;
+}
+
+- (NSURL *)facebookInvalidateUrl {
+    NSString *string;
+    NSURL *url;
+    
+#ifdef DEVEL
+	string = [NSString stringWithFormat:@"http://sandbox.blogcastr.com/facebook_invalidate.xml?authentication_token=%@", self.session.user.authenticationToken];
+#else //DEVEL
+	string = [NSString stringWithFormat:@"http://blogcastr.com/facebook_invalidate.xml?authentication_token=%@", self.session.user.authenticationToken];
+#endif //DEVEL
+    url = [NSURL URLWithString:string];
+    
+    return url;
 }
 
 @end

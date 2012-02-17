@@ -26,5 +26,7 @@
 @dynamic blogcast;
 @dynamic streamCell;
 @dynamic comment;
+@dynamic url;
+@dynamic shortUrl;
 
 @end

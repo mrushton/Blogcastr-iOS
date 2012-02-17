@@ -25,13 +25,21 @@
 	NSString *web;
 	NSString *avatarUrl;
 	NSString *authenticationToken;
+    NSNumber *facebookId;
+    NSString *facebookFullName;
+    NSString *facebookLink;
+    NSString *facebookAccessToken;
+    NSDate *facebookExpiresAt;
+    NSNumber *hasFacebookPublishStream;
+    NSString *twitterUsername;
+    NSString *twitterAccessToken;
+    NSString *twitterTokenSecret;
 	NSNumber *numBlogcasts;
 	NSNumber *numSubscriptions;
 	NSNumber *numSubscribers;
 	NSNumber *numPosts;
 	NSNumber *numComments;
 	NSNumber *numLikes;
-	BOOL isSubscribed;
 	BOOL inStats;
 	User *user;
 }
@@ -49,6 +57,15 @@
 @property (nonatomic, copy) NSString *web;
 @property (nonatomic, copy) NSString *avatarUrl;
 @property (nonatomic, copy) NSString *authenticationToken;
+@property (nonatomic, copy) NSNumber *facebookId;
+@property (nonatomic, copy) NSString *facebookFullName;
+@property (nonatomic, copy) NSString *facebookLink;
+@property (nonatomic, copy) NSString *facebookAccessToken;
+@property (nonatomic, copy) NSDate *facebookExpiresAt;
+@property (nonatomic, copy) NSNumber *hasFacebookPublishStream;
+@property (nonatomic, copy) NSString *twitterUsername;
+@property (nonatomic, copy) NSString *twitterAccessToken;
+@property (nonatomic, copy) NSString *twitterTokenSecret;
 @property (nonatomic, copy) NSNumber *numBlogcasts;
 @property (nonatomic, copy) NSNumber *numSubscriptions;
 @property (nonatomic, copy) NSNumber *numSubscribers;

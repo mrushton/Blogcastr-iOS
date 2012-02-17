@@ -33,6 +33,8 @@
 	NSNumber *commentId;
 	NSDate *commentCreatedAt;
 	NSDate *postCreatedAt;
+    NSString *url;
+    NSString *shortUrl;
 	BOOL inUser;
 	BOOL inComment;
 	NSMutableArray *posts;
@@ -61,8 +63,10 @@
 @property (nonatomic, retain) NSDate *commentCreatedAt;
 @property (nonatomic, retain) NSDate *postCreatedAt;
 @property (nonatomic, retain) NSMutableArray *posts;
+@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *shortUrl;
+
 
 - (BOOL)parse;
-- (NSDate *)parseTimestamp: (NSString *)timestamp;
 
 @end

@@ -14,7 +14,7 @@
 #import "Subscription.h"
 #import "BlogcastrStyleSheet.h"
 #import "ASIFormDataRequest.h"
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 
 
 @implementation CommentController
@@ -96,6 +96,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	//MVR - no need to cancel request
 	[request setDelegate:nil];
 	[request release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[_alertView release];
     [super dealloc];
@@ -171,6 +172,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	label = [[UILabel alloc] init];
 	label.text = username;
 	label.textColor = [UIColor colorWithRed:0.176 green:0.322 blue:0.408 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:14.0];
 	label.frame = CGRectMake(66.0, 9.0, 100.0, 18.0);
 	[label sizeToFit];
@@ -180,6 +182,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	label = [[UILabel alloc] init];
 	label.text = [comment.createdAt stringInWords];
 	label.textColor = [UIColor colorWithRed:0.32 green:0.32 blue:0.32 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.font = [UIFont boldSystemFontOfSize:14.0];
 	label.frame = CGRectMake(66.0, 28.0, 100.0, 18.0);
 	[label sizeToFit];
@@ -190,6 +193,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	label.text = comment.text;
 	label.font = [UIFont systemFontOfSize:13.0];
 	label.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+    label.backgroundColor = [UIColor clearColor];
 	label.lineBreakMode = UILineBreakModeWordWrap;
 	label.numberOfLines = 0;
 	label.frame = CGRectMake(18.0, 57.0, kTableViewSectionWidth, 100.0);
@@ -260,7 +264,7 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 		NSLog(@"Error post comment received status code %i", statusCode);
 		//MVR - enable delete button
 		self.navigationItem.rightBarButtonItem.enabled = YES;
-		[self errorAlertWithTitle:@"Post failed" message:@"Oops! We couldn't post the comment."];
+		[self errorAlertWithTitle:@"Post Failed" message:@"Oops! We couldn't post the comment."];
 		return;
 	}
 }
@@ -277,11 +281,11 @@ static const CGFloat kTableViewSectionWidth = 284.0;
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error posting comment: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't post the comment."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't post the comment."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error posting comment: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't post the comment."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't post the comment."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Post comment request cancelled");

@@ -17,7 +17,6 @@
 @dynamic numComments;
 @dynamic location;
 @dynamic numBlogcasts;
-@dynamic facebookId;
 @dynamic facebookFullName;
 @dynamic blogcastsUpdatedAt;
 @dynamic numSubscriptions;
@@ -37,6 +36,7 @@
 @dynamic numSubscribers;
 @dynamic facebookAccessToken;
 @dynamic twitterAccessToken;
+@dynamic twitterTokenSecret;
 @dynamic fullName;
 @dynamic username;
 @dynamic blogcasts;
@@ -46,5 +46,8 @@
 @dynamic subscribers;
 @dynamic posts;
 @dynamic comments;
+@dynamic facebookId;
+@dynamic facebookExpiresAt;
+@dynamic hasFacebookPublishStream;
 
 @end

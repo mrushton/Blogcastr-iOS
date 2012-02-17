@@ -53,6 +53,10 @@
 	return [UIColor colorWithRed:0.245 green:0.301 blue:0.370 alpha:1.0];
 }
 
+- (UIColor *)topBarLabelColor {
+	return [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+}
+
 - (TTStyle *)topBar {
 	UIColor *gradientColor1;
 	UIColor *gradientColor2;
@@ -102,6 +106,25 @@
 	else
 		return [TTShapeStyle styleWithShape:[TTRoundedRectangleShape shapeWithRadius:5] next:
                [TTImageStyle styleWithImageURL:nil defaultImage:nil contentMode:UIViewContentModeScaleAspectFill size:CGSizeZero next:nil]];		
+}
+
+- (TTStyle *)blueButton:(UIControlState)state {
+	UIColor *stateTintColor;
+	UIColor *textShadowColor;
+	UIFont *font;
+	
+	if (state & UIControlStateHighlighted || state & UIControlStateSelected)
+		stateTintColor = [UIColor colorWithRed:0.194 green:0.422 blue:0.653 alpha:1.0];
+	else
+		stateTintColor = [UIColor colorWithRed:0.294 green:0.522 blue:0.753 alpha:1.0];
+	textShadowColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+	font = [UIFont boldSystemFontOfSize:13.0];
+    
+    return [TTShapeStyle styleWithShape:[TTRoundedRectangleShape shapeWithRadius:14.0] next:
+           [TTReflectiveFillStyle styleWithColor:stateTintColor next:
+           [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.75] blur:2.0 offset:CGSizeMake(0.0, 1.0) next:
+           [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.867 green:0.91 blue:0.894 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:
+           [TTTextStyle styleWithFont:font color:[UIColor whiteColor] minimumFontSize:0.0 shadowColor:textShadowColor shadowOffset:CGSizeMake(0, 1) textAlignment:UITextAlignmentCenter verticalAlignment:UIControlContentVerticalAlignmentCenter lineBreakMode:UILineBreakModeTailTruncation numberOfLines:1 next:nil]]]]];
 }
 
 - (TTStyle *)blueButtonWithImage:(UIControlState)state {
@@ -205,8 +228,9 @@
 }
 
 - (TTStyle *)timestampInWords {
+    //MVR - right padding changed for iOS 5
 	return [TTShapeStyle styleWithShape:[TTRoundedRectangleShape shapeWithRadius:2.5] next:
-           [TTInsetStyle styleWithInset:UIEdgeInsetsMake(0.0, -3.0, -1.0, -3.0) next:
+           [TTInsetStyle styleWithInset:UIEdgeInsetsMake(0.0, -3.0, -1.0, -1.0) next:
            [TTSolidFillStyle styleWithColor:[UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.0] next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5] blur:1.0 offset:CGSizeMake(0.0, 1.0) next:
            [TTInnerShadowStyle styleWithColor:[UIColor colorWithRed:0.976 green:0.976 blue:0.976 alpha:1.0] blur:0.0 offset:CGSizeMake(0.0, -1.0) next:

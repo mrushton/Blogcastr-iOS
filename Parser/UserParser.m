@@ -8,6 +8,7 @@
 
 #import "UserParser.h"
 #import "User.h"
+#import "NSDate+Format.h"
 
 
 @implementation UserParser
@@ -24,6 +25,15 @@
 @synthesize web;
 @synthesize avatarUrl;
 @synthesize authenticationToken;
+@synthesize facebookId;
+@synthesize facebookFullName;
+@synthesize facebookLink;
+@synthesize facebookAccessToken;
+@synthesize facebookExpiresAt;
+@synthesize hasFacebookPublishStream;
+@synthesize twitterUsername;
+@synthesize twitterAccessToken;
+@synthesize twitterTokenSecret;
 @synthesize numBlogcasts;
 @synthesize numSubscriptions;
 @synthesize numSubscribers;
@@ -64,6 +74,15 @@
 	[web release];
 	[avatarUrl release];
 	[authenticationToken release];
+    [facebookId release];
+    [facebookFullName release];
+    [facebookLink release];
+    [facebookAccessToken release];
+    [facebookExpiresAt release];
+    [hasFacebookPublishStream release];
+    [twitterUsername release];
+    [twitterAccessToken release];
+    [twitterTokenSecret release];
 	[numBlogcasts release];
 	[numSubscriptions release];
 	[numSubscribers release];
@@ -89,6 +108,15 @@
 	self.web = nil;
 	self.avatarUrl = nil;
 	self.authenticationToken = nil;
+    self.facebookId = nil;
+    self.facebookFullName = nil;
+    self.facebookLink = nil;
+    self.facebookAccessToken = nil;
+    self.hasFacebookPublishStream = nil;
+    self.twitterUsername = nil;
+    self.twitterAccessToken = nil;
+    self.facebookExpiresAt = nil;
+    self.twitterTokenSecret = nil;
 	self.numBlogcasts = nil;
 	self.numSubscriptions = nil;
 	self.numSubscribers = nil;
@@ -145,10 +173,26 @@
 		self.web = nil;
 		theUser.avatarUrl = avatarUrl;
 		self.avatarUrl = nil;
-		//MVR - do not clear the authentication token
-		if (authenticationToken)
-			theUser.authenticationToken = authenticationToken;
+		theUser.authenticationToken = authenticationToken;
 		self.authenticationToken = nil;
+        theUser.facebookId = facebookId;
+        self.facebookId = nil;
+        theUser.facebookFullName = facebookFullName;
+        self.facebookFullName = nil;
+        theUser.facebookLink = facebookLink;
+        self.facebookLink = nil;
+        theUser.facebookAccessToken = facebookAccessToken;
+        self.facebookAccessToken = nil;
+        theUser.facebookExpiresAt = facebookExpiresAt;
+        self.facebookExpiresAt = nil;
+        theUser.hasFacebookPublishStream = hasFacebookPublishStream;
+        self.hasFacebookPublishStream = nil;
+		theUser.twitterUsername = twitterUsername;
+		self.twitterUsername = nil;
+		theUser.twitterAccessToken = twitterAccessToken;
+		self.twitterAccessToken = nil;
+		theUser.twitterTokenSecret = twitterTokenSecret;
+		self.twitterTokenSecret = nil;
 		theUser.numBlogcasts = numBlogcasts;
 		self.numBlogcasts = nil;
 		theUser.numSubscriptions = numSubscriptions;
@@ -178,6 +222,27 @@
 		self.bio = mutableString;
 	} else if ([elementName isEqual:@"authentication-token"]) {
 		self.authenticationToken = mutableString;
+    } else if ([elementName isEqual:@"facebook-id"]) {
+		self.facebookId = [NSNumber numberWithInteger:[mutableString integerValue]];
+    } else if ([elementName isEqual:@"facebook-full-name"]) {
+		self.facebookFullName = mutableString;
+    } else if ([elementName isEqual:@"facebook-link"]) {
+		self.facebookLink = mutableString;
+    } else if ([elementName isEqual:@"facebook-access-token"]) {
+		self.facebookAccessToken = mutableString;
+    } else if ([elementName isEqual:@"facebook-expires-at"]) {
+		self.facebookExpiresAt = [NSDate dateWithIso8601:mutableString];
+    } else if ([elementName isEqual:@"has-facebook-publish-stream"]) {
+        if ([mutableString isEqual:@"true"])
+            self.hasFacebookPublishStream = [NSNumber numberWithBool:YES];
+        else
+            self.hasFacebookPublishStream = [NSNumber numberWithBool:NO];
+    }  else if ([elementName isEqual:@"twitter-username"]) {
+		self.twitterUsername = mutableString;
+    } else if ([elementName isEqual:@"twitter-access-token"]) {
+		self.twitterAccessToken = mutableString;
+    } else if ([elementName isEqual:@"twitter-token-secret"]) {
+		self.twitterTokenSecret = mutableString;
 	} else if ([elementName isEqual:@"blogcasts"]) {
 		if (inStats)
 			self.numBlogcasts = [NSNumber numberWithInteger:[mutableString integerValue]];

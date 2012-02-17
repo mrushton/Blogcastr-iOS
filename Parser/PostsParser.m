@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "User.h"
 #import "Comment.h"
+#import "NSDate+Format.h"
 
 @implementation PostsParser
 
@@ -36,6 +37,8 @@
 @synthesize commentCreatedAt;
 @synthesize postCreatedAt;
 @synthesize posts;
+@synthesize url;
+@synthesize shortUrl;
 
 #pragma mark -
 #pragma mark Methods
@@ -80,6 +83,8 @@
 	[commentUser release];
 	[commentCreatedAt release];
 	[postCreatedAt release];
+    [url release];
+    [shortUrl release];
 	[posts release];
 	[super dealloc];
 }
@@ -109,6 +114,8 @@
 	self.commentUser = nil;
 	self.commentCreatedAt = nil;
 	self.postCreatedAt = nil;
+    self.url = nil;
+    self.shortUrl = nil;
 	inUser = FALSE;
 	inComment = FALSE;
 	self.posts = [NSMutableArray array];
@@ -174,6 +181,10 @@
 		}
 		post.createdAt = postCreatedAt;
 		self.postCreatedAt = nil;
+        post.url = url;
+        self.url = nil;
+        post.shortUrl = shortUrl;
+        self.shortUrl = nil;
 		//MVR - store post for later processing
 		[posts addObject:post];
 	} else if ([elementName isEqual:@"id"]) {
@@ -191,7 +202,10 @@
 	} else if ([elementName isEqual:@"username"]) {
 		self.userUsername = mutableString;
 	} else if ([elementName isEqual:@"url"]) {
-		self.userUrl = mutableString;
+        if (inUser)
+            self.userUrl = mutableString;
+        else
+            self.url = mutableString;
 	} else if ([elementName isEqual:@"avatar-url"]) {
 		self.userAvatarUrl = mutableString;
 	} else if ([elementName isEqual:@"text"]) {
@@ -205,11 +219,13 @@
 	} else if ([elementName isEqual:@"created-at"]) {
 		NSDate *date;
 
-		date = [self parseTimestamp:mutableString];
+		date = [NSDate dateWithIso8601:mutableString];
 		if (inComment)
 			self.commentCreatedAt = date;
 		else
 			self.postCreatedAt = date;
+	} else if ([elementName isEqual:@"short-url"]) {
+		self.shortUrl = mutableString;
 	} else if ([elementName isEqual:@"user"]) {
 		User *theUser;
 		
@@ -291,23 +307,6 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Error parsing posts: %@", [parseError localizedDescription]);
-}
-
-#pragma mark -
-#pragma mark Helpers
-
-- (NSDate *)parseTimestamp: (NSString *)timestamp {
-	NSString *string;
-	NSDate *date;
-	
-	//MVR - parse timestamp based on whether it is in UTC format or not
-	if ([timestamp length] == 20)
-		string = [NSString stringWithFormat:@"%@ %@ +0000", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)]];
-	else
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [timestamp substringToIndex:10], [timestamp substringWithRange:NSMakeRange(11, 8)], [timestamp substringWithRange:NSMakeRange(19, 3)], [timestamp substringWithRange:NSMakeRange(23, 2)]];
-	date = [[[NSDate alloc] initWithString:string] autorelease];
-	
-	return date;
 }
 
 @end

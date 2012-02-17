@@ -331,6 +331,7 @@
 	[session release];
 	[blogcast release];
 	[startingAt release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
@@ -379,7 +380,7 @@
 		NSLog(@"Error update blogcast received status code %i", statusCode);
 		//MVR - enable update button
 		self.navigationItem.rightBarButtonItem.enabled = YES;
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the blogcast."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the blogcast."];
 		return;
 	}
 	//MVR - parse xml
@@ -388,7 +389,7 @@
 	parser.data = [theRequest responseData];
 	if (![parser parse]) {
 		NSLog(@"Error parsing update blogcast response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the blogcast."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update the blogcast."];
 		[parser release];
 		return;
 	}
@@ -414,11 +415,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating blogcast: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the blogcast."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't update the blogcast."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating blogcast: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the blogcast."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't update the blogcast."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Update blogcast request cancelled");

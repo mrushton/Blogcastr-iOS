@@ -28,6 +28,8 @@
 @property (nonatomic, retain) Blogcast * blogcast;
 @property (nonatomic, retain) PostStreamCell * streamCell;
 @property (nonatomic, retain) Comment * comment;
+@property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSString * shortUrl;
 
 @end
 

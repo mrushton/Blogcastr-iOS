@@ -19,10 +19,11 @@
 #import "Comment.h"
 #import "PostStreamCell.h"
 #import "BlogcastrStyleSheet.h"
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 #import "NSXMLElementAdditions.h"
 #import "XMPPMessage+XEP0045.h"
 #import "Timer.h"
+#import "NSDate+Format.h"
 
 
 @implementation PostsController
@@ -30,6 +31,7 @@
 @synthesize tabToolbarController;
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize blogcast;
 @synthesize xmppStream;
 @synthesize tableView;
@@ -108,7 +110,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	frame = CGRectMake(0.0, kPostBarViewHeight, self.view.bounds.size.width, self.view.bounds.size.height - kPostBarViewHeight);
 	theTableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
 	theTableView.backgroundColor = TTSTYLEVAR(backgroundColor);
-	theTableView.separatorColor = BLOGCASTRSTYLEVAR(tableViewSeperatorColor);
+	//theTableView.separatorColor = BLOGCASTRSTYLEVAR(tableViewSeperatorColor);
 	theTableView.delegate = self;
 	theTableView.dataSource = self;
 	theTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -177,6 +179,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	[_fetchedResultsController release];
 	[managedObjectContext release];
 	[session release];
+    [facebook release];
 	[blogcast release];
 	[xmppStream removeDelegate:self];
 	[xmppStream release];
@@ -271,9 +274,10 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 			//AS DESIGNED: the username is always going to be one line but calculate the size anyway
 			usernameLabelSize = [post.user.username sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(1000.0, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 			textViewSize = [post.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - imageWidth - 20.0 - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
-			if (imageHeight < usernameLabelSize.height + textViewSize.height)
+			if (imageHeight < usernameLabelSize.height + textViewSize.height + 1.0)
 				return usernameLabelSize.height + textViewSize.height + 12.0;
 		}
+        //MVR - five pixels padding and an extra for the border
 		return imageHeight + 11.0;
 	} else if ([post.type isEqual:@"CommentPost"]) {
 		CGSize usernameLabelSize;
@@ -286,10 +290,10 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 			usernameLabelSize = [post.comment.user.facebookFullName sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		else if ([post.comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [post.comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [post.comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [post.comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 12.0;
 	} else {
-		NSLog(@"Error setting cell height for unknown post type %@");
+		NSLog(@"Error setting cell height for unknown post type %@", post.type);
 	}
 	
 	return 0.0;
@@ -590,6 +594,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	postController = [[PostController alloc] initWithNibName:nil bundle:nil];
 	postController.managedObjectContext = managedObjectContext;
 	postController.session = session;
+    postController.facebook = facebook;
 	postController.post = post;
 	if ([post.type isEqual:@"TextPost"])
 		postController.title = @"Text Post";
@@ -752,7 +757,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update posts received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the posts."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the posts."];
 		retryUpdate = YES;
 		return;
 	}
@@ -763,7 +768,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update posts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the posts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update the posts."];
 		[parser release];
 		retryUpdate = YES;
 		return;
@@ -843,12 +848,12 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating posts: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the posts."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't update the posts."];
 			retryUpdate = YES;
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating posts: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the posts."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't update the posts."];
 			retryUpdate = YES;
 			break;
 		case ASIRequestCancelledErrorType:
@@ -873,7 +878,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update posts stream cell received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your posts."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your posts."];
 		return;
 	}
 	//MVR - parse response
@@ -883,7 +888,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update stream cell posts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your posts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your posts."];
 		[parser release];
 		return;
 	}
@@ -919,7 +924,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 - (void)updatePostsStreamCellFailed:(ASIHTTPRequest *)request {
 	NSLog(@"Update posts stream cell failed");
 	[self.streamCellRequests removeObject:request];
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the posts."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the posts."];
 }
 
 - (void)updatePostsFooterFinished:(ASIHTTPRequest *)request {
@@ -932,7 +937,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update posts footer received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your posts."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your posts."];
 		return;
 	}
 	//MVR - parse response
@@ -942,7 +947,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer posts response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your posts."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your posts."];
 		[parser release];
 		return;
 	}
@@ -983,7 +988,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	self.postsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	NSLog(@"Error update posts footer failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your posts."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your posts."];
 }
 
 #pragma mark -
@@ -1311,7 +1316,6 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	NSString *postType;
 	NSString *postId;
 	NSString *postCreatedAt;
-	NSString *string;
 	NSDate *date;
 	NSString *postText;
 	NSString *postImageUrl;
@@ -1328,6 +1332,8 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	NSString *commentUserUsername;
 	NSString *commentUserUrl;
 	NSString *commentUserAvatarUrl;
+    NSString *postUrl;
+    NSString *postShortUrl;
 	NSFetchRequest *request;
 	NSEntityDescription *entity;
 	NSPredicate *predicate;
@@ -1447,6 +1453,16 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 		NSLog(@"Error finding post user avatar url in XMPP message");
 		return nil;
 	}
+    postUrl = [[bodyElement elementForName:@"url"] stringValue];
+	if (!postUrl) {
+		NSLog(@"Error finding post url in XMPP message");
+		return nil;
+	}
+    postShortUrl = [[bodyElement elementForName:@"short-url"] stringValue];
+	if (!postShortUrl) {
+		NSLog(@"Error finding post short url in XMPP message");
+		return nil;
+	}
 	//MVR - find post user if they exist
 	request = [[NSFetchRequest alloc] init];
 	entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
@@ -1472,14 +1488,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	post.id = [NSNumber numberWithInteger:[postId integerValue]];
 	post.blogcast = blogcast;
 	post.type = postType;
-	//MVR - parse timestamp based on whether it is in UTC format or not
-	if ([postCreatedAt length] == 20)
-		string = [NSString stringWithFormat:@"%@ %@ +0000", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)]];
-	else
-		string = [NSString stringWithFormat:@"%@ %@ %@%@", [postCreatedAt substringToIndex:10], [postCreatedAt substringWithRange:NSMakeRange(11, 8)], [postCreatedAt substringWithRange:NSMakeRange(19, 3)], [postCreatedAt substringWithRange:NSMakeRange(23, 2)]];
-	//MVR - convert date string
-	date = [[NSDate alloc] initWithString:string];
-	post.createdAt = date;
+	post.createdAt = [NSDate dateWithIso8601:postCreatedAt];
 	[date release];
 	post.user = postUser;
 	if ([postType isEqual:@"TextPost"]) {
@@ -1539,14 +1548,15 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 			//AS DESIGNED: use the post equivalent variable
 			comment.text = postText;
 			comment.user = commentUser;
-			string = [NSString stringWithFormat:@"%@ %@ %@%@", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)], [commentCreatedAt substringWithRange:NSMakeRange(19, 3)], [commentCreatedAt substringWithRange:NSMakeRange(23, 2)]];
-			date = [[NSDate alloc] initWithString:string];
+			date = [NSDate dateWithIso8601:commentCreatedAt];
 			comment.createdAt = date;
 			[date release];
 		}
 		post.comment = comment;
 	}
-
+    post.url = postUrl;
+    post.shortUrl = postShortUrl;
+    
 	return post;
 }
 
@@ -1556,7 +1566,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	post = [self parseMessage:message];
 	if (!post) {
 		NSLog(@"Error parsing XMPP post message");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't parse the post."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't parse the post."];
 		return NO;
 	}
 	//MVR - now add the stream cell

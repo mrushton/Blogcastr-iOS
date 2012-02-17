@@ -12,11 +12,13 @@
 #import "Session.h"
 #import "XMPPStream.h"
 #import "XMPPReconnect.h"
+#import "FBConnect.h"
 
 
 @interface HomeController : TabToolbarController {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
+    Facebook *facebook;
 	XMPPStream *xmppStream;
 	XMPPReconnect *xmppReconnect;
 	BOOL didAuthenticate;
@@ -26,6 +28,7 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) XMPPStream *xmppStream;
 @property (nonatomic, retain) XMPPReconnect *xmppReconnect;
 @property (nonatomic, retain, readonly) UIAlertView *alertView;

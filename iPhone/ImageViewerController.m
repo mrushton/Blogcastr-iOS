@@ -173,6 +173,7 @@ static NSOperationQueue *sharedOperationQueue;
 	[actionButtonItem release];
 	[imageView release];
 	[_actionSheet release];
+    _progressHUD.delegate = nil;
 	[_progressHUD release];
 	[request cancel];
 	[request release];
@@ -286,7 +287,7 @@ static NSOperationQueue *sharedOperationQueue;
 - (void)request:(TTURLRequest *)theRequest didFailLoadWithError:(NSError *)error {
 	NSLog(@"Error loading image %@", [error localizedDescription]);
 	self.request = nil;
-	[self errorAlertWithTitle:@"Load Error" message:(NSString *)@"Oops! We couldn't load the image."];
+	[self errorAlertWithTitle:@"Load Error" message:@"Oops! We couldn't load the image."];
 	[self.activityIndicatorView stopAnimating];
 }
 
@@ -361,7 +362,7 @@ static NSOperationQueue *sharedOperationQueue;
 	[self.progressHUD hide:YES];
 	if (error) {
 		NSLog(@"Error saving image: %@", [error localizedDescription]);
-		[self errorAlertWithTitle:@"Save Error" message:(NSString *)@"Oops! We couldn't save the image."];
+		[self errorAlertWithTitle:@"Save Error" message:@"Oops! We couldn't save the image."];
 	}
 }
 

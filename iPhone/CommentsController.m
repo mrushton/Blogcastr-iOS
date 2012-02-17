@@ -18,7 +18,7 @@
 #import "Comment.h"
 #import "CommentStreamCell.h"
 #import "BlogcastrStyleSheet.h"
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 #import "NSXMLElementAdditions.h"
 #import "XMPPMessage+XEP0045.h"
 #import "Timer.h"
@@ -157,7 +157,7 @@ static const NSInteger kCommentsRequestCount = 20;
 			usernameLabelSize = [comment.user.facebookFullName sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
 		else if ([comment.user.type isEqual:@"TwitterUser"])
 			usernameLabelSize = [comment.user.twitterUsername sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(100.0, 100.0) lineBreakMode:UILineBreakModeWordWrap];
-		textViewSize = [comment.text sizeWithFont:[UIFont boldSystemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
+		textViewSize = [comment.text sizeWithFont:[UIFont systemFontOfSize:12.0] constrainedToSize:CGSizeMake(theTableView.frame.size.width - 20.0 - kCommentIconWidth - kRightArrowIconWidth, 1000.0) lineBreakMode:UILineBreakModeWordWrap];
 		return usernameLabelSize.height + textViewSize.height + 12.0;
 	}
 	
@@ -563,7 +563,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Update comments received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the comments."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the comments."];
 		retryUpdate = YES;
 		return;
 	}
@@ -574,7 +574,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update comments response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update the comments."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update the comments."];
 		[parser release];
 		retryUpdate = YES;
 		return;
@@ -653,12 +653,12 @@ static const NSInteger kCommentsRequestCount = 20;
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error updating comments: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't update the comments."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't update the comments."];
 			retryUpdate = YES;
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error updating comments: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't update the comments."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't update the comments."];
 			retryUpdate = YES;
 			break;
 		case ASIRequestCancelledErrorType:
@@ -683,7 +683,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update comments stream cell received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your comments."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your comments."];
 		return;
 	}
 	//MVR - parse response
@@ -693,7 +693,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update stream cell comments response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your comments."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your comments."];
 		[parser release];
 		return;
 	}
@@ -729,7 +729,7 @@ static const NSInteger kCommentsRequestCount = 20;
 - (void)updateCommentsStreamCellFailed:(ASIHTTPRequest *)request {
 	NSLog(@"Update comments stream cell failed");
 	[self.streamCellRequests removeObject:request];
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update the comments."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update the comments."];
 }
 
 - (void)updateCommentsFooterFinished:(ASIHTTPRequest *)request {
@@ -742,7 +742,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	statusCode = [request responseStatusCode];
 	if (statusCode != 200) {
 		NSLog(@"Error update comments footer received status code %i", statusCode);
-		[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your comments."];
+		[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your comments."];
 		return;
 	}
 	//MVR - parse response
@@ -752,7 +752,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	parser.blogcast = blogcast;
 	if (![parser parse]) {
 		NSLog(@"Error parsing update footer comments response");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't update your comments."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't update your comments."];
 		[parser release];
 		return;
 	}
@@ -793,7 +793,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	self.commentsFooterRequest = nil;
 	isUpdatingFooter = NO;
 	NSLog(@"Error update comments footer failed");
-	[self errorAlertWithTitle:@"Update failed" message:@"Oops! We couldn't update your comments."];
+	[self errorAlertWithTitle:@"Update Failed" message:@"Oops! We couldn't update your comments."];
 }
 
 #pragma mark -
@@ -1148,20 +1148,14 @@ static const NSInteger kCommentsRequestCount = 20;
 	if ([array count] > 0) {
 		comment = [array objectAtIndex:0];
 	} else {
-		NSString *string;
 		NSDate *date;
 
 		//MVR - parsing done create the post
 		comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 		comment.id = [NSNumber numberWithInteger:[commentId integerValue]];
 		comment.blogcast = blogcast;
-		//MVR - parse timestamp based on whether it is in UTC format or not
-		if ([commentCreatedAt length] == 20)
-			string = [NSString stringWithFormat:@"%@ %@ +0000", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)]];
-		else
-			string = [NSString stringWithFormat:@"%@ %@ %@%@", [commentCreatedAt substringToIndex:10], [commentCreatedAt substringWithRange:NSMakeRange(11, 8)], [commentCreatedAt substringWithRange:NSMakeRange(19, 3)], [commentCreatedAt substringWithRange:NSMakeRange(23, 2)]];
 		//MVR - convert date string
-		date = [[NSDate alloc] initWithString:string];
+		date = [NSDate dateWithIso8601:commentCreatedAt];
 		comment.createdAt = date;
 		[date release];
 		comment.text = commentText;
@@ -1203,7 +1197,7 @@ static const NSInteger kCommentsRequestCount = 20;
 	comment = [self parseMessage:message];
 	if (!comment) {
 		NSLog(@"Error parsing XMPP comment message");
-		[self errorAlertWithTitle:@"Parse error" message:@"Oops! We couldn't parse the comment."];
+		[self errorAlertWithTitle:@"Parse Error" message:@"Oops! We couldn't parse the comment."];
 		return NO;
 	}
 	//MVR - now add the stream cell

@@ -1,15 +1,14 @@
 //
-//  NSDate+Timestamp.m
+//  NSDate+Format.m
 //  Blogcastr
 //
-//  Created by Matthew Rushton on 4/7/11.
-//  Copyright 2011 Blogcastr. All rights reserved.
+//  Created by Matthew Rushton on 1/23/12.
+//  Copyright (c) 2012 Blogcastr. All rights reserved.
 //
 
-#import "NSDate+Timestamp.h"
+#import "NSDate+Format.h"
 
-
-@implementation NSDate (Timestamp)
+@implementation NSDate (Format)
 
 - (NSString *)stringInWords {
 	NSTimeInterval timeInterval;
@@ -80,6 +79,48 @@
 			}
 		}
 	}
+}
+
+- (NSString *)iso8601 {
+    NSDateFormatter *dateFormatter;
+    NSTimeZone *timeZone;
+    NSInteger offset;
+    NSMutableString *format;
+    
+    format = [NSMutableString stringWithString:@"yyyy-MM-dd'T'HH:mm:ss"];
+    timeZone = [NSTimeZone localTimeZone];
+    offset = [timeZone secondsFromGMT];
+    if (offset > 0)
+        [format appendFormat:@"+%02d:%02d", offset / 3600, (offset / 60) % 60];
+    else if (offset < 0)
+        [format appendFormat:@"-%02d:%02d", -offset / 3600, (-offset / 60) % 60];
+    else
+        [format appendString:@"Z"];
+    dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:format];
+
+    return [dateFormatter stringFromDate:self];
+}
+
++ (NSDate *)dateWithIso8601:(NSString *)string {
+    NSMutableString *tmp;
+	NSMutableString *format;
+    NSDateFormatter *dateFormatter;
+
+    format = [NSMutableString stringWithString:@"yyyy-MM-dd'T'HH:mm:ss"];
+    if ([string length] == 20) {
+        [format appendString:@"z"];
+        tmp = [NSString stringWithFormat:@"%@UTC", [string substringWithRange:NSMakeRange(0, 19)]];
+    } else {
+        [format appendString:@"ZZ"];
+        tmp = [NSMutableString stringWithString:string];
+        //TODO: should catch NSRangeException
+        [tmp deleteCharactersInRange:NSMakeRange(22, 1)];
+    }
+    dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:format];
+    
+	return [dateFormatter dateFromString:tmp];
 }
 
 @end

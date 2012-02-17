@@ -8,6 +8,7 @@
 
 #import <Three20/Three20.h>
 #import "NewTextPostController.h"
+#import "TwitterConnectController.h"
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 #import "BlogcastrStyleSheet.h"
@@ -19,8 +20,11 @@
 
 @synthesize managedObjectContext;
 @synthesize session;
+@synthesize facebook;
 @synthesize blogcast;
 @synthesize textView;
+@synthesize twitterSwitch;
+@synthesize facebookSwitch;
 @synthesize progressHud;
 @synthesize cancelActionSheet;
 @synthesize cancelRequestActionSheet;
@@ -57,6 +61,7 @@
 
 - (void)viewDidLoad {
 	UITextView *theTextView;
+    UISwitch *theSwitch;
 	
     [super viewDidLoad];
 
@@ -72,15 +77,23 @@
 	theTextView.textColor = BLOGCASTRSTYLEVAR(blueTextColor);
 	self.textView = theTextView;
 	[theTextView release];
+    theSwitch = [[UISwitch alloc] init];
+    [theSwitch addTarget:self action:@selector(twitterSwitchChanged) forControlEvents:UIControlEventValueChanged];
+	self.twitterSwitch = theSwitch;
+	[theSwitch release];
+	theSwitch = [[UISwitch alloc] init];
+	self.facebookSwitch = theSwitch;
+	[theSwitch release];
 	//MVR - disable post button
 	self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
-/*
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (!session.user.twitterAccessToken || !session.user.twitterTokenSecret)
+        [twitterSwitch setOn:NO animated:NO];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -110,19 +123,26 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    if (section == 0)
+        return 1;
+    else if (section == 1)
+        return 2;
+
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0)
 		return 120.0;
-	
+    else if (indexPath.section == 1)
+		return 44.0;
+
 	return 0;
 }
 
@@ -137,6 +157,15 @@
 	if (indexPath.section == 0) {
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		[cell.contentView addSubview:textView];
+	} else if (indexPath.section == 1) {
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		if (indexPath.row == 0) {
+			cell.textLabel.text = @"Facebook";
+			cell.accessoryView = facebookSwitch;		
+		} else if (indexPath.row == 1) {
+			cell.textLabel.text = @"Twitter";
+			cell.accessoryView = twitterSwitch;
+		}
 	}
 
     return cell;
@@ -185,6 +214,8 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if (section == 0)
 		return @"Text";
+    else if (section == 1)
+		return @"Share";
 	
 	return nil;
 }
@@ -218,13 +249,25 @@
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
 	self.textView = nil;
+    self.facebookSwitch = nil;
+    self.twitterSwitch = nil;
 }
 
 - (void)dealloc {
+    [managedObjectContext release];
+    [session release];
+    [facebook release];
+    [blogcast release];
+    [textView release];
+    [facebookSwitch release];
+    [twitterSwitch release];
+    _progressHud.delegate = nil;
 	[_progressHud release];
 	[_cancelActionSheet release];
 	[_cancelRequestActionSheet release];
 	[_alertView release];
+    [request clearDelegatesAndCancel];
+	[request release];
     [super dealloc];
 }
 
@@ -278,7 +321,7 @@
 		NSLog(@"Error new text post received status code %i", statusCode);
 		//MVR - enable post button
 		self.navigationItem.rightBarButtonItem.enabled = YES;
-		[self errorAlertWithTitle:@"Post failed" message:@"Oops! We couldn't make the text post."];
+		[self errorAlertWithTitle:@"Post Failed" message:@"Oops! We couldn't make the text post."];
 		return;
 	}
 	[self dismissModalViewControllerAnimated:YES];
@@ -299,11 +342,11 @@
 	switch ([error code]) {
 		case ASIConnectionFailureErrorType:
 			NSLog(@"Error posting text: connection failed %@", [[error userInfo] objectForKey:NSUnderlyingErrorKey]);
-			[self errorAlertWithTitle:@"Connection failure" message:@"Oops! We couldn't make the text post."];
+			[self errorAlertWithTitle:@"Connection Failure" message:@"Oops! We couldn't make the text post."];
 			break;
 		case ASIRequestTimedOutErrorType:
 			NSLog(@"Error posting text: request timed out");
-			[self errorAlertWithTitle:@"Request timed out" message:@"Oops! We couldn't make the text post."];
+			[self errorAlertWithTitle:@"Request Timed Out" message:@"Oops! We couldn't make the text post."];
 			break;
 		case ASIRequestCancelledErrorType:
 			NSLog(@"Text post request cancelled");
@@ -328,12 +371,10 @@
 - (void)actionSheet:(UIActionSheet *)theActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (theActionSheet == _cancelRequestActionSheet) {
 		if (buttonIndex == 0) {
-			if (request)
-				[request cancel];
+			[request cancel];
 			[self dismissModalViewControllerAnimated:YES];
 		} else if (buttonIndex == 1) {
-			if (request)
-				[request cancel];
+			[request cancel];
 		}
 	} else if (theActionSheet == _cancelActionSheet) {
 		if (buttonIndex == 0)
@@ -359,6 +400,31 @@
 }
 
 #pragma mark -
+#pragma mark FacebookConnectDelegate methods
+
+- (void)facebookIsConnecting {
+    //MVR - display HUD
+	[self showProgressHudWithLabelText:@"Connecting Facebook..." animated:NO animationType:MBProgressHUDAnimationFade];
+}
+
+- (void)facebookDidConnect {
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+}
+
+- (void)facebookDidNotConnect:(BOOL)cancelled {
+    [facebookSwitch setOn:NO animated:NO];
+}
+
+- (void)facebookConnectFailed:(NSError *)error {
+    NSLog(@"Facebook connect failed");
+    //MVR - hide the progress HUD
+	[self.progressHud hide:YES];
+    [self errorAlertWithTitle:@"Connect Failed" message:@"Oops! We couldn't connect your Facebook account."];
+    [facebookSwitch setOn:NO animated:NO];
+}
+
+#pragma mark -
 #pragma mark Actions
 
 - (void)post {
@@ -377,9 +443,31 @@
 	[theRequest setDidFailSelector:@selector(newTextPostFailed:)];
 	[theRequest addPostValue:session.user.authenticationToken forKey:@"authentication_token"];
 	[theRequest addPostValue:textView.text forKey:@"text_post[text]"];
+    if (facebookSwitch.on)
+        [theRequest addPostValue:@"1" forKey:@"facebook_share"];
+    if (twitterSwitch.on)
+        [theRequest addPostValue:@"1" forKey:@"tweet"];
 	[theRequest addPostValue:@"iPhone" forKey:@"text_post[from]"];
 	[theRequest startAsynchronous];
 	self.request = theRequest;
+}
+
+- (void)twitterSwitchChanged {
+    //MVR - connect to Twitter if not connected
+    if (!session.user.twitterAccessToken || !session.user.twitterTokenSecret) {
+        UINavigationController *theNavigationController;
+        TwitterConnectController *twitterConnectController;
+        
+        twitterConnectController = [[TwitterConnectController alloc] initWithStyle:UITableViewStyleGrouped];
+        twitterConnectController.managedObjectContext = managedObjectContext;
+        twitterConnectController.session = session;
+        twitterConnectController.navigationItem.leftBarButtonItem = twitterConnectController.cancelButton;
+        theNavigationController = [[UINavigationController alloc] initWithRootViewController:twitterConnectController];
+        [twitterConnectController release];
+        theNavigationController.navigationBar.tintColor = TTSTYLEVAR(navigationBarTintColor);
+        [self presentModalViewController:theNavigationController animated:YES];
+        [theNavigationController release];
+    }
 }
 
 - (void)cancel {

@@ -14,11 +14,13 @@
 #import "Subscription.h"
 #import "ASIHTTPRequest.h"
 #import "MBProgressHUD.h"
+#import "FBConnect.h"
 
 
 @interface UserController : UITableViewController <TabToolbarControllerProtocol, MBProgressHUDDelegate> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
+    Facebook *facebook;
 	User *user;
 	Subscription *subscription;
 	TabToolbarController *tabToolbarController;
@@ -34,6 +36,7 @@
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) User *user;
 @property (nonatomic, retain) Subscription *subscription;
 //AS DESIGNED: keep a weak reference to avoid retian cycles

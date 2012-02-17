@@ -5,6 +5,7 @@
 //
 
 #import "MBProgressHUD.h"
+#import <QuartzCore/CALayer.h>
 
 @interface MBProgressHUD ()
 
@@ -281,7 +282,6 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	
     [indicator release];
     [label release];
     [detailsLabel release];
@@ -536,7 +536,8 @@
         [UIView commitAnimations];
     }
     else {
-
+        //MVR - reset transform if necessary 
+        self.transform = CGAffineTransformIdentity;
         self.alpha = 1.0;
     }
 }

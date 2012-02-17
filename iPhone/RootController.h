@@ -17,12 +17,14 @@
 @interface RootController : UINavigationController <SignInControllerProtocol> {
 	NSManagedObjectContext *managedObjectContext;
 	Session *session;
+    Facebook *facebook;
 	SCNetworkReachabilityRef reachability;
 	UIAlertView *_alertView;
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) Session *session;
+@property (nonatomic, retain) Facebook *facebook;
 
 - (void)signIn;
 - (void)signOut;
