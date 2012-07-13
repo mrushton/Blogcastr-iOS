@@ -1148,16 +1148,12 @@ static const NSInteger kCommentsRequestCount = 20;
 	if ([array count] > 0) {
 		comment = [array objectAtIndex:0];
 	} else {
-		NSDate *date;
-
 		//MVR - parsing done create the post
 		comment = [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:managedObjectContext];
 		comment.id = [NSNumber numberWithInteger:[commentId integerValue]];
 		comment.blogcast = blogcast;
 		//MVR - convert date string
-		date = [NSDate dateWithIso8601:commentCreatedAt];
-		comment.createdAt = date;
-		[date release];
+		comment.createdAt = [NSDate dateWithIso8601:commentCreatedAt];
 		comment.text = commentText;
 		//MVR - find user if they exist
 		request = [[NSFetchRequest alloc] init];

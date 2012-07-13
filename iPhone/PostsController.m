@@ -1316,7 +1316,6 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	NSString *postType;
 	NSString *postId;
 	NSString *postCreatedAt;
-	NSDate *date;
 	NSString *postText;
 	NSString *postImageUrl;
 	NSString *postImageWidth;
@@ -1489,7 +1488,6 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 	post.blogcast = blogcast;
 	post.type = postType;
 	post.createdAt = [NSDate dateWithIso8601:postCreatedAt];
-	[date release];
 	post.user = postUser;
 	if ([postType isEqual:@"TextPost"]) {
 		post.text = postText;
@@ -1548,9 +1546,7 @@ static const CGFloat kRightArrowIconHeight = 14.0;
 			//AS DESIGNED: use the post equivalent variable
 			comment.text = postText;
 			comment.user = commentUser;
-			date = [NSDate dateWithIso8601:commentCreatedAt];
-			comment.createdAt = date;
-			[date release];
+			comment.createdAt = [NSDate dateWithIso8601:commentCreatedAt];
 		}
 		post.comment = comment;
 	}

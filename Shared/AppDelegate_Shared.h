@@ -13,7 +13,7 @@
 #import "FBConnect.h"
 
 #define VERSION_MAJOR 2
-#define VERSION_MINOR 0
+#define VERSION_MINOR 1
 
 @protocol FacebookConnectDelegate <NSObject>
 
